@@ -21,7 +21,7 @@ transplant_id_list<-patients_clean%>%
 #Create list of ICD9 and ICD10 codes for cryptococcus
 cryptococcus_ICD_list<-c("1175", "3210", "B450", "B451", "B452", "B453", "B457", "B458", "B459", "B45")
 
-#Obtain cryptococcus codes from patients
+#Obtain cryptococcus claims from the IN and PS files
 cryptococcus_IN_df<-get_IN_ICD(icd_codes = cryptococcus_ICD_list, 
                                years = 2006:2021, 
                                usrds_ids = transplant_id_list )%>%
