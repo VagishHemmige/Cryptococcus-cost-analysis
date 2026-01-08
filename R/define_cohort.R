@@ -6,7 +6,7 @@ library(strobe)
 
 #Import core demographics from "patients" file
 patients_raw<-usRds::load_usrds_file("patients")%>%
-  select(-ZIPCODE) #This is ZIP code at time of USRDS initiation, but we want at time of crypto ds
+  select(-ZIPCODE) #This is ZIP code at time of USRDS initiation, but we want at time of crypto dx
 
 #Initialize a STROBE cohort
 patients_clean<-strobe_initialize(patients_raw, "Initial USRDS cohort")
