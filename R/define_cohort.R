@@ -25,7 +25,7 @@ cryptococcus_ICD_list<-c("1175", "3210", "B450", "B451", "B452", "B453", "B457",
 cryptococcus_IN_df<-get_IN_ICD(icd_codes = cryptococcus_ICD_list, 
                                years = 2006:2021, 
                                usrds_ids = transplant_id_list )%>%
-  select(USRDS_ID, CLM_FROM, DIAG)
+  select(USRDS_ID, CLM_FROM, CODE)
 
 cryptococcus_PS_df<-get_PS_ICD(icd_codes = cryptococcus_ICD_list, 
                                years = 2006:2021, 
@@ -56,64 +56,25 @@ patients_clean<-left_join(patients_clean,
   #Filter by whether or not the patient had a claim in the study period  
   strobe_filter("!is.na(first_cryptococcus_date)", 
                 "At least one cryptococcus claim 2006-2021", 
-                "No cryptococcus claim 2006-2021")%>%
+                "Excluded: No cryptococcus claim 2006-2021")%>%
 
   #Filter by whether or not the first claim was subsequent to the first kidney transplant date
   strobe_filter("first_cryptococcus_date>TX1DATE", 
                 "Cryptococcus subsequent to first transplant ", 
-                "Excluded: Cryptococcus prior to first transplant")
+                "Excluded: Cryptococcus prior to first transplant")%>%
 
-#Load medicare coverage history for patients still in the cohort.  We only want to keep
-#patients with Medicare primary because they will have the appropriate types of claims
-
-eligible_payers <- c(
-  "MEDICARE FFS PRIMARY PAY, FOR BOTH PART A AND PART B",
-  "MEDICARE FFS PRIMARY PAY, FOR OTHER"
-)
-
-#Open medicare history file
-medicare_history<-load_usrds_file("payhist", 
-                usrds_ids = patients_clean$USRDS_ID)%>%
-  filter(PAYER %in% eligible_payers) %>%
-  select(USRDS_ID, BEGDATE, ENDDATE)%>%
-  arrange(USRDS_ID, BEGDATE)%>%
-
-
-  #Combine lines where there is no gap between the lines and they are the same patient
-  group_by(USRDS_ID) %>%
-  arrange(BEGDATE, .by_group = TRUE) %>%
-  mutate(
-    prev_end = lag(ENDDATE),
-    # start a new group if there is a gap
-    new_group = if_else(
-      is.na(prev_end) | BEGDATE > prev_end + days(1),
-      1L,
-      0L
-    ),
-    group_id = cumsum(new_group)
-  ) %>%
-  group_by(USRDS_ID, group_id) %>%
-  summarise(
-    BEGDATE = min(BEGDATE),
-    ENDDATE = max(ENDDATE),
-    .groups = "drop"
-  )%>%
-  select(-group_id)
-
-#Join patient cohort to medicare history data 
-patients_clean<-left_join(patients_clean,
-          medicare_history,
-          join_by(USRDS_ID, between(first_cryptococcus_date, BEGDATE, ENDDATE))
-          )
-
-#Filter by FFS coverage on day of claim through 365 days prior
-patients_clean<-patients_clean%>%
-  strobe_filter("!is.na(BEGDATE)", 
-                "Medicare is primary coverage on date of claim", 
-                "Other coverage on date of claim")%>%
-  strobe_filter("first_cryptococcus_date-BEGDATE>=365", 
-                "365+ days of coverage prior to first cryptococcus claim", 
-                "Fewer than 365 days of coverage")
+    
+  #Filter by Medicare coverage for 365-day lookback period from day of first episode of cryptococcus
+  verify_medicare_primary(index_date = "first_cryptococcus_date",
+                            lookback_days = 365)%>%
+  #Load medicare coverage history for patients still in the cohort.  We only want to keep
+  #patients with Medicare primary because they will have the appropriate types of claims
+  
+  strobe_filter("medicare_primary_TF==FALSE", 
+                "365+ days of Medicare primary coverage\nprior to first cryptococcus claim", 
+                "Excluded: Fewer than 365 days of coverage")%>%
+  select(-medicare_primary_TF, -BEGDATE, -ENDDATE)
+  
 
 #Load ZIP codes
 ZIP_code_df<-load_usrds_file("residenc", 
