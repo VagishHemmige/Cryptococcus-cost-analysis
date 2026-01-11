@@ -1,8 +1,6 @@
 #Create a cohort of kidney transplant patients with cryptococcus
 
-library(tidyverse)
-library(usRds)
-library(strobe)
+source("R/setup.R")
 
 #Import core demographics from "patients" file
 patients_raw<-usRds::load_usrds_file("patients")%>%
@@ -18,8 +16,7 @@ patients_clean<-patients_clean%>%
 #Create list of USRDS ids for patients who have undergone transplant
 transplant_id_list<-patients_clean%>%
   pull(USRDS_ID)
-#Create list of ICD9 and ICD10 codes for cryptococcus
-cryptococcus_ICD_list<-c("1175", "3210", "B450", "B451", "B452", "B453", "B457", "B458", "B459", "B45")
+
 
 #Obtain cryptococcus claims from the IN and PS files
 cryptococcus_IN_df<-get_IN_ICD(icd_codes = cryptococcus_ICD_list, 
@@ -70,11 +67,18 @@ patients_clean<-left_join(patients_clean,
   #Load medicare coverage history for patients still in the cohort.  We only want to keep
   #patients with Medicare primary because they will have the appropriate types of claims
   
-  strobe_filter("medicare_primary_TF==FALSE", 
+  strobe_filter("medicare_primary_TF==TRUE", 
                 "365+ days of Medicare primary coverage\nprior to first cryptococcus claim", 
                 "Excluded: Fewer than 365 days of coverage")%>%
-  select(-medicare_primary_TF, -BEGDATE, -ENDDATE)
+  select(-medicare_primary_TF)%>%
   
+  #Prepare data for cohort initialization
+  mutate(terminal_date=coalesce(ENDDATE, censor_date))%>%
+  
+  strobe_filter("terminal_date - first_cryptococcus_date >=minimum_followup", 
+                "Minimum followup exceeded", 
+                "Excluded: Minimum follow-up threshold not met")
+
 
 #Load ZIP codes
 ZIP_code_df<-load_usrds_file("residenc", 
@@ -110,4 +114,19 @@ plot_strobe_diagram(incl_fontsize = 150,
                     excl_fontsize = 150,
                     incl_width_min = 50, 
                     excl_width_min = 50)
+
+comorbidity_diagnosis_date<-list()
+
+for (comorbidity in names(comorbidity_ICD_list)){
+  
+  print(comorbidity)
+}
+
+
+#Initialize cohort
+cohort<-create_usrds_cohort(df=patients_clean,
+                    start_date = "first_cryptococcus_date",
+                    end_date = "terminal_date")
+
+
 
