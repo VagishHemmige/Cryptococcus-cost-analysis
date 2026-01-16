@@ -45,6 +45,15 @@ cryptococcus_df<-bind_rows(cryptococcus_IN_df, cryptococcus_PS_df)%>%
   rename(first_cryptococcus_date=CLM_FROM)%>%
   select(USRDS_ID, first_cryptococcus_date)
 
+cryptococcus_dx_date<-bind_rows(get_IN_ICD(icd_codes = cryptococcus_ICD_list, 
+                     years = 2006:2021, 
+                     usrds_ids = transplant_id_list ),
+          get_PS_ICD(icd_codes = cryptococcus_ICD_list, 
+                     years = 2006:2021, 
+                     usrds_ids = transplant_id_list )%>%rename(CODE=DIAG)
+          )%>%
+  establish_dx_date(diagnosis_established = "cryptococcus")
+
 
 #Join cryptococcus date to patient file
 patients_clean<-left_join(patients_clean, 
@@ -119,14 +128,33 @@ comorbidity_diagnosis_date<-list()
 
 for (comorbidity in names(comorbidity_ICD_list)){
   
-  print(comorbidity)
+  comorbidity_diagnosis_date[[comorbidity]]<-bind_rows(get_IN_ICD(icd_codes = comorbidity_ICD_list[[comorbidity]], 
+                                                                  years = 2006:2021, 
+                                                                  usrds_ids = transplant_id_list ),
+                                                       get_PS_ICD(icd_codes = comorbidity_ICD_list[[comorbidity]], 
+                                                                  years = 2006:2021, 
+                                                                  usrds_ids = transplant_id_list )%>%rename(CODE=DIAG)
+  )%>%
+    establish_dx_date(diagnosis_established = comorbidity)
 }
 
 
 #Initialize cohort
 cohort<-create_usrds_cohort(df=patients_clean,
                     start_date = "first_cryptococcus_date",
-                    end_date = "terminal_date")
+                    end_date = "terminal_date")%>%
+  
+  # Add cirrhosis
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["cirrhosis"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="cirrhosis")%>%
+  
+  # Add CMV
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["CMV"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="CMV")%>%
+  
+  finalize_usrds_cohort()
 
 
 
