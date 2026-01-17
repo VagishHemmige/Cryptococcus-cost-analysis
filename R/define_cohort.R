@@ -189,21 +189,45 @@ costs_clean <- costs_raw%>%
          group_by(USRDS_ID) %>%
          nest(!!paste0(.y, "_rows") := -USRDS_ID)
   )%>%
-  reduce(full_join, by = "USRDS_ID")%>%
-  mutate(IN_REV_rows=replace_na(IN_REV_rows, list(tibble(CLM_FROM = as.Date(character()),
-                                                         REVPMT = numeric())))
-                )
 
-#Add cost tibbles to transplant_joined data set
+  #Join the three tibbles in the resulting list
+  reduce(full_join, by = "USRDS_ID")%>%
+  
+  #Clean up so that patients with empty cost data tibbles do not throw an error later by providing empty columns
+  mutate(IN_REV_rows=replace_na(IN_REV_rows, list(tibble(CLM_FROM = as.Date(character()),
+                                                         REV_CH = numeric(),
+                                                         REVPMT = numeric(),
+                                                         HCFASAF = character()))))%>%
+  mutate(IN_CLM_rows=replace_na(IN_CLM_rows, list(tibble(CLM_FROM = as.Date(character()),
+                                                         CLM_THRU = as.Date(character()),
+                                                         CLM_TOT = numeric(),
+                                                         CLM_AMT = numeric(),
+                                                         HCFASAF = character()))))%>%
+  mutate(PS_REV_rows=replace_na(PS_REV_rows, list(tibble(CLM_FROM = as.Date(character()),
+                                                         CLM_THRU = as.Date(character()),
+                                                         SBMTCH = numeric(),
+                                                         ALOWCH = numeric(),
+                                                         PMTAMT = numeric(),
+                                                         HCFASAF = character()))))
+
+
+#Add cost tibbles to patients_clean data set
 cost_joined<-left_join(patients_clean, 
                        costs_clean, 
                        by = join_by(USRDS_ID))
 
+#Use the cost claims to calculate appropriate
 cost_intermediate<-cost_joined%>%
   mutate(IN_REV_1yr_cost = map2_dbl(IN_REV_rows, first_cryptococcus_date, ~
                                       .x %>%
                                       filter(CLM_FROM >= .y)%>%
                                       summarise(total = sum(REVPMT, na.rm = TRUE)) %>%
                                       pull(total)
-    ))
+    ))%>%
+  mutate(IN_CLM_1yr_cost = map2_dbl(IN_CLM_rows, first_cryptococcus_date, ~
+                                      .x %>%
+                                      filter(CLM_FROM >= .y)%>%
+                                      summarise(total = sum(CLM_AMT, na.rm = TRUE)) %>%
+                                      pull(total)
+  ))
 
