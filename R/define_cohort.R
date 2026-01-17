@@ -229,5 +229,11 @@ cost_intermediate<-cost_joined%>%
                                       filter(CLM_FROM >= .y)%>%
                                       summarise(total = sum(CLM_AMT, na.rm = TRUE)) %>%
                                       pull(total)
+  ))%>%
+  mutate(PS_REV_1yr_cost = map2_dbl(PS_REV_rows, first_cryptococcus_date, ~
+                                      .x %>%
+                                      filter(CLM_FROM >= .y)%>%
+                                      summarise(total = sum(PMTAMT, na.rm = TRUE)) %>%
+                                      pull(total)
   ))
 
