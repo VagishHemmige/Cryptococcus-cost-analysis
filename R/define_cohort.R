@@ -45,6 +45,7 @@ cryptococcus_df<-bind_rows(cryptococcus_IN_df, cryptococcus_PS_df)%>%
   rename(first_cryptococcus_date=CLM_FROM)%>%
   select(USRDS_ID, first_cryptococcus_date)
 
+#Create a cryptococcus dx date DF that uses the USRDS package expressly written for this purpose:
 cryptococcus_dx_date<-bind_rows(get_IN_ICD(icd_codes = cryptococcus_ICD_list, 
                      years = 2006:2021, 
                      usrds_ids = transplant_id_list ),
@@ -124,17 +125,27 @@ plot_strobe_diagram(incl_fontsize = 150,
                     incl_width_min = 50, 
                     excl_width_min = 50)
 
+
+# We now seek to determine comorbidities by using diagnosis codes from the setup.R file
+
 comorbidity_diagnosis_date<-list()
+
+# Combine all ICD codes from all comorbidities into one list 
+comorbidity_ICD_combined_list<-unlist(comorbidity_ICD_list, use.names=FALSE)
+
+#Scrape files for any comorbiditity claim
+comorbidity_claims_df<-bind_rows(get_IN_ICD(icd_codes = comorbidity_ICD_combined_list, 
+                                            years = 2006:2021, 
+                                            usrds_ids = transplant_id_list ),
+                                 get_PS_ICD(icd_codes = comorbidity_ICD_combined_list, 
+                                            years = 2006:2021, 
+                                            usrds_ids = transplant_id_list )%>%rename(CODE=DIAG))%>%
+  arrange(USRDS_ID, CLM_FROM)
 
 for (comorbidity in names(comorbidity_ICD_list)){
   
-  comorbidity_diagnosis_date[[comorbidity]]<-bind_rows(get_IN_ICD(icd_codes = comorbidity_ICD_list[[comorbidity]], 
-                                                                  years = 2006:2021, 
-                                                                  usrds_ids = transplant_id_list ),
-                                                       get_PS_ICD(icd_codes = comorbidity_ICD_list[[comorbidity]], 
-                                                                  years = 2006:2021, 
-                                                                  usrds_ids = transplant_id_list )%>%rename(CODE=DIAG)
-  )%>%
+  comorbidity_diagnosis_date[[comorbidity]]<-comorbidity_claims_df%>%
+    filter(CODE %in% comorbidity_ICD_list[[comorbidity]])%>%
     establish_dx_date(diagnosis_established = comorbidity)
 }
 
@@ -154,7 +165,26 @@ cohort<-create_usrds_cohort(df=patients_clean,
                        covariate_date="date_established",
                        covariate_variable_name="CMV")%>%
   
+  # Add diabetes
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["Diabetes"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="diabetes")%>%
+  
   finalize_usrds_cohort()
+
+
+#Gather raw costs for each patient
+costs_raw<-list()
+costs_raw[["IN_REV"]]<-get_IN_REV_costs(years = 2006:2021, usrds_ids = cohort$USRDS_ID)
+costs_raw[["IN_CLM"]]<-get_IN_CLM_costs(years = 2006:2021, usrds_ids = cohort$USRDS_ID)
+costs_raw[["PS_REV"]]<-get_PS_REV_costs(years = 2006:2021, usrds_ids = cohort$USRDS_ID)
+
+
+costs_clean <- costs_raw%>% 
+  imap(.x %>%
+         group_by(USRDS_ID) %>%
+         nest(!!paste0(.y, "_rows") := -USRDS_ID)
+  )
 
 
 
