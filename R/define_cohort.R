@@ -179,12 +179,31 @@ costs_raw[["IN_REV"]]<-get_IN_REV_costs(years = 2006:2021, usrds_ids = cohort$US
 costs_raw[["IN_CLM"]]<-get_IN_CLM_costs(years = 2006:2021, usrds_ids = cohort$USRDS_ID)
 costs_raw[["PS_REV"]]<-get_PS_REV_costs(years = 2006:2021, usrds_ids = cohort$USRDS_ID)
 
+#Group by ID and nest, so that each patient has a single tibble for each type of cost
 
+#Start with the raw costs
 costs_clean <- costs_raw%>% 
-  imap(.x %>%
+  
+  #Use the imap function to create nested tibbles so that each USRDS ID is unique
+  imap(~.x %>%
          group_by(USRDS_ID) %>%
          nest(!!paste0(.y, "_rows") := -USRDS_ID)
-  )
+  )%>%
+  reduce(full_join, by = "USRDS_ID")%>%
+  mutate(IN_REV_rows=replace_na(IN_REV_rows, list(tibble(CLM_FROM = as.Date(character()),
+                                                         REVPMT = numeric())))
+                )
 
+#Add cost tibbles to transplant_joined data set
+cost_joined<-left_join(patients_clean, 
+                       costs_clean, 
+                       by = join_by(USRDS_ID))
 
+cost_intermediate<-cost_joined%>%
+  mutate(IN_REV_1yr_cost = map2_dbl(IN_REV_rows, first_cryptococcus_date, ~
+                                      .x %>%
+                                      filter(CLM_FROM >= .y)%>%
+                                      summarise(total = sum(REVPMT, na.rm = TRUE)) %>%
+                                      pull(total)
+    ))
 
