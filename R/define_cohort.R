@@ -142,6 +142,7 @@ comorbidity_claims_df<-bind_rows(get_IN_ICD(icd_codes = comorbidity_ICD_combined
                                             usrds_ids = transplant_id_list )%>%rename(CODE=DIAG))%>%
   arrange(USRDS_ID, CLM_FROM)
 
+#Create comorbidity_diagnosis_date data frame
 for (comorbidity in names(comorbidity_ICD_list)){
   
   comorbidity_diagnosis_date[[comorbidity]]<-comorbidity_claims_df%>%
@@ -236,4 +237,44 @@ cost_intermediate<-cost_joined%>%
                                       summarise(total = sum(PMTAMT, na.rm = TRUE)) %>%
                                       pull(total)
   ))
+
+#Now we trial code that accounts for both the start date and the end date
+cost_broken_down<-cost_intermediate%>%
+  
+  #Define end date for purposes of cost
+  mutate(end_date_analysis=first_cryptococcus_date+365)%>%
+  
+  #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_REV
+  mutate(IN_REV_365d_cost_total=pmap(
+    .l=list(IN_REV_rows, first_cryptococcus_date, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        summarise(total = sum(REVPMT, na.rm = TRUE)) %>%
+        pull(total)}
+    )
+    )%>%
+  
+  #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day
+  mutate(IN_CLM_365d_cost_total=pmap(
+    .l=list(IN_CLM_rows, first_cryptococcus_date, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        usRds::prorate_costs_by_day()%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        summarise(total = sum(CLM_AMT, na.rm = TRUE)) %>%
+        pull(total)}
+  )
+  )%>%
+  
+  #Use pmap to calculate costs between first_cryptococcus_date and end_date for PS_REV
+  mutate(PS_REV_365d_cost_total=pmap(
+    .l=list(PS_REV_rows, first_cryptococcus_date, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        summarise(total = sum(PMTAMT, na.rm = TRUE)) %>%
+        pull(total)}
+  )
+  )
 

@@ -4,6 +4,7 @@
 library(tidyverse)
 library(usRds)
 library(strobe)
+library(flowchart)
 
 #Constants
 censor_date<-as.Date("2022-01-01")
@@ -13,6 +14,17 @@ minimum_followup<-1 #Minimum followup in days
 cryptococcus_ICD_list<-c("1175", "3210", "B450", "B451", "B452", "B453", "B457", "B458", "B459", "B45")
 
 comorbidity_ICD_list<-list()
+
+comorbidity_ICD_list[["cryptococcus"]]<-c("1175", "3210", "B450", "B451", "B452", "B453", "B457", "B458", "B459", "B45")
+
+comorbidity_ICD_list[["HIV"]]<-c("042",
+                                 "07953",
+                                 "V08",
+                                 "79571",
+                                 "B20",
+                                 "Z21"
+                                 )
+
 comorbidity_ICD_list[["cirrhosis"]]<-c("5712", # Alcoholic cirrhosis of liver
                                        "5715", # Cirrhosis of liver without mention of alcohol
                                        "5716", # Biliary cirrhosis
