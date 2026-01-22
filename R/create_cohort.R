@@ -14,6 +14,11 @@ patients_clean<-patients_raw%>%
   fc_filter(TOTTX>0, 
             label="Prior transplant", 
             label_exc = "Excluded: No prior transplant", 
+            show_exc = TRUE)%>%
+  
+  fc_filter(TX1DATE<as.Date("2021-01-01"), 
+            label="Transplant prior to 2021", 
+            label_exc = "Excluded: Transplant 2021 or later", 
             show_exc = TRUE)
 
 
@@ -86,9 +91,8 @@ patients_merged2$data<-patients_merged2$data%>%
   select(-medicare_primary_TF)%>%
   
   #Prepare data for cohort initialization
-  mutate(terminal_date=coalesce(ENDDATE, censor_date))
+  mutate(terminal_date=coalesce(ENDDATE, censor_date))%>%
 
-  
 patients_merged2<-patients_merged2%>%
   fc_filter((terminal_date - cryptococcus_dx_date >=minimum_followup) | is.na(cryptococcus_dx_date), 
             label = "Minimum followup exceeded", 
@@ -96,6 +100,43 @@ patients_merged2<-patients_merged2%>%
             show_exc = TRUE)
 
   
-
 patients_merged2%>%
   fc_draw()
+
+
+#Now we need to construct the time-varying data set
+
+#Ungroup
+initial_cohort<-patients_merged2$data%>%
+  ungroup()%>%
+
+#Cases join when they experience cryptococcus
+#Controls start on date of first transplant
+  mutate(
+    cohort_join_date = coalesce(
+      as.Date(cryptococcus_dx_date),
+      as.Date(TX1DATE)
+    )
+  )
+
+#Initialize cohort
+prematching_cohort<-create_usrds_cohort(df=initial_cohort,
+                            start_date = "cohort_join_date",
+                            end_date = "terminal_date")%>%
+  
+  # Add cirrhosis
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["cirrhosis"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="cirrhosis")%>%
+  
+  # Add CMV
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["CMV"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="CMV")%>%
+  
+  # Add diabetes
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["Diabetes"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="diabetes")%>%
+  
+  finalize_usrds_cohort()
