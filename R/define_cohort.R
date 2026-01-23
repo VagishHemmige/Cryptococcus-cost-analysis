@@ -17,6 +17,18 @@ patients_clean<-patients_clean%>%
 transplant_id_list<-patients_clean%>%
   pull(USRDS_ID)
 
+#Load Medicare coverage history for all patients with transplant
+medicare_history<-load_usrds_file("payhist",
+                                  usrds_ids = transplant_id_list)%>%
+  arrange(USRDS_ID, BEGDATE)%>%
+  group_by(USRDS_ID)%>%
+  mutate(lag_ENDDATE=lag(ENDDATE))%>%
+  mutate(gap=as.numeric(BEGDATE-lag_ENDDATE))%>%
+  arrange(desc(gap))
+
+#Confirm no gaps (gap should always be 1 or missing)
+table(medicare_history$gap)
+
 
 #Obtain cryptococcus claims from the IN and PS files
 cryptococcus_IN_df<-get_IN_ICD(icd_codes = cryptococcus_ICD_list, 

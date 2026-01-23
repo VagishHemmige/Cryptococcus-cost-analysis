@@ -51,6 +51,18 @@ for (comorbidity in names(comorbidity_ICD_list)){
     establish_dx_date(diagnosis_established = comorbidity)
 }
 
+#Load Medicare coverage history for all patients with transplant
+medicare_history<-load_usrds_file("payhist",
+                                  usrds_ids = transplant_id_list)%>%
+  arrange(USRDS_ID, BEGDATE)%>%
+  group_by(USRDS_ID)%>%
+  mutate(lag_ENDDATE=lag(ENDDATE))%>%
+  mutate(gap=as.numeric(BEGDATE-lag_ENDDATE))%>%
+  arrange(desc(gap))
+
+#Confirm no gaps (gap should always be 1 or missing)
+table(medicare_history$gap)
+
 #Add cryptococcus diagnosis date to patients_clean$data:
 cryptococcus_df<-comorbidity_diagnosis_date$cryptococcus%>%
   select(-diagnosis)%>%
@@ -91,7 +103,7 @@ patients_merged2$data<-patients_merged2$data%>%
   select(-medicare_primary_TF)%>%
   
   #Prepare data for cohort initialization
-  mutate(terminal_date=coalesce(ENDDATE, censor_date))%>%
+  mutate(terminal_date=coalesce(ENDDATE, censor_date))
 
 patients_merged2<-patients_merged2%>%
   fc_filter((terminal_date - cryptococcus_dx_date >=minimum_followup) | is.na(cryptococcus_dx_date), 
@@ -139,4 +151,14 @@ prematching_cohort<-create_usrds_cohort(df=initial_cohort,
                        covariate_date="date_established",
                        covariate_variable_name="diabetes")%>%
   
-  finalize_usrds_cohort()
+  # Add HIV
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["HIV"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="HIV")%>%
+  
+  # Add Medicare current coverage
+  add_cohort_covariate(covariate_data_frame=medicare_history,
+                       covariate_date="BEGDATE",
+                       covariate_variable_name="current_medicare_coverage",
+                       covariate_value = "PAYER"
+                       )
