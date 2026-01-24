@@ -61,7 +61,9 @@ medicare_history<-load_usrds_file("payhist",
   arrange(desc(gap))
 
 #Confirm no gaps (gap should always be 1 or missing)
-table(medicare_history$gap)
+if (any(!is.na(medicare_history$gap) & medicare_history$gap != 1)) {
+  stop("Gap assumption violated: `gap` contains values other than 1 or NA.")
+}
 
 #Add cryptococcus diagnosis date to patients_clean$data
 #First, format a df with the cryptococcus dx
@@ -90,7 +92,10 @@ patients_merged<-patients_clean%>%
   #Check Medicare coverage for 365-day lookback period from day of first episode of cryptococcus
 patients_merged$data<-patients_merged$data%>%
   verify_medicare_primary(index_date = "cryptococcus_dx_date",
-                          lookback_days = 365)%>%
+                          lookback_days = 365,
+                          coverage_start_variable = "coverage_start_date",
+                          coverage_end_variable = "coverage_end_date"
+                          )%>%
   mutate(medicare_primary_TF=ifelse(cryptococcus_case=="Potential control", TRUE, medicare_primary_TF))
   
 patients_merged2<-patients_merged%>%
@@ -104,7 +109,7 @@ patients_merged2$data<-patients_merged2$data%>%
   select(-medicare_primary_TF)%>%
   
   #Prepare data for cohort initialization
-  mutate(terminal_date=coalesce(ENDDATE, censor_date))
+  mutate(terminal_date=coalesce(coverage_end_date, censor_date))
 
 patients_merged2<-patients_merged2%>%
   fc_filter((terminal_date - cryptococcus_dx_date >=minimum_followup) | is.na(cryptococcus_dx_date), 

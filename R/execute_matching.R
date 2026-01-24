@@ -19,13 +19,16 @@ unmatched_patients[["Case"]]<-unmatched_patients[["Case"]]%>%
 Case<-unmatched_patients[["Case"]]
 
 
+#Define helper function for function that assesses potential number of controls per case patient
 calculate_number_potential_matches<-function(control_df,
+                                             USRDS_ID,
                                              cirrhosis_status,
                                              cmv_status,
                                              hiv_status,
                                              diabetes_status,
                                              matching_date) {
   
+  print(paste0("Matching patient: ", USRDS_ID))
   control_df%>%
     filter(cirrhosis==cirrhosis_status)%>%
     filter(CMV==cmv_status)%>%
@@ -33,6 +36,8 @@ calculate_number_potential_matches<-function(control_df,
     filter(diabetes==diabetes_status)%>%
     filter(cohort_start_date<=matching_date)%>%
     filter(cohort_stop_date>matching_date)%>%
+    verify_medicare_primary(index_date = matching_date, medicare_coverage_df = medicare_history, cache=TRUE)%>%
+    filter(medicare_primary_TF==TRUE)%>%
     nrow()%>%
     return()
   
@@ -41,10 +46,11 @@ calculate_number_potential_matches<-function(control_df,
 unmatched_patients[["Case"]] <- unmatched_patients[["Case"]] %>%
   mutate(
     num_potential_controls = pmap_int(
-      list(cirrhosis, CMV, HIV, diabetes, cryptococcus_dx_date),
-      function(cirrhosis, CMV, HIV, diabetes, matching_date) {
+      list(USRDS_ID, cirrhosis, CMV, HIV, diabetes, cryptococcus_dx_date),
+      function(USRDS_ID, cirrhosis, CMV, HIV, diabetes, matching_date) {
         calculate_number_potential_matches(
           unmatched_patients[["Control"]],
+          USRDS_ID,
           cirrhosis,
           CMV,
           HIV,
@@ -92,7 +98,11 @@ while (continue==TRUE)
     filter(HIV==unmatched_patients$Case$HIV[[1]])%>%
     filter(diabetes==unmatched_patients$Case$diabetes[[1]])%>%
     filter(cohort_start_date<=unmatched_patients$Case$cryptococcus_dx_date[[1]])%>%
-    filter(cohort_stop_date>unmatched_patients$Case$cryptococcus_dx_date[[1]])
+    filter(cohort_stop_date>unmatched_patients$Case$cryptococcus_dx_date[[1]])%>%
+    verify_medicare_primary(index_date = unmatched_patients$Case$cryptococcus_dx_date[[1]], 
+                            medicare_coverage_df = medicare_history, 
+                            cache=TRUE)%>%
+    filter(medicare_primary_TF==TRUE)
   
   k <- min(number_controls_per_case, nrow(eligible_controls))
   
@@ -121,7 +131,7 @@ while (continue==TRUE)
    continue<-FALSE
  } 
   
-  if (i==10){
+  if (i==10000){
     continue<-FALSE
   }
   
@@ -129,4 +139,4 @@ while (continue==TRUE)
 
 
 post_match_results<-matched_patients%>%
-  bind_rows()
+  bind_rows(.id = "patient_type")

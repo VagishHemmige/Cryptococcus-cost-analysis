@@ -5,6 +5,7 @@ library(tidyverse)
 library(usRds)
 library(strobe)
 library(flowchart)
+library(gtsummary)
 
 #Constants
 censor_date<-as.Date("2022-01-01")
