@@ -1,0 +1,30 @@
+project:
+  type: website
+  output-dir: docs
+
+
+
+website:
+  site-url: https://vagishhemmige.github.io/Cryptococcus-cost-analysis
+  repo-url: https://github.com/VagishHemmige/Cryptococcus-cost-analysis
+  repo-actions: [edit, issue]
+  title: "Cryptococcus post-transplant cost"
+  navbar:
+    left:
+      - href: index.html
+        text: Home
+      - href: quarto/about.html
+        text: About
+        
+    right:
+      - icon: github
+        href: https://github.com/VagishHemmige/Cryptococcus-cost-analysis
+        aria-label: GitHub repository
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+    code-tools: true
+    page-layout: full

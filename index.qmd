@@ -1,0 +1,40 @@
+---
+title: "Overview"
+format: html
+---
+
+## Clinical background
+
+[Cryptococcosis in kidney transplant recipients](https://academic.oup.com/ofid/article/12/5/ofaf263/8121609) is uncommon but potentially catastrophic. When [transmission occurs through the donor](https://pmc.ncbi.nlm.nih.gov/articles/PMC8096655/), it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.
+
+The costs of cryptococcus after solid organ transplant are unclear.  Although studies have quantified the cost of a single hospitalization for cryptococcus,
+no study to date has estimated the total excess cost of care due to cryptococcus.
+
+## What this analysis does
+
+This project uses the [**United States Renal Data System**](https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds) 
+
+
+
+## Methods
+
+
+## Results
+
+
+## Site navigation
+
+-   [**About**](quarto/about.qmd): methods, assumptions, and disclosures
+
+
+### Reproducibility
+
+All analyses presented on this website are fully reproducible.  
+
+The complete source code used to generate the decision trees, sensitivity analyses, and figures is publicly available at this [GitHub repo](https://github.com/VagishHemmige/Cryptococcus-cost-analysis).  The R script `R/main.R` will run the R subscripts needed for this analysis in the order they are to be run.  Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse.
+
+
+## Abstracts/manuscripts
+
+This analysis has yet to be published to date.
+
