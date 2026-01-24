@@ -63,7 +63,8 @@ medicare_history<-load_usrds_file("payhist",
 #Confirm no gaps (gap should always be 1 or missing)
 table(medicare_history$gap)
 
-#Add cryptococcus diagnosis date to patients_clean$data:
+#Add cryptococcus diagnosis date to patients_clean$data
+#First, format a df with the cryptococcus dx
 cryptococcus_df<-comorbidity_diagnosis_date$cryptococcus%>%
   select(-diagnosis)%>%
   rename(cryptococcus_dx_date=date_established)
