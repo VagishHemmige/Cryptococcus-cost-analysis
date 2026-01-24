@@ -72,26 +72,44 @@ costs_clean <- costs_raw%>%
 
 
 
+
 #Add cost tibbles to patients_clean data set
-cost_joined<-left_join(patients_clean, 
+cost_joined<-left_join(post_match_results, 
                        costs_clean, 
-                       by = join_by(USRDS_ID))
+                       by = join_by(USRDS_ID))%>%
+  mutate(IN_REV_rows=map(IN_REV_rows, ~ if (is.null(.x)) tibble(CLM_FROM = as.Date(character()),
+                                                                REV_CH = numeric(),
+                                                                REVPMT = numeric(),
+                                                                HCFASAF = character()) else .x))%>%
+  mutate(IN_CLM_rows=map(IN_CLM_rows, ~ if (is.null(.x)) tibble(CLM_FROM = as.Date(character()),
+                                                                CLM_THRU = as.Date(character()),
+                                                                CLM_TOT = numeric(),
+                                                                CLM_AMT = numeric(),
+                                                                HCFASAF = character()) else .x))%>%
+  mutate(PS_REV_rows=map(PS_REV_rows, ~ if (is.null(.x)) tibble(CLM_FROM = as.Date(character()),
+                                                                CLM_THRU = as.Date(character()),
+                                                                SBMTCH = numeric(),
+                                                                ALOWCH = numeric(),
+                                                                PMTAMT = numeric(),
+                                                                HCFASAF = character()) else .x))
+
+
 
 #Use the cost claims to calculate appropriate
 cost_intermediate<-cost_joined%>%
-  mutate(IN_REV_1yr_cost = map2_dbl(IN_REV_rows, first_cryptococcus_date, ~
+  mutate(IN_REV_post_cost = map2_dbl(IN_REV_rows, index_date_match, ~
                                       .x %>%
                                       filter(CLM_FROM >= .y)%>%
                                       summarise(total = sum(REVPMT, na.rm = TRUE)) %>%
                                       pull(total)
   ))%>%
-  mutate(IN_CLM_1yr_cost = map2_dbl(IN_CLM_rows, first_cryptococcus_date, ~
+  mutate(IN_CLM_post_cost = map2_dbl(IN_CLM_rows, index_date_match, ~
                                       .x %>%
                                       filter(CLM_FROM >= .y)%>%
                                       summarise(total = sum(CLM_AMT, na.rm = TRUE)) %>%
                                       pull(total)
   ))%>%
-  mutate(PS_REV_1yr_cost = map2_dbl(PS_REV_rows, first_cryptococcus_date, ~
+  mutate(PS_REV_post_cost = map2_dbl(PS_REV_rows, index_date_match, ~
                                       .x %>%
                                       filter(CLM_FROM >= .y)%>%
                                       summarise(total = sum(PMTAMT, na.rm = TRUE)) %>%
@@ -102,11 +120,11 @@ cost_intermediate<-cost_joined%>%
 cost_broken_down<-cost_intermediate%>%
   
   #Define end date for purposes of cost
-  mutate(end_date_analysis=first_cryptococcus_date+365)%>%
+  mutate(end_date_analysis=index_date_match+365)%>%
   
   #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_REV
   mutate(IN_REV_365d_cost_total=pmap(
-    .l=list(IN_REV_rows, first_cryptococcus_date, end_date_analysis),
+    .l=list(IN_REV_rows, index_date_match, end_date_analysis),
     .f=function(claims_df, s_date,e_date) {
       claims_df%>%
         filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
@@ -117,7 +135,7 @@ cost_broken_down<-cost_intermediate%>%
   
   #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day
   mutate(IN_CLM_365d_cost_total=pmap(
-    .l=list(IN_CLM_rows, first_cryptococcus_date, end_date_analysis),
+    .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
     .f=function(claims_df, s_date,e_date) {
       claims_df%>%
         usRds::prorate_costs_by_day()%>%
@@ -129,7 +147,7 @@ cost_broken_down<-cost_intermediate%>%
   
   #Use pmap to calculate costs between first_cryptococcus_date and end_date for PS_REV
   mutate(PS_REV_365d_cost_total=pmap(
-    .l=list(PS_REV_rows, first_cryptococcus_date, end_date_analysis),
+    .l=list(PS_REV_rows, index_date_match, end_date_analysis),
     .f=function(claims_df, s_date,e_date) {
       claims_df%>%
         filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
