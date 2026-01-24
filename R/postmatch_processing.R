@@ -32,15 +32,7 @@ costs_raw[["IN_CLM"]]<-get_IN_CLM_costs(years = 2006:2021, usrds_ids = post_matc
 costs_raw[["PS_REV"]]<-get_PS_REV_costs(years = 2006:2021, usrds_ids = post_match_results$USRDS_ID)
 
 
-
-
-
-
-
-
-
 #Group by ID and nest, so that each patient has a single tibble for each type of cost
-
 #Start with the raw costs
 costs_clean <- costs_raw%>% 
   
@@ -69,6 +61,15 @@ costs_clean <- costs_raw%>%
                                                          ALOWCH = numeric(),
                                                          PMTAMT = numeric(),
                                                          HCFASAF = character()))))
+
+
+
+
+
+
+
+
+
 
 
 #Add cost tibbles to patients_clean data set
