@@ -87,7 +87,17 @@ patients_merged<-patients_clean%>%
             label_exc = "Excluded: cryptococcus dx prior to transplant", 
             show_exc = TRUE)%>%
   
-  #Spl
+  fc_filter(time_length(interval(BORN, cryptococcus_dx_date), "years") >= 18,
+            label="Age 18+ at time of cryptococcus if cryptococcus patient", 
+            label_exc = "Excluded: First cryptococcus prior to age 18", 
+            show_exc = TRUE)%>%
+  
+  fc_filter(year(cryptococcus_dx_date)>=2007 && year(cryptococcus_dx_date)<=2020,
+            label="Incident cryptococcus between 1/1/2007 and 12/31/2020", 
+            label_exc = "Incident cryptococcus outside of specified date range", 
+            show_exc = TRUE)%>%
+  
+  #Split cohorts
   fc_split(cryptococcus_case)
   
   #Check Medicare coverage for 365-day lookback period from day of first episode of cryptococcus
