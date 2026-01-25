@@ -133,6 +133,28 @@ cost_broken_down<-cost_intermediate%>%
   )
   )%>%
   
+  #Same, except now we group by HCFASAF
+  #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_REV, grouped by HCFASAF
+  mutate(IN_REV_365d_cost_grouped=pmap(
+    .l=list(IN_REV_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        mutate(HCFASAF = stringr::str_replace_all(HCFASAF, " ", ""))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Inpatient(REBUS)", "Inpatient", HCFASAF))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Non-claim/auxiliary", "Nonclaimauxiliary", HCFASAF))%>%
+        group_by(HCFASAF)%>%
+        summarise(total = sum(REVPMT, na.rm = TRUE)) %>%
+        pivot_wider(
+          names_from  = HCFASAF,
+          values_from = total,
+          names_prefix = "IN_REV_365d_cost_",
+          values_fill = 0
+        ) 
+      }
+  )
+  )%>%
+  
   #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day
   mutate(IN_CLM_365d_cost_total=pmap(
     .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
@@ -140,10 +162,37 @@ cost_broken_down<-cost_intermediate%>%
       claims_df%>%
         usRds::prorate_costs_by_day()%>%
         filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
-        summarise(total = sum(CLM_AMT, na.rm = TRUE)) %>%
-        pull(total)}
+        summarise(total = sum(CLM_AMT, na.rm = TRUE))%>%
+        pull(total)
+    }
+      )
+  )%>%
+  
+  
+  #Same, except now we group by HCFASAF
+  #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day
+  mutate(IN_CLM_365d_cost_grouped=pmap(
+    .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        usRds::prorate_costs_by_day()%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        mutate(HCFASAF = stringr::str_replace_all(HCFASAF, " ", ""))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Inpatient(REBUS)", "Inpatient", HCFASAF))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Non-claim/auxiliary", "Nonclaimauxiliary", HCFASAF))%>%
+        group_by(HCFASAF)%>%
+        summarise(total = sum(CLM_AMT, na.rm = TRUE))%>%
+        pivot_wider(
+          names_from  = HCFASAF,
+          values_from = total,
+          names_prefix = "IN_CLM_365d_cost_",
+          values_fill = 0
+        ) 
+    }
   )
   )%>%
+  
+  
   
   #Use pmap to calculate costs between first_cryptococcus_date and end_date for PS_REV
   mutate(PS_REV_365d_cost_total=pmap(
@@ -154,5 +203,10 @@ cost_broken_down<-cost_intermediate%>%
         summarise(total = sum(PMTAMT, na.rm = TRUE)) %>%
         pull(total)}
   )
-  )
+  )%>%
+  
+  unnest_wider(IN_REV_365d_cost_grouped)%>%
+  unnest_wider(IN_CLM_365d_cost_grouped)%>%
+  mutate(across(matches("_365d_cost_"), ~replace_na(., 0)))
+  
 
