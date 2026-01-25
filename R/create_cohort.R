@@ -87,6 +87,7 @@ patients_merged<-patients_clean%>%
             label_exc = "Excluded: cryptococcus dx prior to transplant", 
             show_exc = TRUE)%>%
   
+  #Spl
   fc_split(cryptococcus_case)
   
   #Check Medicare coverage for 365-day lookback period from day of first episode of cryptococcus
