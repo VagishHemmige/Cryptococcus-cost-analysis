@@ -87,12 +87,12 @@ patients_merged<-patients_clean%>%
             label_exc = "Excluded: cryptococcus dx prior to transplant", 
             show_exc = TRUE)%>%
   
-  fc_filter(time_length(interval(BORN, cryptococcus_dx_date), "years") >= 18,
+  fc_filter((time_length(interval(BORN, cryptococcus_dx_date), "years") >= 18) | is.na(cryptococcus_dx_date),
             label="Age 18+ at time of cryptococcus if cryptococcus patient", 
             label_exc = "Excluded: First cryptococcus prior to age 18", 
             show_exc = TRUE)%>%
   
-  fc_filter(year(cryptococcus_dx_date)>=2007 && year(cryptococcus_dx_date)<=2020,
+  fc_filter((year(cryptococcus_dx_date)>=2007 & year(cryptococcus_dx_date)<=2020) | is.na(cryptococcus_dx_date),
             label="Incident cryptococcus between 1/1/2007 and 12/31/2020", 
             label_exc = "Incident cryptococcus outside of specified date range", 
             show_exc = TRUE)%>%
