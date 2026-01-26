@@ -22,6 +22,7 @@ Case<-unmatched_patients[["Case"]]
 #Define helper function for function that assesses potential number of controls per case patient
 calculate_number_potential_matches<-function(control_df,
                                              USRDS_ID,
+                                             birthdate,
                                              cirrhosis_status,
                                              cmv_status,
                                              hiv_status,
@@ -30,14 +31,27 @@ calculate_number_potential_matches<-function(control_df,
   
   print(paste0("Matching patient: ", USRDS_ID))
   control_df%>%
+    
+    #Exact match on cirrhosis, CMV, HIV, and diabetes status
     filter(cirrhosis==cirrhosis_status)%>%
     filter(CMV==cmv_status)%>%
     filter(HIV==hiv_status)%>%
     filter(diabetes==diabetes_status)%>%
+    
+    #Risk set matching
     filter(cohort_start_date<=matching_date)%>%
     filter(cohort_stop_date>matching_date)%>%
+    
+    #Age>=18 on index date
+    filter(time_length(interval(BORN, matching_date), "years") >= 18)%>%
+    
+    #Age difference under 10 years
+    filter(abs(time_length(interval(BORN, birthdate), "years")) <=10)%>%
+    
+    #Confirming 365 day Medicare lookback available for potential match
     verify_medicare_primary(index_date = matching_date, medicare_coverage_df = medicare_history, cache=TRUE)%>%
     filter(medicare_primary_TF==TRUE)%>%
+    
     nrow()%>%
     return()
   
@@ -46,11 +60,12 @@ calculate_number_potential_matches<-function(control_df,
 unmatched_patients[["Case"]] <- unmatched_patients[["Case"]] %>%
   mutate(
     num_potential_controls = pmap_int(
-      list(USRDS_ID, cirrhosis, CMV, HIV, diabetes, cryptococcus_dx_date),
-      function(USRDS_ID, cirrhosis, CMV, HIV, diabetes, matching_date) {
+      list(USRDS_ID, BORN,cirrhosis, CMV, HIV, diabetes, cryptococcus_dx_date),
+      function(USRDS_ID, BORN, cirrhosis, CMV, HIV, diabetes, matching_date) {
         calculate_number_potential_matches(
           unmatched_patients[["Control"]],
           USRDS_ID,
+          BORN, 
           cirrhosis,
           CMV,
           HIV,
@@ -99,6 +114,13 @@ while (continue==TRUE)
     filter(diabetes==unmatched_patients$Case$diabetes[[1]])%>%
     filter(cohort_start_date<=unmatched_patients$Case$cryptococcus_dx_date[[1]])%>%
     filter(cohort_stop_date>unmatched_patients$Case$cryptococcus_dx_date[[1]])%>%
+    
+    #Age>=18 on index date
+    filter(time_length(interval(BORN, unmatched_patients$Case$cryptococcus_dx_date[[1]]), "years") >= 18)%>%
+    
+    #Age difference under 10 years
+    filter(abs(time_length(interval(BORN, unmatched_patients$Case$BORN[[1]]), "years")) <=10)%>%
+    
     verify_medicare_primary(index_date = unmatched_patients$Case$cryptococcus_dx_date[[1]], 
                             medicare_coverage_df = medicare_history, 
                             coverage_start_variable = "medicare_coverage_start_date",
