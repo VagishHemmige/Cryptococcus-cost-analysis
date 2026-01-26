@@ -101,6 +101,8 @@ while (continue==TRUE)
     filter(cohort_stop_date>unmatched_patients$Case$cryptococcus_dx_date[[1]])%>%
     verify_medicare_primary(index_date = unmatched_patients$Case$cryptococcus_dx_date[[1]], 
                             medicare_coverage_df = medicare_history, 
+                            coverage_start_variable = "coverage_start_date",
+                            coverage_end_variable = "coverage_end_date",
                             cache=TRUE)%>%
     filter(medicare_primary_TF==TRUE)
   
