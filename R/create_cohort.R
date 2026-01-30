@@ -212,6 +212,37 @@ prematching_cohort<-create_usrds_cohort(df=initial_cohort,
                        covariate_date="date_established",
                        covariate_variable_name="HIV")%>%
   
+  # Add liver transplant
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["Liver transplant"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="liver_transplant")%>%
+  
+  # Add lung transplant
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["Lung transplant"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="lung_transplant")%>%
+  
+  # Add heart transplant
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["Heart transplant"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="heart_transplant")%>%
+  
+  # Add pancreas transplant
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["Pancreas transplant"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="pancreas_transplant")%>%
+  
+  # Add heart-lung transplant
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["Heart-lung transplant"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="heartlung_transplant")%>%
+  
+  # Add intestinal transplant
+  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[["Intestinal transplant"]],
+                       covariate_date="date_established",
+                       covariate_variable_name="intestinal_transplant")%>%
+  
+  
   # Add Medicare current coverage
   add_cohort_covariate(covariate_data_frame=medicare_history,
                        covariate_date="BEGDATE",
