@@ -6,6 +6,45 @@ source("R/setup.R")
 patients_raw<-usRds::load_usrds_file("patients")%>%
   select(-ZIPCODE) #This is ZIP code at time of USRDS initiation, but we want at time of crypto dx
 
+#Import key information about the transplants from the TX and UNOS databases
+tx_raw<-usRds::load_usrds_file("tx")%>%
+  select(USRDS_ID, TDATE, FAILDATE, TRR_ID_CODE)
+
+ki_raw<-usRds::load_usrds_file("txunos_trr_ki")%>%
+  select(USRDS_ID, ORGTYP, HRTX, LUTX, INTX, LITX,PITX,BMTX, TRR_ID_CODE)
+
+kp_raw<-usRds::load_usrds_file("txunos_trr_kp")%>%
+  select(USRDS_ID, ORGTYP, HRTX, LUTX, INTX, LITX,PITX,BMTX, TRR_ID_CODE)
+
+#This combines the three datasets
+tx_clean<-tx_raw%>%
+  left_join(bind_rows(ki_raw,
+                      kp_raw))%>%
+  arrange(USRDS_ID, TDATE)%>%
+  
+  group_by(USRDS_ID)%>%
+  mutate(cumulative_transplant_total=row_number())%>%
+  ungroup
+
+#Create a time-varying dataset that can be used to track whether a pt has an active or inactive graft and the cumulative number of txs
+tx_status<-tx_clean%>%
+  select(USRDS_ID, TDATE, FAILDATE, cumulative_transplant_total)%>%
+  pivot_longer(
+    cols = c(TDATE, FAILDATE),
+    names_to = "event_type",
+    values_to = "event_date"
+  ) %>%
+  filter(!is.na(event_date)) %>%
+  mutate(
+    graft_status = case_when(
+      event_type == "TDATE" ~ "Active",
+      event_type == "FAILDATE" ~ "Failed"
+    )
+  ) %>%
+  select(-event_type)%>%
+  arrange(USRDS_ID, cumulative_transplant_total, event_date, graft_status)
+
+
 #Initialize a flowchart cohort
 patients_clean<-patients_raw%>%
   as_fc(label="Patients in USRDS")%>%

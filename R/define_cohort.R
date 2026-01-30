@@ -1,4 +1,5 @@
 #Create a cohort of kidney transplant patients with cryptococcus
+#This file is deprecated as create_cohort is the active file used to create the cohort used in the analysis
 
 source("R/setup.R")
 

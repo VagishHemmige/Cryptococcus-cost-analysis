@@ -122,8 +122,8 @@ cost_broken_down<-cost_intermediate%>%
   #Define end date for purposes of cost
   mutate(end_date_analysis=index_date_match+365)%>%
   
-  #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_REV
-  mutate(IN_REV_365d_cost_total=pmap(
+  #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for IN_REV
+  mutate(IN_REV_365d_cost_total=pmap_dbl(
     .l=list(IN_REV_rows, index_date_match, end_date_analysis),
     .f=function(claims_df, s_date,e_date) {
       claims_df%>%
@@ -155,14 +155,14 @@ cost_broken_down<-cost_intermediate%>%
   )
   )%>%
   
-  #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day
-  mutate(IN_CLM_365d_cost_total=pmap(
+  #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day
+  mutate(IN_CLM_365d_cost_total=pmap_dbl(
     .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
     .f=function(claims_df, s_date,e_date) {
       claims_df%>%
         usRds::prorate_costs_by_day()%>%
         filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
-        summarise(total = sum(CLM_AMT, na.rm = TRUE))%>%
+        summarise(total = sum(CLM_AMT_PRORATED, na.rm = TRUE))%>%
         pull(total)
     }
       )
@@ -181,7 +181,7 @@ cost_broken_down<-cost_intermediate%>%
         mutate(HCFASAF = ifelse(HCFASAF=="Inpatient(REBUS)", "Inpatient", HCFASAF))%>%
         mutate(HCFASAF = ifelse(HCFASAF=="Non-claim/auxiliary", "Nonclaimauxiliary", HCFASAF))%>%
         group_by(HCFASAF)%>%
-        summarise(total = sum(CLM_AMT, na.rm = TRUE))%>%
+        summarise(total = sum(CLM_AMT_PRORATED, na.rm = TRUE))%>%
         pivot_wider(
           names_from  = HCFASAF,
           values_from = total,
@@ -194,8 +194,9 @@ cost_broken_down<-cost_intermediate%>%
   
   
   
-  #Use pmap to calculate costs between first_cryptococcus_date and end_date for PS_REV
-  mutate(PS_REV_365d_cost_total=pmap(
+  
+  #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for PS_REV
+  mutate(PS_REV_365d_cost_total=pmap_dbl(
     .l=list(PS_REV_rows, index_date_match, end_date_analysis),
     .f=function(claims_df, s_date,e_date) {
       claims_df%>%
@@ -210,3 +211,95 @@ cost_broken_down<-cost_intermediate%>%
   mutate(across(matches("_365d_cost_"), ~replace_na(., 0)))
   
 
+cost_inflated<-
+  cost_broken_down%>%
+  
+  #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for IN_REV
+  mutate(IN_REV_365d_cost_adjusted_total=pmap_dbl(
+    .l=list(IN_REV_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        adjust_costs_for_inflation(baseline_month = "January", baseline_year = 2021)%>%
+        summarise(total = sum(REVPMT_ADJUSTED, na.rm = TRUE)) %>%
+        pull(total)}
+  )
+  )%>%
+  
+  #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day and inflating
+  mutate(IN_CLM_365d_cost_adjusted_total=pmap_dbl(
+    .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        usRds::prorate_costs_by_day()%>%
+        adjust_costs_for_inflation(baseline_month = "January", baseline_year = 2021)%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        summarise(total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE))%>%
+        pull(total)
+    }
+  )
+  )%>%
+  
+  #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for PS_REV
+  mutate(PS_REV_365d_cost_adjusted_total=pmap_dbl(
+    .l=list(PS_REV_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        adjust_costs_for_inflation(baseline_month = "January", baseline_year = 2021)%>%
+        summarise(total = sum(PMTAMT_ADJUSTED, na.rm = TRUE)) %>%
+        pull(total)}
+  )
+  )%>%
+  
+  #Same, except now we group by HCFASAF
+  #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day
+  mutate(IN_CLM_365d_cost_adjusted_grouped=pmap(
+    .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        usRds::prorate_costs_by_day()%>%
+        adjust_costs_for_inflation(baseline_month = "January", baseline_year = 2021)%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        mutate(HCFASAF = stringr::str_replace_all(HCFASAF, " ", ""))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Inpatient(REBUS)", "Inpatient", HCFASAF))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Non-claim/auxiliary", "Nonclaimauxiliary", HCFASAF))%>%
+        group_by(HCFASAF)%>%
+        summarise(total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE))%>%
+        pivot_wider(
+          names_from  = HCFASAF,
+          values_from = total,
+          names_prefix = "IN_CLM_365d_cost_adjusted",
+          values_fill = 0
+        ) 
+    }
+  )
+  )%>%
+  unnest_wider(IN_CLM_365d_cost_adjusted_grouped)%>%
+  mutate(across(matches("_365d_cost_"), ~replace_na(., 0)))
+  
+  
+
+cost_broken_down%>%
+  select(patient_type, contains(c("IN_REV_365d_cost", "IN_CLM_365d_cost", "PS_REV_365d_cost")))%>%
+  gtsummary::tbl_summary(by=patient_type)%>%
+  add_p()
+
+
+cost_inflated%>%
+  select(patient_type, contains(c("IN_REV_365d_cost", "IN_CLM_365d_cost", "PS_REV_365d_cost")))%>%
+  gtsummary::tbl_summary(by=patient_type)%>%
+  add_p()
+
+cost_inflated%>%
+  select(patient_type, contains(c("IN_REV_365d_cost", "IN_CLM_365d_cost", "PS_REV_365d_cost")))%>%
+  gtsummary::tbl_summary(by=patient_type,
+                         statistic = all_continuous() ~ "{mean} ({sd})")%>%
+  add_p()
+
+cost_inflated%>%
+  mutate(IN_CLM_365d_cost_adjusted_total=ifelse(IN_CLM_365d_cost_adjusted_total==0, 1, IN_CLM_365d_cost_adjusted_total))%>%
+  ggplot()+
+  geom_quasirandom(mapping=aes(x=patient_type, y=IN_CLM_365d_cost_adjusted_total), alpha=0.1)+
+  scale_y_log10()+
+  theme_classic()

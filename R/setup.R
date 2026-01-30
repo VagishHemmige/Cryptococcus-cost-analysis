@@ -7,6 +7,8 @@ library(usRds)
 library(strobe)
 library(flowchart)
 library(gtsummary)
+library(ggplot2)
+library(ggbeeswarm)
 
 #Constants
 censor_date<-as.Date("2022-01-01")
@@ -26,6 +28,19 @@ comorbidity_ICD_list[["HIV"]]<-c("042",
                                  "B20",
                                  "Z21"
                                  )
+
+
+comorbidity_ICD_list[["Heart transplant"]]<-  c("V421",  # ICD-9-CM: Heart transplant status
+                                                "Z941")  # ICD-10-CM: Heart transplant status
+comorbidity_ICD_list[["Heart-lung transplant"]]<-c("Z943") # ICD-10-CM: Heart and lungs transplant status
+comorbidity_ICD_list[["Lung transplant"]]<-  c("V426",  # ICD-9-CM: Lung transplant status
+                                               "Z942")  # ICD-10-CM: Lung transplant status
+comorbidity_ICD_list[["Pancreas transplant"]]<-  c("V4283", # ICD-9-CM: Pancreas transplant status
+                                                   "Z9483") # ICD-10-CM: Pancreas transplant status
+comorbidity_ICD_list[["Liver transplant"]]<-  c("V427",  # ICD-9-CM: Liver transplant status
+                                                "Z944")  # ICD-10-CM: Liver transplant status
+comorbidity_ICD_list[["Intestinal transplant"]]<-  c("V4284", # ICD-9-CM: Intestinal transplant status
+                                                     "Z9482") # ICD-10-CM: Intestinal transplant status
 
 comorbidity_ICD_list[["cirrhosis"]]<-c("5712", # Alcoholic cirrhosis of liver
                                        "5715", # Cirrhosis of liver without mention of alcohol
