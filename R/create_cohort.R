@@ -242,6 +242,23 @@ prematching_cohort<-create_usrds_cohort(df=initial_cohort,
                        covariate_date="date_established",
                        covariate_variable_name="intestinal_transplant")%>%
   
+  #Add time-varying information about transplant status
+  add_cohort_covariate(covariate_data_frame=tx_status,
+                       covariate_date="event_date",
+                       covariate_variable_name="cumulative_transplant_total",
+                       covariate_value = "cumulative_transplant_total")%>%
+  
+  #Add time-varying information about transplant status (whether current graft is active or failed)
+  add_cohort_covariate(covariate_data_frame=tx_status,
+                       covariate_date="event_date",
+                       covariate_variable_name="current_graft_status",
+                       covariate_value = "graft_status")%>%
+  
+  #Add time-varying information about transplant status (date of most recent transplant)
+  add_cohort_covariate(covariate_data_frame=tx_status%>%filter(graft_status=="Active"),
+                       covariate_date="event_date",
+                       covariate_variable_name="most_recent_transplant_date",
+                       covariate_value = "event_date")%>%
   
   # Add Medicare current coverage
   add_cohort_covariate(covariate_data_frame=medicare_history,
