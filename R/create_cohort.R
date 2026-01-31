@@ -260,6 +260,12 @@ prematching_cohort<-create_usrds_cohort(df=initial_cohort,
                        covariate_variable_name="most_recent_transplant_date",
                        covariate_value = "event_date")%>%
   
+  #Add time-varying information about transplant status (date of most recent graft failure)
+  add_cohort_covariate(covariate_data_frame=tx_status%>%filter(graft_status=="Failed"),
+                       covariate_date="event_date",
+                       covariate_variable_name="most_recent_failure_date",
+                       covariate_value = "event_date")%>%
+  
   # Add Medicare current coverage
   add_cohort_covariate(covariate_data_frame=medicare_history,
                        covariate_date="BEGDATE",
