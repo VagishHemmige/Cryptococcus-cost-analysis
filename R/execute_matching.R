@@ -4,9 +4,6 @@ prematching_cohort<-prematching_cohort
 
 unmatched_patients<-list()
 
-#Number of controls per case
-number_controls_per_case<-2
-
 unmatched_patients[["Case"]]<-prematching_cohort%>%
   filter(cryptococcus_case=="Case")
 
