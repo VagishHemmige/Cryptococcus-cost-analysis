@@ -1,5 +1,7 @@
 #This file executes matching on the prematching_cohort object, which is assumed to already exist
 
+prematching_cohort<-prematching_cohort
+
 unmatched_patients<-list()
 
 #Number of controls per case

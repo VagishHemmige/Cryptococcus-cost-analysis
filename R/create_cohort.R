@@ -265,4 +265,6 @@ prematching_cohort<-create_usrds_cohort(df=initial_cohort,
                        covariate_date="BEGDATE",
                        covariate_variable_name="current_medicare_coverage",
                        covariate_value = "PAYER"
-                       )
+                       )%>%
+  
+  finalize_usrds_cohort(baseline_date_variable = "most_recent_transplant_date")
