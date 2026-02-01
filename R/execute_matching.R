@@ -121,31 +121,69 @@ while (continue==TRUE)
 
   #Select matches from controls
   eligible_controls <-unmatched_patients[["Control"]]%>%
+    
     filter(cirrhosis==unmatched_patients$Case$cirrhosis[[1]])%>%
-    filter(CMV==unmatched_patients$Case$CMV[[1]])%>%
+    #filter(CMV==unmatched_patients$Case$CMV[[1]])%>%
     filter(HIV==unmatched_patients$Case$HIV[[1]])%>%
     filter(diabetes==unmatched_patients$Case$diabetes[[1]])%>%
-    filter(cohort_start_date<=unmatched_patients$Case$cryptococcus_dx_date[[1]])%>%
-    filter(cohort_stop_date>unmatched_patients$Case$cryptococcus_dx_date[[1]])%>%
+    
+    #Risk set matching
+    filter(tstart<=unmatched_patients$Case$tstart[[1]])%>%
+    filter(tstop>unmatched_patients$Case$tstart[[1]])%>%
+    
+    #Calculate date for age calculations/etc.
+    mutate(.baseline_control_date=unmatched_patients$Case$tstart[[1]] + most_recent_transplant_date)%>%
+    
+    #Make sure case and control are sampled within 3 years of each other
+    filter(abs(time_length(interval(.baseline_control_date, unmatched_patients$Case$cryptococcus_dx_date[[1]]), "years")) <=3)%>%
+    
+    #filter(cohort_start_date<=unmatched_patients$Case$cryptococcus_dx_date[[1]])%>%
+    #filter(cohort_stop_date>unmatched_patients$Case$cryptococcus_dx_date[[1]])%>%
     
     #Age>=18 on index date
-    filter(time_length(interval(BORN, unmatched_patients$Case$cryptococcus_dx_date[[1]]), "years") >= 18)%>%
+    filter(time_length(interval(BORN, .baseline_control_date), "years") >= 18)%>%
     
-    #Age difference under 10 years
-    filter(abs(time_length(interval(BORN, unmatched_patients$Case$BORN[[1]]), "years")) <=10)%>%
-    
-    verify_medicare_primary(index_date = unmatched_patients$Case$cryptococcus_dx_date[[1]], 
+    #Age difference under 10 years, calculated at sampling date
+    filter(abs(time_length(interval(BORN,.baseline_control_date), "years")-
+                 time_length(interval(unmatched_patients$Case$BORN[[1]],
+                                      unmatched_patients$Case$cryptococcus_dx_date[[1]]), "years")) <=10)%>%
+  
+    verify_medicare_primary(index_date = ".baseline_control_date", 
                             medicare_coverage_df = medicare_history, 
                             coverage_start_variable = "medicare_coverage_start_date",
                             coverage_end_variable = "medicare_coverage_end_date",
                             cache=TRUE)%>%
-    filter(medicare_primary_TF==TRUE)
+    filter(medicare_primary_TF==TRUE)%>%
+    
+    #Move matches for cumulative number of transplants to the top
+    #Note: this step could be used for propensity score matching on various variables
+    #Consider minimizing date difference and age difference as well
+    arrange(desc(cumulative_transplant_total==unmatched_patients$Case$cumulative_transplant_total[[1]]))
   
-  k <- min(number_controls_per_case, nrow(eligible_controls))
   
-  sampled_controls <- eligible_controls %>%
-    slice_sample(n = k)%>%
-    mutate(index_date_match = unmatched_patients$Case$cryptococcus_dx_date[[1]])
+  #Number of controls is minimum of global constant number_controls_per_case and number of distinct USRDS_IDs
+  k <- min(number_controls_per_case, nrow(distinct(eligible_controls, USRDS_ID)))
+  
+  #Initialize sampled_controls df
+  sampled_controls<-eligible_controls[0, ]
+    
+  #Loop to select controls one at a time to ensure same patient is not sampled multiple times 
+  while (k>0)
+  {
+  
+  sampled_controls <- bind_rows(
+    sampled_controls,
+    eligible_controls %>%slice_head(n = 1))
+    
+    eligible_controls<-eligible_controls%>%
+      filter(!(USRDS_ID %in% sampled_controls$USRDS_ID ))
+
+    k<-min(k-1, nrow(distinct(eligible_controls, USRDS_ID)))   
+  }
+    
+    sampled_controls<-sampled_controls%>%
+    mutate(index_date_match = .baseline_control_date)%>%
+    select(-.baseline_control_date)
   
   #Add case to matched DF
   matched_patients[["Case"]]<-unmatched_patients$Case[1,]%>%
