@@ -1,10 +1,6 @@
 # Performs all postmatch processing
 
-post_match_results%>%
-  select(-matched_control_indices, -USRDS_ID)%>%
-  gtsummary::tbl_summary(by=patient_type)%>%
-  add_p()
-
+#Update flowchart to reflect matching process
 patients_fc_matched<-patients_merged2%>%
   fc_filter(USRDS_ID %in% post_match_results$USRDS_ID,
             label = "Matched", 
@@ -13,16 +9,6 @@ patients_fc_matched<-patients_merged2%>%
 
 patients_fc_matched%>%
   fc_draw()
-
-
-
-
-
-
-
-
-
-
 
 
 #Gather raw costs for each patient
@@ -61,15 +47,6 @@ costs_clean <- costs_raw%>%
                                                          ALOWCH = numeric(),
                                                          PMTAMT = numeric(),
                                                          HCFASAF = character()))))
-
-
-
-
-
-
-
-
-
 
 
 
@@ -119,8 +96,21 @@ cost_intermediate<-cost_joined%>%
 #Now we trial code that accounts for both the start date and the end date
 cost_broken_down<-cost_intermediate%>%
   
-  #Define end date for purposes of cost
-  mutate(end_date_analysis=index_date_match+365)%>%
+  #Define end date for purposes of cost using maximum_followup from setup file
+  mutate(end_date_analysis=pmin(index_date_match + maximum_followup,
+                                censor_date,
+                                coverage_end_date,
+                                medicare_coverage_end_date,
+                                na.rm=TRUE
+                                ))%>%
+  
+  mutate(duration_cost_followup=time_length(interval(index_date_match, end_date_analysis), "days"))%>%
+  mutate(follow_up_final_event=case_when(
+    end_date_analysis==DIED ~ "Death",
+    end_date_analysis==index_date_match + maximum_followup ~ "Maximum follow-up",
+    end_date_analysis==censor_date ~ "Censored",
+    end_date_analysis==coverage_end_date | end_date_analysis==medicare_coverage_end_date ~ "Loss of coverage"
+  ))%>%
   
   #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for IN_REV
   mutate(IN_REV_365d_cost_total=pmap_dbl(
@@ -191,8 +181,6 @@ cost_broken_down<-cost_intermediate%>%
     }
   )
   )%>%
-  
-  
   
   
   #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for PS_REV
@@ -279,27 +267,3 @@ cost_inflated<-
   mutate(across(matches("_365d_cost_"), ~replace_na(., 0)))
   
   
-
-cost_broken_down%>%
-  select(patient_type, contains(c("IN_REV_365d_cost", "IN_CLM_365d_cost", "PS_REV_365d_cost")))%>%
-  gtsummary::tbl_summary(by=patient_type)%>%
-  add_p()
-
-
-cost_inflated%>%
-  select(patient_type, contains(c("IN_REV_365d_cost", "IN_CLM_365d_cost", "PS_REV_365d_cost")))%>%
-  gtsummary::tbl_summary(by=patient_type)%>%
-  add_p()
-
-cost_inflated%>%
-  select(patient_type, contains(c("IN_REV_365d_cost", "IN_CLM_365d_cost", "PS_REV_365d_cost")))%>%
-  gtsummary::tbl_summary(by=patient_type,
-                         statistic = all_continuous() ~ "{mean} ({sd})")%>%
-  add_p()
-
-cost_inflated%>%
-  mutate(IN_CLM_365d_cost_adjusted_total=ifelse(IN_CLM_365d_cost_adjusted_total==0, 1, IN_CLM_365d_cost_adjusted_total))%>%
-  ggplot()+
-  geom_quasirandom(mapping=aes(x=patient_type, y=IN_CLM_365d_cost_adjusted_total), alpha=0.1)+
-  scale_y_log10()+
-  theme_classic()

@@ -13,7 +13,9 @@ library(ggbeeswarm)
 #Constants
 censor_date<-as.Date("2022-01-01")
 minimum_followup<-1 #Minimum followup in days
+maximum_followup<-365 #Maximum followup in days
 number_controls_per_case<-2 #Number of controls per case
+
 
 #Create list of ICD9 and ICD10 codes for cryptococcus
 cryptococcus_ICD_list<-c("1175", "3210", "B450", "B451", "B452", "B453", "B457", "B458", "B459", "B45")
