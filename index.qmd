@@ -49,7 +49,7 @@ Institutional claims data were abstracted as well as Physician/Supplier line-ite
 
 All analyses presented on this website are fully reproducible.  
 
-The complete source code used to generate the decision trees, sensitivity analyses, and figures is publicly available at this [GitHub repo](https://github.com/VagishHemmige/Cryptococcus-cost-analysis).  The R script `R/main.R` will run the R subscripts needed for this analysis in the order they are to be run.  Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse.
+The complete source code used to perform the full analysis and generate the tables and figures is publicly available at this [GitHub repo](https://github.com/VagishHemmige/Cryptococcus-cost-analysis).  The R script `R/main.R` will run the R subscripts needed for this analysis in the order they are to be run.  Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse.
 
 
 ## Abstracts/manuscripts

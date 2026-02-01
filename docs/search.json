@@ -53,7 +53,7 @@
     "href": "index.html#site-navigation",
     "title": "Overview",
     "section": "Site navigation",
-    "text": "Site navigation\n\nAbout: methods, assumptions, and disclosures\n\n\nReproducibility\nAll analyses presented on this website are fully reproducible.\nThe complete source code used to generate the decision trees, sensitivity analyses, and figures is publicly available at this GitHub repo. The R script R/main.R will run the R subscripts needed for this analysis in the order they are to be run. Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse."
+    "text": "Site navigation\n\nAbout: methods, assumptions, and disclosures\n\n\nReproducibility\nAll analyses presented on this website are fully reproducible.\nThe complete source code used to perform the full analysis and generate the tables and figures is publicly available at this GitHub repo. The R script R/main.R will run the R subscripts needed for this analysis in the order they are to be run. Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse."
   },
   {
     "objectID": "index.html#abstractsmanuscripts",
