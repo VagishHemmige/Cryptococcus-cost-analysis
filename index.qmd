@@ -12,11 +12,29 @@ no study to date has estimated the total excess cost of care due to cryptococcus
 
 ## What this analysis does
 
-This project uses the [**United States Renal Data System**](https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds) 
+This project uses the [**United States Renal Data System**](https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds) to analyze the 
 
 
 
 ## Methods
+
+We selected cryptococcus cases based on the following inclusion criteria:
+
+- Age 18 or greater
+- Prior kidney transplant
+- ICD9 or ICD10 codes for cryptococcus (2 outpatient or 1 inpatient)
+- One year of Medicare primary coverage lead-in
+
+Controls were matched 2:1 to cases based on risk-set sampling on the following:
+
+- Time since transplant
+- Cirrhosis
+- Diabetes
+- HIV/AIDS
+- Age within 10 years
+- Sampling date for control within 3 years of sampling date for case
+
+Institutional claims data were abstracted as well as Physician/Supplier line-item data.
 
 
 ## Results

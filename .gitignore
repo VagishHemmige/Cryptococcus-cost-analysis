@@ -7,3 +7,5 @@
 *.RData
 
 /.quarto/
+/docs/
+.html

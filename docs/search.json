@@ -32,14 +32,14 @@
     "href": "index.html#what-this-analysis-does",
     "title": "Overview",
     "section": "What this analysis does",
-    "text": "What this analysis does\nThis project uses the United States Renal Data System"
+    "text": "What this analysis does\nThis project uses the United States Renal Data System to analyze the"
   },
   {
     "objectID": "index.html#methods",
     "href": "index.html#methods",
     "title": "Overview",
     "section": "Methods",
-    "text": "Methods"
+    "text": "Methods\nWe selected cryptococcus cases based on the following inclusion criteria:\n\nAge 18 or greater\nPrior kidney transplant\nICD9 or ICD10 codes for cryptococcus (2 outpatient or 1 inpatient)\nOne year of Medicare primary coverage lead-in\n\nControls were matched 2:1 to cases based on risk-set sampling on the following:\n\nTime since transplant\nCirrhosis\nDiabetes\nHIV/AIDS\nAge within 10 years\nSampling date for control within 3 years of sampling date for case\n\nInstitutional claims data were abstracted as well as Physician/Supplier line-item data."
   },
   {
     "objectID": "index.html#results",
