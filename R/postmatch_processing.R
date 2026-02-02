@@ -281,7 +281,7 @@ cost_longitudinal<-
         mutate(month=time_length(interval(s_date, service_date), "days") %/% 30)%>%
         filter(month<12)%>%
         group_by(month)%>%
-        summarise(IN_CLM_month_total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE))%>%
+        summarise(IN_CLM_month_total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE, .groups = "drop"))%>%
         mutate(IN_CLM_month_total=pmax(IN_CLM_month_total,0))%>%
         mutate(month_offset=pmin(30, time_length(interval(s_date, e_date), "days")-30*month + 1 ))%>%
         ungroup()
@@ -299,7 +299,7 @@ cost_longitudinal<-
         mutate(month=time_length(interval(s_date, CLM_FROM), "days") %/% 30)%>%
         filter(month<12)%>%
         group_by(month)%>%
-        summarise(PS_REV_month_total = sum(PMTAMT_ADJUSTED, na.rm = TRUE)) %>%
+        summarise(PS_REV_month_total = sum(PMTAMT_ADJUSTED, na.rm = TRUE,.groups = "drop")) %>%
         mutate(PS_REV_month_total=pmax(PS_REV_month_total,0))%>%
         ungroup()
     }
@@ -323,7 +323,7 @@ cost_longitudinal<-
         mutate(HCFASAF = ifelse(HCFASAF=="Inpatient(REBUS)", "Inpatient", HCFASAF))%>%
         mutate(HCFASAF = ifelse(HCFASAF=="Non-claim/auxiliary", "Nonclaimauxiliary", HCFASAF))%>%
         group_by(month, HCFASAF)%>%
-        summarise(total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE))%>%
+        summarise(total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE,.groups = "drop"))%>%
         mutate(total=pmax(total,0))%>%
         pivot_wider(
           names_from  = HCFASAF,
@@ -333,7 +333,18 @@ cost_longitudinal<-
         ) 
     }
   )
-  )  
+  )%>%
+  mutate(
+    cost_column_longitudinal = pmap(
+      list(
+        IN_CLM_365d_cost_adjusted_total_longitudinal,
+        PS_REV_365d_cost_adjusted_total_longitudinal,
+        IN_CLM_365d_cost_adjusted_grouped_longitudinal
+      ),
+      ~ full_join(..1, ..2, by = "month") %>%
+        full_join(..3, by = "month")
+    )
+  )
   
   unnest(IN_CLM_365d_cost_adjusted_total_longitudinal)%>%
   mutate(
