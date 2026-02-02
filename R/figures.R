@@ -13,3 +13,19 @@ cost_inflated%>%
   geom_quasirandom(mapping=aes(x=patient_type, y=IN_CLM_365d_cost_adjusted_total), alpha=0.1)+
   scale_y_log10()+
   theme_classic()
+
+
+#GGplot the mean cost (with confidence interval) for cryptococcus cases and controls by month
+
+#IN_CLM first
+#First, use emmeans to calculate the predicted values from the model 
+emm_df_IN_CLM <- emmeans(
+  fit_IN_CLM,
+  ~ patient_type | month,
+  type = "response"
+)%>%as.data.frame()
+
+#Now, use ggplot to pl
+ggplot(data=emm_df_IN_CLM)+
+  geom_point(mapping=aes(x=month, y=response, color=patient_type))+
+  geom_errorbar(aes(x=month, ymin = asymp.LCL, ymax = asymp.UCL, color=patient_type))

@@ -9,12 +9,17 @@ library(flowchart)
 library(gtsummary)
 library(ggplot2)
 library(ggbeeswarm)
+library(glmmTMB)
+library(emmeans)
 
 #Constants
 censor_date<-as.Date("2022-01-01")
 minimum_followup<-1 #Minimum followup in days
 maximum_followup<-365 #Maximum followup in days
 number_controls_per_case<-2 #Number of controls per case
+inflation_month<-"January"
+inflation_year<-2021
+baseline_months_cost<-3
 
 
 #Create list of ICD9 and ICD10 codes for cryptococcus
