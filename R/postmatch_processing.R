@@ -288,6 +288,53 @@ cost_longitudinal<-
     }
   )
   )%>%
+
+  #Use pmap to calculate costs between first_cryptococcus_date and end_date for PS_REV
+  mutate(PS_REV_365d_cost_adjusted_total_longitudinal=pmap(
+    .l=list(PS_REV_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        filter(CLM_FROM >= s_date-30*baseline_months_cost, CLM_FROM<=e_date)%>%
+        adjust_costs_for_inflation(baseline_month = inflation_month, baseline_year = inflation_year)%>%
+        mutate(month=time_length(interval(s_date, CLM_FROM), "days") %/% 30)%>%
+        filter(month<12)%>%
+        group_by(month)%>%
+        summarise(PS_REV_month_total = sum(PMTAMT_ADJUSTED, na.rm = TRUE)) %>%
+        mutate(PS_REV_month_total=pmax(PS_REV_month_total,0))%>%
+        ungroup()
+    }
+        
+        
+  )
+  )%>%
+
+  #IN_CLM, except now we group by HCFASAF
+  #Use pmap to calculate costs IN_CLM, after prorating costs by day
+  mutate(IN_CLM_365d_cost_adjusted_grouped_longitudinal=pmap(
+    .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        usRds::prorate_costs_by_day()%>%
+        adjust_costs_for_inflation(baseline_month = inflation_month, baseline_year = inflation_year)%>%
+        filter(service_date >= s_date-30*baseline_months_cost, service_date<=e_date)%>%
+        mutate(month=time_length(interval(s_date, service_date), "days") %/% 30)%>%
+        filter(month<12)%>%
+        mutate(HCFASAF = stringr::str_replace_all(HCFASAF, " ", ""))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Inpatient(REBUS)", "Inpatient", HCFASAF))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Non-claim/auxiliary", "Nonclaimauxiliary", HCFASAF))%>%
+        group_by(month, HCFASAF)%>%
+        summarise(total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE))%>%
+        mutate(total=pmax(total,0))%>%
+        pivot_wider(
+          names_from  = HCFASAF,
+          values_from = total,
+          names_prefix = "IN_CLM_month_grouped",
+          values_fill = 0
+        ) 
+    }
+  )
+  )  
+  
   unnest(IN_CLM_365d_cost_adjusted_total_longitudinal)%>%
   mutate(
     patient_type = factor(patient_type),
