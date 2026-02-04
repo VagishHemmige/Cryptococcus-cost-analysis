@@ -16,7 +16,7 @@ cost_inflated%>%
 
 
 #Function that returns a ggplot of the mean cost (with confidence interval) for cryptococcus cases and controls by month
-plot_mean_monthly_costs<-function(fitted_model) {
+plot_mean_monthly_costs<-function(fitted_model, countdf=final_count_df) {
 
   #First, use emmeans to calculate the predicted values from the model assuming 30-day months, then convert to data frame
   emm_df <- emmeans(
@@ -34,18 +34,55 @@ plot_mean_monthly_costs<-function(fitted_model) {
     mutate(
       estimate = if ("response" %in% names(.)) response else emmean)
   
-  #Now, use ggplot to pl
-  ggplot(data=emm_df)+
-    geom_point(mapping=aes(x=month, y=estimate, color=patient_type))+
-    geom_errorbar(aes(x=month, ymin = asymp.LCL, ymax = asymp.UCL, color=patient_type),
-                  width = 0.1)+
-    geom_vline(xintercept = 0, linetype = "dashed", color = "gray50")+
-    theme_classic()+
-    theme(legend.position = "bottom")+
-    labs(x="Month", y="Inflation-adjusted cost per month (dollars)", color = "Patient group")+
-    scale_y_continuous(limits = c(0, NA))
+  monthly_plot <- list()
   
+  # Main plot
+  monthly_plot[["main"]] <- ggplot(data = emm_df) +
+    geom_point(aes(x = month, y = estimate, color = patient_type)) +
+    geom_errorbar(
+      aes(
+        x = month,
+        ymin = asymp.LCL,
+        ymax = asymp.UCL,
+        color = patient_type
+      ),
+      width = 0.1
+    ) +
+    geom_vline(xintercept = 0,
+               linetype = "dashed",
+               color = "gray50") +
+    theme_classic() +
+    labs(
+      x = "Month",
+      y = "Inflation-adjusted cost per month (dollars)",
+      color = "Patient group"
+    )
+  
+  # Risk table
+  monthly_plot[["risk_table"]] <- countdf %>%
+    mutate(month = 0.5 + as.numeric(month)) %>%
+    ggplot() +
+    geom_text(
+      aes(x = month, y = patient_type, label = n),
+      size = 3
+    ) +
+    scale_y_discrete(limits = c("Case", "Control")) +
+    theme_void() +
+    theme(
+      legend.position = "none",
+      plot.margin = margin(t = -5, b = 5),
+      axis.text.x = element_blank()
+    )
+  
+  # Combine plots
+  monthly_plot[["main"]] /
+    monthly_plot[["risk_table"]] +
+    plot_layout(heights = c(4, 1), guides = "keep")
 }
+  
+  
+  
+
 
 for (outcome in c("grand_total_cost_month", "IN_CLM_month_total", "PS_REV_month_total", "IN_CLM_month_groupedHomeHealth",
                   "IN_CLM_month_groupedHospice","IN_CLM_month_groupedNonclaimauxiliary","IN_CLM_month_groupedDialysis",

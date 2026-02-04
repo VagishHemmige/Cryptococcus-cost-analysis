@@ -12,6 +12,7 @@ library(ggbeeswarm)
 library(glmmTMB)
 library(emmeans)
 library(geepack)
+library(patchwork)
 
 #Constants
 censor_date<-as.Date("2022-01-01")
