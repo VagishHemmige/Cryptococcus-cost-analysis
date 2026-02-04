@@ -56,28 +56,32 @@ plot_mean_monthly_costs<-function(fitted_model, countdf=final_count_df) {
       x = "Month",
       y = "Inflation-adjusted cost per month (dollars)",
       color = "Patient group"
-    )
+    )+
+    theme(legend.position = "bottom")
   
   # Risk table
   monthly_plot[["risk_table"]] <- countdf %>%
-    mutate(month = 0.5 + as.numeric(month)) %>%
+    mutate(month = 0.5 + as.numeric(month),
+           y_position = ifelse(patient_type == "Case", 0.4, 0.6)) %>%
     ggplot() +
     geom_text(
-      aes(x = month, y = patient_type, label = n),
+      aes(x = month, y = y_position, label = n, color=patient_type),
       size = 3
-    ) +
-    scale_y_discrete(limits = c("Case", "Control")) +
+    )+
+    coord_cartesian(ylim = c(0.3, 0.7)) +
     theme_void() +
     theme(
-      legend.position = "none",
       plot.margin = margin(t = -5, b = 5),
-      axis.text.x = element_blank()
-    )
+      legend.position = "none")
   
   # Combine plots
   monthly_plot[["main"]] /
     monthly_plot[["risk_table"]] +
-    plot_layout(heights = c(4, 1), guides = "keep")
+    plot_layout(heights = c(9, 1), guides = "keep")+
+    plot_annotation(
+      caption = "Bottom panel shows N at risk by month"
+    )
+  
 }
   
   
