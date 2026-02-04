@@ -23,3 +23,19 @@ cost_inflated%>%
   gtsummary::tbl_summary(by=patient_type,
                          statistic = all_continuous() ~ "{mean} ({sd})")%>%
   add_p()
+
+
+
+#Total the grand difference between cases and controls over the entire period of follow up:
+fit[["grand_total_cost_month"]][["gee"]][["linear"]]%>%
+  emmeans(
+    ~ patient_type | month
+  )%>%
+  contrast(
+    method = "revpairwise"  # Case - Control
+  )%>%
+  contrast(
+    list("Months -3 to 11 total" = rep(1, 15)),
+    by = NULL
+  )%>%
+  summary(infer=TRUE)

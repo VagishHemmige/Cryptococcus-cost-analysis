@@ -94,10 +94,37 @@ for (outcome in c("grand_total_cost_month", "IN_CLM_month_total", "PS_REV_month_
   
   
   plot_mean_monthly_costs(fit[[outcome]][["glmmTMB"]][["tweedie"]])
+  ggsave(filename = paste0("figures/Longitudinal ", outcome," glmmTMB", " ", "tweedie.svg"),
+         width=14,
+         height=7
+         )
+  
   plot_mean_monthly_costs(fit[[outcome]][["glmmTMB"]][["linear"]])
+  ggsave(filename = paste0("figures/Longitudinal ", outcome," glmmTMB", " ", "linear.svg"),
+         width=14,
+         height=7
+  )
+  
+  
   plot_mean_monthly_costs(fit[[outcome]][["gee"]][["linear"]])
+  ggsave(filename = paste0("figures/Longitudinal ", outcome," gee", " ", "linear.svg"),
+         width=14,
+         height=7
+  )
+  
+  
   plot_mean_monthly_costs(fit[[outcome]][["glmmTMB"]][["log"]])
+  ggsave(filename = paste0("figures/Longitudinal ", outcome," glmmTMB", " ", "log.svg"),
+         width=14,
+         height=7
+  )
+  
+  
   plot_mean_monthly_costs(fit[[outcome]][["gee"]][["log"]])
+  ggsave(filename = paste0("figures/Longitudinal ", outcome," gee", " ", "log.svg"),
+         width=14,
+         height=7
+  )
   
   
 }
@@ -105,14 +132,3 @@ for (outcome in c("grand_total_cost_month", "IN_CLM_month_total", "PS_REV_month_
 
 
 
-#Create plots of monthly costs for cases and controls
-
-plot_mean_monthly_costs(fit_grand_total_cost_month)
-plot_mean_monthly_costs(fit_IN_CLM)
-plot_mean_monthly_costs(fit_PS_REV)
-
-plot_mean_monthly_costs(fit_IN_CLM_month_groupedHomeHealth)
-plot_mean_monthly_costs(fit_IN_CLM_month_groupedHospice)
-plot_mean_monthly_costs(fit_IN_CLM_month_groupedOutpatient)
-plot_mean_monthly_costs(fit_IN_CLM_month_groupedInpatient)
-plot_mean_monthly_costs(fit_IN_CLM_month_groupedSkilledNursingFacility)
