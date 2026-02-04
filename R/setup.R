@@ -11,6 +11,7 @@ library(ggplot2)
 library(ggbeeswarm)
 library(glmmTMB)
 library(emmeans)
+library(geepack)
 
 #Constants
 censor_date<-as.Date("2022-01-01")
@@ -19,7 +20,8 @@ maximum_followup<-365 #Maximum followup in days
 number_controls_per_case<-2 #Number of controls per case
 inflation_month<-"January"
 inflation_year<-2021
-baseline_months_cost<-3
+baseline_months_cost<-3 #N
+full_months <- -baseline_months_cost:11 #Range of months for longitudinal analysis
 
 
 #Create list of ICD9 and ICD10 codes for cryptococcus

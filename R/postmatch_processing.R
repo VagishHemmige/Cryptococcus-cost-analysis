@@ -281,10 +281,13 @@ cost_longitudinal<-
         mutate(month=time_length(interval(s_date, service_date), "days") %/% 30)%>%
         filter(month<12)%>%
         group_by(month)%>%
-        summarise(IN_CLM_month_total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE, .groups = "drop"))%>%
+        summarise(IN_CLM_month_total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE), 
+                  .groups = "drop")%>%
         mutate(IN_CLM_month_total=pmax(IN_CLM_month_total,0))%>%
-        mutate(month_offset=pmin(30, time_length(interval(s_date, e_date), "days")-30*month + 1 ))%>%
-        ungroup()
+        ungroup()%>%
+        tidyr::complete(
+          month = full_months
+        )
     }
   )
   )%>%
@@ -299,7 +302,8 @@ cost_longitudinal<-
         mutate(month=time_length(interval(s_date, CLM_FROM), "days") %/% 30)%>%
         filter(month<12)%>%
         group_by(month)%>%
-        summarise(PS_REV_month_total = sum(PMTAMT_ADJUSTED, na.rm = TRUE,.groups = "drop")) %>%
+        summarise(PS_REV_month_total = sum(PMTAMT_ADJUSTED, na.rm = TRUE), 
+                  .groups = "drop") %>%
         mutate(PS_REV_month_total=pmax(PS_REV_month_total,0))%>%
         ungroup()
     }
@@ -323,7 +327,8 @@ cost_longitudinal<-
         mutate(HCFASAF = ifelse(HCFASAF=="Inpatient(REBUS)", "Inpatient", HCFASAF))%>%
         mutate(HCFASAF = ifelse(HCFASAF=="Non-claim/auxiliary", "Nonclaimauxiliary", HCFASAF))%>%
         group_by(month, HCFASAF)%>%
-        summarise(total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE,.groups = "drop"))%>%
+        summarise(total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE), 
+                  .groups = "drop")%>%
         mutate(total=pmax(total,0))%>%
         pivot_wider(
           names_from  = HCFASAF,
@@ -339,40 +344,39 @@ cost_longitudinal<-
       list(
         IN_CLM_365d_cost_adjusted_total_longitudinal,
         PS_REV_365d_cost_adjusted_total_longitudinal,
-        IN_CLM_365d_cost_adjusted_grouped_longitudinal
+        IN_CLM_365d_cost_adjusted_grouped_longitudinal,
+        index_date_match, 
+        end_date_analysis
       ),
-      ~ full_join(..1, ..2, by = "month") %>%
-        full_join(..3, by = "month")
-    )
-  )
-  
-  unnest(IN_CLM_365d_cost_adjusted_total_longitudinal)%>%
+      ~ left_join(..1, ..2, by = "month") %>%
+        left_join(..3, by = "month")%>%
+        mutate(month_offset=pmin(30, time_length(interval(..4, ..5), "days")-30*month + 1 ))%>%
+        mutate(month_offset=pmax(month_offset,0))
+
+    ))%>%
+  select(-IN_CLM_365d_cost_adjusted_total_longitudinal,
+         -PS_REV_365d_cost_adjusted_total_longitudinal,
+         -IN_CLM_365d_cost_adjusted_grouped_longitudinal)%>%
+  unnest(cost_column_longitudinal)%>%
   mutate(
     patient_type = factor(patient_type),
     patient_type = relevel(patient_type, ref = "Control")
-  )
-    
-  #Same, except now we group by HCFASAF
-  #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day
-  mutate(IN_CLM_365d_cost_adjusted_grouped=pmap(
-    .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
-    .f=function(claims_df, s_date,e_date) {
-      claims_df%>%
-        usRds::prorate_costs_by_day()%>%
-        adjust_costs_for_inflation(baseline_month = inflation_month, baseline_year = inflation_year)%>%
-        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
-        mutate(HCFASAF = stringr::str_replace_all(HCFASAF, " ", ""))%>%
-        mutate(HCFASAF = ifelse(HCFASAF=="Inpatient(REBUS)", "Inpatient", HCFASAF))%>%
-        mutate(HCFASAF = ifelse(HCFASAF=="Non-claim/auxiliary", "Nonclaimauxiliary", HCFASAF))%>%
-        group_by(HCFASAF)%>%
-        summarise(total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE))%>%
-        pivot_wider(
-          names_from  = HCFASAF,
-          values_from = total,
-          names_prefix = "IN_CLM_365d_cost_adjusted",
-          values_fill = 0
-        ) 
-    }
-  )
-  )
+  )%>%
+  
+  mutate(across(
+    c(
+      IN_CLM_month_total,
+      PS_REV_month_total,
+      starts_with("IN_CLM_month_grouped")
+    ),
+    ~replace_na(., 0)))%>%
+  mutate(grand_total_cost_month=IN_CLM_month_total+PS_REV_month_total)
 
+#Remove lists-columns from the final data frame since they are space-consuming and clunky, and remove months where the patient is not under observation
+final_data_set<-cost_longitudinal%>%
+  select(where(~ !is.list(.)))%>%
+  filter(month_offset>0)
+
+#create a data frame for use as a risk table in ggplot
+final_count_df<-final_data_set%>%
+  count(patient_type, month)
