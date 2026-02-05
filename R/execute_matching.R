@@ -13,62 +13,12 @@ unmatched_patients[["Case"]]<-unmatched_patients[["Case"]]%>%
   slice(1)%>%
   ungroup()
 
+#For exploration--perhaps can delete in future?
 Case<-unmatched_patients[["Case"]]
 Control<-unmatched_patients[["Control"]]
 
 
-#Define helper function for function that assesses potential number of controls per case patient
-calculate_number_potential_matches<-function(control_df,
-                                             USRDS_ID,
-                                             birthdate,
-                                             cirrhosis_status,
-                                             cmv_status,
-                                             hiv_status,
-                                             diabetes_status,
-                                             matching_date,
-                                             matching_days_since_transplant) {
-  
-  print(paste0("Calculating number of potential controls for patient: ", USRDS_ID))
-  control_df%>%
-    
-    #Exact match on cirrhosis, CMV, HIV, and diabetes status
-    filter(cirrhosis==cirrhosis_status)%>%
-  #  filter(CMV==cmv_status)%>%
-    filter(HIV==hiv_status)%>%
-    filter(diabetes==diabetes_status)%>%
-    
-    #Risk set matching
-    filter(tstart<=matching_days_since_transplant)%>%
-    filter(tstop>matching_days_since_transplant)%>%
-    
-    #Calculate date for age calculations/etc.
-    mutate(.baseline_control_date=matching_days_since_transplant+most_recent_transplant_date)%>%
-    
-    #Make sure case and control are sampled within 3 years of each other
-    filter(abs(time_length(interval(.baseline_control_date, matching_date), "years")) <=3)%>%
-    
-    #Date matching
-  #  filter(cohort_start_date<=matching_date)%>%
-  #  filter(cohort_stop_date>matching_date)%>%
-    
-    #Age>=18 on index date
-    filter(time_length(interval(BORN, .baseline_control_date), "years") >= 18)%>%
-    
-    #Age difference under 10 years, calculated at sampling date
-    filter(abs(time_length(interval(BORN,.baseline_control_date), "years")-
-                 time_length(interval(birthdate,matching_date), "years")) <=10)%>%
-    
-    #Confirming 365 day Medicare lookback available for potential match
-    verify_medicare_primary(index_date = matching_date, medicare_coverage_df = medicare_history, cache=TRUE)%>%
-    filter(medicare_primary_TF==TRUE)%>%
-    
-    #Count rows after ensuring controls with mult transplants are only counted once 
-    distinct(USRDS_ID)%>%
-    nrow()%>%
-    return()
-  
-}
-
+#Add number of potential control matches to Case df
 unmatched_patients[["Case"]] <- unmatched_patients[["Case"]] %>%
   mutate(
     num_potential_controls = pmap_int(
@@ -89,31 +39,35 @@ unmatched_patients[["Case"]] <- unmatched_patients[["Case"]] %>%
     )
   )
 
+#Sort by number of potential matches so that most difficult to match cases are matched first
+#Set the index_date for cases to be the date of cryptococcus dx
 unmatched_patients[["Case"]] <- unmatched_patients[["Case"]] %>%
   arrange(num_potential_controls)%>%
   mutate(index_date_match=cryptococcus_dx_date)
 
 
+#Can be deleted
 unmatched_patients_backup<-unmatched_patients
-
-
 unmatched_patients<-unmatched_patients_backup
 
 
 
 #Time to set up the matching loop
-continue<-TRUE
 
-#Initialize the variable where the matched variables will be stored
+#Initial the loop control
+continue<-TRUE
+i<-0
+set.seed(12345)
+
+#Initialize the object where the matched cases and controls will be stored
 matched_patients<-list()
 matched_patients[["Case"]]<-unmatched_patients[["Case"]][0, ]%>%
   mutate(matched_control_indices = list())
 matched_patients[["Control"]] <- unmatched_patients[["Control"]][0, ] %>%
   mutate(index_date_match = as.Date(character()))
 
-set.seed(12345)
-i<-0
 
+#Perform the match
 while (continue==TRUE)
 {
   i<-i+1

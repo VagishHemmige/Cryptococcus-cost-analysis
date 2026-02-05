@@ -39,3 +39,21 @@ fit[["grand_total_cost_month"]][["gee"]][["linear"]]%>%
     by = NULL
   )%>%
   summary(infer=TRUE)
+
+
+interaction_names <- fit[["grand_total_cost_month"]][["gee"]][["linear"]] %>% 
+  coef() %>% 
+  names() %>% 
+  str_subset(":")
+
+contrast <- fit[["grand_total_cost_month"]][["gee"]][["linear"]] %>% 
+  coef() %>% 
+  names() %>% 
+  set_names() %>% 
+  map_dbl(~ if_else(.x %in% interaction_names, 1, 0))
+
+result <- glht(fit[["grand_total_cost_month"]][["gee"]][["linear"]], linfct = rbind(contrast))
+
+# Tidy output
+result %>% 
+  tidy(conf.int = TRUE)

@@ -13,6 +13,9 @@ library(glmmTMB)
 library(emmeans)
 library(geepack)
 library(patchwork)
+library(broom)
+library(broom.mixed)
+library(multcomp)
 
 #Constants
 censor_date<-as.Date("2022-01-01")

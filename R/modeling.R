@@ -91,7 +91,7 @@ for (outcome in c("grand_total_cost_month", "IN_CLM_month_total", "PS_REV_month_
 
 
 
-
+#Currently not used (doesn't work)
 
 fit[[outcome]][["gee"]][["tweedie"]] <- geeglm(
   temp_formula[["gee"]],
