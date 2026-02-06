@@ -27,7 +27,5 @@ This R script file is itself reliant on the following helper files:
 
 ## Other portions of the analysis
 
--   [**Additional tree analyses**](additional_trees.qmd): alternative clinical assumptions\
--   [**One-way sensitivity analysis**](tornado.qmd): key drivers of results\
--   [**Probabilistic sensitivity analyses**](psa.qmd): uncertainty and robustness\
+
 -   [**About**](about.qmd): methods, assumptions, and disclosures
