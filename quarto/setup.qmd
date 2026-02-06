@@ -1,4 +1,36 @@
-# This file contains definitions of comorbidities, "magic numbers", etc.
+---
+title: "Create cohort"
+format: html
+---
+
+## Setup
+
+The code in this script imports libraries, initializes constants, and performs other such preparatory work for the main analysis.
+
+```{r, include=FALSE}
+
+#Ensures pipe works
+library(tidyverse)
+library(gt)
+
+```
+
+
+::: callout-note
+### Source code
+
+The full R script is available at:
+
+-   [`R/setup.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/setup.R)
+
+:::
+
+## Libraries
+
+The analysis relies on a set of open-source R packages for data management, cohort construction, visualization, and statistical modeling. These libraries were selected based on their stability, community support, and suitability for large-scale longitudinal health data. 
+
+
+```{r eval=FALSE}
 
 # Libraries necessary for the analysis
 
@@ -30,6 +62,101 @@ library(broom)
 library(broom.mixed)
 library(multcomp)
 
+
+```
+
+The table below lists the required packages along with links to their primary documentation.
+
+```{r, echo=FALSE}
+
+
+libraries_table <- tibble::tibble(
+  Category = c(
+    "Data management",
+    "Data management",
+    "USRDS-specific",
+    "Flowcharting",
+    "Flowcharting",
+    "Tables",
+    "Tables",
+    "Plotting",
+    "Plotting",
+    "Plotting",
+    "Statistical modeling",
+    "Statistical modeling",
+    "Statistical modeling",
+    "Statistical modeling",
+    "Statistical modeling",
+    "Statistical modeling"
+  ),
+  Package = c(
+    "tidyverse",
+    "lubridate",
+    "usRds",
+    "strobe",
+    "flowchart",
+    "gt",
+    "gtsummary",
+    "ggplot2",
+    "ggbeeswarm",
+    "patchwork",
+    "glmmTMB",
+    "emmeans",
+    "geepack",
+    "broom",
+    "broom.mixed",
+    "multcomp"
+  ),
+  Documentation = c(
+    "[tidyverse.org](https://www.tidyverse.org/)",
+    "[lubridate.tidyverse.org](https://lubridate.tidyverse.org/)",
+    "[GitHub – usRds](https://github.com/USRDS/usRds)",
+    "[GitHub – strobe](https://github.com/vagishhemmige/strobe)",
+    "[CRAN – flowchart](https://cran.r-project.org/package=flowchart)",
+    "[gt documentation](https://gt.rstudio.com/)",
+    "[gtsummary documentation](https://www.danieldsjoberg.com/gtsummary/)",
+    "[ggplot2.tidyverse.org](https://ggplot2.tidyverse.org/)",
+    "[CRAN – ggbeeswarm](https://cran.r-project.org/package=ggbeeswarm)",
+    "[patchwork documentation](https://patchwork.data-imaginist.com/)",
+    "[CRAN – glmmTMB](https://cran.r-project.org/package=glmmTMB)",
+    "[CRAN – emmeans](https://cran.r-project.org/package=emmeans)",
+    "[CRAN – geepack](https://cran.r-project.org/package=geepack)",
+    "[broom documentation](https://broom.tidymodels.org/)",
+    "[broom.mixed documentation](https://broom.tidymodels.org/)",
+    "[CRAN – multcomp](https://cran.r-project.org/package=multcomp)"
+  )
+)
+
+libraries_table |>
+  gt::gt() |>
+  gt::fmt_markdown(columns = "Documentation") |>
+  gt::cols_label(
+    Category = "Category",
+    Package = "R package",
+    Documentation = "Documentation"
+  ) |>
+  gt::tab_header(
+    title = "Required R Packages",
+    subtitle = "Libraries used for data processing, visualization, and statistical modeling"
+  )|>
+  gt::tab_style(
+  style = gt::cell_text(font = "mono"),
+  locations = gt::cells_body(columns = Package)
+)
+
+
+
+```
+
+
+## Constants
+
+A number of analysis parameters are reused across cohort construction, matching, and cost modeling steps. 
+
+These constants are defined in the `R/setup.R` file.
+
+```{r}
+
 #Constants
 censor_date<-as.Date("2022-01-01")
 minimum_followup<-1 #Minimum followup in days
@@ -39,6 +166,68 @@ inflation_month<-"January"
 inflation_year<-2021
 baseline_months_cost<-3 #N
 full_months <- -baseline_months_cost:11 #Range of months for longitudinal analysis
+
+```
+
+For clarity, these constants are summarized below along with brief explanations of their role in the analysis.
+
+```{r, echo=FALSE}
+
+
+constants_table <- tibble::tibble(
+  Constant = c(
+    "censor_date",
+    "minimum_followup",
+    "maximum_followup",
+    "number_controls_per_case",
+    "inflation_month",
+    "inflation_year",
+    "baseline_months_cost",
+    "full_months"
+  ),
+  Value = c(
+    as.character(censor_date),
+    as.character(minimum_followup),
+    as.character(maximum_followup),
+    as.character(number_controls_per_case),
+    inflation_month,
+    as.character(inflation_year),
+    as.character(baseline_months_cost),
+    paste(full_months, collapse = ", ")
+  ),
+  Explanation = c(
+    "Administrative censoring date for follow-up",
+    "Minimum required follow-up time (days)",
+    "Maximum allowed follow-up time (days)",
+    "Number of matched controls per case",
+    "Reference month for cost inflation adjustment",
+    "Reference year for cost inflation adjustment",
+    "Number of months included in baseline cost window prior to index date",
+    "Month indices used for longitudinal cost analysis"
+  )
+)
+
+constants_table |>
+  gt::gt() |>
+  gt::tab_header(
+    title = "Analysis Constants",
+    subtitle = "Matching, follow-up, and cost-model parameters"
+  )
+
+
+```
+
+
+
+## Lists of ICD codes
+
+Lists of ICD-9-CM and ICD-10-CM diagnosis codes were used to define cryptococcosis and relevant comorbid conditions. These code sets were curated prior to analysis and include both legacy ICD-9 codes and corresponding ICD-10 codes to allow consistent identification of conditions across the study period.
+
+For appropriate references, see:
+
+- [https://cdn-links.lww.com/permalink/kn9/b/kn9_2025_06_05_roetker_1_sdc2.pdf](https://cdn-links.lww.com/permalink/kn9/b/kn9_2025_06_05_roetker_1_sdc2.pdf)
+
+```{r}
 
 
 #Create list of ICD9 and ICD10 codes for cryptococcus
@@ -776,3 +965,41 @@ comorbidity_ICD_list[["Diabetes"]]<-c("25000",
                                       "E139")
 
 
+
+
+```
+
+
+```{r echo=FALSE}
+
+comorbidity_ICD_list%>%
+  imap_dfr(., 
+           ~tibble(
+             comorbidity = .y,
+             icd_codes_raw = paste(.x, collapse = ", ")
+             )
+           )%>%
+  gt() %>%
+  cols_label(
+    comorbidity   = "Comorbidity",
+    icd_codes_raw = "ICD Codes"
+  ) %>%
+  cols_width(
+    comorbidity   ~ px(220),
+    icd_codes_raw ~ px(500)
+  ) %>%
+  tab_options(
+    table.font.size = px(12)
+  )%>%
+  tab_header(
+  title = "ICD-9 and ICD-10 Codes Used to Define Comorbidities",
+  subtitle = "Codes grouped by clinical condition"
+)
+
+```
+
+
+## Other portions of the analysis
+
+
+-   [**About**](about.qmd): methods, assumptions, and disclosures
