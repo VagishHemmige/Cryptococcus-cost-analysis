@@ -380,9 +380,10 @@ prematching_cohort<-create_usrds_cohort(df=initial_cohort,
 
 ```
 
-The analysis then proceeds on to the [postmatch_processing](postmatch_processing.qmd) component.
+The analysis then proceeds on to the [execute_matching](execute_matching.qmd) component.
 
 ## Other portions of the analysis
 
 -   [**Setup**](setup.qmd)
+-   [**Execute matching**](execute_matching.qmd)
 -   [**About**](about.qmd): methods, assumptions, and disclosures
