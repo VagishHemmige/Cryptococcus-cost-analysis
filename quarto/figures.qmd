@@ -1,0 +1,117 @@
+---
+title: "Figures"
+format: html
+---
+
+The code in this script generates figures for the manuscript.
+
+::: callout-note
+### Source code
+
+The full R script is available at:
+
+-   [`R/figures.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/Figures.R)
+
+This R script file is itself reliant on the following helper files:
+
+-   [`R/setup.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/setup.R)
+-   [`R/functions.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/functions.R)
+:::
+
+## Final flowchart
+
+The following code uses the `flowchart` package to create a STROBE flowchart for the study.
+
+```{r, eval=FALSE}
+
+
+#Final STROBE flowchart
+patients_fc_matched%>%
+  fc_draw()%>%
+  fc_export("figures/flowchart.svg",
+            width=20,
+            height=10)
+
+
+
+```
+
+## Beeswarm plot of total inflated costs
+
+The following code uses the `ggbeeswarm` add-on to `ggplot2` to compare cases and controls in terms of total inflated costs post-index.  No attempt is made to adjust for censoring or death.
+
+```{r, eval=FALSE}
+
+#GGplot that is beeswarm of adjusted total costs
+cost_inflated%>%
+  mutate(IN_CLM_365d_cost_adjusted_total=ifelse(IN_CLM_365d_cost_adjusted_total==0, 1, IN_CLM_365d_cost_adjusted_total))%>%
+  ggplot()+
+  geom_quasirandom(mapping=aes(x=patient_type, y=IN_CLM_365d_cost_adjusted_total), alpha=0.1)+
+  scale_y_log10()+
+  theme_classic()
+
+
+```
+
+## Month-by-month plots
+
+In order to plot monthly costs predicted from the longitudinal models generated in the `R/models.R` script, we use the 
+`plot_mean_monthly_costs()` function from the `R/functions.R` script to create the ggplot objects, and then save as `.svg` files.
+
+```{r, eval=FALSE}
+
+#Loop that plots the different outcomes longitudinally
+
+for (outcome in c("grand_total_cost_month", "IN_CLM_month_total", "PS_REV_month_total", "IN_CLM_month_groupedHomeHealth",
+                  "IN_CLM_month_groupedHospice","IN_CLM_month_groupedNonclaimauxiliary","IN_CLM_month_groupedDialysis",
+                  "IN_CLM_month_groupedOutpatient","IN_CLM_month_groupedInpatient","IN_CLM_month_groupedSkilledNursingFacility")){
+  
+  
+  plot_mean_monthly_costs(fit[[outcome]][["glmmTMB"]][["tweedie"]])
+  ggsave(filename = paste0("figures/Longitudinal ", outcome," glmmTMB", " ", "tweedie.svg"),
+         width=14,
+         height=7
+         )
+  
+  plot_mean_monthly_costs(fit[[outcome]][["glmmTMB"]][["linear"]])
+  ggsave(filename = paste0("figures/Longitudinal ", outcome," glmmTMB", " ", "linear.svg"),
+         width=14,
+         height=7
+  )
+  
+  
+  plot_mean_monthly_costs(fit[[outcome]][["gee"]][["linear"]])
+  ggsave(filename = paste0("figures/Longitudinal ", outcome," gee", " ", "linear.svg"),
+         width=14,
+         height=7
+  )
+  
+  
+  plot_mean_monthly_costs(fit[[outcome]][["glmmTMB"]][["log"]])
+  ggsave(filename = paste0("figures/Longitudinal ", outcome," glmmTMB", " ", "log.svg"),
+         width=14,
+         height=7
+  )
+  
+  
+  plot_mean_monthly_costs(fit[[outcome]][["gee"]][["log"]])
+  ggsave(filename = paste0("figures/Longitudinal ", outcome," gee", " ", "log.svg"),
+         width=14,
+         height=7
+  )
+  
+  
+}
+
+
+
+```
+
+
+
+
+
+## Other portions of the analysis
+
+
+-   [**About**](about.qmd): methods, assumptions, and disclosures
