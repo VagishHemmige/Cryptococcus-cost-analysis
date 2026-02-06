@@ -19,7 +19,15 @@ This R script file is itself reliant on the following helper files:
 
 ## Plotting mean monthly costs
 
-The following code uses the `gt` package to create a Table 1 comparing cases and controls on key variables measured at the index date, to assess balance after risk-set matching.  The code then saves the tables as `.docx` and as `.png` files.
+The following function uses `ggplot2` to create a plot of monthly costs with a risk table underneath.
+
+Its inputs are as follows:
+
+- `fitted_model`: the `fit` object from models created in the `R/models.R` script
+- `countdf`: a data frame containing the appropriate count data for cases and controls at each time point, used
+to create a risk table
+
+The function uses the `emmeans` function from the package of the same name to estimate months costs.  The x-axis (months) is shifted to the right so that the vertical line at x=0 cleanly separate pre-index and post-index months, and cases and controls are dodged slightly so that the error bars do not overlap.
 
 ```{r, eval=FALSE}
 
@@ -96,8 +104,10 @@ plot_mean_monthly_costs<-function(fitted_model, countdf=final_count_df) {
 ```
 
 
-##
+## Calculating the number of potential matches
 
+The above function is passed a control df and a number of values for a case patient, and returns the number of distinct controls which are potential matches.
+The matching algorithm is hard-coded.
 
 ```{r, eval=FALSE}
 #Function that defines the number of potential control matches for a case
@@ -156,6 +166,9 @@ calculate_number_potential_matches<-function(control_df,
 
 
 ## Total excess costs
+
+This function takes a `fit` object from a model and calculates the total estimated excess costs and confidence intervals.
+This object currently only works for models with linear links.
 
 ```{r, eval=FALSE}
 
