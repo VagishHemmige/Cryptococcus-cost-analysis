@@ -1,0 +1,33 @@
+---
+title: "Create cohort"
+format: html
+---
+
+## Create cohort
+
+The code in this script creates the cohort of kidney transplant patients eligible for the study
+
+::: callout-note
+### Source code
+
+The full R script is available at:
+
+-   [`R/create_cohort.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/create_cohort.R)
+
+This R script file is itself reliant on the following helper files:
+
+-   [`R/setup.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/setup.R)
+-   [`R/functions.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/functions.R)
+:::
+
+## 
+
+
+
+
+## Other portions of the analysis
+
+-   [**Additional tree analyses**](additional_trees.qmd): alternative clinical assumptions\
+-   [**One-way sensitivity analysis**](tornado.qmd): key drivers of results\
+-   [**Probabilistic sensitivity analyses**](psa.qmd): uncertainty and robustness\
+-   [**About**](about.qmd): methods, assumptions, and disclosures

@@ -121,3 +121,77 @@ calculate_number_potential_matches<-function(control_df,
     return()
   
 }
+
+
+
+
+# Calculate total excess costs in a model
+calculate_total_excess_costs <- function(fitted_model, link = "linear") {
+  
+  # Extract coefficients and vcov matrix
+  coef_df <- tidy(fitted_model)
+  vcov_matrix <- vcov(fitted_model)
+  
+  # Get interaction terms
+  interaction_names <- coef_df %>% 
+    filter(str_detect(term, ":")) %>% 
+    pull(term)
+  
+  if (link == "linear") {
+    # Sum of coefficients
+    sum_estimate <- coef_df %>% 
+      filter(term %in% interaction_names) %>% 
+      pull(estimate) %>% 
+      sum()
+    
+    # Variance of sum
+    sum_variance <- vcov_matrix[interaction_names, interaction_names] %>% 
+      sum()
+    
+    # Standard error and CI
+    sum_se <- sqrt(sum_variance)
+    df <- df.residual(fitted_model)
+    
+    tibble(
+      estimate = sum_estimate,
+      std_error = sum_se,
+      conf_low = estimate - qt(0.975, df) * std_error,
+      conf_high = estimate + qt(0.975, df) * std_error,
+      statistic = estimate / std_error,
+      p_value = 2 * pt(-abs(statistic), df)
+    )
+    
+  } else if (link == "log") {
+    # Get coefficients for interactions
+    coefs <- coef(fitted_model)[interaction_names]
+    vcov_sub <- vcov_matrix[interaction_names, interaction_names]
+    
+    # Exponentiate each coefficient
+    exp_coefs <- exp(coefs)
+    
+    # Sum of exponentiated coefficients
+    sum_estimate <- sum(exp_coefs)
+    
+    # Delta method for variance
+    # Gradient: derivative of sum(exp(beta)) w.r.t. each beta is exp(beta)
+    gradient <- exp_coefs
+    
+    # Variance using delta method
+    sum_variance <- as.numeric(t(gradient) %*% vcov_sub %*% gradient)
+    sum_se <- sqrt(sum_variance)
+    
+    # CI using normal approximation (GLM)
+    tibble(
+      estimate = sum_estimate,
+      std_error = sum_se,
+      conf_low = estimate - qnorm(0.975) * std_error,
+      conf_high = estimate + qnorm(0.975) * std_error,
+      statistic = estimate / std_error,
+      p_value = 2 * pnorm(-abs(statistic))
+    )
+    
+  } else {
+    stop("link must be either 'linear' or 'log'")
+  }
+}
+

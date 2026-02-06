@@ -12,7 +12,7 @@ no study to date has estimated the total excess cost of care due to cryptococcus
 
 ## What this analysis does
 
-This project uses the [**United States Renal Data System**](https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds) to analyze the 
+This project uses the [**United States Renal Data System**](https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds) to analyze the impact of cryptococcus on costs.
 
 
 
@@ -28,7 +28,6 @@ We selected cryptococcus cases based on the following inclusion criteria:
 Controls were matched 2:1 to cases based on risk-set sampling on the following:
 
 - Time since transplant
-- Cirrhosis
 - Diabetes
 - HIV/AIDS
 - Age within 10 years
@@ -39,6 +38,7 @@ Institutional claims data were abstracted as well as Physician/Supplier line-ite
 
 ## Results
 
+Pending
 
 ## Site navigation
 

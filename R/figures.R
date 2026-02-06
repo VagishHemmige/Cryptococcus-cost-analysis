@@ -3,7 +3,10 @@
 
 #Final STROBE flowchart
 patients_fc_matched%>%
-  fc_draw()
+  fc_draw()%>%
+  fc_export("figures/flowchart.svg",
+            width=20,
+            height=10)
 
 
 #GGplot that is beeswarm of adjusted total costs
