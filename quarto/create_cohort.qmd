@@ -3,9 +3,9 @@ title: "Create cohort"
 format: html
 ---
 
-## Create cohort
+# Create cohort
 
-The code in this script creates the cohort of kidney transplant patients eligible for the study
+The code in this script creates the cohort of kidney transplant patients eligible for the study for use in other scripts.
 
 ::: callout-note
 ### Source code
@@ -20,13 +20,23 @@ This R script file is itself reliant on the following helper files:
 -   [`R/functions.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/functions.R)
 :::
 
-## 
 
-```{r eval=FALSE}
+## Initial data loading and preprocessing of USRDS core and transplant files
 
-#Create a cohort of kidney transplant patients with cryptococcus matched to controls without cryptococcus
+This portion of the code imports files from the USRDS data set necessary for the cryptococcus analysis.  This portion makes use of the `load_usrds_data()` 
+function from the `usRds` package as well as several tidyverse cleaning functions.
 
-source("R/setup.R")
+Key files used:
+
+- `patients`: This is a part of the `Core` data set of the USRDS and contains key patient demographics.
+- `tx`: Also a part of the `Core` data set of the USRDS and contains summary information about kidney transplants from UNOS.
+- `txunos_trr_ki` and `txunos_trr_kp`: Part of the `transplant` data set of the USRDS, these files contain more detailed information
+derived from UNOS that is part of the Scientific Registry of Transplant Recipients.
+
+The code below loads and merges transplant records across multiple UNOS-derived files, constructs a cumulative transplant count per patient, and reshapes the data into a time-varying format that tracks graft status over time.
+
+
+```{r, eval=FALSE}
 
 #Import core demographics from "patients" file
 patients_raw<-usRds::load_usrds_file("patients")%>%
@@ -71,6 +81,19 @@ tx_status<-tx_clean%>%
   arrange(USRDS_ID, cumulative_transplant_total, event_date, graft_status)
 
 
+```
+
+## Initialize flowchart
+
+The next component makes use of the `flowchart` package.  This package combines two key processes in an epidemiologic analysis:
+
+- **Dataset preparation:** Sequential application of eligibility criteria to define the analytic cohort, with explicit tracking of excluded records at each step.
+- **STROBE(https://www.strobe-statement.org/) diagram preparation:**  STrengthening the Reporting of OBservational studies in Epidemiology [STROBE](https://www.strobe-statement.org/) diagrams visually depict the process of including/excluding patients in an observational study and grouping them into cohorts.  Many journals require these as a standard Figure 1.
+
+The code below initializes a flowchart-aware cohort object and applies sequential eligibility filters, retaining both inclusion counts and labeled exclusion steps for downstream reporting.
+
+```{r, eval=FALSE}
+
 #Initialize a flowchart cohort
 patients_clean<-patients_raw%>%
   as_fc(label="Patients in USRDS")%>%
@@ -87,6 +110,25 @@ patients_clean<-patients_raw%>%
             show_exc = TRUE)
 
 
+```
+
+## Identification of comorbidities and confirmation of Medicare coverage continuity
+
+This component identifies baseline comorbidities among transplant recipients using diagnosis codes derived from Medicare Institutional (Part A) and physician/supplier (Part B) claims. Diagnosis code lists defined in `R/setup.R` are applied uniformly across claims files to establish the presence and timing of comorbid conditions.  
+
+This portion makes use of the `get_IN_ICD()` and `get_PS_ICD()` functions from the `usRds` package to obtain dates that specific ICD codes are used for patients with a history of at least one kidney transplant in the study period.
+
+The `establish_dx_date()` function from the `usRds` package uses the results of this analysis to ascertain the date when comorbidities meet the criteria for a formal diagnosis:
+
+- **Two** outpatient encounters
+or
+- **One** inpatient encounter
+
+In parallel, Medicare coverage history is retrieved for all transplant recipients from the `payhist` file, which is part of the Core dataest.  These data will be used to confirm continuous enrollment during the analytic period. We verify the absence of gaps indicating missing data, noting that every subsequent period in the dataset for a patient starts the day after the previous period ends and thereby supporting valid longitudinal assessment of diagnoses and downstream cost analyses. 
+
+Finally, we separate cryptococcus diagnosis dates from other comorbidities for a separate list, given the key nature of the date of cryptococcus diagnosis for subsequent analyses.
+
+```{r, eval=FALSE}
 
 #Create list of USRDS ids for patients who have undergone transplant
 transplant_id_list<-patients_clean$data%>%
@@ -130,11 +172,27 @@ if (any(!is.na(medicare_history$gap) & medicare_history$gap != 1)) {
   stop("Gap assumption violated: `gap` contains values other than 1 or NA.")
 }
 
-#Add cryptococcus diagnosis date to patients_clean$data
-#First, format a df with the cryptococcus dx
+
+#Format a df with the cryptococcus dx
 cryptococcus_df<-comorbidity_diagnosis_date$cryptococcus%>%
   select(-diagnosis)%>%
   rename(cryptococcus_dx_date=date_established)
+
+
+
+```
+
+## Further development of the STROBE flowchart
+
+Subsequently, key diagnosis dates, including the date of cryptococcosis diagnosis, are merged into the analytic patient dataset.
+
+This code block then extends the STROBE flowchart by integrating diagnosis timing, eligibility criteria, and coverage requirements to finalize the analytic cohorts. Patients are classified as cryptococcosis cases or potential controls based on the presence and timing of diagnosis, and sequential exclusion criteria are applied to ensure incident disease, adult status at diagnosis, and appropriate calendar-time eligibility. 
+
+The `verify_medicare_primary()` function from the `usrds` package is used to confirm that patients with a cryptococcus diagnosis have Medicare primary coverage for at least 365 days prior to the cryptococcus diagnosis date to ensure that the diagnosis is new and not a carryover from an unobserved period.
+
+These steps culminate in the final case and control cohorts, with all inclusion and exclusion decisions explicitly tracked and visualized in the updated STROBE flow diagram.
+
+```{r, eval=FALSE}
 
 
 
@@ -197,6 +255,24 @@ patients_merged2<-patients_merged2%>%
 patients_merged2%>%
   fc_draw()
 
+```
+
+## Creation of a time-varying cohort
+
+We use several functions from the `usRds` package:
+
+- `create_usrds_cohort()`
+- `add_cohort_covariate()`
+- `finalize_usrds_cohort()`
+
+These functions split each patient into multiple rows, with each row describing a discrete period of time.
+This captures that patients will have time-varying status for covariates such as cirrhosis status, etc.
+
+Patients with cryptococcus infection join the cohort on the date of cryptococcosis diagnosis, while patients without cryptococcus (potential controls) join on the date of their first kidney transplant.
+
+"Time since transplant" resets after each new transplant.
+
+```{r eval=FALSE}
 
 #Now we need to construct the time-varying data set
 
@@ -304,9 +380,9 @@ prematching_cohort<-create_usrds_cohort(df=initial_cohort,
 
 ```
 
-
+The analysis then proceeds on to the [postmatch_processing](postmatch_processing.qmd) component.
 
 ## Other portions of the analysis
 
-
+-   [**Setup**](setup.qmd)
 -   [**About**](about.qmd): methods, assumptions, and disclosures
