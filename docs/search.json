@@ -61,5 +61,26 @@
     "title": "Overview",
     "section": "Abstracts/manuscripts",
     "text": "Abstracts/manuscripts\nThis analysis has yet to be published to date."
+  },
+  {
+    "objectID": "quarto/create_cohort.html",
+    "href": "quarto/create_cohort.html",
+    "title": "Create cohort",
+    "section": "",
+    "text": "The code in this script creates the cohort of kidney transplant patients eligible for the study\n\n\n\n\n\n\nSource code\n\n\n\nThe full R script is available at:\n\nR/create_cohort.R\n\nThis R script file is itself reliant on the following helper files:\n\nR/setup.R\nR/functions.R"
+  },
+  {
+    "objectID": "quarto/create_cohort.html#create-cohort",
+    "href": "quarto/create_cohort.html#create-cohort",
+    "title": "Create cohort",
+    "section": "",
+    "text": "The code in this script creates the cohort of kidney transplant patients eligible for the study\n\n\n\n\n\n\nSource code\n\n\n\nThe full R script is available at:\n\nR/create_cohort.R\n\nThis R script file is itself reliant on the following helper files:\n\nR/setup.R\nR/functions.R"
+  },
+  {
+    "objectID": "quarto/create_cohort.html#other-portions-of-the-analysis",
+    "href": "quarto/create_cohort.html#other-portions-of-the-analysis",
+    "title": "Create cohort",
+    "section": "Other portions of the analysis",
+    "text": "Other portions of the analysis\n\nAdditional tree analyses: alternative clinical assumptions\n\nOne-way sensitivity analysis: key drivers of results\n\nProbabilistic sensitivity analyses: uncertainty and robustness\n\nAbout: methods, assumptions, and disclosures"
   }
 ]
