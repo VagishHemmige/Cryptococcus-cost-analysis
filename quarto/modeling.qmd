@@ -10,7 +10,7 @@ The code in this script runs the statistical models used in the `R.figures.R` an
 
 The full R script is available at:
 
--   [`R/modeling.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/create_cohort.R)
+-   [`R/modeling.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/modeling.R)
 
 This R script file is itself reliant on the following helper files:
 

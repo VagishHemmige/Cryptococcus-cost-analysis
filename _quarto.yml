@@ -15,16 +15,20 @@ website:
         text: Home
       - href: quarto/setup.html
         text: Setup
+      - href: quarto/functions.html
+        text: Functions
       - href: quarto/create_cohort.html
-        text: Create cohort
+        text: 1. Create cohort
       - href: quarto/execute_matching.html
-        text: Execute matching
+        text: 2. Execute matching
       - href: quarto/postmatch_processing.html
-        text: Post-match processing
+        text: 3. Post-match processing
       - href: quarto/modeling.html
-        text: Modeling
-      - href: quarto/create_cohort.html
-        text: Create cohort
+        text: 4. Modeling
+      - href: quarto/tables.html
+        text: 5. Tables
+      - href: quarto/figures.html
+        text: 6. Figures
       - href: quarto/about.html
         text: About
         

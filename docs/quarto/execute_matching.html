@@ -130,24 +130,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Setup</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../quarto/functions.html"> 
+<span class="menu-text">Functions</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../quarto/create_cohort.html"> 
-<span class="menu-text">Create cohort</span></a>
+<span class="menu-text">1. Create cohort</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../quarto/execute_matching.html" aria-current="page"> 
-<span class="menu-text">Execute matching</span></a>
+<span class="menu-text">2. Execute matching</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../quarto/postmatch_processing.html"> 
-<span class="menu-text">Post-match processing</span></a>
+<span class="menu-text">3. Post-match processing</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../quarto/modeling.html"> 
-<span class="menu-text">Modeling</span></a>
+<span class="menu-text">4. Modeling</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../quarto/create_cohort.html"> 
-<span class="menu-text">Create cohort</span></a>
+    <a class="nav-link" href="../quarto/tables.html"> 
+<span class="menu-text">5. Tables</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../quarto/figures.html"> 
+<span class="menu-text">6. Figures</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../quarto/about.html"> 
@@ -283,7 +291,7 @@ Source code
 </section>
 <section id="counting-the-potental-number-of-matched-controls-for-each-case" class="level2">
 <h2 class="anchored" data-anchor-id="counting-the-potental-number-of-matched-controls-for-each-case">Counting the potental number of matched controls for each case</h2>
-<p>This step uses the <code>calculate_number_potential_matches()</code> function defined in the <a href="functions.qmd"><code>R/functions.R</code></a> to add a column to the cases data set, then sorts the cases so that those with the lowest number of potential matches are matched first.</p>
+<p>This step uses the <code>calculate_number_potential_matches()</code> function defined in the <a href="../quarto/functions.html"><code>R/functions.R</code></a> to add a column to the cases data set, then sorts the cases so that those with the lowest number of potential matches are matched first.</p>
 <p>(Note the following code took ~2 hours to execute on a laptop given the size of the dataset.)</p>
 <div class="cell">
 <details class="code-fold">

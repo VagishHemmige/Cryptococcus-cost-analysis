@@ -1,5 +1,5 @@
 ---
-title: "Tables"
+title: "Functions"
 format: html
 ---
 
@@ -10,127 +10,228 @@ The code in this script generates tables for the manuscript.
 
 The full R script is available at:
 
--   [`R/tables.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/tables.R)
+-   [`R/functions.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/functions.R)
 
 This R script file is itself reliant on the following helper files:
 
 -   [`R/setup.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/setup.R)
--   [`R/functions.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/functions.R)
 :::
 
-## Table 1
+## Plotting mean monthly costs
 
 The following code uses the `gt` package to create a Table 1 comparing cases and controls on key variables measured at the index date, to assess balance after risk-set matching.  The code then saves the tables as `.docx` and as `.png` files.
 
+```{r, eval=FALSE}
+
+#Function that returns a ggplot of the mean cost (with confidence interval) for cryptococcus cases and controls by month
+plot_mean_monthly_costs<-function(fitted_model, countdf=final_count_df) {
+
+  #First, use emmeans to calculate the predicted values from the model assuming 30-day months, then convert to data frame
+  emm_df <- emmeans(
+    fitted_model,
+    ~ patient_type | month,
+    at = list(month_offset = 30),
+    type = "response"
+  )%>%as.data.frame()%>%
+    
+    #Shifts all points and error_bars 0.5 to the right to avoid the zero-line
+    mutate(month=0.5+as.numeric(month))%>%
+    
+    #Move cases 0.1 to the right and controls 0.1 to the left to improve legibility
+  mutate(month=ifelse(patient_type=="Case", month+0.1, month-0.1))%>%
+    mutate(
+      estimate = if ("response" %in% names(.)) response else emmean)
+  
+  monthly_plot <- list()
+  
+  # Main plot
+  monthly_plot[["main"]] <- ggplot(data = emm_df) +
+    geom_point(aes(x = month, y = estimate, color = patient_type)) +
+    geom_errorbar(
+      aes(
+        x = month,
+        ymin = asymp.LCL,
+        ymax = asymp.UCL,
+        color = patient_type
+      ),
+      width = 0.1
+    ) +
+    geom_vline(xintercept = 0,
+               linetype = "dashed",
+               color = "gray50") +
+    theme_classic() +
+    labs(
+      x = "Month",
+      y = "Inflation-adjusted cost per month (dollars)",
+      color = "Patient group"
+    )+
+    theme(legend.position = "bottom")
+  
+  # Risk table
+  monthly_plot[["risk_table"]] <- countdf %>%
+    mutate(month = 0.5 + as.numeric(month),
+           y_position = ifelse(patient_type == "Case", 0.4, 0.6)) %>%
+    ggplot() +
+    geom_text(
+      aes(x = month, y = y_position, label = n, color=patient_type),
+      size = 3
+    )+
+    coord_cartesian(ylim = c(0.3, 0.7)) +
+    theme_void() +
+    theme(
+      plot.margin = margin(t = -5, b = 5),
+      legend.position = "none")
+  
+  # Combine plots
+  monthly_plot[["main"]] /
+    monthly_plot[["risk_table"]] +
+    plot_layout(heights = c(9, 1), guides = "keep")+
+    plot_annotation(
+      caption = "Bottom panel shows N at risk by month"
+    )
+  
+}
+
+
+```
+
+
+##
+
+
+```{r, eval=FALSE}
+#Function that defines the number of potential control matches for a case
+calculate_number_potential_matches<-function(control_df,
+                                             USRDS_ID,
+                                             birthdate,
+                                             cirrhosis_status,
+                                             cmv_status,
+                                             hiv_status,
+                                             diabetes_status,
+                                             matching_date,
+                                             matching_days_since_transplant) {
+  
+  print(paste0("Calculating number of potential controls for patient: ", USRDS_ID))
+  control_df%>%
+    
+    #Exact match on cirrhosis, CMV, HIV, and diabetes status
+    filter(cirrhosis==cirrhosis_status)%>%
+    #  filter(CMV==cmv_status)%>%
+    filter(HIV==hiv_status)%>%
+    filter(diabetes==diabetes_status)%>%
+    
+    #Risk set matching
+    filter(tstart<=matching_days_since_transplant)%>%
+    filter(tstop>matching_days_since_transplant)%>%
+    
+    #Calculate date for age calculations/etc.
+    mutate(.baseline_control_date=matching_days_since_transplant+most_recent_transplant_date)%>%
+    
+    #Make sure case and control are sampled within 3 years of each other
+    filter(abs(time_length(interval(.baseline_control_date, matching_date), "years")) <=3)%>%
+    
+    #Date matching
+    #  filter(cohort_start_date<=matching_date)%>%
+    #  filter(cohort_stop_date>matching_date)%>%
+    
+    #Age>=18 on index date
+    filter(time_length(interval(BORN, .baseline_control_date), "years") >= 18)%>%
+    
+    #Age difference under 10 years, calculated at sampling date
+    filter(abs(time_length(interval(BORN,.baseline_control_date), "years")-
+                 time_length(interval(birthdate,matching_date), "years")) <=10)%>%
+    
+    #Confirming 365 day Medicare lookback available for potential match
+    verify_medicare_primary(index_date = matching_date, medicare_coverage_df = medicare_history, cache=TRUE)%>%
+    filter(medicare_primary_TF==TRUE)%>%
+    
+    #Count rows after ensuring controls with mult transplants are only counted once 
+    distinct(USRDS_ID)%>%
+    nrow()%>%
+    return()
+  
+}
+
+```
+
+
+## Total excess costs
 
 ```{r, eval=FALSE}
 
 
-#Create a table of the post-match results to confirm that demographics were appropriately balanced
-table1<-post_match_results%>%
-  mutate(age=time_length(interval(BORN, index_date_match), "years"))%>%
-  dplyr::select(cirrhosis, CMV, HIV, diabetes, cumulative_transplant_total, current_graft_status,
-                liver_transplant, lung_transplant, heart_transplant, heartlung_transplant,
-                pancreas_transplant, intestinal_transplant,
-                age, SEX, RACE, HISPANIC, RACEETH, RURALURBAN, cryptococcus_dx_date, 
-         pancreas_transplant, intestinal_transplant, patient_type)%>%
-  gtsummary::tbl_summary(by=patient_type)%>%
-  add_p()
-table1%>%
-  gtsummary::as_gt() %>%
-  gt::gtsave("tables/table1_baseline.png")
-file.exists("tables/table1_baseline.docx") && file.remove("tables/table1_baseline.docx")
-table1%>%
-  gtsummary::as_gt() %>%
-  gt::gtsave("tables/table1_baseline.docx")
-
-
-```
-
-
-## Table 2
-
-Table 2 lists the International Classification of Diseases (ICD-9 and ICD-10) diagnosis codes used to define baseline comorbidities in the study cohort. Comorbidity definitions were specified *a priori* in the `R/setup.R` file and implemented uniformly for cases and matched controls.
-
-Codes were grouped by clinical condition to reflect common diagnostic categories used in transplant and claims-based research. Both ICD-9 and ICD-10 codes were included to ensure continuity across calendar years spanning the ICD-9–to–ICD-10 transition period. For each comorbidity, all qualifying diagnosis codes are shown explicitly to promote transparency and reproducibility.
-
-These comorbidity definitions were used for cohort construction, matching, and covariate adjustment, and were applied using diagnosis information available prior to or at the index date to avoid conditioning on post-exposure information.
-
-Table 2 is provided as a reference table to facilitate replication of the analytic pipeline and to allow readers to evaluate the clinical face validity of the claims-based comorbidity definitions.
-
-```{r, eval=FALSE}
-#Table of comorbidities generated from lists created in setup.R, then exported 
-
-table2_icd <- comorbidity_ICD_list%>%
-  imap_dfr(., 
-           ~tibble(
-             comorbidity = .y,
-             icd_codes_raw = paste(.x, collapse = ", ")
-             )
-           )%>%
-  gt() %>%
-  cols_label(
-    comorbidity   = "Comorbidity",
-    icd_codes_raw = "ICD Codes"
-  ) %>%
-  cols_width(
-    comorbidity   ~ px(220),
-    icd_codes_raw ~ px(500)
-  ) %>%
-  tab_options(
-    table.font.size = px(12)
-  )%>%
-  tab_header(
-  title = "ICD-9 and ICD-10 Codes Used to Define Comorbidities",
-  subtitle = "Codes grouped by clinical condition"
-)
-table2_icd%>%
-  gt::gtsave("tables/table2_baseline.png")
-file.exists("tables/table2_baseline.docx") && file.remove("tables/table2_baseline.docx")
-table2_icd%>%
-  gt::gtsave("tables/table2_baseline.docx")
-
-```
-
-## Cost tables
-
-These tables use the total costs, not the modeled longitudinal costs.  Cases and controls are compared.  These tables are used for exploration and validation and are not intended for the manuscript.
-
-```{r eval=FALSE}
-
-#Examine costs broken down by type
-cost_broken_down%>%
-  select(patient_type, contains(c("IN_REV_365d_cost", "IN_CLM_365d_cost", "PS_REV_365d_cost")))%>%
-  gtsummary::tbl_summary(by=patient_type)%>%
-  add_p()
-
-#Examine costs broken down by type and adjusted for inflation (medians)
-cost_inflated%>%
-  select(patient_type, contains(c("IN_REV_365d_cost", "IN_CLM_365d_cost", "PS_REV_365d_cost")))%>%
-  gtsummary::tbl_summary(by=patient_type)%>%
-  add_p()
-
-cost_inflated%>%
-  select(patient_type, contains(c("IN_REV_365d_cost", "IN_CLM_365d_cost", "PS_REV_365d_cost")))%>%
-  gtsummary::tbl_summary(by=patient_type,
-                         statistic = all_continuous() ~ "{mean} ({sd})")%>%
-  add_p()
-
+# Calculate total excess costs in a model
+calculate_total_excess_costs <- function(fitted_model, link = "linear") {
+  
+  # Extract coefficients and vcov matrix
+  coef_df <- tidy(fitted_model)
+  vcov_matrix <- vcov(fitted_model)
+  
+  # Get interaction terms
+  interaction_names <- coef_df %>% 
+    filter(str_detect(term, ":")) %>% 
+    pull(term)
+  
+  if (link == "linear") {
+    # Sum of coefficients
+    sum_estimate <- coef_df %>% 
+      filter(term %in% interaction_names) %>% 
+      pull(estimate) %>% 
+      sum()
+    
+    # Variance of sum
+    sum_variance <- vcov_matrix[interaction_names, interaction_names] %>% 
+      sum()
+    
+    # Standard error and CI
+    sum_se <- sqrt(sum_variance)
+    df <- df.residual(fitted_model)
+    
+    tibble(
+      estimate = sum_estimate,
+      std_error = sum_se,
+      conf_low = estimate - qt(0.975, df) * std_error,
+      conf_high = estimate + qt(0.975, df) * std_error,
+      statistic = estimate / std_error,
+      p_value = 2 * pt(-abs(statistic), df)
+    )
+    
+  } else if (link == "log") {
+    # Get coefficients for interactions
+    coefs <- coef(fitted_model)[interaction_names]
+    vcov_sub <- vcov_matrix[interaction_names, interaction_names]
+    
+    # Exponentiate each coefficient
+    exp_coefs <- exp(coefs)
+    
+    # Sum of exponentiated coefficients
+    sum_estimate <- sum(exp_coefs)
+    
+    # Delta method for variance
+    # Gradient: derivative of sum(exp(beta)) w.r.t. each beta is exp(beta)
+    gradient <- exp_coefs
+    
+    # Variance using delta method
+    sum_variance <- as.numeric(t(gradient) %*% vcov_sub %*% gradient)
+    sum_se <- sqrt(sum_variance)
+    
+    # CI using normal approximation (GLM)
+    tibble(
+      estimate = sum_estimate,
+      std_error = sum_se,
+      conf_low = estimate - qnorm(0.975) * std_error,
+      conf_high = estimate + qnorm(0.975) * std_error,
+      statistic = estimate / std_error,
+      p_value = 2 * pnorm(-abs(statistic))
+    )
+    
+  } else {
+    stop("link must be either 'linear' or 'log'")
+  }
+}
 
 ```
 
-
-## Modeled total excess costs
-
-This code uses the `calculate_total_excess_costs()` function in the `R/functions.R` file to estimate the total excess cost in cases compared with controls.
-see the [functions](functions.qmd) site for more details about the internal workings of the function.
-
-```{r, eval=FALSE}
-
-#Total the grand difference between cases and controls over the entire period of follow up:
-calculate_total_excess_costs(fit[["grand_total_cost_month"]][["gee"]][["linear"]])
-
-```
 
 
 ## Other portions of the analysis
