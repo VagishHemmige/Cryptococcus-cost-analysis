@@ -1,18 +1,16 @@
 ---
-title: "Create cohort"
+title: "Post-match processing"
 format: html
 ---
 
-## Create cohort
-
-The code in this script creates the cohort of kidney transplant patients eligible for the study
+The code in this script adds the cost data to the dataset and prepares for modeling
 
 ::: callout-note
 ### Source code
 
 The full R script is available at:
 
--   [`R/create_cohort.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/create_cohort.R)
+-   [`R/postmatch_processing.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/postmatch_processing.R)
 
 This R script file is itself reliant on the following helper files:
 
@@ -20,14 +18,489 @@ This R script file is itself reliant on the following helper files:
 -   [`R/functions.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/functions.R)
 :::
 
-## 
+## Cohort flow diagram after risk-set matching
 
-```{r eval=FALSE}
+We update the cohort flow diagram to reflect the results of the risk-set matching procedure, indicating which patients were retained as matched cases or controls and which were excluded due to lack of suitable matches.
+
+```{r, eval=FALSE}
+
+#Update flowchart to reflect matching process
+patients_fc_matched<-patients_merged2%>%
+  fc_filter(USRDS_ID %in% post_match_results$USRDS_ID,
+            label = "Matched", 
+            label_exc= "Excluded: Unmatched",
+            show_exc = TRUE)
+
+patients_fc_matched%>%
+  fc_draw()
+
+```
+
+## Obtain raw costs from raw claims data
+
+We use the `get_IN_REV_costs()`, `get_IN_CLM_costs()`, and `get_PS_REV_costs()` functions to extract raw Medicare claims with cost information for patients in the matched cohort.
+
+Medicare claims data are organized into **claim-level (CLM)** files and **revenue center (REV)** files, which differ in their level of aggregation. CLM files summarize costs at the claim level, while REV files contain detailed line-item charges associated with individual services within a claim.
+
+For example, a home health agency may submit a single claim covering a multi-day episode of care. This episode appears as **one row in a CLM file** and as **multiple rows in the corresponding REV file**, reflecting individual billed services. As a result, costs from CLM and REV files for the same service year should not be summed, as this would lead to double counting.
+
+For **inpatient (Part A) services**, Medicare reimbursement is based on diagnosis-related groups (DRGs), and itemized line-item billing is not permitted. Accordingly, inpatient costs are obtained exclusively from CLM files, which capture the full reimbursed amount for each inpatient stay.
+
+For **physician/supplier (Part B) services**, claim-level CLM files are not available prior to 2012 in the USRDS. Therefore, revenue center files are used to capture physician/supplier-related costs for earlier years.
+
+These distinctions follow standard guidance in the [USRDS Researcher’s Guide](https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds/for-researchers/researchers-guide) and [CMS Medicare billing documentation](  https://www.cms.gov/medicare/payment/prospective-payment-systems/ipps).
+
+
+```{r, eval=FALSE}
+
+#Gather raw costs for each patient
+costs_raw<-list()
+costs_raw[["IN_REV"]]<-get_IN_REV_costs(years = 2006:2021, usrds_ids = post_match_results$USRDS_ID)
+costs_raw[["IN_CLM"]]<-get_IN_CLM_costs(years = 2006:2021, usrds_ids = post_match_results$USRDS_ID)
+costs_raw[["PS_REV"]]<-get_PS_REV_costs(years = 2006:2021, usrds_ids = post_match_results$USRDS_ID)
 
 
 ```
 
+## Merge cost data to cohort
 
+We take the raw claims data and add it to the previously obtained patient cohort data.
+
+This is done as a [nested data frame](https://bookdown.org/Maxine/r4ds/nesting.html) for convenience in subsequent analysis.  A single column is a list, which each element of the list being all cost-related entries for a specific patient.  See [https://bookdown.org/Maxine/r4ds/nesting.html](https://bookdown.org/Maxine/r4ds/nesting.html) for more information on nested data in R.
+
+Patients with no observed claims in a given cost category are assigned empty [tibbles](https://tibble.tidyverse.org/) to ensure consistent downstream processing.
+
+This structure allows costs to be prorated, inflated, and aggregated relative to patient-specific index dates without repeatedly reshaping the data.
+
+While nested data is convenient from many perspectives, it does require the use of the `map()` family of functions from the [`purrr`](https://purrr.tidyverse.org/) package.
+
+```{r, eval=FALSE}
+#Group by ID and nest, so that each patient has a single tibble for each type of cost
+#Start with the raw costs
+costs_clean <- costs_raw%>% 
+  
+  #Use the imap function to create nested tibbles so that each USRDS ID is unique
+  imap(~.x %>%
+         group_by(USRDS_ID) %>%
+         nest(!!paste0(.y, "_rows") := -USRDS_ID)
+  )%>%
+  
+  #Join the three tibbles in the resulting list
+  reduce(full_join, by = "USRDS_ID")%>%
+  
+  #Clean up so that patients with empty cost data tibbles do not throw an error later by providing empty columns
+  mutate(IN_REV_rows=replace_na(IN_REV_rows, list(tibble(CLM_FROM = as.Date(character()),
+                                                         REV_CH = numeric(),
+                                                         REVPMT = numeric(),
+                                                         HCFASAF = character()))))%>%
+  mutate(IN_CLM_rows=replace_na(IN_CLM_rows, list(tibble(CLM_FROM = as.Date(character()),
+                                                         CLM_THRU = as.Date(character()),
+                                                         CLM_TOT = numeric(),
+                                                         CLM_AMT = numeric(),
+                                                         HCFASAF = character()))))%>%
+  mutate(PS_REV_rows=replace_na(PS_REV_rows, list(tibble(CLM_FROM = as.Date(character()),
+                                                         CLM_THRU = as.Date(character()),
+                                                         SBMTCH = numeric(),
+                                                         ALOWCH = numeric(),
+                                                         PMTAMT = numeric(),
+                                                         HCFASAF = character()))))
+
+
+
+#Add cost tibbles to patients_clean data set
+cost_joined<-left_join(post_match_results, 
+                       costs_clean, 
+                       by = join_by(USRDS_ID))%>%
+  mutate(IN_REV_rows=map(IN_REV_rows, ~ if (is.null(.x)) tibble(CLM_FROM = as.Date(character()),
+                                                                REV_CH = numeric(),
+                                                                REVPMT = numeric(),
+                                                                HCFASAF = character()) else .x))%>%
+  mutate(IN_CLM_rows=map(IN_CLM_rows, ~ if (is.null(.x)) tibble(CLM_FROM = as.Date(character()),
+                                                                CLM_THRU = as.Date(character()),
+                                                                CLM_TOT = numeric(),
+                                                                CLM_AMT = numeric(),
+                                                                HCFASAF = character()) else .x))%>%
+  mutate(PS_REV_rows=map(PS_REV_rows, ~ if (is.null(.x)) tibble(CLM_FROM = as.Date(character()),
+                                                                CLM_THRU = as.Date(character()),
+                                                                SBMTCH = numeric(),
+                                                                ALOWCH = numeric(),
+                                                                PMTAMT = numeric(),
+                                                                HCFASAF = character()) else .x))
+
+
+```
+
+## Totalling costs
+
+We start by testing the data frame to make sure that the analysis worked by writing appropriate code to calculate all costs in the USRDS for each patient,
+starting from the index date.  This is for validation only and is not used for modeling.
+
+```{r, eval=FALSE}
+
+
+#Use the cost claims to calculate appropriate
+cost_intermediate<-cost_joined%>%
+  mutate(IN_REV_post_cost = map2_dbl(IN_REV_rows, index_date_match, ~
+                                      .x %>%
+                                      filter(CLM_FROM >= .y)%>%
+                                      summarise(total = sum(REVPMT, na.rm = TRUE)) %>%
+                                      pull(total)
+  ))%>%
+  mutate(IN_CLM_post_cost = map2_dbl(IN_CLM_rows, index_date_match, ~
+                                      .x %>%
+                                      filter(CLM_FROM >= .y)%>%
+                                      summarise(total = sum(CLM_AMT, na.rm = TRUE)) %>%
+                                      pull(total)
+  ))%>%
+  mutate(PS_REV_post_cost = map2_dbl(PS_REV_rows, index_date_match, ~
+                                      .x %>%
+                                      filter(CLM_FROM >= .y)%>%
+                                      summarise(total = sum(PMTAMT, na.rm = TRUE)) %>%
+                                      pull(total)
+  ))
+
+
+```
+
+## Costs from start date to end date
+
+We now write code that totals costs for each patient, accounting for the start and finish dates:
+
+- Start: The index date for each patient
+- Finish: The earliest of
+  - End of Medicare coverage (minimum 1 day)
+  - Death
+  - Censoring date for end of data (1/1/2022)
+
+In addition to total costs, we also calculated total costs grouped by type (Inpatient, Outpatient, Home Health, etc.).
+
+Since claims can span many days, we use the `prorate_costs_by_day()` function from the `usrds` package to divide the costs evenly among the days spanned by
+each claim.  Proration is applied before date filtering so that only the portion of each claim overlapping the analytic window contributes to total cost.
+
+```{r, eval=FALSE}
+
+
+
+#Now we trial code that accounts for both the start date and the end date
+cost_broken_down<-cost_intermediate%>%
+  
+  #Define end date for purposes of cost using maximum_followup from setup file
+  mutate(end_date_analysis=pmin(index_date_match + maximum_followup,
+                                censor_date,
+                                coverage_end_date,
+                                medicare_coverage_end_date,
+                                na.rm=TRUE
+                                ))%>%
+  
+  mutate(duration_cost_followup=time_length(interval(index_date_match, end_date_analysis), "days"))%>%
+  mutate(follow_up_final_event=case_when(
+    end_date_analysis==DIED ~ "Death",
+    end_date_analysis==index_date_match + maximum_followup ~ "Maximum follow-up",
+    end_date_analysis==censor_date ~ "Censored",
+    end_date_analysis==coverage_end_date | end_date_analysis==medicare_coverage_end_date ~ "Loss of coverage"
+  ))%>%
+  
+  #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for IN_REV
+  mutate(IN_REV_365d_cost_total=pmap_dbl(
+    .l=list(IN_REV_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        summarise(total = sum(REVPMT, na.rm = TRUE)) %>%
+        pull(total)}
+  )
+  )%>%
+  
+  #Same, except now we group by HCFASAF
+  #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_REV, grouped by HCFASAF
+  mutate(IN_REV_365d_cost_grouped=pmap(
+    .l=list(IN_REV_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        mutate(HCFASAF = stringr::str_replace_all(HCFASAF, " ", ""))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Inpatient(REBUS)", "Inpatient", HCFASAF))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Non-claim/auxiliary", "Nonclaimauxiliary", HCFASAF))%>%
+        group_by(HCFASAF)%>%
+        summarise(total = sum(REVPMT, na.rm = TRUE)) %>%
+        pivot_wider(
+          names_from  = HCFASAF,
+          values_from = total,
+          names_prefix = "IN_REV_365d_cost_",
+          values_fill = 0
+        ) 
+      }
+  )
+  )%>%
+  
+  #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day
+  mutate(IN_CLM_365d_cost_total=pmap_dbl(
+    .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        usRds::prorate_costs_by_day()%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        summarise(total = sum(CLM_AMT_PRORATED, na.rm = TRUE))%>%
+        pull(total)
+    }
+      )
+  )%>%
+  
+  
+  #Same, except now we group by HCFASAF
+  #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day
+  mutate(IN_CLM_365d_cost_grouped=pmap(
+    .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        usRds::prorate_costs_by_day()%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        mutate(HCFASAF = stringr::str_replace_all(HCFASAF, " ", ""))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Inpatient(REBUS)", "Inpatient", HCFASAF))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Non-claim/auxiliary", "Nonclaimauxiliary", HCFASAF))%>%
+        group_by(HCFASAF)%>%
+        summarise(total = sum(CLM_AMT_PRORATED, na.rm = TRUE))%>%
+        pivot_wider(
+          names_from  = HCFASAF,
+          values_from = total,
+          names_prefix = "IN_CLM_365d_cost_",
+          values_fill = 0
+        ) 
+    }
+  )
+  )%>%
+  
+  
+  #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for PS_REV
+  mutate(PS_REV_365d_cost_total=pmap_dbl(
+    .l=list(PS_REV_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        summarise(total = sum(PMTAMT, na.rm = TRUE)) %>%
+        pull(total)}
+  )
+  )%>%
+  
+  unnest_wider(IN_REV_365d_cost_grouped)%>%
+  unnest_wider(IN_CLM_365d_cost_grouped)%>%
+  mutate(across(matches("_365d_cost_"), ~replace_na(., 0)))
+  
+
+```
+
+## Accounting for inflation
+
+We repeat the analysis above, except that we use the `adjust_costs_for_inflation()` function from the `usRds` package to adjust costs for medical inflation, using the month and year listed in the `R/setup.R` file to establish the time point at which all costs are anchored based on the [medical Consumer Price Index](https://www.bls.gov/cpi/factsheets/medical-care.htm).
+
+```{r, eval=FALSE}
+
+
+
+cost_inflated<-
+  cost_broken_down%>%
+  
+  #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for IN_REV
+  mutate(IN_REV_365d_cost_adjusted_total=pmap_dbl(
+    .l=list(IN_REV_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        adjust_costs_for_inflation(baseline_month = inflation_month, baseline_year = inflation_year)%>%
+        summarise(total = sum(REVPMT_ADJUSTED, na.rm = TRUE)) %>%
+        pull(total)}
+  )
+  )%>%
+  
+  #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day and inflating
+  mutate(IN_CLM_365d_cost_adjusted_total=pmap_dbl(
+    .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        usRds::prorate_costs_by_day()%>%
+        adjust_costs_for_inflation(baseline_month = inflation_month, baseline_year = inflation_year)%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        summarise(total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE))%>%
+        pull(total)
+    }
+  )
+  )%>%
+  
+  #Use pmap_dbl to calculate costs between first_cryptococcus_date and end_date for PS_REV
+  mutate(PS_REV_365d_cost_adjusted_total=pmap_dbl(
+    .l=list(PS_REV_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        adjust_costs_for_inflation(baseline_month = inflation_month, baseline_year = inflation_year)%>%
+        summarise(total = sum(PMTAMT_ADJUSTED, na.rm = TRUE)) %>%
+        pull(total)}
+  )
+  )%>%
+  
+  #Same, except now we group by HCFASAF
+  #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day
+  mutate(IN_CLM_365d_cost_adjusted_grouped=pmap(
+    .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        usRds::prorate_costs_by_day()%>%
+        adjust_costs_for_inflation(baseline_month = inflation_month, baseline_year = inflation_year)%>%
+        filter(CLM_FROM >= s_date, CLM_FROM<=e_date)%>%
+        mutate(HCFASAF = stringr::str_replace_all(HCFASAF, " ", ""))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Inpatient(REBUS)", "Inpatient", HCFASAF))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Non-claim/auxiliary", "Nonclaimauxiliary", HCFASAF))%>%
+        group_by(HCFASAF)%>%
+        summarise(total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE))%>%
+        pivot_wider(
+          names_from  = HCFASAF,
+          values_from = total,
+          names_prefix = "IN_CLM_365d_cost_adjusted",
+          values_fill = 0
+        ) 
+    }
+  )
+  )%>%
+  unnest_wider(IN_CLM_365d_cost_adjusted_grouped)%>%
+  mutate(across(matches("_365d_cost_"), ~replace_na(., 0)))
+  
+```
+
+## Grouping by month
+
+In order to model costs appropriately, we group costs for each patient into 30-day increments, starting from the beginning of the look-back period defined in the `R/setup.R` file.  This will allow us to estimate full-year costs for patients who lose their coverage or are censored before the end of a full-year but do not experience death.
+
+```{r eval=FALSE}
+
+
+  #Longitudinal data set for modeling
+cost_longitudinal<-
+  cost_inflated%>%
+
+  #Use pmap to calculate costs between first_cryptococcus_date and end_date for IN_CLM, after prorating costs by day and inflating
+  mutate(IN_CLM_365d_cost_adjusted_total_longitudinal=pmap(
+    .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        usRds::prorate_costs_by_day()%>%
+        adjust_costs_for_inflation(baseline_month = inflation_month, baseline_year = inflation_year)%>%
+        filter(service_date >= s_date-30*baseline_months_cost, service_date<=e_date)%>%
+        mutate(month=time_length(interval(s_date, service_date), "days") %/% 30)%>%
+        filter(month<12)%>%
+        group_by(month)%>%
+        summarise(IN_CLM_month_total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE), 
+                  .groups = "drop")%>%
+        mutate(IN_CLM_month_total=pmax(IN_CLM_month_total,0))%>%
+        ungroup()%>%
+        tidyr::complete(
+          month = full_months
+        )
+    }
+  )
+  )%>%
+
+  #Use pmap to calculate costs between first_cryptococcus_date and end_date for PS_REV
+  mutate(PS_REV_365d_cost_adjusted_total_longitudinal=pmap(
+    .l=list(PS_REV_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        filter(CLM_FROM >= s_date-30*baseline_months_cost, CLM_FROM<=e_date)%>%
+        adjust_costs_for_inflation(baseline_month = inflation_month, baseline_year = inflation_year)%>%
+        mutate(month=time_length(interval(s_date, CLM_FROM), "days") %/% 30)%>%
+        filter(month<12)%>%
+        group_by(month)%>%
+        summarise(PS_REV_month_total = sum(PMTAMT_ADJUSTED, na.rm = TRUE), 
+                  .groups = "drop") %>%
+        mutate(PS_REV_month_total=pmax(PS_REV_month_total,0))%>%
+        ungroup()
+    }
+        
+        
+  )
+  )%>%
+
+  #IN_CLM, except now we group by HCFASAF
+  #Use pmap to calculate costs IN_CLM, after prorating costs by day
+  mutate(IN_CLM_365d_cost_adjusted_grouped_longitudinal=pmap(
+    .l=list(IN_CLM_rows, index_date_match, end_date_analysis),
+    .f=function(claims_df, s_date,e_date) {
+      claims_df%>%
+        usRds::prorate_costs_by_day()%>%
+        adjust_costs_for_inflation(baseline_month = inflation_month, baseline_year = inflation_year)%>%
+        filter(service_date >= s_date-30*baseline_months_cost, service_date<=e_date)%>%
+        mutate(month=time_length(interval(s_date, service_date), "days") %/% 30)%>%
+        filter(month<12)%>%
+        mutate(HCFASAF = stringr::str_replace_all(HCFASAF, " ", ""))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Inpatient(REBUS)", "Inpatient", HCFASAF))%>%
+        mutate(HCFASAF = ifelse(HCFASAF=="Non-claim/auxiliary", "Nonclaimauxiliary", HCFASAF))%>%
+        group_by(month, HCFASAF)%>%
+        summarise(total = sum(CLM_AMT_PRORATED_ADJUSTED, na.rm = TRUE), 
+                  .groups = "drop")%>%
+        mutate(total=pmax(total,0))%>%
+        pivot_wider(
+          names_from  = HCFASAF,
+          values_from = total,
+          names_prefix = "IN_CLM_month_grouped",
+          values_fill = 0
+        ) 
+    }
+  )
+  )%>%
+  mutate(
+    cost_column_longitudinal = pmap(
+      list(
+        IN_CLM_365d_cost_adjusted_total_longitudinal,
+        PS_REV_365d_cost_adjusted_total_longitudinal,
+        IN_CLM_365d_cost_adjusted_grouped_longitudinal,
+        index_date_match, 
+        end_date_analysis
+      ),
+      ~ left_join(..1, ..2, by = "month") %>%
+        left_join(..3, by = "month")%>%
+        mutate(month_offset=pmin(30, time_length(interval(..4, ..5), "days")-30*month + 1 ))%>%
+        mutate(month_offset=pmax(month_offset,0))
+
+    ))%>%
+  select(-IN_CLM_365d_cost_adjusted_total_longitudinal,
+         -PS_REV_365d_cost_adjusted_total_longitudinal,
+         -IN_CLM_365d_cost_adjusted_grouped_longitudinal)%>%
+  unnest(cost_column_longitudinal)%>%
+  mutate(
+    patient_type = factor(patient_type),
+    patient_type = relevel(patient_type, ref = "Control")
+  )%>%
+  
+  mutate(across(
+    c(
+      IN_CLM_month_total,
+      PS_REV_month_total,
+      starts_with("IN_CLM_month_grouped")
+    ),
+    ~replace_na(., 0)))%>%
+  mutate(grand_total_cost_month=IN_CLM_month_total+PS_REV_month_total)
+
+
+```
+
+## Final preparation
+
+We prepare a final data-set for modeling from the monthly data set by removing the granular cost data and removing months where the patients are not under observation.  We also create a dataframe with the number of patients under observation in each month from the beginning of the lookup period to the end of follow-up.
+
+```{r, eval=FALSE}
+
+#Remove lists-columns from the final data frame since they are space-consuming and clunky, and remove months where the patient is not under observation
+final_data_set<-cost_longitudinal%>%
+  select(where(~ !is.list(.)))%>%
+  filter(month_offset>0)
+
+#create a data frame for use as a risk table in ggplot
+final_count_df<-final_data_set%>%
+  count(patient_type, month)
+
+
+```
+
+The resulting data frames are used in the `R/modeling.R`, `R/tables.R`, and `R/figures.R` scripts.
 
 ## Other portions of the analysis
 
