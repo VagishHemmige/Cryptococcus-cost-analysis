@@ -42,6 +42,7 @@ Pending
 
 ## Site navigation
 
+-   [**Create cohort**](quarto/create_cohort.qmd): Creation of cohort
 -   [**About**](quarto/about.qmd): methods, assumptions, and disclosures
 
 
