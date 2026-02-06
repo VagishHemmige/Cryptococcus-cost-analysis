@@ -88,7 +88,7 @@ tx_status<-tx_clean%>%
 The next component makes use of the `flowchart` package.  This package combines two key processes in an epidemiologic analysis:
 
 - **Dataset preparation:** Sequential application of eligibility criteria to define the analytic cohort, with explicit tracking of excluded records at each step.
-- **STROBE(https://www.strobe-statement.org/) diagram preparation:**  STrengthening the Reporting of OBservational studies in Epidemiology [STROBE](https://www.strobe-statement.org/) diagrams visually depict the process of including/excluding patients in an observational study and grouping them into cohorts.  Many journals require these as a standard Figure 1.
+- **[STROBE](https://www.strobe-statement.org/) diagram preparation:**  [STrengthening the Reporting of OBservational studies in Epidemiology ](https://www.strobe-statement.org/) diagrams visually depict the process of including/excluding patients in an observational study and grouping them into cohorts.  Many journals require these as a standard Figure 1.
 
 The code below initializes a flowchart-aware cohort object and applies sequential eligibility filters, retaining both inclusion counts and labeled exclusion steps for downstream reporting.
 
