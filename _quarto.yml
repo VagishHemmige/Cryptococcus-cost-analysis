@@ -13,6 +13,8 @@ website:
     left:
       - href: index.html
         text: Home
+      - href: quarto/create_cohort.html
+        text: Create cohort
       - href: quarto/about.html
         text: About
         
