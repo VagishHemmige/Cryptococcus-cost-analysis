@@ -13,6 +13,16 @@ website:
     left:
       - href: index.html
         text: Home
+      - href: quarto/setup.html
+        text: Setup
+      - href: quarto/create_cohort.html
+        text: Create cohort
+      - href: quarto/execute_matching.html
+        text: Execute matching
+      - href: quarto/postmatch_processing.html
+        text: Post-match processing
+      - href: quarto/modeling.html
+        text: Modeling
       - href: quarto/create_cohort.html
         text: Create cohort
       - href: quarto/about.html
