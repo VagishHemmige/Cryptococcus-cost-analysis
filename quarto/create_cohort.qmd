@@ -3,8 +3,6 @@ title: "Create cohort"
 format: html
 ---
 
-# Create cohort
-
 The code in this script creates the cohort of kidney transplant patients eligible for the study for use in other scripts.
 
 ::: callout-note

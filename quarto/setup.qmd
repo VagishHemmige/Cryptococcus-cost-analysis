@@ -1,9 +1,8 @@
 ---
-title: "Create cohort"
+title: "Setup"
 format: html
 ---
 
-## Setup
 
 The code in this script imports libraries, initializes constants, and performs other such preparatory work for the main analysis.
 

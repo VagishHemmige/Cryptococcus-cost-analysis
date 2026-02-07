@@ -3,7 +3,7 @@ title: "Execute matching"
 format: html
 ---
 
-# Execute matching
+## Overview
 
 The code in this script uses the cohort of kidney transplant patients with and without cryptococcosis developed in the [`R/create_cohort.R`](create_cohort.qmd)
 and executes n:1 matching based on a custom-written greedy algorithm

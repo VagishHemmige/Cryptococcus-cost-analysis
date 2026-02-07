@@ -184,13 +184,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#execute-matching" id="toc-execute-matching" class="nav-link active" data-scroll-target="#execute-matching">Execute matching</a>
-  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#prepare-cohort-for-matching" id="toc-prepare-cohort-for-matching" class="nav-link" data-scroll-target="#prepare-cohort-for-matching">Prepare cohort for matching</a></li>
   <li><a href="#counting-the-potental-number-of-matched-controls-for-each-case" id="toc-counting-the-potental-number-of-matched-controls-for-each-case" class="nav-link" data-scroll-target="#counting-the-potental-number-of-matched-controls-for-each-case">Counting the potental number of matched controls for each case</a></li>
   <li><a href="#create-a-matched-data-set" id="toc-create-a-matched-data-set" class="nav-link" data-scroll-target="#create-a-matched-data-set">Create a matched data set</a></li>
   <li><a href="#other-portions-of-the-analysis" id="toc-other-portions-of-the-analysis" class="nav-link" data-scroll-target="#other-portions-of-the-analysis">Other portions of the analysis</a></li>
-  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/main/quarto/execute_matching.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -216,8 +214,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="execute-matching" class="level1">
-<h1>Execute matching</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>The code in this script uses the cohort of kidney transplant patients with and without cryptococcosis developed in the <a href="../quarto/create_cohort.html"><code>R/create_cohort.R</code></a> and executes n:1 matching based on a custom-written greedy algorithm</p>
 <p>Characteristics of the matching algorithm:</p>
 <ul>
@@ -264,6 +262,7 @@ Source code
 </ul>
 </div>
 </div>
+</section>
 <section id="prepare-cohort-for-matching" class="level2">
 <h2 class="anchored" data-anchor-id="prepare-cohort-for-matching">Prepare cohort for matching</h2>
 <p>The following code prepares the cohort for matching by creating a list object <code>unmatched_patients</code>, keeping only the initial row for each case as only the covariates at the time of cryptococcus are necessary for matching.</p>
@@ -474,7 +473,6 @@ Source code
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -951,7 +949,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># Execute matching</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>The code in this script uses the cohort of kidney transplant patients with and without cryptococcosis developed in the <span class="co">[</span><span class="ot">`R/create_cohort.R`</span><span class="co">](create_cohort.qmd)</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>and executes n:1 matching based on a custom-written greedy algorithm</span>
