@@ -42,8 +42,16 @@ Pending
 
 ## Site navigation
 
--   [**Create cohort**](quarto/create_cohort.qmd): Creation of cohort
+-   [**Setup**](quarto/setup.qmd): Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.
+-   [**Functions**](quarto/functions.qmd): Reusable helper functions for cohort construction, matching, costing, and modeling.
+-   [**Create cohort**](quarto/create_cohort.qmd): Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.
+-   [**Execute matching**](quarto/execute_matching.qmd): Implements risk-set–based greedy matching without replacement to construct the analytic cohort.
+-   [**Post-match processing**](quarto/postmatch_processing.qmd): Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.
+-   [**Modeling**](quarto/modeling.qmd): Fits prespecified cost and outcome models using the matched cohort.
+-   [**Tables**](quarto/tables.qmd): Summary tables and regression outputs generated from the final models.
+-   [**Figures**](quarto/figures.qmd):Visualizations of costs, risks, and model-based estimates.
 -   [**About**](quarto/about.qmd): methods, assumptions, and disclosures
+
 
 
 ### Reproducibility

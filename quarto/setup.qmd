@@ -1001,7 +1001,6 @@ comorbidity_ICD_list%>%
 
 ## Other portions of the analysis
 
--   [**Setup**](setup.qmd): Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.
 -   [**Functions**](functions.qmd): Reusable helper functions for cohort construction, matching, costing, and modeling.
 -   [**Create cohort**](create_cohort.qmd): Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.
 -   [**Execute matching**](execute_matching.qmd): Implements risk-set–based greedy matching without replacement to construct the analytic cohort.
