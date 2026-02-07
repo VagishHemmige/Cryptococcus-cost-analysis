@@ -5,6 +5,10 @@
 
 <!-- badges: start -->
 
+[![Status](https://img.shields.io/badge/status-preliminary_analysis-yellow)](#)
+[![Methods](https://img.shields.io/badge/methods-under_development-blue)](#)
+[![Not for
+Citation](https://img.shields.io/badge/use-not_for_citation-lightgrey)](#)
 <!-- badges: end -->
 
 The goal of Cryptococcus cost analysis is to understand the cost
