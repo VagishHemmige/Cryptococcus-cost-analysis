@@ -130,7 +130,7 @@
     "href": "quarto/setup.html#other-portions-of-the-analysis",
     "title": "Create cohort",
     "section": "Other portions of the analysis",
-    "text": "Other portions of the analysis\n\nAbout: methods, assumptions, and disclosures"
+    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures"
   },
   {
     "objectID": "quarto/postmatch_processing.html",
