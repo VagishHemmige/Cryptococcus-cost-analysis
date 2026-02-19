@@ -2,40 +2,63 @@ project:
   type: website
   output-dir: docs
 
-
+author:
+  - name: Vagish Hemmige
+    affiliations:
+      - Montefiore Medical Center/ Albert Einstein College of Medicine
+    email: vahemmig@montefiore.org
 
 website:
   site-url: https://vagishhemmige.github.io/Cryptococcus-cost-analysis
   repo-url: https://github.com/VagishHemmige/Cryptococcus-cost-analysis
   repo-actions: [edit, issue]
   title: "Cryptococcus post-transplant cost"
-  navbar:
-    left:
+
+  sidebar:
+    style: docked
+    search: true
+    contents:
       - href: index.html
         text: Home
-      - href: quarto/setup.html
-        text: Setup
-      - href: quarto/functions.html
-        text: Functions
-      - href: quarto/create_cohort.html
-        text: 1. Create cohort
-      - href: quarto/execute_matching.html
-        text: 2. Execute matching
-      - href: quarto/postmatch_processing.html
-        text: 3. Post-match processing
-      - href: quarto/modeling.html
-        text: 4. Modeling
-      - href: quarto/tables.html
-        text: 5. Tables
-      - href: quarto/figures.html
-        text: 6. Figures
+
+      - section: Background
+        contents:
+          - href: quarto/setup.html
+            text: Setup
+          - href: quarto/functions.html
+            text: Functions
+
+      - section: Data loading and processing
+        contents:
+          - href: quarto/create_cohort.html
+            text: 1. Create cohort
+          - href: quarto/execute_matching.html
+            text: 2. Execute matching
+          - href: quarto/postmatch_processing.html
+            text: 3. Post-match processing
+          - href: quarto/modeling.html
+            text: 4. Modeling
+
+      - section: Code to create tables and figures
+        contents:
+          - href: quarto/tables.html
+            text: Tables
+          - href: quarto/figures.html
+            text: Figures
+
       - href: quarto/about.html
         text: About
-        
-    right:
-      - icon: github
-        href: https://github.com/VagishHemmige/Cryptococcus-cost-analysis
-        aria-label: GitHub repository
+
+  page-navigation: true
+
+custom-callout:
+  Rcode:
+    icon: true
+    icon-symbol: "💻"
+    color: pink
+
+filters:
+  - custom-callout
 
 format:
   html:
@@ -44,3 +67,4 @@ format:
     code-fold: true
     code-tools: true
     page-layout: full
+    code-summary: "Click to show/hide R Code"

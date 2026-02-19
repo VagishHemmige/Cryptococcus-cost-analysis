@@ -5,7 +5,7 @@ format: html
 
 The code in this script creates the cohort of kidney transplant patients eligible for the study for use in other scripts.
 
-::: callout-note
+::: Rcode
 ### Source code
 
 The full R script is available at:

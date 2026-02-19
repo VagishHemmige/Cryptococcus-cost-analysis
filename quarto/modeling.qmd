@@ -5,7 +5,7 @@ format: html
 
 The code in this script runs the statistical models used in the `R.figures.R` and `R.tables.R` scripts to generate tables and figures for the manuscript.
 
-::: callout-note
+::: Rcode
 ### Source code
 
 The full R script is available at:

@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/about.html</loc>
-    <lastmod>2026-02-07T00:53:52.658Z</lastmod>
+    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/tables.html</loc>
+    <lastmod>2026-02-19T17:47:27.480Z</lastmod>
   </url>
   <url>
-    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/LICENSE.html</loc>
-    <lastmod>2026-01-04T03:32:26.447Z</lastmod>
+    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/postmatch_processing.html</loc>
+    <lastmod>2026-02-19T17:40:00.022Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/functions.html</loc>
+    <lastmod>2026-02-19T17:46:49.917Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/execute_matching.html</loc>
+    <lastmod>2026-02-19T17:46:31.881Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/about.html</loc>
+    <lastmod>2026-02-07T00:53:52.658Z</lastmod>
   </url>
   <url>
     <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/index.html</loc>
     <lastmod>2026-02-07T00:51:48.174Z</lastmod>
   </url>
   <url>
+    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/LICENSE.html</loc>
+    <lastmod>2026-01-04T03:32:26.447Z</lastmod>
+  </url>
+  <url>
     <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/create_cohort.html</loc>
-    <lastmod>2026-02-07T01:17:12.801Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/setup.html</loc>
-    <lastmod>2026-02-07T01:17:00.172Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/postmatch_processing.html</loc>
-    <lastmod>2026-02-07T00:53:13.286Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/execute_matching.html</loc>
-    <lastmod>2026-02-07T01:17:37.691Z</lastmod>
-  </url>
-  <url>
-    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/modeling.html</loc>
-    <lastmod>2026-02-07T00:53:25.368Z</lastmod>
+    <lastmod>2026-02-19T17:46:16.569Z</lastmod>
   </url>
   <url>
     <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/figures.html</loc>
-    <lastmod>2026-02-07T00:52:22.986Z</lastmod>
+    <lastmod>2026-02-19T17:46:41.587Z</lastmod>
   </url>
   <url>
-    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/tables.html</loc>
-    <lastmod>2026-02-07T00:54:12.566Z</lastmod>
+    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/modeling.html</loc>
+    <lastmod>2026-02-19T17:47:01.318Z</lastmod>
   </url>
   <url>
-    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/functions.html</loc>
-    <lastmod>2026-02-07T00:52:05.392Z</lastmod>
+    <loc>https://vagishhemmige.github.io/Cryptococcus-cost-analysis/quarto/setup.html</loc>
+    <lastmod>2026-02-19T17:47:17.424Z</lastmod>
   </url>
 </urlset>

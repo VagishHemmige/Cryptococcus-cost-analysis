@@ -27,7 +27,7 @@ chosen based on their covariate values at exactly 243 days post-transplant.
     
 
 
-::: callout-note
+::: Rcode
 ### Source code
 
 The full R script is available at:

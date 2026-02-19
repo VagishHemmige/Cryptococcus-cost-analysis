@@ -15,7 +15,7 @@ library(gt)
 ```
 
 
-::: callout-note
+::: Rcode
 ### Source code
 
 The full R script is available at:

@@ -5,7 +5,7 @@ format: html
 
 The code in this script adds the cost data to the dataset and prepares for modeling
 
-::: callout-note
+::: Rcode
 ### Source code
 
 The full R script is available at:
