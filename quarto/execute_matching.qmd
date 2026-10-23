@@ -6,7 +6,7 @@ format: html
 ## Overview
 
 The code in this script uses the cohort of kidney transplant patients with and without cryptococcosis developed in the [`R/create_cohort.R`](create_cohort.qmd)
-and executes n:1 matching based on a custom-written greedy algorithm
+and executes 1:n matching based on a custom-written greedy algorithm
 
 Characteristics of the matching algorithm:
 
@@ -32,211 +32,51 @@ chosen based on their covariate values at exactly 243 days post-transplant.
 
 The full R script is available at:
 
--   [`R/execute_matching.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/execute_matching.R)
+-   [`R/execute_matching.R`](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/blob/master/R/execute_matching.R)
 
 This R script file is itself reliant on the following helper files:
 
--   [`R/setup.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/setup.R)
--   [`R/functions.R`](https://github.com/VagishHemmige/Cryptococcus-cost_analysis/blob/master/R/functions.R)
+-   [`R/setup.R`](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/blob/master/R/setup.R)
+-   [`R/functions.R`](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/blob/master/R/functions.R)
+
+The code sections below are imported directly from that script when this page is rendered.
 :::
+
+```{r}
+#| include: false
+#| cache: false
+knitr::read_chunk("../R/execute_matching.R")
+```
 
 ## Prepare cohort for matching
 
 The following code prepares the cohort for matching by creating a list object `unmatched_patients`, keeping only the initial row for each case as only
 the covariates at the time of cryptococcus are necessary for matching.
 
-```{r, eval=FALSE}
-
-unmatched_patients<-list()
-
-unmatched_patients[["Case"]]<-prematching_cohort%>%
-  filter(cryptococcus_case=="Case")
-
-unmatched_patients[["Control"]]<-prematching_cohort%>%
-  filter(cryptococcus_case=="Potential control")
-
-unmatched_patients[["Case"]]<-unmatched_patients[["Case"]]%>%
-  group_by(USRDS_ID)%>%
-  slice(1)%>%
-  ungroup()
-
-#For exploration--perhaps can delete in future?
-Case<-unmatched_patients[["Case"]]
-Control<-unmatched_patients[["Control"]]
-
-
+```{r}
+#| label: prepare-cohort
+#| eval: false
 ```
 
-## Counting the potental number of matched controls for each case
+## Counting the potential number of matched controls for each case
 
 This step uses the `calculate_number_potential_matches()` function defined in the [`R/functions.R`](functions.qmd) to add a column to the cases data set, then
 sorts the cases so that those with the lowest number of potential matches are matched first.
 
 (Note the following code took ~2 hours to execute on a laptop given the size of the dataset.)
 
-```{r, eval=FALSE}
-
-#Add number of potential control matches to Case df
-unmatched_patients[["Case"]] <- unmatched_patients[["Case"]] %>%
-  mutate(
-    num_potential_controls = pmap_int(
-      list(USRDS_ID, BORN,cirrhosis, CMV, HIV, diabetes, cryptococcus_dx_date, tstart),
-      function(USRDS_ID, BORN, cirrhosis, CMV, HIV, diabetes, matching_date, tstart) {
-        calculate_number_potential_matches(
-          unmatched_patients[["Control"]],
-          USRDS_ID,
-          BORN, 
-          cirrhosis,
-          CMV,
-          HIV,
-          diabetes,
-          matching_date,
-          tstart
-        )
-      }
-    )
-  )
-
-#Sort by number of potential matches so that most difficult to match cases are matched first
-#Set the index_date for cases to be the date of cryptococcus dx
-unmatched_patients[["Case"]] <- unmatched_patients[["Case"]] %>%
-  arrange(num_potential_controls)%>%
-  mutate(index_date_match=cryptococcus_dx_date)
-
-
-#Can be deleted
-unmatched_patients_backup<-unmatched_patients
-unmatched_patients<-unmatched_patients_backup
-
-
+```{r}
+#| label: count-potential-matches
+#| eval: false
 ```
 
 ## Create a matched data set
 
 The following code executes the match, creating a matched dataframe suitable for use in subsequent analysis.
 
-```{r eval=FALSE}
-
-#Time to set up the matching loop
-
-#Initial the loop control
-continue<-TRUE
-i<-0
-set.seed(12345)
-
-#Initialize the object where the matched cases and controls will be stored
-matched_patients<-list()
-matched_patients[["Case"]]<-unmatched_patients[["Case"]][0, ]%>%
-  mutate(matched_control_indices = list())
-matched_patients[["Control"]] <- unmatched_patients[["Control"]][0, ] %>%
-  mutate(index_date_match = as.Date(character()))
-
-
-#Perform the match
-while (continue==TRUE)
-{
-  i<-i+1
-  print(i)
-
-  #Select matches from controls
-  eligible_controls <-unmatched_patients[["Control"]]%>%
-    
-    filter(cirrhosis==unmatched_patients$Case$cirrhosis[[1]])%>%
-    #filter(CMV==unmatched_patients$Case$CMV[[1]])%>%
-    filter(HIV==unmatched_patients$Case$HIV[[1]])%>%
-    filter(diabetes==unmatched_patients$Case$diabetes[[1]])%>%
-    
-    #Risk set matching
-    filter(tstart<=unmatched_patients$Case$tstart[[1]])%>%
-    filter(tstop>unmatched_patients$Case$tstart[[1]])%>%
-    
-    #Calculate date for age calculations/etc.
-    mutate(.baseline_control_date=unmatched_patients$Case$tstart[[1]] + most_recent_transplant_date)%>%
-    
-    #Make sure case and control are sampled within 3 years of each other
-    filter(abs(time_length(interval(.baseline_control_date, unmatched_patients$Case$cryptococcus_dx_date[[1]]), "years")) <=3)%>%
-    
-    #filter(cohort_start_date<=unmatched_patients$Case$cryptococcus_dx_date[[1]])%>%
-    #filter(cohort_stop_date>unmatched_patients$Case$cryptococcus_dx_date[[1]])%>%
-    
-    #Age>=18 on index date
-    filter(time_length(interval(BORN, .baseline_control_date), "years") >= 18)%>%
-    
-    #Age difference under 10 years, calculated at sampling date
-    filter(abs(time_length(interval(BORN,.baseline_control_date), "years")-
-                 time_length(interval(unmatched_patients$Case$BORN[[1]],
-                                      unmatched_patients$Case$cryptococcus_dx_date[[1]]), "years")) <=10)%>%
-  
-    verify_medicare_primary(index_date = ".baseline_control_date", 
-                            medicare_coverage_df = medicare_history, 
-                            coverage_start_variable = "medicare_coverage_start_date",
-                            coverage_end_variable = "medicare_coverage_end_date",
-                            cache=TRUE)%>%
-    filter(medicare_primary_TF==TRUE)%>%
-    
-    #Move matches for cumulative number of transplants to the top
-    #Note: this step could be used for propensity score matching on various variables
-    #Consider minimizing date difference and age difference as well
-    arrange(desc(cumulative_transplant_total==unmatched_patients$Case$cumulative_transplant_total[[1]]))
-  
-  
-  #Number of controls is minimum of global constant number_controls_per_case and number of distinct USRDS_IDs
-  k <- min(number_controls_per_case, nrow(distinct(eligible_controls, USRDS_ID)))
-  
-  #Initialize sampled_controls df
-  sampled_controls<-eligible_controls[0, ]
-    
-  #Loop to select controls one at a time to ensure same patient is not sampled multiple times 
-  while (k>0)
-  {
-  
-  sampled_controls <- bind_rows(
-    sampled_controls,
-    eligible_controls %>%slice_head(n = 1))
-    
-    eligible_controls<-eligible_controls%>%
-      filter(!(USRDS_ID %in% sampled_controls$USRDS_ID ))
-
-    k<-min(k-1, nrow(distinct(eligible_controls, USRDS_ID)))   
-  }
-    
-    sampled_controls<-sampled_controls%>%
-    mutate(index_date_match = .baseline_control_date)%>%
-    select(-.baseline_control_date)
-  
-  #Add case to matched DF
-  matched_patients[["Case"]]<-unmatched_patients$Case[1,]%>%
-    mutate(matched_control_indices=list(sampled_controls$USRDS_ID))%>%
-    bind_rows(matched_patients[["Case"]])
-  
-  #Add controls to control DF
-  matched_patients[["Control"]]<-matched_patients[["Control"]]%>%
-    bind_rows(sampled_controls)
-  
-  #Remove controls
-  unmatched_patients[["Control"]]<-unmatched_patients[["Control"]]%>%
-    filter(!(USRDS_ID %in% sampled_controls$USRDS_ID ))
-  
-  #Remove cases
-  unmatched_patients[["Case"]]<-unmatched_patients[["Case"]]%>%
-    slice(-1)
-  
- if (nrow(unmatched_patients[["Case"]])==0){
-   continue<-FALSE
- } 
-  
-  if (i==10000){
-    continue<-FALSE
-  }
-  
-}
-
-
-post_match_results<-matched_patients%>%
-  bind_rows(.id = "patient_type")
-
-
-
+```{r}
+#| label: matching-loop
+#| eval: false
 ```
 
 The [modeling](modeling.qmd) script uses the above matched dataframe for the actual cost analysis.
