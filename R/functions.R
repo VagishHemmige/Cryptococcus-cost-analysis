@@ -1,5 +1,6 @@
 #Define functions for use in the analysis
 
+## ---- plot-mean-monthly-costs
 #Function that returns a ggplot of the mean cost (with confidence interval) for cryptococcus cases and controls by month
 plot_mean_monthly_costs<-function(fitted_model, countdf=final_count_df) {
 
@@ -70,6 +71,7 @@ plot_mean_monthly_costs<-function(fitted_model, countdf=final_count_df) {
 }
 
 
+## ---- calculate-number-potential-matches
 #Function that defines the number of potential control matches for a case
 calculate_number_potential_matches<-function(control_df,
                                              USRDS_ID,
@@ -125,6 +127,7 @@ calculate_number_potential_matches<-function(control_df,
 
 
 
+## ---- calculate-total-excess-costs
 # Calculate total excess costs in a model
 calculate_total_excess_costs <- function(fitted_model, link = "linear") {
   

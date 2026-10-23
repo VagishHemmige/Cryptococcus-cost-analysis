@@ -1,5 +1,6 @@
 # Performs all postmatch processing
 
+## ---- matched-flowchart
 #Update flowchart to reflect matching process
 patients_fc_matched<-patients_merged2%>%
   fc_filter(USRDS_ID %in% post_match_results$USRDS_ID,
@@ -11,6 +12,7 @@ patients_fc_matched%>%
   fc_draw()
 
 
+## ---- raw-costs
 #Gather raw costs for each patient
 costs_raw<-list()
 costs_raw[["IN_REV"]]<-get_IN_REV_costs(years = 2006:2021, usrds_ids = post_match_results$USRDS_ID)
@@ -18,6 +20,7 @@ costs_raw[["IN_CLM"]]<-get_IN_CLM_costs(years = 2006:2021, usrds_ids = post_matc
 costs_raw[["PS_REV"]]<-get_PS_REV_costs(years = 2006:2021, usrds_ids = post_match_results$USRDS_ID)
 
 
+## ---- merge-costs
 #Group by ID and nest, so that each patient has a single tibble for each type of cost
 #Start with the raw costs
 costs_clean <- costs_raw%>% 
@@ -72,6 +75,7 @@ cost_joined<-left_join(post_match_results,
 
 
 
+## ---- total-costs
 #Use the cost claims to calculate appropriate
 cost_intermediate<-cost_joined%>%
   mutate(IN_REV_post_cost = map2_dbl(IN_REV_rows, index_date_match, ~
@@ -93,6 +97,7 @@ cost_intermediate<-cost_joined%>%
                                       pull(total)
   ))
 
+## ---- prorated-costs
 #Now we trial code that accounts for both the start date and the end date
 cost_broken_down<-cost_intermediate%>%
   
@@ -199,6 +204,7 @@ cost_broken_down<-cost_intermediate%>%
   mutate(across(matches("_365d_cost_"), ~replace_na(., 0)))
   
 
+## ---- inflation-adjustment
 cost_inflated<-
   cost_broken_down%>%
   
@@ -266,6 +272,7 @@ cost_inflated<-
   unnest_wider(IN_CLM_365d_cost_adjusted_grouped)%>%
   mutate(across(matches("_365d_cost_"), ~replace_na(., 0)))
   
+## ---- monthly-costs
   #Longitudinal data set for modeling
 cost_longitudinal<-
   cost_inflated%>%
@@ -372,6 +379,7 @@ cost_longitudinal<-
     ~replace_na(., 0)))%>%
   mutate(grand_total_cost_month=IN_CLM_month_total+PS_REV_month_total)
 
+## ---- final-data-set
 #Remove lists-columns from the final data frame since they are space-consuming and clunky, and remove months where the patient is not under observation
 final_data_set<-cost_longitudinal%>%
   select(where(~ !is.list(.)))%>%

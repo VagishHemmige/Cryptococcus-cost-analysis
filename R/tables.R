@@ -1,5 +1,6 @@
 # Create tables
 
+## ---- table-1
 #Create a table of the post-match results to confirm that demographics were appropriately balanced
 table1<-post_match_results%>%
   mutate(age=time_length(interval(BORN, index_date_match), "years"))%>%
@@ -7,7 +8,7 @@ table1<-post_match_results%>%
                 liver_transplant, lung_transplant, heart_transplant, heartlung_transplant,
                 pancreas_transplant, intestinal_transplant,
                 age, SEX, RACE, HISPANIC, RACEETH, RURALURBAN, cryptococcus_dx_date, 
-         pancreas_transplant, intestinal_transplant, patient_type)%>%
+         patient_type)%>%
   gtsummary::tbl_summary(by=patient_type)%>%
   add_p()
 table1%>%
@@ -19,6 +20,7 @@ table1%>%
   gt::gtsave("tables/table1_baseline.docx")
 
 
+## ---- table-2-icd-codes
 #Table of comorbidities generated from lists created in setup.R, then exported 
 
 table2_icd <- comorbidity_ICD_list%>%
@@ -52,6 +54,7 @@ table2_icd%>%
 
 
 
+## ---- cost-tables
 #Examine costs broken down by type
 cost_broken_down%>%
   select(patient_type, contains(c("IN_REV_365d_cost", "IN_CLM_365d_cost", "PS_REV_365d_cost")))%>%
@@ -72,5 +75,6 @@ cost_inflated%>%
 
 
 
+## ---- total-excess-costs
 #Total the grand difference between cases and controls over the entire period of follow up:
 calculate_total_excess_costs(fit[["grand_total_cost_month"]][["gee"]][["linear"]])

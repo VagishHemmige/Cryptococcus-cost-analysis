@@ -1,6 +1,7 @@
 # Create figures
 
 
+## ---- final-flowchart
 #Final STROBE flowchart
 patients_fc_matched%>%
   fc_draw()%>%
@@ -9,6 +10,7 @@ patients_fc_matched%>%
             height=10)
 
 
+## ---- beeswarm-total-costs
 #GGplot that is beeswarm of adjusted total costs
 cost_inflated%>%
   mutate(IN_CLM_365d_cost_adjusted_total=ifelse(IN_CLM_365d_cost_adjusted_total==0, 1, IN_CLM_365d_cost_adjusted_total))%>%
@@ -19,6 +21,7 @@ cost_inflated%>%
 
 
   
+## ---- monthly-cost-plots
 #Loop that plots the different outcomes longitudinally
 
 for (outcome in c("grand_total_cost_month", "IN_CLM_month_total", "PS_REV_month_total", "IN_CLM_month_groupedHomeHealth",

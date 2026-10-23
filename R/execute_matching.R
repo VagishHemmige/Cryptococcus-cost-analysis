@@ -1,5 +1,6 @@
 #This file executes matching on the prematching_cohort object, which is assumed to already exist
 
+## ---- prepare-cohort
 unmatched_patients<-list()
 
 unmatched_patients[["Case"]]<-prematching_cohort%>%
@@ -18,6 +19,7 @@ Case<-unmatched_patients[["Case"]]
 Control<-unmatched_patients[["Control"]]
 
 
+## ---- count-potential-matches
 #Add number of potential control matches to Case df
 unmatched_patients[["Case"]] <- unmatched_patients[["Case"]] %>%
   mutate(
@@ -52,6 +54,7 @@ unmatched_patients<-unmatched_patients_backup
 
 
 
+## ---- matching-loop
 #Time to set up the matching loop
 
 #Initial the loop control

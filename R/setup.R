@@ -1,5 +1,6 @@
 # This file contains definitions of comorbidities, "magic numbers", etc.
 
+## ---- libraries
 # Libraries necessary for the analysis
 
 #Data management libraries
@@ -30,6 +31,7 @@ library(broom)
 library(broom.mixed)
 library(multcomp)
 
+## ---- constants
 #Constants
 censor_date<-as.Date("2022-01-01")
 minimum_followup<-1 #Minimum followup in days
@@ -41,6 +43,7 @@ baseline_months_cost<-3 #N
 full_months <- -baseline_months_cost:11 #Range of months for longitudinal analysis
 
 
+## ---- icd-code-lists
 #Create list of ICD9 and ICD10 codes for cryptococcus
 cryptococcus_ICD_list<-c("1175", "3210", "B450", "B451", "B452", "B453", "B457", "B458", "B459", "B45")
 

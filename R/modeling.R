@@ -1,5 +1,8 @@
 # Statistical modeling of cost data
 
+temp_formula <- list()
+fit <- list()
+
 for (outcome in c("grand_total_cost_month", "IN_CLM_month_total", "PS_REV_month_total", "IN_CLM_month_groupedHomeHealth",
                   "IN_CLM_month_groupedHospice","IN_CLM_month_groupedNonclaimauxiliary","IN_CLM_month_groupedDialysis",
                   "IN_CLM_month_groupedOutpatient","IN_CLM_month_groupedInpatient","IN_CLM_month_groupedSkilledNursingFacility")){

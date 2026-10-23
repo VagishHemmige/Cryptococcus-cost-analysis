@@ -2,6 +2,7 @@
 
 source("R/setup.R")
 
+## ---- load-usrds-files
 #Import core demographics from "patients" file
 patients_raw<-usRds::load_usrds_file("patients")%>%
   select(-ZIPCODE) #This is ZIP code at time of USRDS initiation, but we want at time of crypto dx
@@ -45,6 +46,7 @@ tx_status<-tx_clean%>%
   arrange(USRDS_ID, cumulative_transplant_total, event_date, graft_status)
 
 
+## ---- initialize-flowchart
 #Initialize a flowchart cohort
 patients_clean<-patients_raw%>%
   as_fc(label="Patients in USRDS")%>%
@@ -62,6 +64,7 @@ patients_clean<-patients_raw%>%
 
 
 
+## ---- comorbidities-medicare
 #Create list of USRDS ids for patients who have undergone transplant
 transplant_id_list<-patients_clean$data%>%
   pull(USRDS_ID)
@@ -112,6 +115,7 @@ cryptococcus_df<-comorbidity_diagnosis_date$cryptococcus%>%
 
 
 
+## ---- develop-flowchart
 #Join cryptococcus date to fc cohort
 patients_clean$data<-left_join(patients_clean$data, 
                                cryptococcus_df)%>%
@@ -172,6 +176,7 @@ patients_merged2%>%
   fc_draw()
 
 
+## ---- time-varying-cohort
 #Now we need to construct the time-varying data set
 
 #Ungroup
