@@ -11,6 +11,7 @@ author:
 website:
   site-url: https://vagishhemmige.github.io/Cryptococcus-cost-analysis
   repo-url: https://github.com/VagishHemmige/Cryptococcus-cost-analysis
+  repo-branch: master
   repo-actions: [edit, issue]
   title: "Cryptococcus post-transplant cost"
 
