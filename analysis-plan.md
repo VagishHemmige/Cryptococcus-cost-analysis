@@ -1,289 +1,153 @@
-# Statistical Analysis Plan: Medicare Costs of Cryptococcosis After Kidney Transplant
+# Analysis plan: Potential missed opportunities for diagnosis of cryptococcosis among kidney transplant recipients using USRDS
 
-**Version:** 0.1 (draft) · **Date:** 2026-10-23 · **Author:** Vagish Hemmige
+- **Version:** 0.2 (draft for review)
+- **Date:** 2026-10-24
+- **Reporting frameworks:** STROBE and RECORD. Bracketed references indicate applicable reporting elements, not methodological validation.
+- **Repository:** https://github.com/VagishHemmige/Cryptococcus-missed-diagnosis-USRDS
+- **Status:** Prespecified design decisions are recorded below. Outstanding items marked **[VERIFY]** or **[TO FINALIZE]** must be resolved before analyses dependent on them are examined. Any subsequent changes should be entered in the change log.
 
-This plan states the intended design and analysis. It does not describe the current state of the code; implementation status is tracked separately. Items marked **Decision D*n*** are intended choices not yet made; they are collected in [Open decisions](#13-open-decisions).
+## 1. Title, data source, and overview [S1, R1]
 
-Reporting will follow STROBE, its RECORD extension for routinely collected health data, and, for the target-trial sensitivity analysis, the TARGET guideline. The [reporting map](#12-reporting-map) links each checklist item to a section of this plan.
+This retrospective claims-based study will identify potential missed diagnostic opportunities before the first observed cryptococcosis diagnosis among kidney transplant recipients in the United States Renal Data System (USRDS). It will use linked USRDS demographic, transplant, payer-history, residence, facility, inpatient (IN), and physician/supplier (PS) data. The primary analysis describes encounters within 90 days before the first observed diagnosis. Secondary analyses evaluate all-cause mortality and geographic associations.
 
----
+The existing repository extracts IN and PS claims from **2006–2021**; these are extraction years rather than an independently verified final accrual period. **[VERIFY]** USRDS release, exact availability by claims source, calendar-year coverage, and feasible beginning/end dates for case accrual. The study's data linkage, source populations, and selection flow will be reported under RECORD.
 
-## 1. Objective
+## 2. Background and rationale [S2]
 
-To estimate the excess Medicare payments attributable to cryptococcosis in the 12 months after diagnosis among adult kidney transplant recipients, compared with similar recipients at the same time since transplant who have not been diagnosed.
+Cryptococcosis is a potentially severe infection in kidney transplant recipients. Preceding encounters for neurologic, respiratory, or nonspecific infectious manifestations, or associated diagnostic procedures, may be identifiable in administrative claims. Published cryptococcosis missed-opportunity studies provide a starting point for the diagnostic phenotype and 90-day prediagnosis window. This study expands assessment to USRDS IN and PS claims and distinguishes newly recorded symptom/condition categories from previous documentation.
 
-**Secondary objectives**
+An encounter meeting the algorithm represents a **claims-based potential missed opportunity**, not an adjudicated diagnostic error. Claims cannot establish symptom onset, prove that cryptococcosis was clinically recognizable at that encounter, or measure the actual duration of diagnostic delay.
 
-- Describe the month-by-month profile of excess cost from 3 months before to 12 months after diagnosis.
-- Partition excess cost by care setting (inpatient, outpatient, skilled nursing, home health, hospice, dialysis, physician/supplier).
+**[TO FINALIZE]** Full clinical-background citations and source-study bibliographic details prior to manuscript submission.
 
-## 2. Design
+## 3. Objectives and estimands [S3, S7]
 
-Retrospective cohort study in linked registry and claims data, using **risk-set (incidence density) matching**. Each case is matched, at the time since transplant when they are diagnosed, to controls who are still at risk and undiagnosed at that same time.
+**Primary objective:** Estimate the proportion of eligible recipients with at least one potential missed diagnostic opportunity in days −90 through −1 before the first observed cryptococcosis diagnosis. Report diagnosis-based, procedure-based, and combined opportunities separately; additionally describe numbers of distinct encounters, clinical categories, and elapsed time from earliest qualifying encounter to index.
 
-**Decision D10:** the matching method — direct covariate matching, or matching on a time-varying propensity score ([Section 6](#6-matching)).
+**Secondary objectives:** (1) Estimate the association between at least one potential missed opportunity and 90-day all-cause mortality; (2) estimate associations of rural versus urban residence and continuous distance to the transplant center with having at least one potential missed opportunity.
 
-A **sequential target-trial emulation** with propensity-score weighting is the planned main sensitivity analysis ([Section 9](#9-sensitivity-analyses); protocol in [Appendix A](#appendix-a-target-trial-protocol)). It requires a propensity score model whichever matching method is chosen.
+**Additional mortality endpoints:** 30-day and 365-day all-cause mortality. **Exploratory:** Graft outcomes, subject to defensible definition and sufficient follow-up.
 
-## 3. Data source
+The mortality analysis is associational, not a causal effect estimate for diagnostic delay.
 
-- **United States Renal Data System (USRDS)** standard analysis files, accessed under a data use agreement through the `usRds` R package.
-  - Core files: patients, transplant (TX), payer history (PAYHIST), treatment history (RXHIST), death.
-  - Transplant files linked from OPTN/UNOS transplant recipient registration (TRR) records for kidney and kidney–pancreas recipients.
-  - Medicare Parts A and B claims: institutional claims and revenue-center lines, and physician/supplier claims. Part D prescription events where a covariate requires them.
-- **Linkage:** USRDS links CMS and OPTN records to a single USRDS patient identifier. The study uses this linkage as supplied; no further linkage is performed.
-- **Period:** claims 2006–2021; incident cryptococcosis 2007–2020; administrative end of follow-up 2022-01-01.
-- **Geography:** United States.
+## 4. Design and setting [S4–S5]
 
-## 4. Study population
+A retrospective cohort of kidney transplant recipients with a first observed qualifying post-transplant cryptococcosis episode, using claims before index to ascertain potential missed diagnostic opportunities and USRDS mortality information after index. No noncryptococcosis matched control group is required for the primary analysis. All eligible cases constitute its denominator.
 
-### 4.1 Source population
+**Index date (day 0):** Earliest observed cryptococcosis diagnosis claim (IN or PS) among patients who ultimately meet the case-confirmation algorithm. Case-confirmation date may be later than index. A prior isolated cryptococcosis-coded PS encounter can establish the index date even if a later encounter confirms eligibility. The implication of arbitrarily distant confirmatory events will be evaluated in sensitivity analysis. **[VERIFY]** Assign clinically appropriate IN dates and determine relationship between claim-level `CLM_FROM`, admission, and discharge dates.
 
-Kidney transplant recipients in USRDS with a transplant before 2021.
+## 5. Participants, selection, and follow-up [S6, S13, R6, R13]
 
-### 4.2 Eligibility at time zero (cases and controls alike)
+Selection will be recorded as a flowchart with counts remaining at each step:
 
-At the risk-set time ([Section 5.3](#53-time-zero)), a person is eligible if they:
+1. Start with USRDS patient records and identify recipients with at least one kidney transplant.
+2. Search available IN and PS diagnoses for cryptococcosis, including pretransplant history, using any available diagnosis position.
+3. Confirm case status by **either one inpatient hospitalization** coded for cryptococcosis **or two distinct PS clinical encounters** coded for cryptococcosis **within 30 calendar days**. Multiple PS claim lines within one clinical encounter cannot satisfy this criterion.
+4. Set index to the earliest observed cryptococcosis claim in a confirmed case, including an earlier isolated PS code.
+5. Exclude patients whose **first observed cryptococcosis diagnosis is before their first kidney transplant**. Do not use a transplant occurring after index to retroactively exclude a qualifying earlier episode. Only the first observed eligible episode per recipient enters the cohort.
+6. Require the index to occur after kidney transplantation, with transplant characteristics and time since transplantation derived from the **most recent kidney transplant preceding index**.
+7. Require continuous eligible Medicare fee-for-service (FFS) primary coverage from day −365 through day 0. Use the longitudinal payer-history file; merge overlapping or adjacent eligible coverage spells without allowing uncovered days.
+8. Exclude records with invalid critical chronology or insufficient claims observability, applying documented rules.
 
-1. Have had at least one kidney transplant before that date.
-2. Are aged 18 or older.
-3. Have no prior cryptococcosis diagnosis.
-4. Have Medicare fee-for-service as primary payer for both Part A and Part B for the 365 days before time zero, without gaps, so that baseline covariates and baseline cost are fully observed. **Decision D1:** whether Medicare as secondary payer or other payer categories are ever eligible.
-5. Are alive and under observation on that date.
+Recipients remain eligible regardless of graft function at diagnosis or return to dialysis. Graft status is descriptive; restriction to functioning grafts is a sensitivity analysis. Residence, center location, or other geographic missingness does **not** exclude a recipient from the main cohort or mortality analysis.
 
-### 4.3 Index transplant
+**[VERIFY]** The current repository accepts both USRDS payer categories `MPAB` (Medicare FFS primary for both Parts A and B) and `MPO` (Medicare FFS primary for other). Both were previously selected for the study, but `MPO` does not affirm both A/B parts. Validate with documentation applicable to the actual USRDS release, report the operational definition honestly, and prespecify an MPAB-only sensitivity analysis. Exclude Medicare Advantage and Medicare-secondary periods from eligible FFS-primary spells.
 
-The time scale is time since the **most recent** kidney transplant before time zero. Retransplant recipients are eligible; prior transplants enter as covariates. **Decision D2:** inclusion of kidney–pancreas and other multi-organ recipients (exclude, or include with an indicator).
+The first *observed* diagnosis is not necessarily incident disease. Available claims may not reveal cryptococcosis outside the observable period or payer system. **[TO FINALIZE]** Rules for contradictory transplant and diagnosis dates, same-day transplantation, and differences between initial isolated codes and much later confirmatory episodes.
 
-## 5. Exposure and time zero
+## 6. Linkage and clinical covariates [S7, S8, R6.3, R12.3]
 
-### 5.1 Exposure definition
+Use the USRDS patient identifier to link patient, transplantation, coverage, residence-history, IN, and PS data. For transplant-center geography, use the center assigned to the most recent transplant before index and year-appropriate facility information. Select the residence interval containing the index date. Confirm the expected number of matches for each person-date or person-transplant linkage; diagnose rather than silently discard overlapping or duplicate records. Report linkage completeness and any nonunique mappings.
 
-Incident cryptococcosis, identified from ICD-9-CM and ICD-10-CM diagnosis codes on Medicare institutional or physician/supplier claims. The full code list is published as a supplementary table.
+Covariates for the principal mortality model: age at index, sex, time since most recent transplant, calendar year, and four targeted comorbidities—**diabetes mellitus, HIV infection, chronic liver disease, and malignancy**.
 
-**Decision D3:** the claim algorithm, meaning the claim types and diagnosis positions accepted and the number of claims required (for example, one inpatient claim, or two outpatient claims within a set window). The choice will cite any available validation literature for fungal infection codes in claims.
+For each comorbidity, ascertain documentation during **days −365 through −91**. Classify as documented if at least one IN hospitalization or at least two distinct PS encounters contain relevant diagnosis codes in any available diagnosis position during this fixed period. Two PS encounters may occur anywhere within the period; identical codes are not required if they belong to the same comorbidity definition. Otherwise classify as *not documented* if claims were observable. This is not evidence of clinical absence. Missing denotes genuinely unknown or uninterpretable status, not lack of a qualifying code.
 
-### 5.2 Diagnosis date
+Describe baseline utilization (numbers of distinct inpatient hospitalizations and PS encounters during days −365 through −91) by opportunity status, but **do not include utilization as a covariate in mortality models**. Varying encounter frequency is a possible surveillance-bias source notwithstanding regular transplant follow-up.
 
-The service date of the first qualifying claim.
+## 7. Diagnosis and procedure phenotype [S8, R7.1]
 
-### 5.3 Time zero
+Case-identifying cryptococcosis codes and candidate neurologic, pulmonary, infectious, and diagnostic-procedure categories are maintained in the repository. These lists will be clinically reviewed against source literature and official code definitions appropriate to each year before the corresponding implementation is finalized. Detailed individual code enumeration is outside this plan; publish the finalized code lists and matching rules as reproducible supplementary methodological material.
 
-- **Cases:** the diagnosis date.
-- **Controls:** the date on which the control reaches the same number of days since their most recent transplant as the case had at diagnosis.
+Use ICD-9-CM and ICD-10-CM diagnosis codes, ICD-9-CM Volume 3 and ICD-10-PCS institutional procedure codes, and clinically relevant CPT/HCPCS procedures in PS claims, as appropriate. Verify code system and effective date for each source: do not classify cross-transition inpatient hospitalizations solely from the claim start date. Verify available diagnosis positions, exact/prefix matching, leading zeros, decimals, valid category versus billable codes, and whether procedure fields correspond to the intended clinical action. Clinical judgment is required for ICD-9/ICD-10 mappings; automated crosswalks alone are insufficient.
 
-Eligibility, covariates and baseline cost are measured as of time zero, using only information available before it.
+Cryptococcosis diagnosis codes cannot independently count as missed-opportunity symptoms or conditions. The prediagnosis clinical-category and procedure lists will be finalized without reviewing dependent effect estimates. **[VERIFY]** Claims and historical code-system availability for the specific USRDS release.
 
-### 5.4 Control eligibility
+## 8. Prediagnosis periods [S6, S7]
 
-Any person meeting [Section 4.2](#42-eligibility-at-time-zero-cases-and-controls-alike) at the case's risk-set time is eligible, **including people who are diagnosed with cryptococcosis later**. Their time before diagnosis is unexposed time. Excluding them would condition on the future.
+All times are relative to index day 0:
 
-**Decision D4:** whether a person may serve as a control in more than one risk set (sampling with replacement across risk sets, as in standard incidence density sampling) or at most once.
-
-## 6. Matching
-
-### 6.1 Common elements
-
-Whichever method is chosen under D10:
-
-- **Exact matching** on current graft status (functioning, or failed and on dialysis).
-- **Ratio:** up to 2 controls per case.
-- **Order:** cases are matched in a random order fixed by a recorded seed. Ties among controls are broken at random using the same seed.
-- **Pre-period cost:** months −3 to −1 are **not** used for matching. They are kept to check balance on pre-diagnosis cost (Daw and Hatfield, *Health Services Research* 2018).
-
-### 6.2 Covariates
-
-These are the confounders the design must address. Under Option A ([Section 6.3](#63-option-a-direct-covariate-matching)), a subset is matched on directly and the rest are checked for balance. Under Option B ([Section 6.4](#64-option-b-time-varying-propensity-score-matching)), all enter the score. All are measured before time zero.
-
-| Domain | Covariates |
-|---|---|
-| Demographics | Age, sex, race and ethnicity, calendar year |
-| Transplant | Time since transplant (the time scale), donor type (living or deceased), retransplant and number of prior transplants, cause of kidney failure, time on dialysis before transplant, induction regimen |
-| Graft function | Current graft status (functioning, or failed and on dialysis) |
-| Immunosuppression intensity | Rejection treatment in the prior 3–6 months; maintenance regimen where observable |
-| Comorbidity | Diabetes, cirrhosis, HIV, other solid organ transplant, a claims-based comorbidity index |
-| Other infections | CMV, BK virus, *Pneumocystis* pneumonia, other invasive fungal infection, sepsis |
-| Prior use of care | Hospital admissions, emergency visits, skilled nursing days in the prior year |
-| Prior cost | Medicare payments in months −12 to −4, as a smoothed measure (mean or log of monthly cost) |
-| Payer and place | Medicaid dual eligibility, region |
-
-Each covariate's code list or registry field will be specified and published before analysis. **Decision D5:** the lookback window for rejection treatment, and the comorbidity index (Charlson or Elixhauser).
-
-### 6.3 Option A: direct covariate matching
-
-- Exact matching on diabetes, cirrhosis and HIV status, in addition to graft status.
-- Calipers on age (±10 years) and calendar time (±3 years).
-- Among eligible controls, the closest on smoothed prior cost (months −12 to −4) is chosen first.
-- The remaining covariates in Section 6.2 are checked for balance and, if imbalanced, adjusted for in the outcome model.
-
-**Strength:** simple to explain and to reproduce. **Weakness:** exact matching becomes sparse as matching factors are added, so few of the covariates in Section 6.2 can be matched on directly.
-
-### 6.4 Option B: time-varying propensity score matching
-
-- A time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months (or, equivalently, a Cox model with time-varying covariates). Each person-interval's linear predictor is its score at that time (Lu, *Biometrics* 2005).
-- All covariates in Section 6.2 enter the score.
-- Controls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit (Austin 2011).
-- **Decision D6:** whether to keep the hard calipers on age and calendar time from Option A on top of the score.
-
-**Strength:** balances many covariates at once, and the same score model serves the target-trial sensitivity analysis. **Weakness:** depends on a correctly specified score model and is harder to explain.
-
-### 6.5 Matching outcomes reported
-
-- The number of cases with 2, 1 and 0 matched controls.
-- The characteristics of unmatched cases compared with matched cases.
-
-## 7. Outcome
-
-### 7.1 Cost measure
-
-**Medicare paid amounts** (not charges) from institutional claims and physician/supplier claims. Institutional claims spanning several days are prorated evenly across days of service.
-
-### 7.2 Inflation adjustment
-
-All costs are expressed in January 2021 US dollars. **Decision D7:** the price index (for example, the medical care component of the CPI-U, or the PCE health price index).
-
-### 7.3 Person-month structure
-
-- Each person's follow-up is divided into 30-day months relative to time zero, from month −3 (days −90 to −61) through month 11 (days 330 to 359).
-- Each person-month's cost is the sum of prorated, inflation-adjusted payments for services in that month.
-- Partial months are kept, with the number of observed days recorded as exposure.
-- A month with Medicare coverage and no claims has a cost of zero. A month without qualifying coverage is not observed; it is never recorded as zero cost.
-
-### 7.4 End of follow-up
-
-Follow-up ends at the earliest of:
-
-- day 365 after time zero;
-- death;
-- loss of Medicare fee-for-service primary coverage for Parts A and B;
-- the administrative end date, 2022-01-01.
-
-Graft failure after time zero does not end follow-up; it is an outcome pathway, not a censoring event.
-
-**Decision D8:** the treatment of death, which defines the estimand. In option (a), cost accrues only while alive, and death ends follow-up. In option (b), months after death count as zero cost, so the estimand includes the cost consequences of mortality. Whichever is primary, the other is a sensitivity analysis.
-
-## 8. Statistical analysis
-
-### 8.1 Descriptive analysis
-
-- A cohort flow diagram from the source population through eligibility, case identification, and matching.
-- Baseline characteristics at time zero, by group, before and after matching.
-
-### 8.2 Balance
-
-- Standardized mean differences at time zero for every covariate in [Section 6.2](#62-covariates), and for cost in months −3, −2 and −1.
-- An absolute standardized mean difference below 0.1 is considered adequate balance.
-- Balance on months −3 to −1, which were not matched on, is reported as a check on residual confounding.
-
-### 8.3 Estimand
-
-The **average treatment effect in the treated (ATT)**: the mean difference in total Medicare payments over months 0–11 between cases and their matched controls, per case.
-
-### 8.4 Primary model
-
-- Person-month cost is modelled with a generalized linear model with log link and Tweedie variance, including group, month (as a categorical variable), and their interaction, with log observed days as an offset.
-- Standard errors are estimated with generalized estimating equations clustered on matched set; robust standard errors also cluster on patient if [D4](#13-open-decisions) allows a person in more than one set.
-- **Retransformation to dollars:** predicted monthly cost for each group is computed at a full 30-day month by recycled predictions. The ATT is the sum of case-minus-control differences over months 0–11.
-- Confidence intervals come from a cluster bootstrap that resamples matched sets (1,000 replicates, or more if needed for stability).
-- **Decision D9:** whether the primary estimate subtracts the pre-period difference (months −3 to −1), giving a difference-in-differences, or relies on matching alone with the pre-period reported as a balance check.
-
-### 8.5 Secondary analyses
-
-- The month-by-month excess cost profile for months −3 to 11, from the primary model.
-- Excess cost by care setting, using the same model on each setting's cost.
-
-### 8.6 Missing data
-
-- Cost outcomes are observed only during covered months, by design ([Section 7.3](#73-person-month-structure)).
-- For covariates with missing registry values, missingness is described. If it exceeds 5% for any covariate in the score, multiple imputation by chained equations is used, with the score estimated within each imputation.
-
-### 8.7 Software
-
-Analyses are run in R. Code is public at https://github.com/VagishHemmige/Cryptococcus-cost-analysis, and a website at https://vagishhemmige.github.io/Cryptococcus-cost-analysis documents each step. Data are not shared, as the data use agreement requires.
-
-## 9. Sensitivity analyses
-
-1. **Sequential target-trial emulation** ([Appendix A](#appendix-a-target-trial-protocol)). Monthly trials of everyone eligible, with the newly diagnosed as the exposed group. The comparison group is weighted by propensity odds (ATT weights), trials are pooled, and robust standard errors are clustered on patient. Weights are truncated at the 1st and 99th percentiles, with untruncated results also reported.
-2. **Alternative death handling:** the option in D8 not chosen as primary.
-3. **Alternative outcome models:** Gaussian identity-link and log-cost models, to show sensitivity to distributional assumptions.
-4. **Alternative exposure algorithm:** a stricter claims definition than D3 (for example, requiring an inpatient claim), to address misclassification.
-5. **Matching variations:** a 1:1 ratio; exact matching on CMV status; under Option B, a caliper of 0.1 standard deviations. The matching method not chosen under D10 may also be run as a sensitivity analysis.
-6. **Restriction to first transplant** recipients.
-7. **Pre-2015 and 2015-or-later** diagnoses, to check stability across the ICD-9-CM to ICD-10-CM transition (October 2015).
-
-## 10. Disclosure control
-
-- No cell with a count under 11 is reported in any table, figure, or text, including flow diagrams and website pages. Complementary cells are suppressed where they would allow a small count to be derived.
-- Figures that show individual-level data (for example, beeswarm or scatter plots) are not published.
-- All outputs are reviewed against the USRDS data use agreement before release.
-
-## 11. Limitations to address in reporting
-
-- Claims-based diagnoses carry misclassification of both exposure and covariates.
-- Costs are Medicare payments only; patient cost-sharing, other payers, and Part D are excluded unless Part D is added.
-- Restricting to Medicare fee-for-service primary coverage limits generalizability to recipients with other primary payers or Medicare Advantage.
-- Confounding by unmeasured immunosuppression intensity may remain despite the covariates in Section 6.2.
-- Coverage requirements depend on eligibility rules that change over time, such as the end of Medicare entitlement 36 months after a successful transplant for patients without another qualifying reason.
-
-## 12. Reporting map
-
-| Checklist item | Topic | Plan section |
+| Period | Days (inclusive) | Role |
 |---|---|---|
-| STROBE 1 / RECORD 1.1–1.3 | Title, abstract, data type, region and period, linkage | 3 |
-| STROBE 2–3 | Background, objectives | 1 |
-| STROBE 4 | Study design | 2 |
-| STROBE 5 | Setting, dates | 3 |
-| STROBE 6 / RECORD 6.1–6.3 | Eligibility, selection codes and algorithms, validation, linkage | 4, 5 |
-| STROBE 6b | Matching criteria and number of controls | 6 |
-| STROBE 7 / RECORD 7.1 | Variables, with complete code lists | 5, 6.2, 7 |
-| STROBE 8 | Data sources and measurement | 3, 7 |
-| STROBE 9 | Bias | 5.4, 6, 9, 11 |
-| STROBE 10 | Study size | 6.5, 8.1 |
-| STROBE 11 | Quantitative variables | 6.2, 7 |
-| STROBE 12 / RECORD 12.1–12.3 | Statistical methods, data access, cleaning, linkage | 3, 8 |
-| STROBE 12d | Matching taken into account in analysis | 8.4 |
-| STROBE 12e | Sensitivity analyses | 9 |
-| STROBE 13 / RECORD 13.1 | Participants, flow diagram | 8.1 |
-| STROBE 14–17 | Descriptive data, outcomes, main and other results | 8 |
-| STROBE 18–21 | Discussion, limitations, interpretation, generalizability | 11 |
-| RECORD 19.1 | Limitations of routinely collected data | 11 |
-| STROBE 22 / RECORD 22.1 | Funding; access to protocol, code and supplementary material | 8.7 |
-| TARGET | Target-trial emulation | 9, Appendix A |
+| Fixed prior symptom history | −365 to −91 | Determine whether qualifying clinical diagnosis categories were previously documented; ascertain baseline comorbidities and utilization |
+| Primary opportunity window | −90 to −1 | Identify potential missed opportunities |
+| Nested sensitivity window | −60 to −1 | Repeat opportunity analyses in same cohort |
+| Nested sensitivity window | −30 to −1 | Repeat opportunity analyses in same cohort |
+| Index | 0 | First observed cryptococcosis diagnosis |
 
-## 13. Open decisions
+All windows use the same eligible cohort and the **same fixed history period**. Prior symptoms are assessed at the *clinical-category* level: a different code in an already documented category is not newly recorded. “Newly recorded” is a claims observation, not proof of new clinical onset. Qualifying procedures need **not** be new and can occur more than once, including when a similar procedure was recorded previously.
 
-| ID | Decision | Section |
-|---|---|---|
-| D1 | Eligible payer categories beyond Medicare fee-for-service primary for Parts A and B | 4.2 |
-| D2 | Inclusion of kidney–pancreas and other multi-organ recipients | 4.3 |
-| D3 | Claim algorithm for cryptococcosis: claim types, diagnosis positions, number of claims | 5.1 |
-| D4 | Controls in more than one risk set, or at most once | 5.4 |
-| D5 | Rejection-treatment lookback window; comorbidity index | 6.2 |
-| D6 | Under Option B, hard calipers on age and calendar time in addition to the score | 6.4 |
-| D7 | Price index for inflation adjustment | 7.2 |
-| D8 | Death: end of cost accrual, or zero cost after death | 7.4 |
-| D9 | Primary estimate as matched difference, or difference-in-differences | 8.4 |
-| D10 | Matching method: direct covariate matching (Option A) or time-varying propensity score (Option B) | 2, 6 |
+A claim's date alone does not establish its encounter boundary. **[VERIFY]** Date attribution for IN admissions, PS services, and claims overlapping the index date.
 
-## Appendix A: Target-trial protocol
+## 9. Potential missed-opportunity algorithm [S8, S12]
 
-| Component | Target trial | Emulation |
-|---|---|---|
-| Eligibility | Adult kidney transplant recipients, no prior cryptococcosis, 12 months of Medicare fee-for-service primary Parts A and B coverage | Same criteria, applied at the start of each monthly trial |
-| Treatment strategies | Develop cryptococcosis in month *t*, or not | Diagnosis in month *t* (exposed) versus no diagnosis in month *t* (comparison) |
-| Assignment | Not randomizable; the trial is hypothetical | Exchangeability approximated by ATT weights from a propensity score with the covariates in Section 6.2 |
-| Time zero | Start of month *t* | Start of each monthly trial; aligned with eligibility and exposure |
-| Follow-up | 12 months, ending as in Section 7.4 | Same |
-| Outcome | Medicare payments over months 0–11 | Same as Section 7 |
-| Causal contrast | Effect in those who develop cryptococcosis (ATT) | Weighted difference pooled across trials |
-| Analysis | — | Weighted model as in Section 8.4; robust standard errors clustered on patient, because people appear in several trials |
+**Unit of analysis for counting:** Distinct clinical encounters, not claim lines or diagnosis codes.
 
-## References
+**Diagnosis-based pathway:** An otherwise eligible encounter in the opportunity window has at least one qualifying diagnosis in a clinical category **absent during the fixed −365 to −91 history**.
 
-- von Elm E, et al. The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) statement. *PLoS Med* 2007.
-- Benchimol EI, et al. The REporting of studies Conducted using Observational Routinely-collected health Data (RECORD) statement. *PLoS Med* 2015.
-- Cashin AG, et al. Transparent reporting of observational studies emulating a target trial: the TARGET statement. *JAMA* and *BMJ* 2025.
-- Lu B. Propensity score matching with time-dependent covariates. *Biometrics* 2005.
-- Daw JR, Hatfield LA. Matching and regression to the mean in difference-in-differences analysis. *Health Serv Res* 2018.
-- Austin PC. Optimal caliper widths for propensity-score matching. *Pharm Stat* 2011.
-- United States Renal Data System. *Researcher's Guide to the USRDS Database*, 2025.
+**Procedure-based pathway:** An otherwise eligible encounter contains at least one qualifying diagnostic procedure; a prior procedure in the same category does not disqualify the encounter.
+
+**Combined pathway:** An encounter meeting either definition qualifies. An encounter with multiple categories and/or procedures counts **once** in the combined encounter count, while contributing to all applicable category and pathway summaries. Separate subsequent encounters can qualify, including repeated procedures or the same qualifying category.
+
+**Index diagnostic episode:** Exclude the entire index hospitalization and PS services associated with it. For a documented direct transfer into the index hospitalization, treat the transferring and receiving hospitalization(s) as one continuous diagnostic episode and exclude the full episode. Earlier, separate completed encounters remain eligible if temporally and clinically qualifying. For PS-index cases, identify and exclude an associated hospitalization where applicable; do not automatically designate a later hospitalization as the index hospitalization.
+
+Combine PS claims associated with an inpatient stay rather than double-counting them. Deduplicate PS claim lines into distinct clinical encounters using defensible identifiers and service dates; different services on the same calendar date are not necessarily one encounter. Verify admission/discharge boundaries, direct-transfer indicators, and professional/institutional overlaps. **[TO FINALIZE BEFORE IMPLEMENTATION]** Encounter-grouping rules in edge cases where exact linkage is unavailable; transfer-identification validation.
+
+Report the proportion of cases with any diagnosis-based, any procedure-based, and either type of opportunity; number of distinct opportunities per patient; category distributions; and days from earliest qualifying opportunity to index. This elapsed time is **not** a clinically measured diagnostic delay. Summarize the nested 30/60-day estimates using identical phenotype and counting rules.
+
+## 10. Mortality outcomes and statistical plan [S10, S12]
+
+The principal secondary outcome is **90-day all-cause mortality** after index. Additional outcomes are **30-day and 365-day all-cause mortality**. Follow from index until death, known administrative end of death ascertainment, or the horizon. Do **not** require survival through the outcome window for eligibility. Loss of Medicare FFS coverage does not automatically imply loss of USRDS death ascertainment; verify the death-data follow-up mechanisms and last observable dates. The outcome window should not extend beyond reliable mortality ascertainment without appropriate censoring.
+
+Use Kaplan–Meier estimates, with absolute estimated mortality risk and 95% intervals at each horizon, stratified by any potential missed opportunity. The principal adjusted association uses a Cox proportional hazards model with the prespecified covariates in section 6 and exposure of any qualifying opportunity during days −90 to −1. Report adjusted hazard ratios and 95% confidence intervals. Check proportional hazards (including Schoenfeld residuals), functional forms for continuous covariates, influential observations, sparse events, and overfitting. Do not select covariates solely because of p values; if deaths are too few for the full model, document a prespecified or explicitly labeled simplified analysis rather than a data-driven model.
+
+The exposure is classified from the pre-index window and fixed at index, so the risk period begins only after exposure ascertainment. Nonetheless, selection on confirmed cryptococcosis, survival until index, encounter frequency, and earlier care pathways may bias associations. Avoid adjusting for clinical findings first documented during the pre-index opportunity period or index hospitalization as if they were baseline confounders. Interpret adjusted associations cautiously; they do not demonstrate preventable mortality from diagnostic delay.
+
+**[TO FINALIZE]** Confidence-interval methods for primary proportions and encounter counts, and details of any mortality analyses beyond the principal Cox model. **[VERIFY]** Date-of-death and follow-up coverage for 30/90/365-day horizons.
+
+## 11. Geographic secondary objectives [S7, S12]
+
+Use the patient’s residential ZIP code **at index**, from USRDS residence history, for both exposures. Patients with missing geography remain in nongeographic analyses.
+
+**Rurality:** Use ZIP-code-based Rural–Urban Commuting Area (RUCA) classifications, with primary urban versus rural grouping based on primary RUCA codes **1–3 versus 4–10**, respectively. Assign a **period-appropriate RUCA version based on index year**, documenting release dates, mappings across study years, ZIP linkage method, and unmatched ZIPs. RUCA releases are not necessarily annual. **[VERIFY]** Historical versions and applicable ZIP crosswalks before geographic implementation.
+
+**Distance:** Straight-line distance (miles) from residence ZIP centroid to the transplant center for the **most recent kidney transplant before index**; not driving distance or travel time. Model as continuous distance, reporting adjusted prevalence ratios for a **50-mile increase** and checking whether a nonlinear relation needs consideration. **[VERIFY]** Historical ZIP centroid data, facility geographic linkage, and geographic measurement method.
+
+For each formal geographic exposure separately, fit a modified Poisson model with robust standard errors for binary outcome of any opportunity within the 90-day window, adjusted for age, sex, time since most recent transplant, calendar year, diabetes, HIV, chronic liver disease, and malignancy, subject to adequate sample size and model diagnostics. Report adjusted prevalence ratios and 95% intervals. Analyze complete cases for variables required by each geographic model and disclose denominators and exclusions. Distance to the transplant center is an imperfect proxy for location of prediagnosis care.
+
+## 12. Missing information, bias, and sensitivity analyses [S9, S12c–e]
+
+Keep all otherwise eligible patients in descriptive and primary frequency analyses; use complete cases for adjusted models and report missing covariate frequency, model sample sizes, and observed differences between retained and excluded records. No imputation is prespecified. Absence of a code under continuous eligible coverage is defined as *not documented*, not a missing value or confirmed absence of disease.
+
+Prespecified sensitivity analyses include: primary 90-day versus nested 60- and 30-day windows; one cryptococcosis claim versus the confirmed definition; inpatient-only versus combined IN/PS case definitions; principal/first-listed cryptococcosis diagnoses versus any diagnosis position; functioning-graft restriction; MPAB-only payer-history restriction; and ICD-9 versus ICD-10 eras. Evaluate nonspecific symptom categories and possible prolonged direct-transfer encounters separately if the code list and ascertainment support those comparisons. Consider a confirmation-proximity restriction because a very early isolated PS cryptococcosis code can set the index despite much later confirmation. Record any added sensitivity analysis before viewing its results or explicitly label it post hoc.
+
+Main threats include left truncation of historical diagnoses, imperfect FFS claims capture, selection by payer and case confirmation, code-list misclassification, ICD transition differences, detection/surveillance bias, indistinguishable dates within admissions, geographic exposure measurement error, confounding by severity, sparse death counts, and missing information. None of the algorithms confirms diagnostic error.
+
+## 13. Data processing and reproducibility [R12, R22]
+
+Document release year, actual SAF filenames, functions used to load claims, exact variable definitions and formats, linkage cardinality, coverage-interval consolidation, encounter consolidation, handling of duplicates/overlaps, code-system transitions, and analysis software/package versions. Include a reproducible participant-flow diagram and sensitivity definitions. Repository code and nonrestricted algorithms may be made public; restricted USRDS patient-level data must not be published. The plan is for an **analysis project**, not an R package.
+
+Existing scripts `R/define_cohort.R` and `R/missed_diagnoses.R` are preliminary implementations and **do not yet implement all rules in this plan**. Changes to these files require separate approval and implementation, not merely adoption of this plan.
+
+## 14. Disclosure
+
+Follow applicable USRDS/CMS data-use restrictions. Do not publish counts of 1–10 or allow their derivation by subtraction or complementary cells, including in tables, flowcharts, figures, and prose. Check the exact disclosure language in the governing data-use agreement before dissemination.
+
+## 15. Open verification items and change log
+
+**Required before executing dependent analyses:** verify source release and claims availability; exact code-list matching and diagnosis/procedure fields; MPAB/MPO coverage interpretation; index-admission and transfer identification; encounter-level PS/IN deduplication; historical RUCA data and ZIP/center linkage; mortality follow-up; clinical code-list validation. Resolve remaining `[TO FINALIZE]` algorithm choices before examining their dependent results.
+
+| Date | Version | Decision/change | Rationale | Timing relative to dependent results |
+|---|---|---|---|---|
+| 2026-10-24 | 0.2 | Reconciled protocol with decisions in project discussion: confirmed case criteria; earliest observed index; transplant and prior-disease chronology; fixed history and opportunity periods; encounter grouping; procedure pathway; mortality and geographic analyses; missingness | Move from generic STROBE/RECORD scaffold to study-specific prespecification | Before implementation/review of dependent results, to be confirmed |
+
