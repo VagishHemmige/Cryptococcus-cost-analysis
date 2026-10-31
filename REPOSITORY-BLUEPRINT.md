@@ -16,7 +16,7 @@ repository/
   ├── references/              # Supporting literature and evidence
   ├── quarto/                  # Explanatory Quarto pages
   ├── _extensions/             # Quarto extensions, when used
-  ├── docs/                    # Example rendered website directory
+  ├── docs/                    # Local render of the website (ignored; published to gh-pages)
   ├── <project>.Rproj          # Optional RStudio project file
 ├── _quarto.yml              # Quarto configuration
 ├── index.qmd                # Website entry point

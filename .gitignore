@@ -6,6 +6,9 @@
 .quarto
 *.RData
 
+# Quarto. docs/ is the local render; GitHub Actions renders the site and
+# publishes it to the gh-pages branch (.github/workflows/publish.yml)
+/docs/
 /.quarto/
 /figures/
 /tables/
