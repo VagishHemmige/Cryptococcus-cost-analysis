@@ -62,8 +62,8 @@ The Quarto site documents the code. It does not run the analysis.
 
 - **Setup files:** `_quarto.yml` and `index.qmd` sit at the root. There is one page per pipeline script in `quarto/`, named after the script (for example, `quarto/create_cohort.qmd` for `R/create_cohort.R`). The `custom-callout` extension in `_extensions/` provides the `Rcode` callout.
 - **Showing code:** each page loads its script with `knitr::read_chunk("../R/<script>.R")` in a hidden chunk. It then shows each labelled section in a chunk with `#| eval: false`, with prose explaining what the section does and why. Pages link to the script on GitHub and to the scripts it depends on.
-- **Never evaluate analysis code in the site.** Pages must render without USRDS data. The rendered site therefore contains code and explanation only, never results.
-- **Rendering:** the site renders to `docs/` and is served by GitHub Pages. Re-render after changing a script's labels or a page's prose, and commit `docs/`.
+- **Never evaluate analysis code in the site.** Pages must render without USRDS data. The rendered site therefore contains code and explanation only, never results. The one exception is the Setup page, which runs the `constants` and `icd-code-lists` sections of `R/setup.R` and the tables that summarize them; those sections only define values and read nothing. No other section may run, and those two must never read data.
+- **Rendering:** the site renders to `docs/`, which is not committed. `.github/workflows/publish.yml` renders it on every pull request as a check and, on each push to `master`, publishes it to the `gh-pages` branch, which GitHub Pages serves. Render locally to preview a change to a script's labels or a page's prose, but do not commit the output.
 - **New scripts:** when you add a script, add its page and its sidebar entry in `_quarto.yml` in the same commit.
 - **Prose must match the code.** If a change alters what a section does, update that section's explanation in the same pull request.
 
@@ -227,8 +227,8 @@ Before opening a pull request, check the items below that apply to your change.
 
 - Does `ARCHITECTURE.md` still describe the scripts and the data flow?
 - Are the chunk labels unique, and does each script's Quarto page still find every label it uses?
-- Does every script have a Quarto page and a sidebar entry, and has `docs/` been re-rendered?
-- Are all site chunks `eval: false`?
+- Does every script have a Quarto page and a sidebar entry, and does the pull request's render check pass?
+- Are all site chunks `eval: false`, apart from the Setup page's `constants` and `icd-code-lists` sections and their summary tables?
 - Are new derived variables labelled?
 
 **Execution**

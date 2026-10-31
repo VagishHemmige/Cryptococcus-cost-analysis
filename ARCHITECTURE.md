@@ -11,7 +11,7 @@ The project estimates excess Medicare cost after cryptococcosis in kidney transp
 3. Turn each person's claims into an inflation-adjusted cost panel by month, from month −3 to month 11 around the index date.
 4. Fit cost models in which `patient_type × month` gives the case–control cost difference.
 
-A Quarto website in `quarto/` explains each script and displays its code in `eval: false` chunks. The site never runs the analysis. It is rendered to `docs/` and served by GitHub Pages.
+A Quarto website in `quarto/` explains each script and displays its code in `eval: false` chunks. The site never runs the analysis: the only script sections it runs are the Setup page's constants and ICD code lists, which define values and read nothing. It is rendered by `.github/workflows/publish.yml` and published to the `gh-pages` branch, which GitHub Pages serves; the local render in `docs/` is not committed.
 
 ## Script and Object Flow
 
@@ -206,13 +206,14 @@ flowchart LR
     Q --> REN
     QM --> REN
     IX[index.qmd] --> REN
-    REN --> DOCS[(docs/ — committed,<br/>served by GitHub Pages)]
+    REN --> DOCS[(gh-pages branch, rendered by<br/>GitHub Actions, served by GitHub Pages)]
 ```
 
 - Each page calls `knitr::read_chunk()` on its script, then shows sections by label. A script edit appears on the site at the next render, with no page edit.
 - `quarto/modeling.qmd` includes the whole script with `#| file:`, so it displays everything in `modeling.R`, including unused blocks.
 - `_quarto.yml` defines the sidebar, the `custom-callout` filter (the `Rcode` callout), and `output-dir: docs`.
-- `docs/` must be re-rendered and committed after any script or page change, or the live site goes stale.
+- `.github/workflows/publish.yml` renders the site on every pull request as a check and, on each push to `master`, renders it and publishes it to the `gh-pages` branch, so the live site follows every script or page change. `docs/` is the local render and is not committed.
+- The Setup page runs the `constants` and `icd-code-lists` sections of `R/setup.R` to build its summary tables; every other imported section is shown with `eval: false`.
 
 ## Configuration
 
