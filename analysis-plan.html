@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vagish Hemmige">
+
+<title>analysis-plan – Cryptococcus post-transplant cost</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-66ae90e4418e9d0ac3caa4b8c3bef75c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+div.callout-Rcode.callout {
+  border-left-color: pink;
+}
+div.callout-Rcode.callout-style-default > .callout-header {
+  background-color: rgb(from pink r g b / 13%);
+}
+div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
+  content: '💻';
+  background-image: none;
+}
+</style>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Cryptococcus post-transplant cost
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Cryptococcus post-transplant cost</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Background</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data loading and processing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/create_cohort.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Create cohort</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/execute_matching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Execute matching</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/postmatch_processing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Post-match processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Modeling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Code to create tables and figures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/figures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Figures</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#statistical-analysis-plan-medicare-costs-of-cryptococcosis-after-kidney-transplant" id="toc-statistical-analysis-plan-medicare-costs-of-cryptococcosis-after-kidney-transplant" class="nav-link active" data-scroll-target="#statistical-analysis-plan-medicare-costs-of-cryptococcosis-after-kidney-transplant">Statistical Analysis Plan: Medicare Costs of Cryptococcosis After Kidney Transplant</a>
+  <ul class="collapse">
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">1. Objective</a></li>
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design">2. Design</a></li>
+  <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source">3. Data source</a></li>
+  <li><a href="#study-population" id="toc-study-population" class="nav-link" data-scroll-target="#study-population">4. Study population</a>
+  <ul class="collapse">
+  <li><a href="#source-population" id="toc-source-population" class="nav-link" data-scroll-target="#source-population">4.1 Source population</a></li>
+  <li><a href="#eligibility-at-time-zero-cases-and-controls-alike" id="toc-eligibility-at-time-zero-cases-and-controls-alike" class="nav-link" data-scroll-target="#eligibility-at-time-zero-cases-and-controls-alike">4.2 Eligibility at time zero (cases and controls alike)</a></li>
+  <li><a href="#index-transplant" id="toc-index-transplant" class="nav-link" data-scroll-target="#index-transplant">4.3 Index transplant</a></li>
+  </ul></li>
+  <li><a href="#exposure-and-time-zero" id="toc-exposure-and-time-zero" class="nav-link" data-scroll-target="#exposure-and-time-zero">5. Exposure and time zero</a>
+  <ul class="collapse">
+  <li><a href="#exposure-definition" id="toc-exposure-definition" class="nav-link" data-scroll-target="#exposure-definition">5.1 Exposure definition</a></li>
+  <li><a href="#diagnosis-date" id="toc-diagnosis-date" class="nav-link" data-scroll-target="#diagnosis-date">5.2 Diagnosis date</a></li>
+  <li><a href="#time-zero" id="toc-time-zero" class="nav-link" data-scroll-target="#time-zero">5.3 Time zero</a></li>
+  <li><a href="#control-eligibility" id="toc-control-eligibility" class="nav-link" data-scroll-target="#control-eligibility">5.4 Control eligibility</a></li>
+  </ul></li>
+  <li><a href="#matching" id="toc-matching" class="nav-link" data-scroll-target="#matching">6. Matching</a>
+  <ul class="collapse">
+  <li><a href="#common-elements" id="toc-common-elements" class="nav-link" data-scroll-target="#common-elements">6.1 Common elements</a></li>
+  <li><a href="#covariates" id="toc-covariates" class="nav-link" data-scroll-target="#covariates">6.2 Covariates</a></li>
+  <li><a href="#option-a-direct-covariate-matching" id="toc-option-a-direct-covariate-matching" class="nav-link" data-scroll-target="#option-a-direct-covariate-matching">6.3 Option A: direct covariate matching</a></li>
+  <li><a href="#option-b-time-varying-propensity-score-matching" id="toc-option-b-time-varying-propensity-score-matching" class="nav-link" data-scroll-target="#option-b-time-varying-propensity-score-matching">6.4 Option B: time-varying propensity score matching</a></li>
+  <li><a href="#matching-outcomes-reported" id="toc-matching-outcomes-reported" class="nav-link" data-scroll-target="#matching-outcomes-reported">6.5 Matching outcomes reported</a></li>
+  </ul></li>
+  <li><a href="#outcome" id="toc-outcome" class="nav-link" data-scroll-target="#outcome">7. Outcome</a>
+  <ul class="collapse">
+  <li><a href="#cost-measure" id="toc-cost-measure" class="nav-link" data-scroll-target="#cost-measure">7.1 Cost measure</a></li>
+  <li><a href="#inflation-adjustment" id="toc-inflation-adjustment" class="nav-link" data-scroll-target="#inflation-adjustment">7.2 Inflation adjustment</a></li>
+  <li><a href="#person-month-structure" id="toc-person-month-structure" class="nav-link" data-scroll-target="#person-month-structure">7.3 Person-month structure</a></li>
+  <li><a href="#end-of-follow-up" id="toc-end-of-follow-up" class="nav-link" data-scroll-target="#end-of-follow-up">7.4 End of follow-up</a></li>
+  </ul></li>
+  <li><a href="#statistical-analysis" id="toc-statistical-analysis" class="nav-link" data-scroll-target="#statistical-analysis">8. Statistical analysis</a>
+  <ul class="collapse">
+  <li><a href="#descriptive-analysis" id="toc-descriptive-analysis" class="nav-link" data-scroll-target="#descriptive-analysis">8.1 Descriptive analysis</a></li>
+  <li><a href="#balance" id="toc-balance" class="nav-link" data-scroll-target="#balance">8.2 Balance</a></li>
+  <li><a href="#estimand" id="toc-estimand" class="nav-link" data-scroll-target="#estimand">8.3 Estimand</a></li>
+  <li><a href="#primary-model" id="toc-primary-model" class="nav-link" data-scroll-target="#primary-model">8.4 Primary model</a></li>
+  <li><a href="#secondary-analyses" id="toc-secondary-analyses" class="nav-link" data-scroll-target="#secondary-analyses">8.5 Secondary analyses</a></li>
+  <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data">8.6 Missing data</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">8.7 Software</a></li>
+  </ul></li>
+  <li><a href="#sensitivity-analyses" id="toc-sensitivity-analyses" class="nav-link" data-scroll-target="#sensitivity-analyses">9. Sensitivity analyses</a></li>
+  <li><a href="#disclosure-control" id="toc-disclosure-control" class="nav-link" data-scroll-target="#disclosure-control">10. Disclosure control</a></li>
+  <li><a href="#limitations-to-address-in-reporting" id="toc-limitations-to-address-in-reporting" class="nav-link" data-scroll-target="#limitations-to-address-in-reporting">11. Limitations to address in reporting</a></li>
+  <li><a href="#reporting-map" id="toc-reporting-map" class="nav-link" data-scroll-target="#reporting-map">12. Reporting map</a></li>
+  <li><a href="#open-decisions" id="toc-open-decisions" class="nav-link" data-scroll-target="#open-decisions">13. Open decisions</a></li>
+  <li><a href="#appendix-a-target-trial-protocol" id="toc-appendix-a-target-trial-protocol" class="nav-link" data-scroll-target="#appendix-a-target-trial-protocol">Appendix A: Target-trial protocol</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/master/analysis-plan.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content"><div class="quarto-title-block"><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+</div>
+
+
+<div class="quarto-title-meta-author column-body">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Vagish Hemmige <a href="mailto:vahemmig@montefiore.org" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Montefiore Medical Center/ Albert Einstein College of Medicine
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta column-body">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="statistical-analysis-plan-medicare-costs-of-cryptococcosis-after-kidney-transplant" class="level1">
+<h1>Statistical Analysis Plan: Medicare Costs of Cryptococcosis After Kidney Transplant</h1>
+<p><strong>Version:</strong> 0.1 (draft) · <strong>Date:</strong> 2026-10-23 · <strong>Author:</strong> Vagish Hemmige</p>
+<p>This plan states the intended design and analysis. It does not describe the current state of the code; implementation status is tracked separately. Items marked <strong>Decision D<em>n</em></strong> are intended choices not yet made; they are collected in <a href="#13-open-decisions">Open decisions</a>.</p>
+<p>Reporting will follow STROBE, its RECORD extension for routinely collected health data, and, for the target-trial sensitivity analysis, the TARGET guideline. The <a href="#12-reporting-map">reporting map</a> links each checklist item to a section of this plan.</p>
+<hr>
+<section id="objective" class="level2">
+<h2 class="anchored" data-anchor-id="objective">1. Objective</h2>
+<p>To estimate the excess Medicare payments attributable to cryptococcosis in the 12 months after diagnosis among adult kidney transplant recipients, compared with similar recipients at the same time since transplant who have not been diagnosed.</p>
+<p><strong>Secondary objectives</strong></p>
+<ul>
+<li>Describe the month-by-month profile of excess cost from 3 months before to 12 months after diagnosis.</li>
+<li>Partition excess cost by care setting (inpatient, outpatient, skilled nursing, home health, hospice, dialysis, physician/supplier).</li>
+</ul>
+</section>
+<section id="design" class="level2">
+<h2 class="anchored" data-anchor-id="design">2. Design</h2>
+<p>Retrospective cohort study in linked registry and claims data, using <strong>risk-set (incidence density) matching</strong>. Each case is matched, at the time since transplant when they are diagnosed, to controls who are still at risk and undiagnosed at that same time.</p>
+<p><strong>Decision D10:</strong> the matching method — direct covariate matching, or matching on a time-varying propensity score (<a href="#6-matching">Section 6</a>).</p>
+<p>A <strong>sequential target-trial emulation</strong> with propensity-score weighting is the planned main sensitivity analysis (<a href="#9-sensitivity-analyses">Section 9</a>; protocol in <a href="#appendix-a-target-trial-protocol">Appendix A</a>). It requires a propensity score model whichever matching method is chosen.</p>
+</section>
+<section id="data-source" class="level2">
+<h2 class="anchored" data-anchor-id="data-source">3. Data source</h2>
+<ul>
+<li><strong>United States Renal Data System (USRDS)</strong> standard analysis files, accessed under a data use agreement through the <code>usRds</code> R package.
+<ul>
+<li>Core files: patients, transplant (TX), payer history (PAYHIST), treatment history (RXHIST), death.</li>
+<li>Transplant files linked from OPTN/UNOS transplant recipient registration (TRR) records for kidney and kidney–pancreas recipients.</li>
+<li>Medicare Parts A and B claims: institutional claims and revenue-center lines, and physician/supplier claims. Part D prescription events where a covariate requires them.</li>
+</ul></li>
+<li><strong>Linkage:</strong> USRDS links CMS and OPTN records to a single USRDS patient identifier. The study uses this linkage as supplied; no further linkage is performed.</li>
+<li><strong>Period:</strong> claims 2006–2021; incident cryptococcosis 2007–2020; administrative end of follow-up 2022-01-01.</li>
+<li><strong>Geography:</strong> United States.</li>
+</ul>
+</section>
+<section id="study-population" class="level2">
+<h2 class="anchored" data-anchor-id="study-population">4. Study population</h2>
+<section id="source-population" class="level3">
+<h3 class="anchored" data-anchor-id="source-population">4.1 Source population</h3>
+<p>Kidney transplant recipients in USRDS with a transplant before 2021.</p>
+</section>
+<section id="eligibility-at-time-zero-cases-and-controls-alike" class="level3">
+<h3 class="anchored" data-anchor-id="eligibility-at-time-zero-cases-and-controls-alike">4.2 Eligibility at time zero (cases and controls alike)</h3>
+<p>At the risk-set time (<a href="#53-time-zero">Section 5.3</a>), a person is eligible if they:</p>
+<ol type="1">
+<li>Have had at least one kidney transplant before that date.</li>
+<li>Are aged 18 or older.</li>
+<li>Have no prior cryptococcosis diagnosis.</li>
+<li>Have Medicare fee-for-service as primary payer for both Part A and Part B for the 365 days before time zero, without gaps, so that baseline covariates and baseline cost are fully observed. <strong>Decision D1:</strong> whether Medicare as secondary payer or other payer categories are ever eligible.</li>
+<li>Are alive and under observation on that date.</li>
+</ol>
+</section>
+<section id="index-transplant" class="level3">
+<h3 class="anchored" data-anchor-id="index-transplant">4.3 Index transplant</h3>
+<p>The time scale is time since the <strong>most recent</strong> kidney transplant before time zero. Retransplant recipients are eligible; prior transplants enter as covariates. <strong>Decision D2:</strong> inclusion of kidney–pancreas and other multi-organ recipients (exclude, or include with an indicator).</p>
+</section>
+</section>
+<section id="exposure-and-time-zero" class="level2">
+<h2 class="anchored" data-anchor-id="exposure-and-time-zero">5. Exposure and time zero</h2>
+<section id="exposure-definition" class="level3">
+<h3 class="anchored" data-anchor-id="exposure-definition">5.1 Exposure definition</h3>
+<p>Incident cryptococcosis, identified from ICD-9-CM and ICD-10-CM diagnosis codes on Medicare institutional or physician/supplier claims. The full code list is published as a supplementary table.</p>
+<p><strong>Decision D3:</strong> the claim algorithm, meaning the claim types and diagnosis positions accepted and the number of claims required (for example, one inpatient claim, or two outpatient claims within a set window). The choice will cite any available validation literature for fungal infection codes in claims.</p>
+</section>
+<section id="diagnosis-date" class="level3">
+<h3 class="anchored" data-anchor-id="diagnosis-date">5.2 Diagnosis date</h3>
+<p>The service date of the first qualifying claim.</p>
+</section>
+<section id="time-zero" class="level3">
+<h3 class="anchored" data-anchor-id="time-zero">5.3 Time zero</h3>
+<ul>
+<li><strong>Cases:</strong> the diagnosis date.</li>
+<li><strong>Controls:</strong> the date on which the control reaches the same number of days since their most recent transplant as the case had at diagnosis.</li>
+</ul>
+<p>Eligibility, covariates and baseline cost are measured as of time zero, using only information available before it.</p>
+</section>
+<section id="control-eligibility" class="level3">
+<h3 class="anchored" data-anchor-id="control-eligibility">5.4 Control eligibility</h3>
+<p>Any person meeting <a href="#42-eligibility-at-time-zero-cases-and-controls-alike">Section 4.2</a> at the case’s risk-set time is eligible, <strong>including people who are diagnosed with cryptococcosis later</strong>. Their time before diagnosis is unexposed time. Excluding them would condition on the future.</p>
+<p><strong>Decision D4:</strong> whether a person may serve as a control in more than one risk set (sampling with replacement across risk sets, as in standard incidence density sampling) or at most once.</p>
+</section>
+</section>
+<section id="matching" class="level2">
+<h2 class="anchored" data-anchor-id="matching">6. Matching</h2>
+<section id="common-elements" class="level3">
+<h3 class="anchored" data-anchor-id="common-elements">6.1 Common elements</h3>
+<p>Whichever method is chosen under D10:</p>
+<ul>
+<li><strong>Exact matching</strong> on current graft status (functioning, or failed and on dialysis).</li>
+<li><strong>Ratio:</strong> up to 2 controls per case.</li>
+<li><strong>Order:</strong> cases are matched in a random order fixed by a recorded seed. Ties among controls are broken at random using the same seed.</li>
+<li><strong>Pre-period cost:</strong> months −3 to −1 are <strong>not</strong> used for matching. They are kept to check balance on pre-diagnosis cost (Daw and Hatfield, <em>Health Services Research</em> 2018).</li>
+</ul>
+</section>
+<section id="covariates" class="level3">
+<h3 class="anchored" data-anchor-id="covariates">6.2 Covariates</h3>
+<p>These are the confounders the design must address. Under Option A (<a href="#63-option-a-direct-covariate-matching">Section 6.3</a>), a subset is matched on directly and the rest are checked for balance. Under Option B (<a href="#64-option-b-time-varying-propensity-score-matching">Section 6.4</a>), all enter the score. All are measured before time zero.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Domain</th>
+<th>Covariates</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Demographics</td>
+<td>Age, sex, race and ethnicity, calendar year</td>
+</tr>
+<tr class="even">
+<td>Transplant</td>
+<td>Time since transplant (the time scale), donor type (living or deceased), retransplant and number of prior transplants, cause of kidney failure, time on dialysis before transplant, induction regimen</td>
+</tr>
+<tr class="odd">
+<td>Graft function</td>
+<td>Current graft status (functioning, or failed and on dialysis)</td>
+</tr>
+<tr class="even">
+<td>Immunosuppression intensity</td>
+<td>Rejection treatment in the prior 3–6 months; maintenance regimen where observable</td>
+</tr>
+<tr class="odd">
+<td>Comorbidity</td>
+<td>Diabetes, cirrhosis, HIV, other solid organ transplant, a claims-based comorbidity index</td>
+</tr>
+<tr class="even">
+<td>Other infections</td>
+<td>CMV, BK virus, <em>Pneumocystis</em> pneumonia, other invasive fungal infection, sepsis</td>
+</tr>
+<tr class="odd">
+<td>Prior use of care</td>
+<td>Hospital admissions, emergency visits, skilled nursing days in the prior year</td>
+</tr>
+<tr class="even">
+<td>Prior cost</td>
+<td>Medicare payments in months −12 to −4, as a smoothed measure (mean or log of monthly cost)</td>
+</tr>
+<tr class="odd">
+<td>Payer and place</td>
+<td>Medicaid dual eligibility, region</td>
+</tr>
+</tbody>
+</table>
+<p>Each covariate’s code list or registry field will be specified and published before analysis. <strong>Decision D5:</strong> the lookback window for rejection treatment, and the comorbidity index (Charlson or Elixhauser).</p>
+</section>
+<section id="option-a-direct-covariate-matching" class="level3">
+<h3 class="anchored" data-anchor-id="option-a-direct-covariate-matching">6.3 Option A: direct covariate matching</h3>
+<ul>
+<li>Exact matching on diabetes, cirrhosis and HIV status, in addition to graft status.</li>
+<li>Calipers on age (±10 years) and calendar time (±3 years).</li>
+<li>Among eligible controls, the closest on smoothed prior cost (months −12 to −4) is chosen first.</li>
+<li>The remaining covariates in Section 6.2 are checked for balance and, if imbalanced, adjusted for in the outcome model.</li>
+</ul>
+<p><strong>Strength:</strong> simple to explain and to reproduce. <strong>Weakness:</strong> exact matching becomes sparse as matching factors are added, so few of the covariates in Section 6.2 can be matched on directly.</p>
+</section>
+<section id="option-b-time-varying-propensity-score-matching" class="level3">
+<h3 class="anchored" data-anchor-id="option-b-time-varying-propensity-score-matching">6.4 Option B: time-varying propensity score matching</h3>
+<ul>
+<li>A time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months (or, equivalently, a Cox model with time-varying covariates). Each person-interval’s linear predictor is its score at that time (Lu, <em>Biometrics</em> 2005).</li>
+<li>All covariates in Section 6.2 enter the score.</li>
+<li>Controls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit (Austin 2011).</li>
+<li><strong>Decision D6:</strong> whether to keep the hard calipers on age and calendar time from Option A on top of the score.</li>
+</ul>
+<p><strong>Strength:</strong> balances many covariates at once, and the same score model serves the target-trial sensitivity analysis. <strong>Weakness:</strong> depends on a correctly specified score model and is harder to explain.</p>
+</section>
+<section id="matching-outcomes-reported" class="level3">
+<h3 class="anchored" data-anchor-id="matching-outcomes-reported">6.5 Matching outcomes reported</h3>
+<ul>
+<li>The number of cases with 2, 1 and 0 matched controls.</li>
+<li>The characteristics of unmatched cases compared with matched cases.</li>
+</ul>
+</section>
+</section>
+<section id="outcome" class="level2">
+<h2 class="anchored" data-anchor-id="outcome">7. Outcome</h2>
+<section id="cost-measure" class="level3">
+<h3 class="anchored" data-anchor-id="cost-measure">7.1 Cost measure</h3>
+<p><strong>Medicare paid amounts</strong> (not charges) from institutional claims and physician/supplier claims. Institutional claims spanning several days are prorated evenly across days of service.</p>
+</section>
+<section id="inflation-adjustment" class="level3">
+<h3 class="anchored" data-anchor-id="inflation-adjustment">7.2 Inflation adjustment</h3>
+<p>All costs are expressed in January 2021 US dollars. <strong>Decision D7:</strong> the price index (for example, the medical care component of the CPI-U, or the PCE health price index).</p>
+</section>
+<section id="person-month-structure" class="level3">
+<h3 class="anchored" data-anchor-id="person-month-structure">7.3 Person-month structure</h3>
+<ul>
+<li>Each person’s follow-up is divided into 30-day months relative to time zero, from month −3 (days −90 to −61) through month 11 (days 330 to 359).</li>
+<li>Each person-month’s cost is the sum of prorated, inflation-adjusted payments for services in that month.</li>
+<li>Partial months are kept, with the number of observed days recorded as exposure.</li>
+<li>A month with Medicare coverage and no claims has a cost of zero. A month without qualifying coverage is not observed; it is never recorded as zero cost.</li>
+</ul>
+</section>
+<section id="end-of-follow-up" class="level3">
+<h3 class="anchored" data-anchor-id="end-of-follow-up">7.4 End of follow-up</h3>
+<p>Follow-up ends at the earliest of:</p>
+<ul>
+<li>day 365 after time zero;</li>
+<li>death;</li>
+<li>loss of Medicare fee-for-service primary coverage for Parts A and B;</li>
+<li>the administrative end date, 2022-01-01.</li>
+</ul>
+<p>Graft failure after time zero does not end follow-up; it is an outcome pathway, not a censoring event.</p>
+<p><strong>Decision D8:</strong> the treatment of death, which defines the estimand. In option (a), cost accrues only while alive, and death ends follow-up. In option (b), months after death count as zero cost, so the estimand includes the cost consequences of mortality. Whichever is primary, the other is a sensitivity analysis.</p>
+</section>
+</section>
+<section id="statistical-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-analysis">8. Statistical analysis</h2>
+<section id="descriptive-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="descriptive-analysis">8.1 Descriptive analysis</h3>
+<ul>
+<li>A cohort flow diagram from the source population through eligibility, case identification, and matching.</li>
+<li>Baseline characteristics at time zero, by group, before and after matching.</li>
+</ul>
+</section>
+<section id="balance" class="level3">
+<h3 class="anchored" data-anchor-id="balance">8.2 Balance</h3>
+<ul>
+<li>Standardized mean differences at time zero for every covariate in <a href="#62-covariates">Section 6.2</a>, and for cost in months −3, −2 and −1.</li>
+<li>An absolute standardized mean difference below 0.1 is considered adequate balance.</li>
+<li>Balance on months −3 to −1, which were not matched on, is reported as a check on residual confounding.</li>
+</ul>
+</section>
+<section id="estimand" class="level3">
+<h3 class="anchored" data-anchor-id="estimand">8.3 Estimand</h3>
+<p>The <strong>average treatment effect in the treated (ATT)</strong>: the mean difference in total Medicare payments over months 0–11 between cases and their matched controls, per case.</p>
+</section>
+<section id="primary-model" class="level3">
+<h3 class="anchored" data-anchor-id="primary-model">8.4 Primary model</h3>
+<ul>
+<li>Person-month cost is modelled with a generalized linear model with log link and Tweedie variance, including group, month (as a categorical variable), and their interaction, with log observed days as an offset.</li>
+<li>Standard errors are estimated with generalized estimating equations clustered on matched set; robust standard errors also cluster on patient if <a href="#13-open-decisions">D4</a> allows a person in more than one set.</li>
+<li><strong>Retransformation to dollars:</strong> predicted monthly cost for each group is computed at a full 30-day month by recycled predictions. The ATT is the sum of case-minus-control differences over months 0–11.</li>
+<li>Confidence intervals come from a cluster bootstrap that resamples matched sets (1,000 replicates, or more if needed for stability).</li>
+<li><strong>Decision D9:</strong> whether the primary estimate subtracts the pre-period difference (months −3 to −1), giving a difference-in-differences, or relies on matching alone with the pre-period reported as a balance check.</li>
+</ul>
+</section>
+<section id="secondary-analyses" class="level3">
+<h3 class="anchored" data-anchor-id="secondary-analyses">8.5 Secondary analyses</h3>
+<ul>
+<li>The month-by-month excess cost profile for months −3 to 11, from the primary model.</li>
+<li>Excess cost by care setting, using the same model on each setting’s cost.</li>
+</ul>
+</section>
+<section id="missing-data" class="level3">
+<h3 class="anchored" data-anchor-id="missing-data">8.6 Missing data</h3>
+<ul>
+<li>Cost outcomes are observed only during covered months, by design (<a href="#73-person-month-structure">Section 7.3</a>).</li>
+<li>For covariates with missing registry values, missingness is described. If it exceeds 5% for any covariate in the score, multiple imputation by chained equations is used, with the score estimated within each imputation.</li>
+</ul>
+</section>
+<section id="software" class="level3">
+<h3 class="anchored" data-anchor-id="software">8.7 Software</h3>
+<p>Analyses are run in R. Code is public at https://github.com/VagishHemmige/Cryptococcus-cost-analysis, and a website at https://vagishhemmige.github.io/Cryptococcus-cost-analysis documents each step. Data are not shared, as the data use agreement requires.</p>
+</section>
+</section>
+<section id="sensitivity-analyses" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity-analyses">9. Sensitivity analyses</h2>
+<ol type="1">
+<li><strong>Sequential target-trial emulation</strong> (<a href="#appendix-a-target-trial-protocol">Appendix A</a>). Monthly trials of everyone eligible, with the newly diagnosed as the exposed group. The comparison group is weighted by propensity odds (ATT weights), trials are pooled, and robust standard errors are clustered on patient. Weights are truncated at the 1st and 99th percentiles, with untruncated results also reported.</li>
+<li><strong>Alternative death handling:</strong> the option in D8 not chosen as primary.</li>
+<li><strong>Alternative outcome models:</strong> Gaussian identity-link and log-cost models, to show sensitivity to distributional assumptions.</li>
+<li><strong>Alternative exposure algorithm:</strong> a stricter claims definition than D3 (for example, requiring an inpatient claim), to address misclassification.</li>
+<li><strong>Matching variations:</strong> a 1:1 ratio; exact matching on CMV status; under Option B, a caliper of 0.1 standard deviations. The matching method not chosen under D10 may also be run as a sensitivity analysis.</li>
+<li><strong>Restriction to first transplant</strong> recipients.</li>
+<li><strong>Pre-2015 and 2015-or-later</strong> diagnoses, to check stability across the ICD-9-CM to ICD-10-CM transition (October 2015).</li>
+</ol>
+</section>
+<section id="disclosure-control" class="level2">
+<h2 class="anchored" data-anchor-id="disclosure-control">10. Disclosure control</h2>
+<ul>
+<li>No cell with a count under 11 is reported in any table, figure, or text, including flow diagrams and website pages. Complementary cells are suppressed where they would allow a small count to be derived.</li>
+<li>Figures that show individual-level data (for example, beeswarm or scatter plots) are not published.</li>
+<li>All outputs are reviewed against the USRDS data use agreement before release.</li>
+</ul>
+</section>
+<section id="limitations-to-address-in-reporting" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-to-address-in-reporting">11. Limitations to address in reporting</h2>
+<ul>
+<li>Claims-based diagnoses carry misclassification of both exposure and covariates.</li>
+<li>Costs are Medicare payments only; patient cost-sharing, other payers, and Part D are excluded unless Part D is added.</li>
+<li>Restricting to Medicare fee-for-service primary coverage limits generalizability to recipients with other primary payers or Medicare Advantage.</li>
+<li>Confounding by unmeasured immunosuppression intensity may remain despite the covariates in Section 6.2.</li>
+<li>Coverage requirements depend on eligibility rules that change over time, such as the end of Medicare entitlement 36 months after a successful transplant for patients without another qualifying reason.</li>
+</ul>
+</section>
+<section id="reporting-map" class="level2">
+<h2 class="anchored" data-anchor-id="reporting-map">12. Reporting map</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Checklist item</th>
+<th>Topic</th>
+<th>Plan section</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>STROBE 1 / RECORD 1.1–1.3</td>
+<td>Title, abstract, data type, region and period, linkage</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>STROBE 2–3</td>
+<td>Background, objectives</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>STROBE 4</td>
+<td>Study design</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>STROBE 5</td>
+<td>Setting, dates</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>STROBE 6 / RECORD 6.1–6.3</td>
+<td>Eligibility, selection codes and algorithms, validation, linkage</td>
+<td>4, 5</td>
+</tr>
+<tr class="even">
+<td>STROBE 6b</td>
+<td>Matching criteria and number of controls</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>STROBE 7 / RECORD 7.1</td>
+<td>Variables, with complete code lists</td>
+<td>5, 6.2, 7</td>
+</tr>
+<tr class="even">
+<td>STROBE 8</td>
+<td>Data sources and measurement</td>
+<td>3, 7</td>
+</tr>
+<tr class="odd">
+<td>STROBE 9</td>
+<td>Bias</td>
+<td>5.4, 6, 9, 11</td>
+</tr>
+<tr class="even">
+<td>STROBE 10</td>
+<td>Study size</td>
+<td>6.5, 8.1</td>
+</tr>
+<tr class="odd">
+<td>STROBE 11</td>
+<td>Quantitative variables</td>
+<td>6.2, 7</td>
+</tr>
+<tr class="even">
+<td>STROBE 12 / RECORD 12.1–12.3</td>
+<td>Statistical methods, data access, cleaning, linkage</td>
+<td>3, 8</td>
+</tr>
+<tr class="odd">
+<td>STROBE 12d</td>
+<td>Matching taken into account in analysis</td>
+<td>8.4</td>
+</tr>
+<tr class="even">
+<td>STROBE 12e</td>
+<td>Sensitivity analyses</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>STROBE 13 / RECORD 13.1</td>
+<td>Participants, flow diagram</td>
+<td>8.1</td>
+</tr>
+<tr class="even">
+<td>STROBE 14–17</td>
+<td>Descriptive data, outcomes, main and other results</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>STROBE 18–21</td>
+<td>Discussion, limitations, interpretation, generalizability</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td>RECORD 19.1</td>
+<td>Limitations of routinely collected data</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>STROBE 22 / RECORD 22.1</td>
+<td>Funding; access to protocol, code and supplementary material</td>
+<td>8.7</td>
+</tr>
+<tr class="even">
+<td>TARGET</td>
+<td>Target-trial emulation</td>
+<td>9, Appendix A</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="open-decisions" class="level2">
+<h2 class="anchored" data-anchor-id="open-decisions">13. Open decisions</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Decision</th>
+<th>Section</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D1</td>
+<td>Eligible payer categories beyond Medicare fee-for-service primary for Parts A and B</td>
+<td>4.2</td>
+</tr>
+<tr class="even">
+<td>D2</td>
+<td>Inclusion of kidney–pancreas and other multi-organ recipients</td>
+<td>4.3</td>
+</tr>
+<tr class="odd">
+<td>D3</td>
+<td>Claim algorithm for cryptococcosis: claim types, diagnosis positions, number of claims</td>
+<td>5.1</td>
+</tr>
+<tr class="even">
+<td>D4</td>
+<td>Controls in more than one risk set, or at most once</td>
+<td>5.4</td>
+</tr>
+<tr class="odd">
+<td>D5</td>
+<td>Rejection-treatment lookback window; comorbidity index</td>
+<td>6.2</td>
+</tr>
+<tr class="even">
+<td>D6</td>
+<td>Under Option B, hard calipers on age and calendar time in addition to the score</td>
+<td>6.4</td>
+</tr>
+<tr class="odd">
+<td>D7</td>
+<td>Price index for inflation adjustment</td>
+<td>7.2</td>
+</tr>
+<tr class="even">
+<td>D8</td>
+<td>Death: end of cost accrual, or zero cost after death</td>
+<td>7.4</td>
+</tr>
+<tr class="odd">
+<td>D9</td>
+<td>Primary estimate as matched difference, or difference-in-differences</td>
+<td>8.4</td>
+</tr>
+<tr class="even">
+<td>D10</td>
+<td>Matching method: direct covariate matching (Option A) or time-varying propensity score (Option B)</td>
+<td>2, 6</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="appendix-a-target-trial-protocol" class="level2">
+<h2 class="anchored" data-anchor-id="appendix-a-target-trial-protocol">Appendix A: Target-trial protocol</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Target trial</th>
+<th>Emulation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Eligibility</td>
+<td>Adult kidney transplant recipients, no prior cryptococcosis, 12 months of Medicare fee-for-service primary Parts A and B coverage</td>
+<td>Same criteria, applied at the start of each monthly trial</td>
+</tr>
+<tr class="even">
+<td>Treatment strategies</td>
+<td>Develop cryptococcosis in month <em>t</em>, or not</td>
+<td>Diagnosis in month <em>t</em> (exposed) versus no diagnosis in month <em>t</em> (comparison)</td>
+</tr>
+<tr class="odd">
+<td>Assignment</td>
+<td>Not randomizable; the trial is hypothetical</td>
+<td>Exchangeability approximated by ATT weights from a propensity score with the covariates in Section 6.2</td>
+</tr>
+<tr class="even">
+<td>Time zero</td>
+<td>Start of month <em>t</em></td>
+<td>Start of each monthly trial; aligned with eligibility and exposure</td>
+</tr>
+<tr class="odd">
+<td>Follow-up</td>
+<td>12 months, ending as in Section 7.4</td>
+<td>Same</td>
+</tr>
+<tr class="even">
+<td>Outcome</td>
+<td>Medicare payments over months 0–11</td>
+<td>Same as Section 7</td>
+</tr>
+<tr class="odd">
+<td>Causal contrast</td>
+<td>Effect in those who develop cryptococcosis (ATT)</td>
+<td>Weighted difference pooled across trials</td>
+</tr>
+<tr class="even">
+<td>Analysis</td>
+<td>—</td>
+<td>Weighted model as in Section 8.4; robust standard errors clustered on patient, because people appear in several trials</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li>von Elm E, et al.&nbsp;The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) statement. <em>PLoS Med</em> 2007.</li>
+<li>Benchimol EI, et al.&nbsp;The REporting of studies Conducted using Observational Routinely-collected health Data (RECORD) statement. <em>PLoS Med</em> 2015.</li>
+<li>Cashin AG, et al.&nbsp;Transparent reporting of observational studies emulating a target trial: the TARGET statement. <em>JAMA</em> and <em>BMJ</em> 2025.</li>
+<li>Lu B. Propensity score matching with time-dependent covariates. <em>Biometrics</em> 2005.</li>
+<li>Daw JR, Hatfield LA. Matching and regression to the mean in difference-in-differences analysis. <em>Health Serv Res</em> 2018.</li>
+<li>Austin PC. Optimal caliper widths for propensity-score matching. <em>Pharm Stat</em> 2011.</li>
+<li>United States Renal Data System. <em>Researcher’s Guide to the USRDS Database</em>, 2025.</li>
+</ul>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/vagishhemmige\.github\.io\/Cryptococcus-cost-analysis");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Statistical Analysis Plan: Medicare Costs of Cryptococcosis After Kidney Transplant</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>**Version:** 0.1 (draft) · **Date:** 2026-10-23 · **Author:** Vagish Hemmige</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>This plan states the intended design and analysis. It does not describe the current state of the code; implementation status is tracked separately. Items marked **Decision D*n*** are intended choices not yet made; they are collected in <span class="co">[</span><span class="ot">Open decisions</span><span class="co">](#13-open-decisions)</span>.</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Reporting will follow STROBE, its RECORD extension for routinely collected health data, and, for the target-trial sensitivity analysis, the TARGET guideline. The <span class="co">[</span><span class="ot">reporting map</span><span class="co">](#12-reporting-map)</span> links each checklist item to a section of this plan.</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Objective</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>To estimate the excess Medicare payments attributable to cryptococcosis in the 12 months after diagnosis among adult kidney transplant recipients, compared with similar recipients at the same time since transplant who have not been diagnosed.</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>**Secondary objectives**</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Describe the month-by-month profile of excess cost from 3 months before to 12 months after diagnosis.</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Partition excess cost by care setting (inpatient, outpatient, skilled nursing, home health, hospice, dialysis, physician/supplier).</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Design</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>Retrospective cohort study in linked registry and claims data, using **risk-set (incidence density) matching**. Each case is matched, at the time since transplant when they are diagnosed, to controls who are still at risk and undiagnosed at that same time.</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>**Decision D10:** the matching method — direct covariate matching, or matching on a time-varying propensity score (<span class="co">[</span><span class="ot">Section 6</span><span class="co">](#6-matching)</span>).</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>A **sequential target-trial emulation** with propensity-score weighting is the planned main sensitivity analysis (<span class="co">[</span><span class="ot">Section 9</span><span class="co">](#9-sensitivity-analyses)</span>; protocol in <span class="co">[</span><span class="ot">Appendix A</span><span class="co">](#appendix-a-target-trial-protocol)</span>). It requires a propensity score model whichever matching method is chosen.</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Data source</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**United States Renal Data System (USRDS)** standard analysis files, accessed under a data use agreement through the <span class="in">`usRds`</span> R package.</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Core files: patients, transplant (TX), payer history (PAYHIST), treatment history (RXHIST), death.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Transplant files linked from OPTN/UNOS transplant recipient registration (TRR) records for kidney and kidney–pancreas recipients.</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Medicare Parts A and B claims: institutional claims and revenue-center lines, and physician/supplier claims. Part D prescription events where a covariate requires them.</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Linkage:** USRDS links CMS and OPTN records to a single USRDS patient identifier. The study uses this linkage as supplied; no further linkage is performed.</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Period:** claims 2006–2021; incident cryptococcosis 2007–2020; administrative end of follow-up 2022-01-01.</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Geography:** United States.</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Study population</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4.1 Source population</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>Kidney transplant recipients in USRDS with a transplant before 2021.</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4.2 Eligibility at time zero (cases and controls alike)</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>At the risk-set time (<span class="co">[</span><span class="ot">Section 5.3</span><span class="co">](#53-time-zero)</span>), a person is eligible if they:</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Have had at least one kidney transplant before that date.</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Are aged 18 or older.</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Have no prior cryptococcosis diagnosis.</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Have Medicare fee-for-service as primary payer for both Part A and Part B for the 365 days before time zero, without gaps, so that baseline covariates and baseline cost are fully observed. **Decision D1:** whether Medicare as secondary payer or other payer categories are ever eligible.</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Are alive and under observation on that date.</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4.3 Index transplant</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>The time scale is time since the **most recent** kidney transplant before time zero. Retransplant recipients are eligible; prior transplants enter as covariates. **Decision D2:** inclusion of kidney–pancreas and other multi-organ recipients (exclude, or include with an indicator).</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. Exposure and time zero</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5.1 Exposure definition</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>Incident cryptococcosis, identified from ICD-9-CM and ICD-10-CM diagnosis codes on Medicare institutional or physician/supplier claims. The full code list is published as a supplementary table.</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>**Decision D3:** the claim algorithm, meaning the claim types and diagnosis positions accepted and the number of claims required (for example, one inpatient claim, or two outpatient claims within a set window). The choice will cite any available validation literature for fungal infection codes in claims.</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5.2 Diagnosis date</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>The service date of the first qualifying claim.</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5.3 Time zero</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Cases:** the diagnosis date.</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Controls:** the date on which the control reaches the same number of days since their most recent transplant as the case had at diagnosis.</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>Eligibility, covariates and baseline cost are measured as of time zero, using only information available before it.</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5.4 Control eligibility</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>Any person meeting <span class="co">[</span><span class="ot">Section 4.2</span><span class="co">](#42-eligibility-at-time-zero-cases-and-controls-alike)</span> at the case's risk-set time is eligible, **including people who are diagnosed with cryptococcosis later**. Their time before diagnosis is unexposed time. Excluding them would condition on the future.</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>**Decision D4:** whether a person may serve as a control in more than one risk set (sampling with replacement across risk sets, as in standard incidence density sampling) or at most once.</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. Matching</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6.1 Common elements</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>Whichever method is chosen under D10:</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Exact matching** on current graft status (functioning, or failed and on dialysis).</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Ratio:** up to 2 controls per case.</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Order:** cases are matched in a random order fixed by a recorded seed. Ties among controls are broken at random using the same seed.</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Pre-period cost:** months −3 to −1 are **not** used for matching. They are kept to check balance on pre-diagnosis cost (Daw and Hatfield, *Health Services Research* 2018).</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6.2 Covariates</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>These are the confounders the design must address. Under Option A (<span class="co">[</span><span class="ot">Section 6.3</span><span class="co">](#63-option-a-direct-covariate-matching)</span>), a subset is matched on directly and the rest are checked for balance. Under Option B (<span class="co">[</span><span class="ot">Section 6.4</span><span class="co">](#64-option-b-time-varying-propensity-score-matching)</span>), all enter the score. All are measured before time zero.</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Domain <span class="pp">|</span> Covariates <span class="pp">|</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Demographics <span class="pp">|</span> Age, sex, race and ethnicity, calendar year <span class="pp">|</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Transplant <span class="pp">|</span> Time since transplant (the time scale), donor type (living or deceased), retransplant and number of prior transplants, cause of kidney failure, time on dialysis before transplant, induction regimen <span class="pp">|</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Graft function <span class="pp">|</span> Current graft status (functioning, or failed and on dialysis) <span class="pp">|</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Immunosuppression intensity <span class="pp">|</span> Rejection treatment in the prior 3–6 months; maintenance regimen where observable <span class="pp">|</span></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Comorbidity <span class="pp">|</span> Diabetes, cirrhosis, HIV, other solid organ transplant, a claims-based comorbidity index <span class="pp">|</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Other infections <span class="pp">|</span> CMV, BK virus, *Pneumocystis* pneumonia, other invasive fungal infection, sepsis <span class="pp">|</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Prior use of care <span class="pp">|</span> Hospital admissions, emergency visits, skilled nursing days in the prior year <span class="pp">|</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Prior cost <span class="pp">|</span> Medicare payments in months −12 to −4, as a smoothed measure (mean or log of monthly cost) <span class="pp">|</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Payer and place <span class="pp">|</span> Medicaid dual eligibility, region <span class="pp">|</span></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>Each covariate's code list or registry field will be specified and published before analysis. **Decision D5:** the lookback window for rejection treatment, and the comorbidity index (Charlson or Elixhauser).</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6.3 Option A: direct covariate matching</span></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Exact matching on diabetes, cirrhosis and HIV status, in addition to graft status.</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Calipers on age (±10 years) and calendar time (±3 years).</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Among eligible controls, the closest on smoothed prior cost (months −12 to −4) is chosen first.</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The remaining covariates in Section 6.2 are checked for balance and, if imbalanced, adjusted for in the outcome model.</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>**Strength:** simple to explain and to reproduce. **Weakness:** exact matching becomes sparse as matching factors are added, so few of the covariates in Section 6.2 can be matched on directly.</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6.4 Option B: time-varying propensity score matching</span></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months (or, equivalently, a Cox model with time-varying covariates). Each person-interval's linear predictor is its score at that time (Lu, *Biometrics* 2005).</span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>All covariates in Section 6.2 enter the score.</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Controls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit (Austin 2011).</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Decision D6:** whether to keep the hard calipers on age and calendar time from Option A on top of the score.</span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>**Strength:** balances many covariates at once, and the same score model serves the target-trial sensitivity analysis. **Weakness:** depends on a correctly specified score model and is harder to explain.</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6.5 Matching outcomes reported</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The number of cases with 2, 1 and 0 matched controls.</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The characteristics of unmatched cases compared with matched cases.</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## 7. Outcome</span></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### 7.1 Cost measure</span></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>**Medicare paid amounts** (not charges) from institutional claims and physician/supplier claims. Institutional claims spanning several days are prorated evenly across days of service.</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="fu">### 7.2 Inflation adjustment</span></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>All costs are expressed in January 2021 US dollars. **Decision D7:** the price index (for example, the medical care component of the CPI-U, or the PCE health price index).</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a><span class="fu">### 7.3 Person-month structure</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Each person's follow-up is divided into 30-day months relative to time zero, from month −3 (days −90 to −61) through month 11 (days 330 to 359).</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Each person-month's cost is the sum of prorated, inflation-adjusted payments for services in that month.</span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Partial months are kept, with the number of observed days recorded as exposure.</span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A month with Medicare coverage and no claims has a cost of zero. A month without qualifying coverage is not observed; it is never recorded as zero cost.</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a><span class="fu">### 7.4 End of follow-up</span></span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>Follow-up ends at the earliest of:</span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>day 365 after time zero;</span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>death;</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>loss of Medicare fee-for-service primary coverage for Parts A and B;</span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the administrative end date, 2022-01-01.</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>Graft failure after time zero does not end follow-up; it is an outcome pathway, not a censoring event.</span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>**Decision D8:** the treatment of death, which defines the estimand. In option (a), cost accrues only while alive, and death ends follow-up. In option (b), months after death count as zero cost, so the estimand includes the cost consequences of mortality. Whichever is primary, the other is a sensitivity analysis.</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a><span class="fu">## 8. Statistical analysis</span></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a><span class="fu">### 8.1 Descriptive analysis</span></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A cohort flow diagram from the source population through eligibility, case identification, and matching.</span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Baseline characteristics at time zero, by group, before and after matching.</span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a><span class="fu">### 8.2 Balance</span></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Standardized mean differences at time zero for every covariate in <span class="co">[</span><span class="ot">Section 6.2</span><span class="co">](#62-covariates)</span>, and for cost in months −3, −2 and −1.</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>An absolute standardized mean difference below 0.1 is considered adequate balance.</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Balance on months −3 to −1, which were not matched on, is reported as a check on residual confounding.</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="fu">### 8.3 Estimand</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>The **average treatment effect in the treated (ATT)**: the mean difference in total Medicare payments over months 0–11 between cases and their matched controls, per case.</span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="fu">### 8.4 Primary model</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Person-month cost is modelled with a generalized linear model with log link and Tweedie variance, including group, month (as a categorical variable), and their interaction, with log observed days as an offset.</span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Standard errors are estimated with generalized estimating equations clustered on matched set; robust standard errors also cluster on patient if <span class="co">[</span><span class="ot">D4</span><span class="co">](#13-open-decisions)</span> allows a person in more than one set.</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Retransformation to dollars:** predicted monthly cost for each group is computed at a full 30-day month by recycled predictions. The ATT is the sum of case-minus-control differences over months 0–11.</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Confidence intervals come from a cluster bootstrap that resamples matched sets (1,000 replicates, or more if needed for stability).</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Decision D9:** whether the primary estimate subtracts the pre-period difference (months −3 to −1), giving a difference-in-differences, or relies on matching alone with the pre-period reported as a balance check.</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a><span class="fu">### 8.5 Secondary analyses</span></span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The month-by-month excess cost profile for months −3 to 11, from the primary model.</span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Excess cost by care setting, using the same model on each setting's cost.</span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="fu">### 8.6 Missing data</span></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Cost outcomes are observed only during covered months, by design (<span class="co">[</span><span class="ot">Section 7.3</span><span class="co">](#73-person-month-structure)</span>).</span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>For covariates with missing registry values, missingness is described. If it exceeds 5% for any covariate in the score, multiple imputation by chained equations is used, with the score estimated within each imputation.</span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a><span class="fu">### 8.7 Software</span></span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>Analyses are run in R. Code is public at https://github.com/VagishHemmige/Cryptococcus-cost-analysis, and a website at https://vagishhemmige.github.io/Cryptococcus-cost-analysis documents each step. Data are not shared, as the data use agreement requires.</span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="fu">## 9. Sensitivity analyses</span></span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Sequential target-trial emulation** (<span class="co">[</span><span class="ot">Appendix A</span><span class="co">](#appendix-a-target-trial-protocol)</span>). Monthly trials of everyone eligible, with the newly diagnosed as the exposed group. The comparison group is weighted by propensity odds (ATT weights), trials are pooled, and robust standard errors are clustered on patient. Weights are truncated at the 1st and 99th percentiles, with untruncated results also reported.</span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Alternative death handling:** the option in D8 not chosen as primary.</span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Alternative outcome models:** Gaussian identity-link and log-cost models, to show sensitivity to distributional assumptions.</span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Alternative exposure algorithm:** a stricter claims definition than D3 (for example, requiring an inpatient claim), to address misclassification.</span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Matching variations:** a 1:1 ratio; exact matching on CMV status; under Option B, a caliper of 0.1 standard deviations. The matching method not chosen under D10 may also be run as a sensitivity analysis.</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**Restriction to first transplant** recipients.</span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>**Pre-2015 and 2015-or-later** diagnoses, to check stability across the ICD-9-CM to ICD-10-CM transition (October 2015).</span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a><span class="fu">## 10. Disclosure control</span></span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No cell with a count under 11 is reported in any table, figure, or text, including flow diagrams and website pages. Complementary cells are suppressed where they would allow a small count to be derived.</span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Figures that show individual-level data (for example, beeswarm or scatter plots) are not published.</span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>All outputs are reviewed against the USRDS data use agreement before release.</span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a><span class="fu">## 11. Limitations to address in reporting</span></span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Claims-based diagnoses carry misclassification of both exposure and covariates.</span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Costs are Medicare payments only; patient cost-sharing, other payers, and Part D are excluded unless Part D is added.</span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Restricting to Medicare fee-for-service primary coverage limits generalizability to recipients with other primary payers or Medicare Advantage.</span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Confounding by unmeasured immunosuppression intensity may remain despite the covariates in Section 6.2.</span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Coverage requirements depend on eligibility rules that change over time, such as the end of Medicare entitlement 36 months after a successful transplant for patients without another qualifying reason.</span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a><span class="fu">## 12. Reporting map</span></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Checklist item <span class="pp">|</span> Topic <span class="pp">|</span> Plan section <span class="pp">|</span></span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 1 / RECORD 1.1–1.3 <span class="pp">|</span> Title, abstract, data type, region and period, linkage <span class="pp">|</span> 3 <span class="pp">|</span></span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 2–3 <span class="pp">|</span> Background, objectives <span class="pp">|</span> 1 <span class="pp">|</span></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 4 <span class="pp">|</span> Study design <span class="pp">|</span> 2 <span class="pp">|</span></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 5 <span class="pp">|</span> Setting, dates <span class="pp">|</span> 3 <span class="pp">|</span></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 6 / RECORD 6.1–6.3 <span class="pp">|</span> Eligibility, selection codes and algorithms, validation, linkage <span class="pp">|</span> 4, 5 <span class="pp">|</span></span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 6b <span class="pp">|</span> Matching criteria and number of controls <span class="pp">|</span> 6 <span class="pp">|</span></span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 7 / RECORD 7.1 <span class="pp">|</span> Variables, with complete code lists <span class="pp">|</span> 5, 6.2, 7 <span class="pp">|</span></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 8 <span class="pp">|</span> Data sources and measurement <span class="pp">|</span> 3, 7 <span class="pp">|</span></span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 9 <span class="pp">|</span> Bias <span class="pp">|</span> 5.4, 6, 9, 11 <span class="pp">|</span></span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 10 <span class="pp">|</span> Study size <span class="pp">|</span> 6.5, 8.1 <span class="pp">|</span></span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 11 <span class="pp">|</span> Quantitative variables <span class="pp">|</span> 6.2, 7 <span class="pp">|</span></span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 12 / RECORD 12.1–12.3 <span class="pp">|</span> Statistical methods, data access, cleaning, linkage <span class="pp">|</span> 3, 8 <span class="pp">|</span></span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 12d <span class="pp">|</span> Matching taken into account in analysis <span class="pp">|</span> 8.4 <span class="pp">|</span></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 12e <span class="pp">|</span> Sensitivity analyses <span class="pp">|</span> 9 <span class="pp">|</span></span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 13 / RECORD 13.1 <span class="pp">|</span> Participants, flow diagram <span class="pp">|</span> 8.1 <span class="pp">|</span></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 14–17 <span class="pp">|</span> Descriptive data, outcomes, main and other results <span class="pp">|</span> 8 <span class="pp">|</span></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 18–21 <span class="pp">|</span> Discussion, limitations, interpretation, generalizability <span class="pp">|</span> 11 <span class="pp">|</span></span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> RECORD 19.1 <span class="pp">|</span> Limitations of routinely collected data <span class="pp">|</span> 11 <span class="pp">|</span></span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> STROBE 22 / RECORD 22.1 <span class="pp">|</span> Funding; access to protocol, code and supplementary material <span class="pp">|</span> 8.7 <span class="pp">|</span></span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> TARGET <span class="pp">|</span> Target-trial emulation <span class="pp">|</span> 9, Appendix A <span class="pp">|</span></span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a><span class="fu">## 13. Open decisions</span></span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> ID <span class="pp">|</span> Decision <span class="pp">|</span> Section <span class="pp">|</span></span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> D1 <span class="pp">|</span> Eligible payer categories beyond Medicare fee-for-service primary for Parts A and B <span class="pp">|</span> 4.2 <span class="pp">|</span></span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> D2 <span class="pp">|</span> Inclusion of kidney–pancreas and other multi-organ recipients <span class="pp">|</span> 4.3 <span class="pp">|</span></span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> D3 <span class="pp">|</span> Claim algorithm for cryptococcosis: claim types, diagnosis positions, number of claims <span class="pp">|</span> 5.1 <span class="pp">|</span></span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> D4 <span class="pp">|</span> Controls in more than one risk set, or at most once <span class="pp">|</span> 5.4 <span class="pp">|</span></span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> D5 <span class="pp">|</span> Rejection-treatment lookback window; comorbidity index <span class="pp">|</span> 6.2 <span class="pp">|</span></span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> D6 <span class="pp">|</span> Under Option B, hard calipers on age and calendar time in addition to the score <span class="pp">|</span> 6.4 <span class="pp">|</span></span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> D7 <span class="pp">|</span> Price index for inflation adjustment <span class="pp">|</span> 7.2 <span class="pp">|</span></span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> D8 <span class="pp">|</span> Death: end of cost accrual, or zero cost after death <span class="pp">|</span> 7.4 <span class="pp">|</span></span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> D9 <span class="pp">|</span> Primary estimate as matched difference, or difference-in-differences <span class="pp">|</span> 8.4 <span class="pp">|</span></span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> D10 <span class="pp">|</span> Matching method: direct covariate matching (Option A) or time-varying propensity score (Option B) <span class="pp">|</span> 2, 6 <span class="pp">|</span></span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a><span class="fu">## Appendix A: Target-trial protocol</span></span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Component <span class="pp">|</span> Target trial <span class="pp">|</span> Emulation <span class="pp">|</span></span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Eligibility <span class="pp">|</span> Adult kidney transplant recipients, no prior cryptococcosis, 12 months of Medicare fee-for-service primary Parts A and B coverage <span class="pp">|</span> Same criteria, applied at the start of each monthly trial <span class="pp">|</span></span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Treatment strategies <span class="pp">|</span> Develop cryptococcosis in month *t*, or not | Diagnosis in month *t* (exposed) versus no diagnosis in month *t* (comparison) <span class="pp">|</span></span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Assignment <span class="pp">|</span> Not randomizable; the trial is hypothetical <span class="pp">|</span> Exchangeability approximated by ATT weights from a propensity score with the covariates in Section 6.2 <span class="pp">|</span></span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Time zero <span class="pp">|</span> Start of month *t* <span class="pp">|</span> Start of each monthly trial; aligned with eligibility and exposure <span class="pp">|</span></span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Follow-up <span class="pp">|</span> 12 months, ending as in Section 7.4 <span class="pp">|</span> Same <span class="pp">|</span></span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Outcome <span class="pp">|</span> Medicare payments over months 0–11 <span class="pp">|</span> Same as Section 7 <span class="pp">|</span></span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Causal contrast <span class="pp">|</span> Effect in those who develop cryptococcosis (ATT) <span class="pp">|</span> Weighted difference pooled across trials <span class="pp">|</span></span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Analysis <span class="pp">|</span> — <span class="pp">|</span> Weighted model as in Section 8.4; robust standard errors clustered on patient, because people appear in several trials <span class="pp">|</span></span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>von Elm E, et al. The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) statement. *PLoS Med* 2007.</span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Benchimol EI, et al. The REporting of studies Conducted using Observational Routinely-collected health Data (RECORD) statement. *PLoS Med* 2015.</span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Cashin AG, et al. Transparent reporting of observational studies emulating a target trial: the TARGET statement. *JAMA* and *BMJ* 2025.</span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Lu B. Propensity score matching with time-dependent covariates. *Biometrics* 2005.</span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Daw JR, Hatfield LA. Matching and regression to the mean in difference-in-differences analysis. *Health Serv Res* 2018.</span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Austin PC. Optimal caliper widths for propensity-score matching. *Pharm Stat* 2011.</span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>United States Renal Data System. *Researcher's Guide to the USRDS Database*, 2025.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/master/analysis-plan.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

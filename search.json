@@ -1,5 +1,363 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Cryptococcosis in kidney transplant recipients is uncommon but potentially catastrophic. When transmission occurs through the donor, it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.\nThe costs of cryptococcus after solid organ transplant are unclear. Although studies have quantified the cost of a single hospitalization for cryptococcus, no study to date has estimated the total excess cost of care due to cryptococcus.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#clinical-background",
+    "href": "index.html#clinical-background",
+    "title": "Overview",
+    "section": "",
+    "text": "Cryptococcosis in kidney transplant recipients is uncommon but potentially catastrophic. When transmission occurs through the donor, it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.\nThe costs of cryptococcus after solid organ transplant are unclear. Although studies have quantified the cost of a single hospitalization for cryptococcus, no study to date has estimated the total excess cost of care due to cryptococcus.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#what-this-analysis-does",
+    "href": "index.html#what-this-analysis-does",
+    "title": "Overview",
+    "section": "What this analysis does",
+    "text": "What this analysis does\nThis project uses the United States Renal Data System to analyze the impact of cryptococcus on costs.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#methods",
+    "href": "index.html#methods",
+    "title": "Overview",
+    "section": "Methods",
+    "text": "Methods\nWe selected cryptococcus cases based on the following inclusion criteria:\n\nAge 18 or greater\nPrior kidney transplant\nICD9 or ICD10 codes for cryptococcus (2 outpatient or 1 inpatient)\nOne year of Medicare primary coverage lead-in\n\nControls were matched 2:1 to cases based on risk-set sampling on the following:\n\nTime since transplant\nDiabetes\nHIV/AIDS\nAge within 10 years\nSampling date for control within 3 years of sampling date for case\n\nInstitutional claims data were abstracted as well as Physician/Supplier line-item data.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#results",
+    "href": "index.html#results",
+    "title": "Overview",
+    "section": "Results",
+    "text": "Results\nPending",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#site-navigation",
+    "href": "index.html#site-navigation",
+    "title": "Overview",
+    "section": "Site navigation",
+    "text": "Site navigation\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures\n\n\nReproducibility\nAll analyses presented on this website are fully reproducible.\nThe complete source code used to perform the full analysis and generate the tables and figures is publicly available at this GitHub repo. The R script R/main.R will run the R subscripts needed for this analysis in the order they are to be run. Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#abstractsmanuscripts",
+    "href": "index.html#abstractsmanuscripts",
+    "title": "Overview",
+    "section": "Abstracts/manuscripts",
+    "text": "Abstracts/manuscripts\nThis analysis has yet to be published to date.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "REPOSITORY-BLUEPRINT.html",
+    "href": "REPOSITORY-BLUEPRINT.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "REPOSITORY-BLUEPRINT.html#analytical-scripts",
+    "href": "REPOSITORY-BLUEPRINT.html#analytical-scripts",
+    "title": "",
+    "section": "Analytical scripts",
+    "text": "Analytical scripts\n\nR/main.R sources definitive scripts in dependency order.\nTypical workflow: setup → cohort construction → processing → modeling → outputs.\nStudy-specific scripts may be grouped into subdirectories by analytical stage.\nR/tables.R and R/figures.R may generate outputs directly or orchestrate specialized scripts."
+  },
+  {
+    "objectID": "REPOSITORY-BLUEPRINT.html#documentation",
+    "href": "REPOSITORY-BLUEPRINT.html#documentation",
+    "title": "",
+    "section": "Documentation",
+    "text": "Documentation\n\nDocument definitive analytical scripts with explanatory Quarto pages; exploratory scripts need not have pages.\nUse Cryptococcus-cost-analysis as an example for Quarto supporting files, chunk imports, callouts, and formatting—not scientific methods.\nQuarto source and rendered output locations may vary by project."
+  },
+  {
+    "objectID": "REPOSITORY-BLUEPRINT.html#outputs-and-version-control",
+    "href": "REPOSITORY-BLUEPRINT.html#outputs-and-version-control",
+    "title": "",
+    "section": "Outputs and version control",
+    "text": "Outputs and version control\n\nTrack approved, nonrestricted outputs when useful for publication; otherwise retain them locally and exclude them from Git.\n.gitignore: Exclude restricted data, credentials, caches, temporary files, and generated outputs unless intentionally tracked (e.g., .Rproj.user/, .Rhistory, .RData, .httr-oauth, .quarto/, cache/, figures/, tables/, *.quarto_ipynb); verify exclusions cover actual output paths without hiding necessary source or reference files."
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "",
+    "section": "",
+    "text": "Code\n\n\n\n\n\nMIT License\nCopyright (c) 2026 Cryptococcus cost analysis authors\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+  },
+  {
+    "objectID": "quarto/execute_matching.html",
+    "href": "quarto/execute_matching.html",
+    "title": "Execute matching",
+    "section": "",
+    "text": "The code in this script uses the cohort of kidney transplant patients with and without cryptococcosis developed in the R/create_cohort.R and executes 1:n matching based on a custom-written greedy algorithm\nCharacteristics of the matching algorithm:\n\nMatching without replacement: Each patient without cryptococcosis only serves as a control to one case at most. This makes subsequent statistical analysis simpler.\nRisk set sampling (incidence density sampling): If a case patient develops cryptococcosis at 243 days after their most recent kidney transplant, then all potential controls are chosen based on their covariate values at exactly 243 days post-transplant.\nGreedy matching: Cases are ranked by the number of potential controls at the onset, and then matches chosen without replacement without subsequent reordering.\nMix of exact matching** and caliper matching\n\nExact matching on the following:\n\nCirrhosis\nHIV\nDiabetes\n\nCaliper matching on the following:\n\nAge (within 10 years on the index date, calculated exactly)\nIndex date of case and controls (within 3 years of each other)\n\nPreferential matching on the following:\n\nNumber of transplants prior to index date\n\n\n\n\n\n\n\n\n\nRcodeSource code\n\n\n\nThe full R script is available at:\n\nR/execute_matching.R\n\nThis R script file is itself reliant on the following helper files:\n\nR/setup.R\nR/functions.R\n\nThe code sections below are imported directly from that script when this page is rendered.",
+    "crumbs": [
+      "Data loading and processing",
+      "2. Execute matching"
+    ]
+  },
+  {
+    "objectID": "quarto/execute_matching.html#overview",
+    "href": "quarto/execute_matching.html#overview",
+    "title": "Execute matching",
+    "section": "",
+    "text": "The code in this script uses the cohort of kidney transplant patients with and without cryptococcosis developed in the R/create_cohort.R and executes 1:n matching based on a custom-written greedy algorithm\nCharacteristics of the matching algorithm:\n\nMatching without replacement: Each patient without cryptococcosis only serves as a control to one case at most. This makes subsequent statistical analysis simpler.\nRisk set sampling (incidence density sampling): If a case patient develops cryptococcosis at 243 days after their most recent kidney transplant, then all potential controls are chosen based on their covariate values at exactly 243 days post-transplant.\nGreedy matching: Cases are ranked by the number of potential controls at the onset, and then matches chosen without replacement without subsequent reordering.\nMix of exact matching** and caliper matching\n\nExact matching on the following:\n\nCirrhosis\nHIV\nDiabetes\n\nCaliper matching on the following:\n\nAge (within 10 years on the index date, calculated exactly)\nIndex date of case and controls (within 3 years of each other)\n\nPreferential matching on the following:\n\nNumber of transplants prior to index date\n\n\n\n\n\n\n\n\n\nRcodeSource code\n\n\n\nThe full R script is available at:\n\nR/execute_matching.R\n\nThis R script file is itself reliant on the following helper files:\n\nR/setup.R\nR/functions.R\n\nThe code sections below are imported directly from that script when this page is rendered.",
+    "crumbs": [
+      "Data loading and processing",
+      "2. Execute matching"
+    ]
+  },
+  {
+    "objectID": "quarto/execute_matching.html#prepare-cohort-for-matching",
+    "href": "quarto/execute_matching.html#prepare-cohort-for-matching",
+    "title": "Execute matching",
+    "section": "Prepare cohort for matching",
+    "text": "Prepare cohort for matching\nThe following code prepares the cohort for matching by creating a list object unmatched_patients, keeping only the initial row for each case as only the covariates at the time of cryptococcus are necessary for matching.\n\n\nClick to show/hide R Code\nunmatched_patients&lt;-list()\n\nunmatched_patients[[\"Case\"]]&lt;-prematching_cohort%&gt;%\n  filter(cryptococcus_case==\"Case\")\n\nunmatched_patients[[\"Control\"]]&lt;-prematching_cohort%&gt;%\n  filter(cryptococcus_case==\"Potential control\")\n\nunmatched_patients[[\"Case\"]]&lt;-unmatched_patients[[\"Case\"]]%&gt;%\n  group_by(USRDS_ID)%&gt;%\n  slice(1)%&gt;%\n  ungroup()\n\n#For exploration--perhaps can delete in future?\nCase&lt;-unmatched_patients[[\"Case\"]]\nControl&lt;-unmatched_patients[[\"Control\"]]",
+    "crumbs": [
+      "Data loading and processing",
+      "2. Execute matching"
+    ]
+  },
+  {
+    "objectID": "quarto/execute_matching.html#counting-the-potential-number-of-matched-controls-for-each-case",
+    "href": "quarto/execute_matching.html#counting-the-potential-number-of-matched-controls-for-each-case",
+    "title": "Execute matching",
+    "section": "Counting the potential number of matched controls for each case",
+    "text": "Counting the potential number of matched controls for each case\nThis step uses the calculate_number_potential_matches() function defined in the R/functions.R to add a column to the cases data set, then sorts the cases so that those with the lowest number of potential matches are matched first.\n(Note the following code took ~2 hours to execute on a laptop given the size of the dataset.)\n\n\nClick to show/hide R Code\n#Add number of potential control matches to Case df\nunmatched_patients[[\"Case\"]] &lt;- unmatched_patients[[\"Case\"]] %&gt;%\n  mutate(\n    num_potential_controls = pmap_int(\n      list(USRDS_ID, BORN,cirrhosis, CMV, HIV, diabetes, cryptococcus_dx_date, tstart),\n      function(USRDS_ID, BORN, cirrhosis, CMV, HIV, diabetes, matching_date, tstart) {\n        calculate_number_potential_matches(\n          unmatched_patients[[\"Control\"]],\n          USRDS_ID,\n          BORN, \n          cirrhosis,\n          CMV,\n          HIV,\n          diabetes,\n          matching_date,\n          tstart\n        )\n      }\n    )\n  )\n\n#Sort by number of potential matches so that most difficult to match cases are matched first\n#Set the index_date for cases to be the date of cryptococcus dx\nunmatched_patients[[\"Case\"]] &lt;- unmatched_patients[[\"Case\"]] %&gt;%\n  arrange(num_potential_controls)%&gt;%\n  mutate(index_date_match=cryptococcus_dx_date)\n\n\n#Can be deleted\nunmatched_patients_backup&lt;-unmatched_patients\nunmatched_patients&lt;-unmatched_patients_backup",
+    "crumbs": [
+      "Data loading and processing",
+      "2. Execute matching"
+    ]
+  },
+  {
+    "objectID": "quarto/execute_matching.html#create-a-matched-data-set",
+    "href": "quarto/execute_matching.html#create-a-matched-data-set",
+    "title": "Execute matching",
+    "section": "Create a matched data set",
+    "text": "Create a matched data set\nThe following code executes the match, creating a matched dataframe suitable for use in subsequent analysis.\n\n\nClick to show/hide R Code\n#Time to set up the matching loop\n\n#Initial the loop control\ncontinue&lt;-TRUE\ni&lt;-0\nset.seed(12345)\n\n#Initialize the object where the matched cases and controls will be stored\nmatched_patients&lt;-list()\nmatched_patients[[\"Case\"]]&lt;-unmatched_patients[[\"Case\"]][0, ]%&gt;%\n  mutate(matched_control_indices = list())\nmatched_patients[[\"Control\"]] &lt;- unmatched_patients[[\"Control\"]][0, ] %&gt;%\n  mutate(index_date_match = as.Date(character()))\n\n\n#Perform the match\nwhile (continue==TRUE)\n{\n  i&lt;-i+1\n  print(i)\n\n  #Select matches from controls\n  eligible_controls &lt;-unmatched_patients[[\"Control\"]]%&gt;%\n    \n    filter(cirrhosis==unmatched_patients$Case$cirrhosis[[1]])%&gt;%\n    #filter(CMV==unmatched_patients$Case$CMV[[1]])%&gt;%\n    filter(HIV==unmatched_patients$Case$HIV[[1]])%&gt;%\n    filter(diabetes==unmatched_patients$Case$diabetes[[1]])%&gt;%\n    \n    #Risk set matching\n    filter(tstart&lt;=unmatched_patients$Case$tstart[[1]])%&gt;%\n    filter(tstop&gt;unmatched_patients$Case$tstart[[1]])%&gt;%\n    \n    #Calculate date for age calculations/etc.\n    mutate(.baseline_control_date=unmatched_patients$Case$tstart[[1]] + most_recent_transplant_date)%&gt;%\n    \n    #Make sure case and control are sampled within 3 years of each other\n    filter(abs(time_length(interval(.baseline_control_date, unmatched_patients$Case$cryptococcus_dx_date[[1]]), \"years\")) &lt;=3)%&gt;%\n    \n    #filter(cohort_start_date&lt;=unmatched_patients$Case$cryptococcus_dx_date[[1]])%&gt;%\n    #filter(cohort_stop_date&gt;unmatched_patients$Case$cryptococcus_dx_date[[1]])%&gt;%\n    \n    #Age&gt;=18 on index date\n    filter(time_length(interval(BORN, .baseline_control_date), \"years\") &gt;= 18)%&gt;%\n    \n    #Age difference under 10 years, calculated at sampling date\n    filter(abs(time_length(interval(BORN,.baseline_control_date), \"years\")-\n                 time_length(interval(unmatched_patients$Case$BORN[[1]],\n                                      unmatched_patients$Case$cryptococcus_dx_date[[1]]), \"years\")) &lt;=10)%&gt;%\n  \n    verify_medicare_primary(index_date = \".baseline_control_date\", \n                            medicare_coverage_df = medicare_history, \n                            coverage_start_variable = \"medicare_coverage_start_date\",\n                            coverage_end_variable = \"medicare_coverage_end_date\",\n                            cache=TRUE)%&gt;%\n    filter(medicare_primary_TF==TRUE)%&gt;%\n    \n    #Move matches for cumulative number of transplants to the top\n    #Note: this step could be used for propensity score matching on various variables\n    #Consider minimizing date difference and age difference as well\n    arrange(desc(cumulative_transplant_total==unmatched_patients$Case$cumulative_transplant_total[[1]]))\n  \n  \n  #Number of controls is minimum of global constant number_controls_per_case and number of distinct USRDS_IDs\n  k &lt;- min(number_controls_per_case, nrow(distinct(eligible_controls, USRDS_ID)))\n  \n  #Initialize sampled_controls df\n  sampled_controls&lt;-eligible_controls[0, ]\n    \n  #Loop to select controls one at a time to ensure same patient is not sampled multiple times \n  while (k&gt;0)\n  {\n  \n  sampled_controls &lt;- bind_rows(\n    sampled_controls,\n    eligible_controls %&gt;%slice_head(n = 1))\n    \n    eligible_controls&lt;-eligible_controls%&gt;%\n      filter(!(USRDS_ID %in% sampled_controls$USRDS_ID ))\n\n    k&lt;-min(k-1, nrow(distinct(eligible_controls, USRDS_ID)))   \n  }\n    \n    sampled_controls&lt;-sampled_controls%&gt;%\n    mutate(index_date_match = .baseline_control_date)%&gt;%\n    select(-.baseline_control_date)\n  \n  #Add case to matched DF\n  matched_patients[[\"Case\"]]&lt;-unmatched_patients$Case[1,]%&gt;%\n    mutate(matched_control_indices=list(sampled_controls$USRDS_ID))%&gt;%\n    bind_rows(matched_patients[[\"Case\"]])\n  \n  #Add controls to control DF\n  matched_patients[[\"Control\"]]&lt;-matched_patients[[\"Control\"]]%&gt;%\n    bind_rows(sampled_controls)\n  \n  #Remove controls\n  unmatched_patients[[\"Control\"]]&lt;-unmatched_patients[[\"Control\"]]%&gt;%\n    filter(!(USRDS_ID %in% sampled_controls$USRDS_ID ))\n  \n  #Remove cases\n  unmatched_patients[[\"Case\"]]&lt;-unmatched_patients[[\"Case\"]]%&gt;%\n    slice(-1)\n  \n if (nrow(unmatched_patients[[\"Case\"]])==0){\n   continue&lt;-FALSE\n } \n  \n  if (i==10000){\n    continue&lt;-FALSE\n  }\n  \n}\n\n\npost_match_results&lt;-matched_patients%&gt;%\n  bind_rows(.id = \"patient_type\")\n\n\nThe modeling script uses the above matched dataframe for the actual cost analysis.",
+    "crumbs": [
+      "Data loading and processing",
+      "2. Execute matching"
+    ]
+  },
+  {
+    "objectID": "quarto/execute_matching.html#other-portions-of-the-analysis",
+    "href": "quarto/execute_matching.html#other-portions-of-the-analysis",
+    "title": "Execute matching",
+    "section": "Other portions of the analysis",
+    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures",
+    "crumbs": [
+      "Data loading and processing",
+      "2. Execute matching"
+    ]
+  },
+  {
+    "objectID": "quarto/create_cohort.html",
+    "href": "quarto/create_cohort.html",
+    "title": "Create cohort",
+    "section": "",
+    "text": "The code in this script creates the cohort of kidney transplant patients eligible for the study for use in other scripts.",
+    "crumbs": [
+      "Data loading and processing",
+      "1. Create cohort"
+    ]
+  },
+  {
+    "objectID": "quarto/create_cohort.html#initial-data-loading-and-preprocessing-of-usrds-core-and-transplant-files",
+    "href": "quarto/create_cohort.html#initial-data-loading-and-preprocessing-of-usrds-core-and-transplant-files",
+    "title": "Create cohort",
+    "section": "Initial data loading and preprocessing of USRDS core and transplant files",
+    "text": "Initial data loading and preprocessing of USRDS core and transplant files\nThis portion of the code imports files from the USRDS data set necessary for the cryptococcus analysis. This portion makes use of the load_usrds_file() function from the usRds package as well as several tidyverse cleaning functions.\nKey files used:\n\npatients: This is a part of the Core data set of the USRDS and contains key patient demographics.\ntx: Also a part of the Core data set of the USRDS and contains summary information about kidney transplants from UNOS.\ntxunos_trr_ki and txunos_trr_kp: Part of the transplant data set of the USRDS, these files contain more detailed information derived from UNOS that is part of the Scientific Registry of Transplant Recipients.\n\nThe code below loads and merges transplant records across multiple UNOS-derived files, constructs a cumulative transplant count per patient, and reshapes the data into a time-varying format that tracks graft status over time.\n\n\nClick to show/hide R Code\n#Import core demographics from \"patients\" file\npatients_raw&lt;-usRds::load_usrds_file(\"patients\")%&gt;%\n  select(-ZIPCODE) #This is ZIP code at time of USRDS initiation, but we want at time of crypto dx\n\n#Import key information about the transplants from the TX and UNOS databases\ntx_raw&lt;-usRds::load_usrds_file(\"tx\")%&gt;%\n  select(USRDS_ID, TDATE, FAILDATE, TRR_ID_CODE)\n\nki_raw&lt;-usRds::load_usrds_file(\"txunos_trr_ki\")%&gt;%\n  select(USRDS_ID, ORGTYP, HRTX, LUTX, INTX, LITX,PITX,BMTX, TRR_ID_CODE)\n\nkp_raw&lt;-usRds::load_usrds_file(\"txunos_trr_kp\")%&gt;%\n  select(USRDS_ID, ORGTYP, HRTX, LUTX, INTX, LITX,PITX,BMTX, TRR_ID_CODE)\n\n#This combines the three datasets\ntx_clean&lt;-tx_raw%&gt;%\n  left_join(bind_rows(ki_raw,\n                      kp_raw))%&gt;%\n  arrange(USRDS_ID, TDATE)%&gt;%\n  \n  group_by(USRDS_ID)%&gt;%\n  mutate(cumulative_transplant_total=row_number())%&gt;%\n  ungroup\n\n#Create a time-varying dataset that can be used to track whether a pt has an active or inactive graft and the cumulative number of txs\ntx_status&lt;-tx_clean%&gt;%\n  select(USRDS_ID, TDATE, FAILDATE, cumulative_transplant_total)%&gt;%\n  pivot_longer(\n    cols = c(TDATE, FAILDATE),\n    names_to = \"event_type\",\n    values_to = \"event_date\"\n  ) %&gt;%\n  filter(!is.na(event_date)) %&gt;%\n  mutate(\n    graft_status = case_when(\n      event_type == \"TDATE\" ~ \"Active\",\n      event_type == \"FAILDATE\" ~ \"Failed\"\n    )\n  ) %&gt;%\n  select(-event_type)%&gt;%\n  arrange(USRDS_ID, cumulative_transplant_total, event_date, graft_status)",
+    "crumbs": [
+      "Data loading and processing",
+      "1. Create cohort"
+    ]
+  },
+  {
+    "objectID": "quarto/create_cohort.html#initialize-flowchart",
+    "href": "quarto/create_cohort.html#initialize-flowchart",
+    "title": "Create cohort",
+    "section": "Initialize flowchart",
+    "text": "Initialize flowchart\nThe next component makes use of the flowchart package. This package combines two key processes in an epidemiologic analysis:\n\nDataset preparation: Sequential application of eligibility criteria to define the analytic cohort, with explicit tracking of excluded records at each step.\nSTROBE diagram preparation: STrengthening the Reporting of OBservational studies in Epidemiology diagrams visually depict the process of including/excluding patients in an observational study and grouping them into cohorts. Many journals require these as a standard Figure 1.\n\nThe code below initializes a flowchart-aware cohort object and applies sequential eligibility filters, retaining both inclusion counts and labeled exclusion steps for downstream reporting.\n\n\nClick to show/hide R Code\n#Initialize a flowchart cohort\npatients_clean&lt;-patients_raw%&gt;%\n  as_fc(label=\"Patients in USRDS\")%&gt;%\n  \n  \n  fc_filter(TOTTX&gt;0, \n            label=\"Prior transplant\", \n            label_exc = \"Excluded: No prior transplant\", \n            show_exc = TRUE)%&gt;%\n  \n  fc_filter(TX1DATE&lt;as.Date(\"2021-01-01\"), \n            label=\"Transplant prior to 2021\", \n            label_exc = \"Excluded: Transplant 2021 or later\", \n            show_exc = TRUE)",
+    "crumbs": [
+      "Data loading and processing",
+      "1. Create cohort"
+    ]
+  },
+  {
+    "objectID": "quarto/create_cohort.html#identification-of-comorbidities-and-confirmation-of-medicare-coverage-continuity",
+    "href": "quarto/create_cohort.html#identification-of-comorbidities-and-confirmation-of-medicare-coverage-continuity",
+    "title": "Create cohort",
+    "section": "Identification of comorbidities and confirmation of Medicare coverage continuity",
+    "text": "Identification of comorbidities and confirmation of Medicare coverage continuity\nThis component identifies baseline comorbidities among transplant recipients using diagnosis codes derived from Medicare Institutional (Part A) and physician/supplier (Part B) claims. Diagnosis code lists defined in R/setup.R are applied uniformly across claims files to establish the presence and timing of comorbid conditions.\nThis portion makes use of the get_IN_ICD() and get_PS_ICD() functions from the usRds package to obtain dates that specific ICD codes are used for patients with a history of at least one kidney transplant in the study period.\nThe establish_dx_date() function from the usRds package uses the results of this analysis to ascertain the date when comorbidities meet the criteria for a formal diagnosis:\n\nTwo outpatient encounters or\nOne inpatient encounter\n\nIn parallel, Medicare coverage history is retrieved for all transplant recipients from the payhist file, which is part of the Core dataset. These data will be used to confirm continuous enrollment during the analytic period. We verify the absence of gaps indicating missing data, noting that every subsequent period in the dataset for a patient starts the day after the previous period ends and thereby supporting valid longitudinal assessment of diagnoses and downstream cost analyses.\nFinally, we separate cryptococcus diagnosis dates from other comorbidities for a separate list, given the key nature of the date of cryptococcus diagnosis for subsequent analyses.\n\n\nClick to show/hide R Code\n#Create list of USRDS ids for patients who have undergone transplant\ntransplant_id_list&lt;-patients_clean$data%&gt;%\n  pull(USRDS_ID)\n\n# We now seek to determine comorbidities by using diagnosis codes from the setup.R file\n\ncomorbidity_diagnosis_date&lt;-list()\n\n# Combine all ICD codes from all comorbidities into one list \ncomorbidity_ICD_combined_list&lt;-unlist(comorbidity_ICD_list, use.names=FALSE)\n\n#Scrape files for any comorbidity claim\ncomorbidity_claims_df&lt;-bind_rows(get_IN_ICD(icd_codes = comorbidity_ICD_combined_list, \n                                            years = 2006:2021, \n                                            usrds_ids = transplant_id_list ),\n                                 get_PS_ICD(icd_codes = comorbidity_ICD_combined_list, \n                                            years = 2006:2021, \n                                            usrds_ids = transplant_id_list )%&gt;%rename(CODE=DIAG))%&gt;%\n  arrange(USRDS_ID, CLM_FROM)\n\n#Create comorbidity_diagnosis_date data frame\nfor (comorbidity in names(comorbidity_ICD_list)){\n  \n  comorbidity_diagnosis_date[[comorbidity]]&lt;-comorbidity_claims_df%&gt;%\n    filter(CODE %in% comorbidity_ICD_list[[comorbidity]])%&gt;%\n    establish_dx_date(diagnosis_established = comorbidity)\n}\n\n#Load Medicare coverage history for all patients with transplant\nmedicare_history&lt;-load_usrds_file(\"payhist\",\n                                  usrds_ids = transplant_id_list)%&gt;%\n  arrange(USRDS_ID, BEGDATE)%&gt;%\n  group_by(USRDS_ID)%&gt;%\n  mutate(lag_ENDDATE=lag(ENDDATE))%&gt;%\n  mutate(gap=as.numeric(BEGDATE-lag_ENDDATE))%&gt;%\n  arrange(desc(gap))\n\n#Confirm no gaps (gap should always be 1 or missing)\nif (any(!is.na(medicare_history$gap) & medicare_history$gap != 1)) {\n  stop(\"Gap assumption violated: `gap` contains values other than 1 or NA.\")\n}\n\n#Add cryptococcus diagnosis date to patients_clean$data\n#First, format a df with the cryptococcus dx\ncryptococcus_df&lt;-comorbidity_diagnosis_date$cryptococcus%&gt;%\n  select(-diagnosis)%&gt;%\n  rename(cryptococcus_dx_date=date_established)",
+    "crumbs": [
+      "Data loading and processing",
+      "1. Create cohort"
+    ]
+  },
+  {
+    "objectID": "quarto/create_cohort.html#further-development-of-the-strobe-flowchart",
+    "href": "quarto/create_cohort.html#further-development-of-the-strobe-flowchart",
+    "title": "Create cohort",
+    "section": "Further development of the STROBE flowchart",
+    "text": "Further development of the STROBE flowchart\nSubsequently, key diagnosis dates, including the date of cryptococcosis diagnosis, are merged into the analytic patient dataset.\nThis code block then extends the STROBE flowchart by integrating diagnosis timing, eligibility criteria, and coverage requirements to finalize the analytic cohorts. Patients are classified as cryptococcosis cases or potential controls based on the presence and timing of diagnosis, and sequential exclusion criteria are applied to ensure incident disease, adult status at diagnosis, and appropriate calendar-time eligibility.\nThe verify_medicare_primary() function from the usRds package is used to confirm that patients with a cryptococcus diagnosis have Medicare primary coverage for at least 365 days prior to the cryptococcus diagnosis date to ensure that the diagnosis is new and not a carryover from an unobserved period.\nThese steps culminate in the final case and control cohorts, with all inclusion and exclusion decisions explicitly tracked and visualized in the updated STROBE flow diagram.\n\n\nClick to show/hide R Code\n#Join cryptococcus date to fc cohort\npatients_clean$data&lt;-left_join(patients_clean$data, \n                               cryptococcus_df)%&gt;%\n  mutate(cryptococcus_case=ifelse(is.na(cryptococcus_dx_date), \"Potential control\", \"Case\"))\n\n#Continue to create analytic cohort\npatients_merged&lt;-patients_clean%&gt;%\n  \n  #Remove patients with a diagnosis of cryptococcus prior to transplant\n  fc_filter(cryptococcus_dx_date&gt;TX1DATE | is.na(cryptococcus_dx_date), \n            label=\"No cryptococcus dx prior to transplant\", \n            label_exc = \"Excluded: cryptococcus dx prior to transplant\", \n            show_exc = TRUE)%&gt;%\n  \n  fc_filter((time_length(interval(BORN, cryptococcus_dx_date), \"years\") &gt;= 18) | is.na(cryptococcus_dx_date),\n            label=\"Age 18+ at time of cryptococcus if cryptococcus patient\", \n            label_exc = \"Excluded: First cryptococcus prior to age 18\", \n            show_exc = TRUE)%&gt;%\n  \n  fc_filter((year(cryptococcus_dx_date)&gt;=2007 & year(cryptococcus_dx_date)&lt;=2020) | is.na(cryptococcus_dx_date),\n            label=\"Incident cryptococcus between 1/1/2007 and 12/31/2020\", \n            label_exc = \"Incident cryptococcus outside of specified date range\", \n            show_exc = TRUE)%&gt;%\n  \n  #Split cohorts\n  fc_split(cryptococcus_case)\n  \n  #Check Medicare coverage for 365-day lookback period from day of first episode of cryptococcus\npatients_merged$data&lt;-patients_merged$data%&gt;%\n  verify_medicare_primary(index_date = \"cryptococcus_dx_date\",\n                          lookback_days = 365,\n                          coverage_start_variable = \"coverage_start_date\",\n                          coverage_end_variable = \"coverage_end_date\"\n                          )%&gt;%\n  mutate(medicare_primary_TF=ifelse(cryptococcus_case==\"Potential control\", TRUE, medicare_primary_TF))\n  \npatients_merged2&lt;-patients_merged%&gt;%\n  \n  fc_filter(medicare_primary_TF==TRUE, \n            label = \"365+ days of Medicare primary coverage\\nprior to first cryptococcus claim\", \n            label_exc = \"Excluded: Fewer than 365 days of coverage\",\n            show_exc = TRUE)\n\npatients_merged2$data&lt;-patients_merged2$data%&gt;%\n  select(-medicare_primary_TF)%&gt;%\n  \n  #Prepare data for cohort initialization\n  mutate(terminal_date=coalesce(coverage_end_date, censor_date))\n\npatients_merged2&lt;-patients_merged2%&gt;%\n  fc_filter((terminal_date - cryptococcus_dx_date &gt;=minimum_followup) | is.na(cryptococcus_dx_date), \n            label = \"Minimum followup exceeded\", \n            label_exc= \"Excluded: Minimum follow-up threshold not met\",\n            show_exc = TRUE)\n\n  \npatients_merged2%&gt;%\n  fc_draw()",
+    "crumbs": [
+      "Data loading and processing",
+      "1. Create cohort"
+    ]
+  },
+  {
+    "objectID": "quarto/create_cohort.html#creation-of-a-time-varying-cohort",
+    "href": "quarto/create_cohort.html#creation-of-a-time-varying-cohort",
+    "title": "Create cohort",
+    "section": "Creation of a time-varying cohort",
+    "text": "Creation of a time-varying cohort\nWe use several functions from the usRds package:\n\ncreate_usrds_cohort()\nadd_cohort_covariate()\nfinalize_usrds_cohort()\n\nThese functions split each patient into multiple rows, with each row describing a discrete period of time. This captures that patients will have time-varying status for covariates such as cirrhosis status, etc.\nPatients with cryptococcus infection join the cohort on the date of cryptococcosis diagnosis, while patients without cryptococcus (potential controls) join on the date of their first kidney transplant.\n“Time since transplant” resets after each new transplant.\n\n\nClick to show/hide R Code\n#Now we need to construct the time-varying data set\n\n#Ungroup\ninitial_cohort&lt;-patients_merged2$data%&gt;%\n  ungroup()%&gt;%\n\n#Cases join when they experience cryptococcus\n#Controls start on date of first transplant\n  mutate(\n    cohort_join_date = coalesce(\n      as.Date(cryptococcus_dx_date),\n      as.Date(TX1DATE)\n    )\n  )\n\n#Initialize cohort\nprematching_cohort&lt;-create_usrds_cohort(df=initial_cohort,\n                            start_date = \"cohort_join_date\",\n                            end_date = \"terminal_date\")%&gt;%\n  \n  # Add cirrhosis\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"cirrhosis\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"cirrhosis\")%&gt;%\n  \n  # Add CMV\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"CMV\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"CMV\")%&gt;%\n  \n  # Add diabetes\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Diabetes\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"diabetes\")%&gt;%\n  \n  # Add HIV\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"HIV\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"HIV\")%&gt;%\n  \n  # Add liver transplant\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Liver transplant\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"liver_transplant\")%&gt;%\n  \n  # Add lung transplant\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Lung transplant\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"lung_transplant\")%&gt;%\n  \n  # Add heart transplant\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Heart transplant\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"heart_transplant\")%&gt;%\n  \n  # Add pancreas transplant\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Pancreas transplant\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"pancreas_transplant\")%&gt;%\n  \n  # Add heart-lung transplant\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Heart-lung transplant\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"heartlung_transplant\")%&gt;%\n  \n  # Add intestinal transplant\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Intestinal transplant\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"intestinal_transplant\")%&gt;%\n  \n  #Add time-varying information about transplant status\n  add_cohort_covariate(covariate_data_frame=tx_status,\n                       covariate_date=\"event_date\",\n                       covariate_variable_name=\"cumulative_transplant_total\",\n                       covariate_value = \"cumulative_transplant_total\")%&gt;%\n  \n  #Add time-varying information about transplant status (whether current graft is active or failed)\n  add_cohort_covariate(covariate_data_frame=tx_status,\n                       covariate_date=\"event_date\",\n                       covariate_variable_name=\"current_graft_status\",\n                       covariate_value = \"graft_status\")%&gt;%\n  \n  #Add time-varying information about transplant status (date of most recent transplant)\n  add_cohort_covariate(covariate_data_frame=tx_status%&gt;%filter(graft_status==\"Active\"),\n                       covariate_date=\"event_date\",\n                       covariate_variable_name=\"most_recent_transplant_date\",\n                       covariate_value = \"event_date\")%&gt;%\n  \n  #Add time-varying information about transplant status (date of most recent graft failure)\n  add_cohort_covariate(covariate_data_frame=tx_status%&gt;%filter(graft_status==\"Failed\"),\n                       covariate_date=\"event_date\",\n                       covariate_variable_name=\"most_recent_failure_date\",\n                       covariate_value = \"event_date\")%&gt;%\n  \n  # Add Medicare current coverage\n  add_cohort_covariate(covariate_data_frame=medicare_history,\n                       covariate_date=\"BEGDATE\",\n                       covariate_variable_name=\"current_medicare_coverage\",\n                       covariate_value = \"PAYER\"\n                       )%&gt;%\n  \n  finalize_usrds_cohort(baseline_date_variable = \"most_recent_transplant_date\")\n\n\nThe analysis then proceeds on to the execute_matching component.",
+    "crumbs": [
+      "Data loading and processing",
+      "1. Create cohort"
+    ]
+  },
+  {
+    "objectID": "quarto/create_cohort.html#other-portions-of-the-analysis",
+    "href": "quarto/create_cohort.html#other-portions-of-the-analysis",
+    "title": "Create cohort",
+    "section": "Other portions of the analysis",
+    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures",
+    "crumbs": [
+      "Data loading and processing",
+      "1. Create cohort"
+    ]
+  },
+  {
+    "objectID": "quarto/functions.html",
+    "href": "quarto/functions.html",
+    "title": "Functions",
+    "section": "",
+    "text": "The code in this script defines helper functions used throughout the analysis.",
+    "crumbs": [
+      "Background",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "quarto/functions.html#plotting-mean-monthly-costs",
+    "href": "quarto/functions.html#plotting-mean-monthly-costs",
+    "title": "Functions",
+    "section": "Plotting mean monthly costs",
+    "text": "Plotting mean monthly costs\nThe following function uses ggplot2 to create a plot of monthly costs with a risk table underneath.\nIts inputs are as follows:\n\nfitted_model: the fit object from models created in the R/modeling.R script\ncountdf: a data frame containing the appropriate count data for cases and controls at each time point, used to create a risk table\n\nThe function uses the emmeans function from the package of the same name to estimate monthly costs. The x-axis (months) is shifted to the right so that the vertical line at x=0 cleanly separates pre-index and post-index months, and cases and controls are dodged slightly so that the error bars do not overlap.\n\n\nClick to show/hide R Code\n#Function that returns a ggplot of the mean cost (with confidence interval) for cryptococcus cases and controls by month\nplot_mean_monthly_costs&lt;-function(fitted_model, countdf=final_count_df) {\n\n  #First, use emmeans to calculate the predicted values from the model assuming 30-day months, then convert to data frame\n  emm_df &lt;- emmeans(\n    fitted_model,\n    ~ patient_type | month,\n    at = list(month_offset = 30),\n    type = \"response\"\n  )%&gt;%as.data.frame()%&gt;%\n    \n    #Shifts all points and error_bars 0.5 to the right to avoid the zero-line\n    mutate(month=0.5+as.numeric(month))%&gt;%\n    \n    #Move cases 0.1 to the right and controls 0.1 to the left to improve legibility\n  mutate(month=ifelse(patient_type==\"Case\", month+0.1, month-0.1))%&gt;%\n    mutate(\n      estimate = if (\"response\" %in% names(.)) response else emmean)\n  \n  monthly_plot &lt;- list()\n  \n  # Main plot\n  monthly_plot[[\"main\"]] &lt;- ggplot(data = emm_df) +\n    geom_point(aes(x = month, y = estimate, color = patient_type)) +\n    geom_errorbar(\n      aes(\n        x = month,\n        ymin = asymp.LCL,\n        ymax = asymp.UCL,\n        color = patient_type\n      ),\n      width = 0.1\n    ) +\n    geom_vline(xintercept = 0,\n               linetype = \"dashed\",\n               color = \"gray50\") +\n    theme_classic() +\n    labs(\n      x = \"Month\",\n      y = \"Inflation-adjusted cost per month (dollars)\",\n      color = \"Patient group\"\n    )+\n    theme(legend.position = \"bottom\")\n  \n  # Risk table\n  monthly_plot[[\"risk_table\"]] &lt;- countdf %&gt;%\n    mutate(month = 0.5 + as.numeric(month),\n           y_position = ifelse(patient_type == \"Case\", 0.4, 0.6)) %&gt;%\n    ggplot() +\n    geom_text(\n      aes(x = month, y = y_position, label = n, color=patient_type),\n      size = 3\n    )+\n    coord_cartesian(ylim = c(0.3, 0.7)) +\n    theme_void() +\n    theme(\n      plot.margin = margin(t = -5, b = 5),\n      legend.position = \"none\")\n  \n  # Combine plots\n  monthly_plot[[\"main\"]] /\n    monthly_plot[[\"risk_table\"]] +\n    plot_layout(heights = c(9, 1), guides = \"keep\")+\n    plot_annotation(\n      caption = \"Bottom panel shows N at risk by month\"\n    )\n  \n}",
+    "crumbs": [
+      "Background",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "quarto/functions.html#calculating-the-number-of-potential-matches",
+    "href": "quarto/functions.html#calculating-the-number-of-potential-matches",
+    "title": "Functions",
+    "section": "Calculating the number of potential matches",
+    "text": "Calculating the number of potential matches\nThe following function is passed a control df and a number of values for a case patient, and returns the number of distinct controls which are potential matches. The matching algorithm is hard-coded.\n\n\nClick to show/hide R Code\n#Function that defines the number of potential control matches for a case\ncalculate_number_potential_matches&lt;-function(control_df,\n                                             USRDS_ID,\n                                             birthdate,\n                                             cirrhosis_status,\n                                             cmv_status,\n                                             hiv_status,\n                                             diabetes_status,\n                                             matching_date,\n                                             matching_days_since_transplant) {\n  \n  print(paste0(\"Calculating number of potential controls for patient: \", USRDS_ID))\n  control_df%&gt;%\n    \n    #Exact match on cirrhosis, CMV, HIV, and diabetes status\n    filter(cirrhosis==cirrhosis_status)%&gt;%\n    #  filter(CMV==cmv_status)%&gt;%\n    filter(HIV==hiv_status)%&gt;%\n    filter(diabetes==diabetes_status)%&gt;%\n    \n    #Risk set matching\n    filter(tstart&lt;=matching_days_since_transplant)%&gt;%\n    filter(tstop&gt;matching_days_since_transplant)%&gt;%\n    \n    #Calculate date for age calculations/etc.\n    mutate(.baseline_control_date=matching_days_since_transplant+most_recent_transplant_date)%&gt;%\n    \n    #Make sure case and control are sampled within 3 years of each other\n    filter(abs(time_length(interval(.baseline_control_date, matching_date), \"years\")) &lt;=3)%&gt;%\n    \n    #Date matching\n    #  filter(cohort_start_date&lt;=matching_date)%&gt;%\n    #  filter(cohort_stop_date&gt;matching_date)%&gt;%\n    \n    #Age&gt;=18 on index date\n    filter(time_length(interval(BORN, .baseline_control_date), \"years\") &gt;= 18)%&gt;%\n    \n    #Age difference under 10 years, calculated at sampling date\n    filter(abs(time_length(interval(BORN,.baseline_control_date), \"years\")-\n                 time_length(interval(birthdate,matching_date), \"years\")) &lt;=10)%&gt;%\n    \n    #Confirming 365 day Medicare lookback available for potential match\n    verify_medicare_primary(index_date = matching_date, medicare_coverage_df = medicare_history, cache=TRUE)%&gt;%\n    filter(medicare_primary_TF==TRUE)%&gt;%\n    \n    #Count rows after ensuring controls with mult transplants are only counted once \n    distinct(USRDS_ID)%&gt;%\n    nrow()%&gt;%\n    return()\n  \n}",
+    "crumbs": [
+      "Background",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "quarto/functions.html#total-excess-costs",
+    "href": "quarto/functions.html#total-excess-costs",
+    "title": "Functions",
+    "section": "Total excess costs",
+    "text": "Total excess costs\nThis function takes a fit object from a model and calculates the total estimated excess costs and confidence intervals. This object currently only works for models with linear links.\n\n\nClick to show/hide R Code\n# Calculate total excess costs in a model\ncalculate_total_excess_costs &lt;- function(fitted_model, link = \"linear\") {\n  \n  # Extract coefficients and vcov matrix\n  coef_df &lt;- tidy(fitted_model)\n  vcov_matrix &lt;- vcov(fitted_model)\n  \n  # Get interaction terms\n  interaction_names &lt;- coef_df %&gt;% \n    filter(str_detect(term, \":\")) %&gt;% \n    pull(term)\n  \n  if (link == \"linear\") {\n    # Sum of coefficients\n    sum_estimate &lt;- coef_df %&gt;% \n      filter(term %in% interaction_names) %&gt;% \n      pull(estimate) %&gt;% \n      sum()\n    \n    # Variance of sum\n    sum_variance &lt;- vcov_matrix[interaction_names, interaction_names] %&gt;% \n      sum()\n    \n    # Standard error and CI\n    sum_se &lt;- sqrt(sum_variance)\n    df &lt;- df.residual(fitted_model)\n    \n    tibble(\n      estimate = sum_estimate,\n      std_error = sum_se,\n      conf_low = estimate - qt(0.975, df) * std_error,\n      conf_high = estimate + qt(0.975, df) * std_error,\n      statistic = estimate / std_error,\n      p_value = 2 * pt(-abs(statistic), df)\n    )\n    \n  } else if (link == \"log\") {\n    # Get coefficients for interactions\n    coefs &lt;- coef(fitted_model)[interaction_names]\n    vcov_sub &lt;- vcov_matrix[interaction_names, interaction_names]\n    \n    # Exponentiate each coefficient\n    exp_coefs &lt;- exp(coefs)\n    \n    # Sum of exponentiated coefficients\n    sum_estimate &lt;- sum(exp_coefs)\n    \n    # Delta method for variance\n    # Gradient: derivative of sum(exp(beta)) w.r.t. each beta is exp(beta)\n    gradient &lt;- exp_coefs\n    \n    # Variance using delta method\n    sum_variance &lt;- as.numeric(t(gradient) %*% vcov_sub %*% gradient)\n    sum_se &lt;- sqrt(sum_variance)\n    \n    # CI using normal approximation (GLM)\n    tibble(\n      estimate = sum_estimate,\n      std_error = sum_se,\n      conf_low = estimate - qnorm(0.975) * std_error,\n      conf_high = estimate + qnorm(0.975) * std_error,\n      statistic = estimate / std_error,\n      p_value = 2 * pnorm(-abs(statistic))\n    )\n    \n  } else {\n    stop(\"link must be either 'linear' or 'log'\")\n  }\n}",
+    "crumbs": [
+      "Background",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "quarto/functions.html#other-portions-of-the-analysis",
+    "href": "quarto/functions.html#other-portions-of-the-analysis",
+    "title": "Functions",
+    "section": "Other portions of the analysis",
+    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures",
+    "crumbs": [
+      "Background",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "quarto/figures.html",
+    "href": "quarto/figures.html",
+    "title": "Figures",
+    "section": "",
+    "text": "The code in this script generates figures for the manuscript.",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Figures"
+    ]
+  },
+  {
+    "objectID": "quarto/figures.html#final-flowchart",
+    "href": "quarto/figures.html#final-flowchart",
+    "title": "Figures",
+    "section": "Final flowchart",
+    "text": "Final flowchart\nThe following code uses the flowchart package to create a STROBE flowchart for the study.\n\n\nClick to show/hide R Code\n#Final STROBE flowchart\npatients_fc_matched%&gt;%\n  fc_draw()%&gt;%\n  fc_export(\"figures/flowchart.svg\",\n            width=20,\n            height=10)",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Figures"
+    ]
+  },
+  {
+    "objectID": "quarto/figures.html#beeswarm-plot-of-total-inflated-costs",
+    "href": "quarto/figures.html#beeswarm-plot-of-total-inflated-costs",
+    "title": "Figures",
+    "section": "Beeswarm plot of total inflated costs",
+    "text": "Beeswarm plot of total inflated costs\nThe following code uses the ggbeeswarm add-on to ggplot2 to compare cases and controls in terms of total inflated costs post-index. No attempt is made to adjust for censoring or death.\n\n\nClick to show/hide R Code\n#GGplot that is beeswarm of adjusted total costs\ncost_inflated%&gt;%\n  mutate(IN_CLM_365d_cost_adjusted_total=ifelse(IN_CLM_365d_cost_adjusted_total==0, 1, IN_CLM_365d_cost_adjusted_total))%&gt;%\n  ggplot()+\n  geom_quasirandom(mapping=aes(x=patient_type, y=IN_CLM_365d_cost_adjusted_total), alpha=0.1)+\n  scale_y_log10()+\n  theme_classic()",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Figures"
+    ]
+  },
+  {
+    "objectID": "quarto/figures.html#month-by-month-plots",
+    "href": "quarto/figures.html#month-by-month-plots",
+    "title": "Figures",
+    "section": "Month-by-month plots",
+    "text": "Month-by-month plots\nIn order to plot monthly costs predicted from the longitudinal models generated in the R/models.R script, we use the plot_mean_monthly_costs() function from the R/functions.R script to create the ggplot objects, and then save as .svg files.\n\n\nClick to show/hide R Code\n#Loop that plots the different outcomes longitudinally\n\nfor (outcome in c(\"grand_total_cost_month\", \"IN_CLM_month_total\", \"PS_REV_month_total\", \"IN_CLM_month_groupedHomeHealth\",\n                  \"IN_CLM_month_groupedHospice\",\"IN_CLM_month_groupedNonclaimauxiliary\",\"IN_CLM_month_groupedDialysis\",\n                  \"IN_CLM_month_groupedOutpatient\",\"IN_CLM_month_groupedInpatient\",\"IN_CLM_month_groupedSkilledNursingFacility\")){\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"glmmTMB\"]][[\"tweedie\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" glmmTMB\", \" \", \"tweedie.svg\"),\n         width=14,\n         height=7\n         )\n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"glmmTMB\"]][[\"linear\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" glmmTMB\", \" \", \"linear.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"gee\"]][[\"linear\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" gee\", \" \", \"linear.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"glmmTMB\"]][[\"log\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" glmmTMB\", \" \", \"log.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"gee\"]][[\"log\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" gee\", \" \", \"log.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n}",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Figures"
+    ]
+  },
+  {
+    "objectID": "quarto/figures.html#other-portions-of-the-analysis",
+    "href": "quarto/figures.html#other-portions-of-the-analysis",
+    "title": "Figures",
+    "section": "Other portions of the analysis",
+    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nAbout: methods, assumptions, and disclosures",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Figures"
+    ]
+  },
+  {
     "objectID": "quarto/tables.html",
     "href": "quarto/tables.html",
     "title": "Tables",
@@ -176,127 +534,6 @@
     ]
   },
   {
-    "objectID": "quarto/functions.html",
-    "href": "quarto/functions.html",
-    "title": "Functions",
-    "section": "",
-    "text": "The code in this script defines helper functions used throughout the analysis.",
-    "crumbs": [
-      "Background",
-      "Functions"
-    ]
-  },
-  {
-    "objectID": "quarto/functions.html#plotting-mean-monthly-costs",
-    "href": "quarto/functions.html#plotting-mean-monthly-costs",
-    "title": "Functions",
-    "section": "Plotting mean monthly costs",
-    "text": "Plotting mean monthly costs\nThe following function uses ggplot2 to create a plot of monthly costs with a risk table underneath.\nIts inputs are as follows:\n\nfitted_model: the fit object from models created in the R/modeling.R script\ncountdf: a data frame containing the appropriate count data for cases and controls at each time point, used to create a risk table\n\nThe function uses the emmeans function from the package of the same name to estimate monthly costs. The x-axis (months) is shifted to the right so that the vertical line at x=0 cleanly separates pre-index and post-index months, and cases and controls are dodged slightly so that the error bars do not overlap.\n\n\nClick to show/hide R Code\n#Function that returns a ggplot of the mean cost (with confidence interval) for cryptococcus cases and controls by month\nplot_mean_monthly_costs&lt;-function(fitted_model, countdf=final_count_df) {\n\n  #First, use emmeans to calculate the predicted values from the model assuming 30-day months, then convert to data frame\n  emm_df &lt;- emmeans(\n    fitted_model,\n    ~ patient_type | month,\n    at = list(month_offset = 30),\n    type = \"response\"\n  )%&gt;%as.data.frame()%&gt;%\n    \n    #Shifts all points and error_bars 0.5 to the right to avoid the zero-line\n    mutate(month=0.5+as.numeric(month))%&gt;%\n    \n    #Move cases 0.1 to the right and controls 0.1 to the left to improve legibility\n  mutate(month=ifelse(patient_type==\"Case\", month+0.1, month-0.1))%&gt;%\n    mutate(\n      estimate = if (\"response\" %in% names(.)) response else emmean)\n  \n  monthly_plot &lt;- list()\n  \n  # Main plot\n  monthly_plot[[\"main\"]] &lt;- ggplot(data = emm_df) +\n    geom_point(aes(x = month, y = estimate, color = patient_type)) +\n    geom_errorbar(\n      aes(\n        x = month,\n        ymin = asymp.LCL,\n        ymax = asymp.UCL,\n        color = patient_type\n      ),\n      width = 0.1\n    ) +\n    geom_vline(xintercept = 0,\n               linetype = \"dashed\",\n               color = \"gray50\") +\n    theme_classic() +\n    labs(\n      x = \"Month\",\n      y = \"Inflation-adjusted cost per month (dollars)\",\n      color = \"Patient group\"\n    )+\n    theme(legend.position = \"bottom\")\n  \n  # Risk table\n  monthly_plot[[\"risk_table\"]] &lt;- countdf %&gt;%\n    mutate(month = 0.5 + as.numeric(month),\n           y_position = ifelse(patient_type == \"Case\", 0.4, 0.6)) %&gt;%\n    ggplot() +\n    geom_text(\n      aes(x = month, y = y_position, label = n, color=patient_type),\n      size = 3\n    )+\n    coord_cartesian(ylim = c(0.3, 0.7)) +\n    theme_void() +\n    theme(\n      plot.margin = margin(t = -5, b = 5),\n      legend.position = \"none\")\n  \n  # Combine plots\n  monthly_plot[[\"main\"]] /\n    monthly_plot[[\"risk_table\"]] +\n    plot_layout(heights = c(9, 1), guides = \"keep\")+\n    plot_annotation(\n      caption = \"Bottom panel shows N at risk by month\"\n    )\n  \n}",
-    "crumbs": [
-      "Background",
-      "Functions"
-    ]
-  },
-  {
-    "objectID": "quarto/functions.html#calculating-the-number-of-potential-matches",
-    "href": "quarto/functions.html#calculating-the-number-of-potential-matches",
-    "title": "Functions",
-    "section": "Calculating the number of potential matches",
-    "text": "Calculating the number of potential matches\nThe following function is passed a control df and a number of values for a case patient, and returns the number of distinct controls which are potential matches. The matching algorithm is hard-coded.\n\n\nClick to show/hide R Code\n#Function that defines the number of potential control matches for a case\ncalculate_number_potential_matches&lt;-function(control_df,\n                                             USRDS_ID,\n                                             birthdate,\n                                             cirrhosis_status,\n                                             cmv_status,\n                                             hiv_status,\n                                             diabetes_status,\n                                             matching_date,\n                                             matching_days_since_transplant) {\n  \n  print(paste0(\"Calculating number of potential controls for patient: \", USRDS_ID))\n  control_df%&gt;%\n    \n    #Exact match on cirrhosis, CMV, HIV, and diabetes status\n    filter(cirrhosis==cirrhosis_status)%&gt;%\n    #  filter(CMV==cmv_status)%&gt;%\n    filter(HIV==hiv_status)%&gt;%\n    filter(diabetes==diabetes_status)%&gt;%\n    \n    #Risk set matching\n    filter(tstart&lt;=matching_days_since_transplant)%&gt;%\n    filter(tstop&gt;matching_days_since_transplant)%&gt;%\n    \n    #Calculate date for age calculations/etc.\n    mutate(.baseline_control_date=matching_days_since_transplant+most_recent_transplant_date)%&gt;%\n    \n    #Make sure case and control are sampled within 3 years of each other\n    filter(abs(time_length(interval(.baseline_control_date, matching_date), \"years\")) &lt;=3)%&gt;%\n    \n    #Date matching\n    #  filter(cohort_start_date&lt;=matching_date)%&gt;%\n    #  filter(cohort_stop_date&gt;matching_date)%&gt;%\n    \n    #Age&gt;=18 on index date\n    filter(time_length(interval(BORN, .baseline_control_date), \"years\") &gt;= 18)%&gt;%\n    \n    #Age difference under 10 years, calculated at sampling date\n    filter(abs(time_length(interval(BORN,.baseline_control_date), \"years\")-\n                 time_length(interval(birthdate,matching_date), \"years\")) &lt;=10)%&gt;%\n    \n    #Confirming 365 day Medicare lookback available for potential match\n    verify_medicare_primary(index_date = matching_date, medicare_coverage_df = medicare_history, cache=TRUE)%&gt;%\n    filter(medicare_primary_TF==TRUE)%&gt;%\n    \n    #Count rows after ensuring controls with mult transplants are only counted once \n    distinct(USRDS_ID)%&gt;%\n    nrow()%&gt;%\n    return()\n  \n}",
-    "crumbs": [
-      "Background",
-      "Functions"
-    ]
-  },
-  {
-    "objectID": "quarto/functions.html#total-excess-costs",
-    "href": "quarto/functions.html#total-excess-costs",
-    "title": "Functions",
-    "section": "Total excess costs",
-    "text": "Total excess costs\nThis function takes a fit object from a model and calculates the total estimated excess costs and confidence intervals. This object currently only works for models with linear links.\n\n\nClick to show/hide R Code\n# Calculate total excess costs in a model\ncalculate_total_excess_costs &lt;- function(fitted_model, link = \"linear\") {\n  \n  # Extract coefficients and vcov matrix\n  coef_df &lt;- tidy(fitted_model)\n  vcov_matrix &lt;- vcov(fitted_model)\n  \n  # Get interaction terms\n  interaction_names &lt;- coef_df %&gt;% \n    filter(str_detect(term, \":\")) %&gt;% \n    pull(term)\n  \n  if (link == \"linear\") {\n    # Sum of coefficients\n    sum_estimate &lt;- coef_df %&gt;% \n      filter(term %in% interaction_names) %&gt;% \n      pull(estimate) %&gt;% \n      sum()\n    \n    # Variance of sum\n    sum_variance &lt;- vcov_matrix[interaction_names, interaction_names] %&gt;% \n      sum()\n    \n    # Standard error and CI\n    sum_se &lt;- sqrt(sum_variance)\n    df &lt;- df.residual(fitted_model)\n    \n    tibble(\n      estimate = sum_estimate,\n      std_error = sum_se,\n      conf_low = estimate - qt(0.975, df) * std_error,\n      conf_high = estimate + qt(0.975, df) * std_error,\n      statistic = estimate / std_error,\n      p_value = 2 * pt(-abs(statistic), df)\n    )\n    \n  } else if (link == \"log\") {\n    # Get coefficients for interactions\n    coefs &lt;- coef(fitted_model)[interaction_names]\n    vcov_sub &lt;- vcov_matrix[interaction_names, interaction_names]\n    \n    # Exponentiate each coefficient\n    exp_coefs &lt;- exp(coefs)\n    \n    # Sum of exponentiated coefficients\n    sum_estimate &lt;- sum(exp_coefs)\n    \n    # Delta method for variance\n    # Gradient: derivative of sum(exp(beta)) w.r.t. each beta is exp(beta)\n    gradient &lt;- exp_coefs\n    \n    # Variance using delta method\n    sum_variance &lt;- as.numeric(t(gradient) %*% vcov_sub %*% gradient)\n    sum_se &lt;- sqrt(sum_variance)\n    \n    # CI using normal approximation (GLM)\n    tibble(\n      estimate = sum_estimate,\n      std_error = sum_se,\n      conf_low = estimate - qnorm(0.975) * std_error,\n      conf_high = estimate + qnorm(0.975) * std_error,\n      statistic = estimate / std_error,\n      p_value = 2 * pnorm(-abs(statistic))\n    )\n    \n  } else {\n    stop(\"link must be either 'linear' or 'log'\")\n  }\n}",
-    "crumbs": [
-      "Background",
-      "Functions"
-    ]
-  },
-  {
-    "objectID": "quarto/functions.html#other-portions-of-the-analysis",
-    "href": "quarto/functions.html#other-portions-of-the-analysis",
-    "title": "Functions",
-    "section": "Other portions of the analysis",
-    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures",
-    "crumbs": [
-      "Background",
-      "Functions"
-    ]
-  },
-  {
-    "objectID": "quarto/execute_matching.html",
-    "href": "quarto/execute_matching.html",
-    "title": "Execute matching",
-    "section": "",
-    "text": "The code in this script uses the cohort of kidney transplant patients with and without cryptococcosis developed in the R/create_cohort.R and executes 1:n matching based on a custom-written greedy algorithm\nCharacteristics of the matching algorithm:\n\nMatching without replacement: Each patient without cryptococcosis only serves as a control to one case at most. This makes subsequent statistical analysis simpler.\nRisk set sampling (incidence density sampling): If a case patient develops cryptococcosis at 243 days after their most recent kidney transplant, then all potential controls are chosen based on their covariate values at exactly 243 days post-transplant.\nGreedy matching: Cases are ranked by the number of potential controls at the onset, and then matches chosen without replacement without subsequent reordering.\nMix of exact matching** and caliper matching\n\nExact matching on the following:\n\nCirrhosis\nHIV\nDiabetes\n\nCaliper matching on the following:\n\nAge (within 10 years on the index date, calculated exactly)\nIndex date of case and controls (within 3 years of each other)\n\nPreferential matching on the following:\n\nNumber of transplants prior to index date\n\n\n\n\n\n\n\n\n\nRcodeSource code\n\n\n\nThe full R script is available at:\n\nR/execute_matching.R\n\nThis R script file is itself reliant on the following helper files:\n\nR/setup.R\nR/functions.R\n\nThe code sections below are imported directly from that script when this page is rendered.",
-    "crumbs": [
-      "Data loading and processing",
-      "2. Execute matching"
-    ]
-  },
-  {
-    "objectID": "quarto/execute_matching.html#overview",
-    "href": "quarto/execute_matching.html#overview",
-    "title": "Execute matching",
-    "section": "",
-    "text": "The code in this script uses the cohort of kidney transplant patients with and without cryptococcosis developed in the R/create_cohort.R and executes 1:n matching based on a custom-written greedy algorithm\nCharacteristics of the matching algorithm:\n\nMatching without replacement: Each patient without cryptococcosis only serves as a control to one case at most. This makes subsequent statistical analysis simpler.\nRisk set sampling (incidence density sampling): If a case patient develops cryptococcosis at 243 days after their most recent kidney transplant, then all potential controls are chosen based on their covariate values at exactly 243 days post-transplant.\nGreedy matching: Cases are ranked by the number of potential controls at the onset, and then matches chosen without replacement without subsequent reordering.\nMix of exact matching** and caliper matching\n\nExact matching on the following:\n\nCirrhosis\nHIV\nDiabetes\n\nCaliper matching on the following:\n\nAge (within 10 years on the index date, calculated exactly)\nIndex date of case and controls (within 3 years of each other)\n\nPreferential matching on the following:\n\nNumber of transplants prior to index date\n\n\n\n\n\n\n\n\n\nRcodeSource code\n\n\n\nThe full R script is available at:\n\nR/execute_matching.R\n\nThis R script file is itself reliant on the following helper files:\n\nR/setup.R\nR/functions.R\n\nThe code sections below are imported directly from that script when this page is rendered.",
-    "crumbs": [
-      "Data loading and processing",
-      "2. Execute matching"
-    ]
-  },
-  {
-    "objectID": "quarto/execute_matching.html#prepare-cohort-for-matching",
-    "href": "quarto/execute_matching.html#prepare-cohort-for-matching",
-    "title": "Execute matching",
-    "section": "Prepare cohort for matching",
-    "text": "Prepare cohort for matching\nThe following code prepares the cohort for matching by creating a list object unmatched_patients, keeping only the initial row for each case as only the covariates at the time of cryptococcus are necessary for matching.\n\n\nClick to show/hide R Code\nunmatched_patients&lt;-list()\n\nunmatched_patients[[\"Case\"]]&lt;-prematching_cohort%&gt;%\n  filter(cryptococcus_case==\"Case\")\n\nunmatched_patients[[\"Control\"]]&lt;-prematching_cohort%&gt;%\n  filter(cryptococcus_case==\"Potential control\")\n\nunmatched_patients[[\"Case\"]]&lt;-unmatched_patients[[\"Case\"]]%&gt;%\n  group_by(USRDS_ID)%&gt;%\n  slice(1)%&gt;%\n  ungroup()\n\n#For exploration--perhaps can delete in future?\nCase&lt;-unmatched_patients[[\"Case\"]]\nControl&lt;-unmatched_patients[[\"Control\"]]",
-    "crumbs": [
-      "Data loading and processing",
-      "2. Execute matching"
-    ]
-  },
-  {
-    "objectID": "quarto/execute_matching.html#counting-the-potential-number-of-matched-controls-for-each-case",
-    "href": "quarto/execute_matching.html#counting-the-potential-number-of-matched-controls-for-each-case",
-    "title": "Execute matching",
-    "section": "Counting the potential number of matched controls for each case",
-    "text": "Counting the potential number of matched controls for each case\nThis step uses the calculate_number_potential_matches() function defined in the R/functions.R to add a column to the cases data set, then sorts the cases so that those with the lowest number of potential matches are matched first.\n(Note the following code took ~2 hours to execute on a laptop given the size of the dataset.)\n\n\nClick to show/hide R Code\n#Add number of potential control matches to Case df\nunmatched_patients[[\"Case\"]] &lt;- unmatched_patients[[\"Case\"]] %&gt;%\n  mutate(\n    num_potential_controls = pmap_int(\n      list(USRDS_ID, BORN,cirrhosis, CMV, HIV, diabetes, cryptococcus_dx_date, tstart),\n      function(USRDS_ID, BORN, cirrhosis, CMV, HIV, diabetes, matching_date, tstart) {\n        calculate_number_potential_matches(\n          unmatched_patients[[\"Control\"]],\n          USRDS_ID,\n          BORN, \n          cirrhosis,\n          CMV,\n          HIV,\n          diabetes,\n          matching_date,\n          tstart\n        )\n      }\n    )\n  )\n\n#Sort by number of potential matches so that most difficult to match cases are matched first\n#Set the index_date for cases to be the date of cryptococcus dx\nunmatched_patients[[\"Case\"]] &lt;- unmatched_patients[[\"Case\"]] %&gt;%\n  arrange(num_potential_controls)%&gt;%\n  mutate(index_date_match=cryptococcus_dx_date)\n\n\n#Can be deleted\nunmatched_patients_backup&lt;-unmatched_patients\nunmatched_patients&lt;-unmatched_patients_backup",
-    "crumbs": [
-      "Data loading and processing",
-      "2. Execute matching"
-    ]
-  },
-  {
-    "objectID": "quarto/execute_matching.html#create-a-matched-data-set",
-    "href": "quarto/execute_matching.html#create-a-matched-data-set",
-    "title": "Execute matching",
-    "section": "Create a matched data set",
-    "text": "Create a matched data set\nThe following code executes the match, creating a matched dataframe suitable for use in subsequent analysis.\n\n\nClick to show/hide R Code\n#Time to set up the matching loop\n\n#Initial the loop control\ncontinue&lt;-TRUE\ni&lt;-0\nset.seed(12345)\n\n#Initialize the object where the matched cases and controls will be stored\nmatched_patients&lt;-list()\nmatched_patients[[\"Case\"]]&lt;-unmatched_patients[[\"Case\"]][0, ]%&gt;%\n  mutate(matched_control_indices = list())\nmatched_patients[[\"Control\"]] &lt;- unmatched_patients[[\"Control\"]][0, ] %&gt;%\n  mutate(index_date_match = as.Date(character()))\n\n\n#Perform the match\nwhile (continue==TRUE)\n{\n  i&lt;-i+1\n  print(i)\n\n  #Select matches from controls\n  eligible_controls &lt;-unmatched_patients[[\"Control\"]]%&gt;%\n    \n    filter(cirrhosis==unmatched_patients$Case$cirrhosis[[1]])%&gt;%\n    #filter(CMV==unmatched_patients$Case$CMV[[1]])%&gt;%\n    filter(HIV==unmatched_patients$Case$HIV[[1]])%&gt;%\n    filter(diabetes==unmatched_patients$Case$diabetes[[1]])%&gt;%\n    \n    #Risk set matching\n    filter(tstart&lt;=unmatched_patients$Case$tstart[[1]])%&gt;%\n    filter(tstop&gt;unmatched_patients$Case$tstart[[1]])%&gt;%\n    \n    #Calculate date for age calculations/etc.\n    mutate(.baseline_control_date=unmatched_patients$Case$tstart[[1]] + most_recent_transplant_date)%&gt;%\n    \n    #Make sure case and control are sampled within 3 years of each other\n    filter(abs(time_length(interval(.baseline_control_date, unmatched_patients$Case$cryptococcus_dx_date[[1]]), \"years\")) &lt;=3)%&gt;%\n    \n    #filter(cohort_start_date&lt;=unmatched_patients$Case$cryptococcus_dx_date[[1]])%&gt;%\n    #filter(cohort_stop_date&gt;unmatched_patients$Case$cryptococcus_dx_date[[1]])%&gt;%\n    \n    #Age&gt;=18 on index date\n    filter(time_length(interval(BORN, .baseline_control_date), \"years\") &gt;= 18)%&gt;%\n    \n    #Age difference under 10 years, calculated at sampling date\n    filter(abs(time_length(interval(BORN,.baseline_control_date), \"years\")-\n                 time_length(interval(unmatched_patients$Case$BORN[[1]],\n                                      unmatched_patients$Case$cryptococcus_dx_date[[1]]), \"years\")) &lt;=10)%&gt;%\n  \n    verify_medicare_primary(index_date = \".baseline_control_date\", \n                            medicare_coverage_df = medicare_history, \n                            coverage_start_variable = \"medicare_coverage_start_date\",\n                            coverage_end_variable = \"medicare_coverage_end_date\",\n                            cache=TRUE)%&gt;%\n    filter(medicare_primary_TF==TRUE)%&gt;%\n    \n    #Move matches for cumulative number of transplants to the top\n    #Note: this step could be used for propensity score matching on various variables\n    #Consider minimizing date difference and age difference as well\n    arrange(desc(cumulative_transplant_total==unmatched_patients$Case$cumulative_transplant_total[[1]]))\n  \n  \n  #Number of controls is minimum of global constant number_controls_per_case and number of distinct USRDS_IDs\n  k &lt;- min(number_controls_per_case, nrow(distinct(eligible_controls, USRDS_ID)))\n  \n  #Initialize sampled_controls df\n  sampled_controls&lt;-eligible_controls[0, ]\n    \n  #Loop to select controls one at a time to ensure same patient is not sampled multiple times \n  while (k&gt;0)\n  {\n  \n  sampled_controls &lt;- bind_rows(\n    sampled_controls,\n    eligible_controls %&gt;%slice_head(n = 1))\n    \n    eligible_controls&lt;-eligible_controls%&gt;%\n      filter(!(USRDS_ID %in% sampled_controls$USRDS_ID ))\n\n    k&lt;-min(k-1, nrow(distinct(eligible_controls, USRDS_ID)))   \n  }\n    \n    sampled_controls&lt;-sampled_controls%&gt;%\n    mutate(index_date_match = .baseline_control_date)%&gt;%\n    select(-.baseline_control_date)\n  \n  #Add case to matched DF\n  matched_patients[[\"Case\"]]&lt;-unmatched_patients$Case[1,]%&gt;%\n    mutate(matched_control_indices=list(sampled_controls$USRDS_ID))%&gt;%\n    bind_rows(matched_patients[[\"Case\"]])\n  \n  #Add controls to control DF\n  matched_patients[[\"Control\"]]&lt;-matched_patients[[\"Control\"]]%&gt;%\n    bind_rows(sampled_controls)\n  \n  #Remove controls\n  unmatched_patients[[\"Control\"]]&lt;-unmatched_patients[[\"Control\"]]%&gt;%\n    filter(!(USRDS_ID %in% sampled_controls$USRDS_ID ))\n  \n  #Remove cases\n  unmatched_patients[[\"Case\"]]&lt;-unmatched_patients[[\"Case\"]]%&gt;%\n    slice(-1)\n  \n if (nrow(unmatched_patients[[\"Case\"]])==0){\n   continue&lt;-FALSE\n } \n  \n  if (i==10000){\n    continue&lt;-FALSE\n  }\n  \n}\n\n\npost_match_results&lt;-matched_patients%&gt;%\n  bind_rows(.id = \"patient_type\")\n\n\nThe modeling script uses the above matched dataframe for the actual cost analysis.",
-    "crumbs": [
-      "Data loading and processing",
-      "2. Execute matching"
-    ]
-  },
-  {
-    "objectID": "quarto/execute_matching.html#other-portions-of-the-analysis",
-    "href": "quarto/execute_matching.html#other-portions-of-the-analysis",
-    "title": "Execute matching",
-    "section": "Other portions of the analysis",
-    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures",
-    "crumbs": [
-      "Data loading and processing",
-      "2. Execute matching"
-    ]
-  },
-  {
     "objectID": "quarto/about.html",
     "href": "quarto/about.html",
     "title": "About",
@@ -314,215 +551,6 @@
     "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures",
     "crumbs": [
       "About"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Overview",
-    "section": "",
-    "text": "Cryptococcosis in kidney transplant recipients is uncommon but potentially catastrophic. When transmission occurs through the donor, it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.\nThe costs of cryptococcus after solid organ transplant are unclear. Although studies have quantified the cost of a single hospitalization for cryptococcus, no study to date has estimated the total excess cost of care due to cryptococcus.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#clinical-background",
-    "href": "index.html#clinical-background",
-    "title": "Overview",
-    "section": "",
-    "text": "Cryptococcosis in kidney transplant recipients is uncommon but potentially catastrophic. When transmission occurs through the donor, it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.\nThe costs of cryptococcus after solid organ transplant are unclear. Although studies have quantified the cost of a single hospitalization for cryptococcus, no study to date has estimated the total excess cost of care due to cryptococcus.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#what-this-analysis-does",
-    "href": "index.html#what-this-analysis-does",
-    "title": "Overview",
-    "section": "What this analysis does",
-    "text": "What this analysis does\nThis project uses the United States Renal Data System to analyze the impact of cryptococcus on costs.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#methods",
-    "href": "index.html#methods",
-    "title": "Overview",
-    "section": "Methods",
-    "text": "Methods\nWe selected cryptococcus cases based on the following inclusion criteria:\n\nAge 18 or greater\nPrior kidney transplant\nICD9 or ICD10 codes for cryptococcus (2 outpatient or 1 inpatient)\nOne year of Medicare primary coverage lead-in\n\nControls were matched 2:1 to cases based on risk-set sampling on the following:\n\nTime since transplant\nDiabetes\nHIV/AIDS\nAge within 10 years\nSampling date for control within 3 years of sampling date for case\n\nInstitutional claims data were abstracted as well as Physician/Supplier line-item data.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#results",
-    "href": "index.html#results",
-    "title": "Overview",
-    "section": "Results",
-    "text": "Results\nPending",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#site-navigation",
-    "href": "index.html#site-navigation",
-    "title": "Overview",
-    "section": "Site navigation",
-    "text": "Site navigation\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures\n\n\nReproducibility\nAll analyses presented on this website are fully reproducible.\nThe complete source code used to perform the full analysis and generate the tables and figures is publicly available at this GitHub repo. The R script R/main.R will run the R subscripts needed for this analysis in the order they are to be run. Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#abstractsmanuscripts",
-    "href": "index.html#abstractsmanuscripts",
-    "title": "Overview",
-    "section": "Abstracts/manuscripts",
-    "text": "Abstracts/manuscripts\nThis analysis has yet to be published to date.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "LICENSE.html",
-    "href": "LICENSE.html",
-    "title": "",
-    "section": "",
-    "text": "Code\n\n\n\n\n\nMIT License\nCopyright (c) 2026 Cryptococcus cost analysis authors\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
-  },
-  {
-    "objectID": "quarto/create_cohort.html",
-    "href": "quarto/create_cohort.html",
-    "title": "Create cohort",
-    "section": "",
-    "text": "The code in this script creates the cohort of kidney transplant patients eligible for the study for use in other scripts.",
-    "crumbs": [
-      "Data loading and processing",
-      "1. Create cohort"
-    ]
-  },
-  {
-    "objectID": "quarto/create_cohort.html#initial-data-loading-and-preprocessing-of-usrds-core-and-transplant-files",
-    "href": "quarto/create_cohort.html#initial-data-loading-and-preprocessing-of-usrds-core-and-transplant-files",
-    "title": "Create cohort",
-    "section": "Initial data loading and preprocessing of USRDS core and transplant files",
-    "text": "Initial data loading and preprocessing of USRDS core and transplant files\nThis portion of the code imports files from the USRDS data set necessary for the cryptococcus analysis. This portion makes use of the load_usrds_file() function from the usRds package as well as several tidyverse cleaning functions.\nKey files used:\n\npatients: This is a part of the Core data set of the USRDS and contains key patient demographics.\ntx: Also a part of the Core data set of the USRDS and contains summary information about kidney transplants from UNOS.\ntxunos_trr_ki and txunos_trr_kp: Part of the transplant data set of the USRDS, these files contain more detailed information derived from UNOS that is part of the Scientific Registry of Transplant Recipients.\n\nThe code below loads and merges transplant records across multiple UNOS-derived files, constructs a cumulative transplant count per patient, and reshapes the data into a time-varying format that tracks graft status over time.\n\n\nClick to show/hide R Code\n#Import core demographics from \"patients\" file\npatients_raw&lt;-usRds::load_usrds_file(\"patients\")%&gt;%\n  select(-ZIPCODE) #This is ZIP code at time of USRDS initiation, but we want at time of crypto dx\n\n#Import key information about the transplants from the TX and UNOS databases\ntx_raw&lt;-usRds::load_usrds_file(\"tx\")%&gt;%\n  select(USRDS_ID, TDATE, FAILDATE, TRR_ID_CODE)\n\nki_raw&lt;-usRds::load_usrds_file(\"txunos_trr_ki\")%&gt;%\n  select(USRDS_ID, ORGTYP, HRTX, LUTX, INTX, LITX,PITX,BMTX, TRR_ID_CODE)\n\nkp_raw&lt;-usRds::load_usrds_file(\"txunos_trr_kp\")%&gt;%\n  select(USRDS_ID, ORGTYP, HRTX, LUTX, INTX, LITX,PITX,BMTX, TRR_ID_CODE)\n\n#This combines the three datasets\ntx_clean&lt;-tx_raw%&gt;%\n  left_join(bind_rows(ki_raw,\n                      kp_raw))%&gt;%\n  arrange(USRDS_ID, TDATE)%&gt;%\n  \n  group_by(USRDS_ID)%&gt;%\n  mutate(cumulative_transplant_total=row_number())%&gt;%\n  ungroup\n\n#Create a time-varying dataset that can be used to track whether a pt has an active or inactive graft and the cumulative number of txs\ntx_status&lt;-tx_clean%&gt;%\n  select(USRDS_ID, TDATE, FAILDATE, cumulative_transplant_total)%&gt;%\n  pivot_longer(\n    cols = c(TDATE, FAILDATE),\n    names_to = \"event_type\",\n    values_to = \"event_date\"\n  ) %&gt;%\n  filter(!is.na(event_date)) %&gt;%\n  mutate(\n    graft_status = case_when(\n      event_type == \"TDATE\" ~ \"Active\",\n      event_type == \"FAILDATE\" ~ \"Failed\"\n    )\n  ) %&gt;%\n  select(-event_type)%&gt;%\n  arrange(USRDS_ID, cumulative_transplant_total, event_date, graft_status)",
-    "crumbs": [
-      "Data loading and processing",
-      "1. Create cohort"
-    ]
-  },
-  {
-    "objectID": "quarto/create_cohort.html#initialize-flowchart",
-    "href": "quarto/create_cohort.html#initialize-flowchart",
-    "title": "Create cohort",
-    "section": "Initialize flowchart",
-    "text": "Initialize flowchart\nThe next component makes use of the flowchart package. This package combines two key processes in an epidemiologic analysis:\n\nDataset preparation: Sequential application of eligibility criteria to define the analytic cohort, with explicit tracking of excluded records at each step.\nSTROBE diagram preparation: STrengthening the Reporting of OBservational studies in Epidemiology diagrams visually depict the process of including/excluding patients in an observational study and grouping them into cohorts. Many journals require these as a standard Figure 1.\n\nThe code below initializes a flowchart-aware cohort object and applies sequential eligibility filters, retaining both inclusion counts and labeled exclusion steps for downstream reporting.\n\n\nClick to show/hide R Code\n#Initialize a flowchart cohort\npatients_clean&lt;-patients_raw%&gt;%\n  as_fc(label=\"Patients in USRDS\")%&gt;%\n  \n  \n  fc_filter(TOTTX&gt;0, \n            label=\"Prior transplant\", \n            label_exc = \"Excluded: No prior transplant\", \n            show_exc = TRUE)%&gt;%\n  \n  fc_filter(TX1DATE&lt;as.Date(\"2021-01-01\"), \n            label=\"Transplant prior to 2021\", \n            label_exc = \"Excluded: Transplant 2021 or later\", \n            show_exc = TRUE)",
-    "crumbs": [
-      "Data loading and processing",
-      "1. Create cohort"
-    ]
-  },
-  {
-    "objectID": "quarto/create_cohort.html#identification-of-comorbidities-and-confirmation-of-medicare-coverage-continuity",
-    "href": "quarto/create_cohort.html#identification-of-comorbidities-and-confirmation-of-medicare-coverage-continuity",
-    "title": "Create cohort",
-    "section": "Identification of comorbidities and confirmation of Medicare coverage continuity",
-    "text": "Identification of comorbidities and confirmation of Medicare coverage continuity\nThis component identifies baseline comorbidities among transplant recipients using diagnosis codes derived from Medicare Institutional (Part A) and physician/supplier (Part B) claims. Diagnosis code lists defined in R/setup.R are applied uniformly across claims files to establish the presence and timing of comorbid conditions.\nThis portion makes use of the get_IN_ICD() and get_PS_ICD() functions from the usRds package to obtain dates that specific ICD codes are used for patients with a history of at least one kidney transplant in the study period.\nThe establish_dx_date() function from the usRds package uses the results of this analysis to ascertain the date when comorbidities meet the criteria for a formal diagnosis:\n\nTwo outpatient encounters or\nOne inpatient encounter\n\nIn parallel, Medicare coverage history is retrieved for all transplant recipients from the payhist file, which is part of the Core dataset. These data will be used to confirm continuous enrollment during the analytic period. We verify the absence of gaps indicating missing data, noting that every subsequent period in the dataset for a patient starts the day after the previous period ends and thereby supporting valid longitudinal assessment of diagnoses and downstream cost analyses.\nFinally, we separate cryptococcus diagnosis dates from other comorbidities for a separate list, given the key nature of the date of cryptococcus diagnosis for subsequent analyses.\n\n\nClick to show/hide R Code\n#Create list of USRDS ids for patients who have undergone transplant\ntransplant_id_list&lt;-patients_clean$data%&gt;%\n  pull(USRDS_ID)\n\n# We now seek to determine comorbidities by using diagnosis codes from the setup.R file\n\ncomorbidity_diagnosis_date&lt;-list()\n\n# Combine all ICD codes from all comorbidities into one list \ncomorbidity_ICD_combined_list&lt;-unlist(comorbidity_ICD_list, use.names=FALSE)\n\n#Scrape files for any comorbidity claim\ncomorbidity_claims_df&lt;-bind_rows(get_IN_ICD(icd_codes = comorbidity_ICD_combined_list, \n                                            years = 2006:2021, \n                                            usrds_ids = transplant_id_list ),\n                                 get_PS_ICD(icd_codes = comorbidity_ICD_combined_list, \n                                            years = 2006:2021, \n                                            usrds_ids = transplant_id_list )%&gt;%rename(CODE=DIAG))%&gt;%\n  arrange(USRDS_ID, CLM_FROM)\n\n#Create comorbidity_diagnosis_date data frame\nfor (comorbidity in names(comorbidity_ICD_list)){\n  \n  comorbidity_diagnosis_date[[comorbidity]]&lt;-comorbidity_claims_df%&gt;%\n    filter(CODE %in% comorbidity_ICD_list[[comorbidity]])%&gt;%\n    establish_dx_date(diagnosis_established = comorbidity)\n}\n\n#Load Medicare coverage history for all patients with transplant\nmedicare_history&lt;-load_usrds_file(\"payhist\",\n                                  usrds_ids = transplant_id_list)%&gt;%\n  arrange(USRDS_ID, BEGDATE)%&gt;%\n  group_by(USRDS_ID)%&gt;%\n  mutate(lag_ENDDATE=lag(ENDDATE))%&gt;%\n  mutate(gap=as.numeric(BEGDATE-lag_ENDDATE))%&gt;%\n  arrange(desc(gap))\n\n#Confirm no gaps (gap should always be 1 or missing)\nif (any(!is.na(medicare_history$gap) & medicare_history$gap != 1)) {\n  stop(\"Gap assumption violated: `gap` contains values other than 1 or NA.\")\n}\n\n#Add cryptococcus diagnosis date to patients_clean$data\n#First, format a df with the cryptococcus dx\ncryptococcus_df&lt;-comorbidity_diagnosis_date$cryptococcus%&gt;%\n  select(-diagnosis)%&gt;%\n  rename(cryptococcus_dx_date=date_established)",
-    "crumbs": [
-      "Data loading and processing",
-      "1. Create cohort"
-    ]
-  },
-  {
-    "objectID": "quarto/create_cohort.html#further-development-of-the-strobe-flowchart",
-    "href": "quarto/create_cohort.html#further-development-of-the-strobe-flowchart",
-    "title": "Create cohort",
-    "section": "Further development of the STROBE flowchart",
-    "text": "Further development of the STROBE flowchart\nSubsequently, key diagnosis dates, including the date of cryptococcosis diagnosis, are merged into the analytic patient dataset.\nThis code block then extends the STROBE flowchart by integrating diagnosis timing, eligibility criteria, and coverage requirements to finalize the analytic cohorts. Patients are classified as cryptococcosis cases or potential controls based on the presence and timing of diagnosis, and sequential exclusion criteria are applied to ensure incident disease, adult status at diagnosis, and appropriate calendar-time eligibility.\nThe verify_medicare_primary() function from the usRds package is used to confirm that patients with a cryptococcus diagnosis have Medicare primary coverage for at least 365 days prior to the cryptococcus diagnosis date to ensure that the diagnosis is new and not a carryover from an unobserved period.\nThese steps culminate in the final case and control cohorts, with all inclusion and exclusion decisions explicitly tracked and visualized in the updated STROBE flow diagram.\n\n\nClick to show/hide R Code\n#Join cryptococcus date to fc cohort\npatients_clean$data&lt;-left_join(patients_clean$data, \n                               cryptococcus_df)%&gt;%\n  mutate(cryptococcus_case=ifelse(is.na(cryptococcus_dx_date), \"Potential control\", \"Case\"))\n\n#Continue to create analytic cohort\npatients_merged&lt;-patients_clean%&gt;%\n  \n  #Remove patients with a diagnosis of cryptococcus prior to transplant\n  fc_filter(cryptococcus_dx_date&gt;TX1DATE | is.na(cryptococcus_dx_date), \n            label=\"No cryptococcus dx prior to transplant\", \n            label_exc = \"Excluded: cryptococcus dx prior to transplant\", \n            show_exc = TRUE)%&gt;%\n  \n  fc_filter((time_length(interval(BORN, cryptococcus_dx_date), \"years\") &gt;= 18) | is.na(cryptococcus_dx_date),\n            label=\"Age 18+ at time of cryptococcus if cryptococcus patient\", \n            label_exc = \"Excluded: First cryptococcus prior to age 18\", \n            show_exc = TRUE)%&gt;%\n  \n  fc_filter((year(cryptococcus_dx_date)&gt;=2007 & year(cryptococcus_dx_date)&lt;=2020) | is.na(cryptococcus_dx_date),\n            label=\"Incident cryptococcus between 1/1/2007 and 12/31/2020\", \n            label_exc = \"Incident cryptococcus outside of specified date range\", \n            show_exc = TRUE)%&gt;%\n  \n  #Split cohorts\n  fc_split(cryptococcus_case)\n  \n  #Check Medicare coverage for 365-day lookback period from day of first episode of cryptococcus\npatients_merged$data&lt;-patients_merged$data%&gt;%\n  verify_medicare_primary(index_date = \"cryptococcus_dx_date\",\n                          lookback_days = 365,\n                          coverage_start_variable = \"coverage_start_date\",\n                          coverage_end_variable = \"coverage_end_date\"\n                          )%&gt;%\n  mutate(medicare_primary_TF=ifelse(cryptococcus_case==\"Potential control\", TRUE, medicare_primary_TF))\n  \npatients_merged2&lt;-patients_merged%&gt;%\n  \n  fc_filter(medicare_primary_TF==TRUE, \n            label = \"365+ days of Medicare primary coverage\\nprior to first cryptococcus claim\", \n            label_exc = \"Excluded: Fewer than 365 days of coverage\",\n            show_exc = TRUE)\n\npatients_merged2$data&lt;-patients_merged2$data%&gt;%\n  select(-medicare_primary_TF)%&gt;%\n  \n  #Prepare data for cohort initialization\n  mutate(terminal_date=coalesce(coverage_end_date, censor_date))\n\npatients_merged2&lt;-patients_merged2%&gt;%\n  fc_filter((terminal_date - cryptococcus_dx_date &gt;=minimum_followup) | is.na(cryptococcus_dx_date), \n            label = \"Minimum followup exceeded\", \n            label_exc= \"Excluded: Minimum follow-up threshold not met\",\n            show_exc = TRUE)\n\n  \npatients_merged2%&gt;%\n  fc_draw()",
-    "crumbs": [
-      "Data loading and processing",
-      "1. Create cohort"
-    ]
-  },
-  {
-    "objectID": "quarto/create_cohort.html#creation-of-a-time-varying-cohort",
-    "href": "quarto/create_cohort.html#creation-of-a-time-varying-cohort",
-    "title": "Create cohort",
-    "section": "Creation of a time-varying cohort",
-    "text": "Creation of a time-varying cohort\nWe use several functions from the usRds package:\n\ncreate_usrds_cohort()\nadd_cohort_covariate()\nfinalize_usrds_cohort()\n\nThese functions split each patient into multiple rows, with each row describing a discrete period of time. This captures that patients will have time-varying status for covariates such as cirrhosis status, etc.\nPatients with cryptococcus infection join the cohort on the date of cryptococcosis diagnosis, while patients without cryptococcus (potential controls) join on the date of their first kidney transplant.\n“Time since transplant” resets after each new transplant.\n\n\nClick to show/hide R Code\n#Now we need to construct the time-varying data set\n\n#Ungroup\ninitial_cohort&lt;-patients_merged2$data%&gt;%\n  ungroup()%&gt;%\n\n#Cases join when they experience cryptococcus\n#Controls start on date of first transplant\n  mutate(\n    cohort_join_date = coalesce(\n      as.Date(cryptococcus_dx_date),\n      as.Date(TX1DATE)\n    )\n  )\n\n#Initialize cohort\nprematching_cohort&lt;-create_usrds_cohort(df=initial_cohort,\n                            start_date = \"cohort_join_date\",\n                            end_date = \"terminal_date\")%&gt;%\n  \n  # Add cirrhosis\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"cirrhosis\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"cirrhosis\")%&gt;%\n  \n  # Add CMV\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"CMV\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"CMV\")%&gt;%\n  \n  # Add diabetes\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Diabetes\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"diabetes\")%&gt;%\n  \n  # Add HIV\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"HIV\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"HIV\")%&gt;%\n  \n  # Add liver transplant\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Liver transplant\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"liver_transplant\")%&gt;%\n  \n  # Add lung transplant\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Lung transplant\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"lung_transplant\")%&gt;%\n  \n  # Add heart transplant\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Heart transplant\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"heart_transplant\")%&gt;%\n  \n  # Add pancreas transplant\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Pancreas transplant\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"pancreas_transplant\")%&gt;%\n  \n  # Add heart-lung transplant\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Heart-lung transplant\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"heartlung_transplant\")%&gt;%\n  \n  # Add intestinal transplant\n  add_cohort_covariate(covariate_data_frame=comorbidity_diagnosis_date[[\"Intestinal transplant\"]],\n                       covariate_date=\"date_established\",\n                       covariate_variable_name=\"intestinal_transplant\")%&gt;%\n  \n  #Add time-varying information about transplant status\n  add_cohort_covariate(covariate_data_frame=tx_status,\n                       covariate_date=\"event_date\",\n                       covariate_variable_name=\"cumulative_transplant_total\",\n                       covariate_value = \"cumulative_transplant_total\")%&gt;%\n  \n  #Add time-varying information about transplant status (whether current graft is active or failed)\n  add_cohort_covariate(covariate_data_frame=tx_status,\n                       covariate_date=\"event_date\",\n                       covariate_variable_name=\"current_graft_status\",\n                       covariate_value = \"graft_status\")%&gt;%\n  \n  #Add time-varying information about transplant status (date of most recent transplant)\n  add_cohort_covariate(covariate_data_frame=tx_status%&gt;%filter(graft_status==\"Active\"),\n                       covariate_date=\"event_date\",\n                       covariate_variable_name=\"most_recent_transplant_date\",\n                       covariate_value = \"event_date\")%&gt;%\n  \n  #Add time-varying information about transplant status (date of most recent graft failure)\n  add_cohort_covariate(covariate_data_frame=tx_status%&gt;%filter(graft_status==\"Failed\"),\n                       covariate_date=\"event_date\",\n                       covariate_variable_name=\"most_recent_failure_date\",\n                       covariate_value = \"event_date\")%&gt;%\n  \n  # Add Medicare current coverage\n  add_cohort_covariate(covariate_data_frame=medicare_history,\n                       covariate_date=\"BEGDATE\",\n                       covariate_variable_name=\"current_medicare_coverage\",\n                       covariate_value = \"PAYER\"\n                       )%&gt;%\n  \n  finalize_usrds_cohort(baseline_date_variable = \"most_recent_transplant_date\")\n\n\nThe analysis then proceeds on to the execute_matching component.",
-    "crumbs": [
-      "Data loading and processing",
-      "1. Create cohort"
-    ]
-  },
-  {
-    "objectID": "quarto/create_cohort.html#other-portions-of-the-analysis",
-    "href": "quarto/create_cohort.html#other-portions-of-the-analysis",
-    "title": "Create cohort",
-    "section": "Other portions of the analysis",
-    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures",
-    "crumbs": [
-      "Data loading and processing",
-      "1. Create cohort"
-    ]
-  },
-  {
-    "objectID": "quarto/figures.html",
-    "href": "quarto/figures.html",
-    "title": "Figures",
-    "section": "",
-    "text": "The code in this script generates figures for the manuscript.",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Figures"
-    ]
-  },
-  {
-    "objectID": "quarto/figures.html#final-flowchart",
-    "href": "quarto/figures.html#final-flowchart",
-    "title": "Figures",
-    "section": "Final flowchart",
-    "text": "Final flowchart\nThe following code uses the flowchart package to create a STROBE flowchart for the study.\n\n\nClick to show/hide R Code\n#Final STROBE flowchart\npatients_fc_matched%&gt;%\n  fc_draw()%&gt;%\n  fc_export(\"figures/flowchart.svg\",\n            width=20,\n            height=10)",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Figures"
-    ]
-  },
-  {
-    "objectID": "quarto/figures.html#beeswarm-plot-of-total-inflated-costs",
-    "href": "quarto/figures.html#beeswarm-plot-of-total-inflated-costs",
-    "title": "Figures",
-    "section": "Beeswarm plot of total inflated costs",
-    "text": "Beeswarm plot of total inflated costs\nThe following code uses the ggbeeswarm add-on to ggplot2 to compare cases and controls in terms of total inflated costs post-index. No attempt is made to adjust for censoring or death.\n\n\nClick to show/hide R Code\n#GGplot that is beeswarm of adjusted total costs\ncost_inflated%&gt;%\n  mutate(IN_CLM_365d_cost_adjusted_total=ifelse(IN_CLM_365d_cost_adjusted_total==0, 1, IN_CLM_365d_cost_adjusted_total))%&gt;%\n  ggplot()+\n  geom_quasirandom(mapping=aes(x=patient_type, y=IN_CLM_365d_cost_adjusted_total), alpha=0.1)+\n  scale_y_log10()+\n  theme_classic()",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Figures"
-    ]
-  },
-  {
-    "objectID": "quarto/figures.html#month-by-month-plots",
-    "href": "quarto/figures.html#month-by-month-plots",
-    "title": "Figures",
-    "section": "Month-by-month plots",
-    "text": "Month-by-month plots\nIn order to plot monthly costs predicted from the longitudinal models generated in the R/models.R script, we use the plot_mean_monthly_costs() function from the R/functions.R script to create the ggplot objects, and then save as .svg files.\n\n\nClick to show/hide R Code\n#Loop that plots the different outcomes longitudinally\n\nfor (outcome in c(\"grand_total_cost_month\", \"IN_CLM_month_total\", \"PS_REV_month_total\", \"IN_CLM_month_groupedHomeHealth\",\n                  \"IN_CLM_month_groupedHospice\",\"IN_CLM_month_groupedNonclaimauxiliary\",\"IN_CLM_month_groupedDialysis\",\n                  \"IN_CLM_month_groupedOutpatient\",\"IN_CLM_month_groupedInpatient\",\"IN_CLM_month_groupedSkilledNursingFacility\")){\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"glmmTMB\"]][[\"tweedie\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" glmmTMB\", \" \", \"tweedie.svg\"),\n         width=14,\n         height=7\n         )\n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"glmmTMB\"]][[\"linear\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" glmmTMB\", \" \", \"linear.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"gee\"]][[\"linear\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" gee\", \" \", \"linear.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"glmmTMB\"]][[\"log\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" glmmTMB\", \" \", \"log.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"gee\"]][[\"log\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" gee\", \" \", \"log.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n}",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Figures"
-    ]
-  },
-  {
-    "objectID": "quarto/figures.html#other-portions-of-the-analysis",
-    "href": "quarto/figures.html#other-portions-of-the-analysis",
-    "title": "Figures",
-    "section": "Other portions of the analysis",
-    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nAbout: methods, assumptions, and disclosures",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Figures"
     ]
   },
   {
@@ -612,5 +640,180 @@
       "Background",
       "Setup"
     ]
+  },
+  {
+    "objectID": "ARCHITECTURE.html",
+    "href": "ARCHITECTURE.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "ARCHITECTURE.html#overview",
+    "href": "ARCHITECTURE.html#overview",
+    "title": "",
+    "section": "Overview",
+    "text": "Overview\nThe project estimates excess Medicare cost after cryptococcosis in kidney transplant recipients, using USRDS data (linked UNOS and Medicare) accessed through the separate usRds package. It works in four stages:\n\nBuild a time-varying cohort of transplant recipients.\nMatch each case at diagnosis to up to number_controls_per_case (2) never-diagnosed controls, using risk-set matching on time since transplant.\nTurn each person’s claims into an inflation-adjusted cost panel by month, from month −3 to month 11 around the index date.\nFit cost models in which patient_type × month gives the case–control cost difference.\n\nA Quarto website in quarto/ explains each script and displays its code in eval: false chunks. The site never runs the analysis: the only script sections it runs are the Setup page’s constants and ICD code lists, which define values and read nothing. It is rendered by .github/workflows/publish.yml and published to the gh-pages branch, which GitHub Pages serves; the local render in docs/ is not committed."
+  },
+  {
+    "objectID": "ARCHITECTURE.html#script-and-object-flow",
+    "href": "ARCHITECTURE.html#script-and-object-flow",
+    "title": "",
+    "section": "Script and Object Flow",
+    "text": "Script and Object Flow\nR/main.R sources the scripts in order. Every script uses objects that earlier scripts left in the global environment; no script saves or loads intermediate files.\nflowchart TD\n    S[setup.R&lt;br/&gt;libraries, constants,&lt;br/&gt;comorbidity_ICD_list] --&gt; F[functions.R&lt;br/&gt;plot_mean_monthly_costs&lt;br/&gt;calculate_number_potential_matches&lt;br/&gt;calculate_total_excess_costs]\n    F --&gt; C[create_cohort.R]\n    C --&gt;|prematching_cohort&lt;br/&gt;medicare_history&lt;br/&gt;patients_merged2| M[execute_matching.R]\n    M --&gt;|post_match_results| P[postmatch_processing.R]\n    P --&gt;|final_data_set&lt;br/&gt;final_count_df&lt;br/&gt;cost_broken_down, cost_inflated&lt;br/&gt;patients_fc_matched| MO[modeling.R]\n    MO --&gt;|fit list&lt;br/&gt;10 outcomes × 5 models| T[tables.R]\n    MO --&gt; FG[figures.R]\n    P --&gt; T\n    P --&gt; FG\n    T --&gt; TO[(tables/ — gitignored)]\n    FG --&gt; FO[(figures/ — gitignored)]\n    U[[usRds package]] -.-&gt; C\n    U -.-&gt; M\n    U -.-&gt; P\n    D[define_cohort.R&lt;br/&gt;deprecated, not sourced]\n\nHidden dependencies\nSome functions read globals instead of taking them as arguments:\n\ncalculate_number_potential_matches() reads medicare_history, created in create_cohort.R.\nplot_mean_monthly_costs() defaults countdf = final_count_df, created in postmatch_processing.R. R evaluates the default only when the function is called, so this works from figures.R but not earlier.\ncreate_cohort.R sources setup.R a second time. Harmless, but it reloads every library.\ndefine_cohort.R is marked deprecated, uses the older strobe API, and is sourced by nothing. setup.R still loads strobe for it."
+  },
+  {
+    "objectID": "ARCHITECTURE.html#components",
+    "href": "ARCHITECTURE.html#components",
+    "title": "",
+    "section": "Components",
+    "text": "Components\n\nSetup\nPurpose: Load libraries and define analysis-wide constants and ICD code lists.\nLocation: R/setup.R\nKey symbols: - censor_date, minimum_followup, maximum_followup — follow-up window - number_controls_per_case — target matching ratio - inflation_month, inflation_year — inflation baseline - baseline_months_cost, full_months — pre-index months and the month range of the panel - cryptococcus_ICD_list, comorbidity_ICD_list — ICD-9-CM and ICD-10-CM code lists by condition\nInteractions: Read by every later script.\n\n\nHelper functions\nPurpose: Functions shared across scripts.\nLocation: R/functions.R\nKey functions: - calculate_number_potential_matches() — counts eligible controls for one case, used to order the greedy match - calculate_total_excess_costs() — sums patient_type:month interaction coefficients and their variance (linear branch; log branch exists) - plot_mean_monthly_costs() — emmeans predictions by group and month at month_offset = 30, with a risk table underneath\n\n\nCohort construction\nPurpose: Build the time-varying cohort of transplant recipients with cases, potential controls, and time-varying covariates.\nLocation: R/create_cohort.R (sections load-usrds-files, initialize-flowchart, comorbidities-medicare, develop-flowchart, time-varying-cohort)\nflowchart LR\n    subgraph USRDS via usRds\n      PT[patients]\n      TX[tx]\n      KI[txunos_trr_ki]\n      KP[txunos_trr_kp]\n      CL[IN + PS claims&lt;br/&gt;2006–2021]\n      PH[payhist]\n    end\n    TX --&gt; TXC[tx_clean&lt;br/&gt;cumulative_transplant_total]\n    KI --&gt; TXC\n    KP --&gt; TXC\n    TXC --&gt; TXS[tx_status&lt;br/&gt;long: TDATE→Active,&lt;br/&gt;FAILDATE→Failed]\n    PT --&gt; FC[patients_clean&lt;br/&gt;flowchart: TOTTX&gt;0,&lt;br/&gt;TX1DATE &lt; 2021]\n    CL --&gt;|get_IN_ICD / get_PS_ICD| CD[comorbidity_diagnosis_date&lt;br/&gt;one df per condition&lt;br/&gt;via establish_dx_date]\n    PH --&gt; MH[medicare_history&lt;br/&gt;+ gap check]\n    FC --&gt; PM[patients_merged&lt;br/&gt;crypto after TX1DATE, age ≥18,&lt;br/&gt;dx 2007–2020, fc_split]\n    CD --&gt;|cryptococcus| PM\n    PM --&gt;|verify_medicare_primary&lt;br/&gt;365 d, cases only| PM2[patients_merged2&lt;br/&gt;terminal_date,&lt;br/&gt;minimum follow-up]\n    PM2 --&gt; IC[initial_cohort&lt;br/&gt;cohort_join_date:&lt;br/&gt;cases = dx date&lt;br/&gt;controls = TX1DATE]\n    IC --&gt;|create_usrds_cohort| PC[prematching_cohort&lt;br/&gt;start/stop rows]\n    CD --&gt;|add_cohort_covariate ×10| PC\n    TXS --&gt;|tx count, graft status,&lt;br/&gt;last tx / failure date| PC\n    MH --&gt;|PAYER| PC\nOutput: prematching_cohort, a counting-process data set with one row per person per interval (tstart, tstop). After finalize_usrds_cohort(), time is days since most_recent_transplant_date. Comorbidities, graft status and payer vary over time within a person.\nCases enter at diagnosis, so a case’s first row has tstart equal to the days from their most recent transplant to diagnosis. That value is their matching time. Controls run from TX1DATE to terminal_date.\nThe flowchart package objects (patients_clean, patients_merged, patients_merged2) carry the exclusion counts for the STROBE diagram.\n\n\nMatching\nPurpose: Greedy risk-set matching of cases to controls without replacement.\nLocation: R/execute_matching.R (sections prepare-cohort, count-potential-matches, matching-loop)\nflowchart TD\n    A[prematching_cohort] --&gt; B[Cases: first row per ID&lt;br/&gt;Controls: all rows of&lt;br/&gt;'Potential control']\n    B --&gt; C[Count potential controls per case&lt;br/&gt;calculate_number_potential_matches]\n    C --&gt; D[Sort cases: fewest potential&lt;br/&gt;controls first]\n    D --&gt; E{Next case}\n    E --&gt; F[Eligible controls:&lt;br/&gt;exact cirrhosis, HIV, diabetes&lt;br/&gt;CMV commented out&lt;br/&gt;tstart ≤ case tstart &lt; tstop]\n    F --&gt; G[control index date =&lt;br/&gt;most_recent_transplant_date + case tstart&lt;br/&gt;±3 y calendar, age ≥18, age ±10 y&lt;br/&gt;Medicare primary at control date]\n    G --&gt; H[arrange: same cumulative&lt;br/&gt;transplant count first]\n    H --&gt; I[Take up to 2, one at a time,&lt;br/&gt;slice_head, distinct IDs]\n    I --&gt; J[Add case + controls to matched_patients&lt;br/&gt;remove controls from pool]\n    J --&gt; E\n    E --&gt;|none left| K[post_match_results&lt;br/&gt;patient_type, index_date_match,&lt;br/&gt;matched_control_indices on case rows]\nOutput: post_match_results, which stacks cases and controls with patient_type and index_date_match. The only record of the matched set is the list column matched_control_indices on case rows.\n\n\nPost-match processing\nPurpose: Attach claims, define the follow-up window, compute 365-day totals, and build the monthly cost panel.\nLocation: R/postmatch_processing.R (sections matched-flowchart, raw-costs, merge-costs, total-costs, prorated-costs, inflation-adjustment, monthly-costs, final-data-set)\nflowchart TD\n    R[post_match_results] --&gt; RC[costs_raw via usRds&lt;br/&gt;IN_REV, IN_CLM, PS_REV]\n    RC --&gt; CJ[cost_joined&lt;br/&gt;one nested tibble per&lt;br/&gt;claim file per person]\n    CJ --&gt; EA[end_date_analysis = min of&lt;br/&gt;index + 365, censor_date,&lt;br/&gt;coverage_end_date,&lt;br/&gt;medicare_coverage_end_date]\n    EA --&gt; T365[cost_broken_down / cost_inflated&lt;br/&gt;365-day totals, raw and adjusted,&lt;br/&gt;by HCFASAF; IN_CLM prorated by day]\n    EA --&gt; MP[cost_longitudinal&lt;br/&gt;month = days from index %/% 30&lt;br/&gt;months −3…11&lt;br/&gt;IN_CLM by service_date + PS_REV by CLM_FROM&lt;br/&gt;month_offset = observed days, max 30]\n    MP --&gt; FD[final_data_set&lt;br/&gt;drop list columns,&lt;br/&gt;drop month_offset = 0]\nOne person’s timeline in the panel:\nday:    −90      −60      −30       0        30      ...     330      360\nmonth:  [  −3   ][  −2   ][  −1   ][   0   ][   1  ] ... [  11  ]\n                                   ^ index_date_match (case: dx date; control: matched date)\nmonth_offset = days observed in each month, capped at 30; follow-up ends at end_date_analysis\nDetails that are easy to miss:\n\nIN_REV feeds only the 365-day totals. The monthly panel and all models use IN_CLM and PS_REV; grand_total_cost_month is IN_CLM_month_total + PS_REV_month_total.\nMonthly sums are floored at 0 with pmax(), which absorbs negative adjustment claims.\nfinal_count_df (persons per group per month) is the risk table under each monthly plot.\n\n\n\nModeling\nPurpose: Fit monthly cost models for each outcome.\nLocation: R/modeling.R (no section labels; the page includes the whole file)\nFor each of 10 outcomes (grand total, IN_CLM total, PS_REV total, and seven IN_CLM service categories), five models are fitted, all with patient_type * factor(month) + offset(log(month_offset)), clustered on USRDS_ID:\n\n\n\n\n\n\n\n\n\nKey in fit[[outcome]]\nEngine\nOutcome scale\nFamily\n\n\n\n\nglmmTMB$tweedie\nglmmTMB, random intercept\ndollars\nTweedie, log link\n\n\nglmmTMB$linear\nglmmTMB, random intercept\ndollars\nGaussian, identity\n\n\ngee$linear\ngeeglm, exchangeable\ndollars\nGaussian, identity\n\n\nglmmTMB$log\nglmmTMB, random intercept\nlog1p dollars\nGaussian, identity\n\n\ngee$log\ngeeglm, exchangeable\nlog1p dollars\nGaussian, identity\n\n\n\nThe reference level of factor(month) is −3, the lowest month, so each interaction term is a case–control difference relative to month −3.\n\n\nTables and figures\nLocation: R/tables.R, R/figures.R\n\nTable 1 (table1) summarizes post_match_results by patient_type; saved to tables/.\nTable 2 (table2_icd) lists the ICD codes from comorbidity_ICD_list; saved to tables/.\nCost summary tables from cost_broken_down and cost_inflated are printed, not saved.\nThe total excess cost comes from calculate_total_excess_costs() on fit$grand_total_cost_month$gee$linear.\nFigures: the final flowchart (patients_fc_matched), a beeswarm of 365-day IN_CLM totals, and one monthly plot per outcome and model via plot_mean_monthly_costs(); saved to figures/.\n\ntables/ and figures/ are gitignored, so saved outputs cannot be checked from GitHub."
+  },
+  {
+    "objectID": "ARCHITECTURE.html#website-build",
+    "href": "ARCHITECTURE.html#website-build",
+    "title": "",
+    "section": "Website Build",
+    "text": "Website Build\nflowchart LR\n    RS[\"R/*.R&lt;br/&gt;sections marked ## ---- label\"] --&gt;|knitr::read_chunk| Q[\"quarto/*.qmd&lt;br/&gt;chunks with #| label + eval: false\"]\n    RM[R/modeling.R] --&gt;|\"#| file: whole script\"| QM[quarto/modeling.qmd]\n    Y[_quarto.yml&lt;br/&gt;sidebar, custom-callout filter] --&gt; REN[quarto render]\n    Q --&gt; REN\n    QM --&gt; REN\n    IX[index.qmd] --&gt; REN\n    REN --&gt; DOCS[(gh-pages branch, rendered by&lt;br/&gt;GitHub Actions, served by GitHub Pages)]\n\nEach page calls knitr::read_chunk() on its script, then shows sections by label. A script edit appears on the site at the next render, with no page edit.\nquarto/modeling.qmd includes the whole script with #| file:, so it displays everything in modeling.R, including unused blocks.\n_quarto.yml defines the sidebar, the custom-callout filter (the Rcode callout), and output-dir: docs.\n.github/workflows/publish.yml renders the site on every pull request as a check and, on each push to master, renders it and publishes it to the gh-pages branch, so the live site follows every script or page change. docs/ is the local render and is not committed.\nThe Setup page runs the constants and icd-code-lists sections of R/setup.R to build its summary tables; every other imported section is shown with eval: false."
+  },
+  {
+    "objectID": "ARCHITECTURE.html#configuration",
+    "href": "ARCHITECTURE.html#configuration",
+    "title": "",
+    "section": "Configuration",
+    "text": "Configuration\n\n\n\n\n\n\n\n\nSetting\nWhere\nEffect\n\n\n\n\ncensor_date\nR/setup.R\nAdministrative end of follow-up\n\n\nminimum_followup, maximum_followup\nR/setup.R\nCase inclusion; 365-day cost window\n\n\nnumber_controls_per_case\nR/setup.R\nTarget controls per case\n\n\ninflation_month, inflation_year\nR/setup.R\nBaseline for adjust_costs_for_inflation()\n\n\nbaseline_months_cost, full_months\nR/setup.R\nPre-index months; panel month range\n\n\ncomorbidity_ICD_list\nR/setup.R\nCondition definitions for cases and covariates\n\n\nMatching calipers (±3 y calendar, ±10 y age, age ≥18)\nR/execute_matching.R, R/functions.R\nHard-coded in both places\n\n\nSite navigation, theme, output dir\n_quarto.yml\nWebsite structure"
+  },
+  {
+    "objectID": "ARCHITECTURE.html#code-references",
+    "href": "ARCHITECTURE.html#code-references",
+    "title": "",
+    "section": "Code References",
+    "text": "Code References\n\n\n\n\n\n\n\n\nComponent\nFile\nKey symbols\n\n\n\n\nEntry point\nR/main.R\nsourcing order\n\n\nConstants, code lists\nR/setup.R\ncensor_date, number_controls_per_case, full_months, comorbidity_ICD_list\n\n\nHelpers\nR/functions.R\ncalculate_number_potential_matches(), calculate_total_excess_costs(), plot_mean_monthly_costs()\n\n\nCohort\nR/create_cohort.R\ntx_status, medicare_history, patients_merged2, prematching_cohort\n\n\nMatching\nR/execute_matching.R\nunmatched_patients, matching while loop, post_match_results\n\n\nCosts and panel\nR/postmatch_processing.R\nend_date_analysis, cost_inflated, cost_longitudinal, final_data_set, final_count_df\n\n\nModels\nR/modeling.R\ntemp_formula, fit[[outcome]][[engine]][[family]]\n\n\nOutputs\nR/tables.R, R/figures.R\ntable1, table2_icd, monthly plot loop\n\n\nDeprecated\nR/define_cohort.R\nolder strobe-based cohort script\n\n\nWebsite\n_quarto.yml, index.qmd, quarto/*.qmd, _extensions/\nread_chunk, custom-callout\n\n\nExternal (usRds)\n—\nload_usrds_file, get_IN_ICD, get_PS_ICD, establish_dx_date, verify_medicare_primary, create_usrds_cohort, add_cohort_covariate, finalize_usrds_cohort, get_IN_REV_costs, get_IN_CLM_costs, get_PS_REV_costs, prorate_costs_by_day, adjust_costs_for_inflation"
+  },
+  {
+    "objectID": "ARCHITECTURE.html#known-architectural-gaps",
+    "href": "ARCHITECTURE.html#known-architectural-gaps",
+    "title": "",
+    "section": "Known Architectural Gaps",
+    "text": "Known Architectural Gaps\nStatus as of commit 8a52330. These come from reading the code and need checking against the real data where noted.\n\nMatched-set ID is lost before modeling. matched_control_indices is a list column, and final_data_set drops list columns. Models can cluster only on USRDS_ID. (Needs a design decision.)\nDeath is not an input to end_date_analysis. DIED appears only in the follow_up_final_event label. Post-death months stay in the panel unless a coverage end date already equals the death date. (Needs verification: count person-months after DIED by patient_type.)\nOpen items from earlier reviews, still present: calculate_total_excess_costs() sums months −2 and −1 interactions; slice_head(n = 1) makes set.seed() ineffective; the potential-match count checks coverage at a different date than the loop; controls are limited to never-diagnosed patients; graft status isn’t matched; cases with zero controls are still added as matched.\nPartly fixed: temp_formula and fit are now initialized; the unused GEE tweedie block at the end of modeling.R still runs when sourced."
+  },
+  {
+    "objectID": "ARCHITECTURE.html#glossary",
+    "href": "ARCHITECTURE.html#glossary",
+    "title": "",
+    "section": "Glossary",
+    "text": "Glossary\n\n\n\n\n\n\n\nTerm\nDefinition\n\n\n\n\nCase\nTransplant recipient with an incident cryptococcosis claim meeting the cohort criteria; index date is the diagnosis date\n\n\nPotential control\nTransplant recipient with no cryptococcosis diagnosis at any time\n\n\nIndex date (index_date_match)\nCase: diagnosis date. Control: most_recent_transplant_date plus the case’s days since transplant\n\n\nRisk-set matching\nControls must be under observation at the same time since transplant as the case’s diagnosis\n\n\ntstart / tstop\nInterval bounds in days since most recent transplant, from finalize_usrds_cohort()\n\n\nmonth\nFloor of days from index divided by 30; panel covers −3 to 11\n\n\nmonth_offset\nDays observed in a panel month, capped at 30; used as the model offset\n\n\nIN_CLM / IN_REV / PS_REV\nInstitutional claims, institutional revenue-center lines, and physician/supplier lines from USRDS Medicare files\n\n\nHCFASAF\nClaim setting (inpatient, outpatient, SNF, home health, hospice, dialysis, auxiliary) used to split costs\n\n\nusRds\nSeparate package that loads USRDS files and provides cohort, coverage and cost helpers"
+  },
+  {
+    "objectID": "analysis-plan.html",
+    "href": "analysis-plan.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "analysis-plan.html#objective",
+    "href": "analysis-plan.html#objective",
+    "title": "",
+    "section": "1. Objective",
+    "text": "1. Objective\nTo estimate the excess Medicare payments attributable to cryptococcosis in the 12 months after diagnosis among adult kidney transplant recipients, compared with similar recipients at the same time since transplant who have not been diagnosed.\nSecondary objectives\n\nDescribe the month-by-month profile of excess cost from 3 months before to 12 months after diagnosis.\nPartition excess cost by care setting (inpatient, outpatient, skilled nursing, home health, hospice, dialysis, physician/supplier)."
+  },
+  {
+    "objectID": "analysis-plan.html#design",
+    "href": "analysis-plan.html#design",
+    "title": "",
+    "section": "2. Design",
+    "text": "2. Design\nRetrospective cohort study in linked registry and claims data, using risk-set (incidence density) matching. Each case is matched, at the time since transplant when they are diagnosed, to controls who are still at risk and undiagnosed at that same time.\nDecision D10: the matching method — direct covariate matching, or matching on a time-varying propensity score (Section 6).\nA sequential target-trial emulation with propensity-score weighting is the planned main sensitivity analysis (Section 9; protocol in Appendix A). It requires a propensity score model whichever matching method is chosen."
+  },
+  {
+    "objectID": "analysis-plan.html#data-source",
+    "href": "analysis-plan.html#data-source",
+    "title": "",
+    "section": "3. Data source",
+    "text": "3. Data source\n\nUnited States Renal Data System (USRDS) standard analysis files, accessed under a data use agreement through the usRds R package.\n\nCore files: patients, transplant (TX), payer history (PAYHIST), treatment history (RXHIST), death.\nTransplant files linked from OPTN/UNOS transplant recipient registration (TRR) records for kidney and kidney–pancreas recipients.\nMedicare Parts A and B claims: institutional claims and revenue-center lines, and physician/supplier claims. Part D prescription events where a covariate requires them.\n\nLinkage: USRDS links CMS and OPTN records to a single USRDS patient identifier. The study uses this linkage as supplied; no further linkage is performed.\nPeriod: claims 2006–2021; incident cryptococcosis 2007–2020; administrative end of follow-up 2022-01-01.\nGeography: United States."
+  },
+  {
+    "objectID": "analysis-plan.html#study-population",
+    "href": "analysis-plan.html#study-population",
+    "title": "",
+    "section": "4. Study population",
+    "text": "4. Study population\n\n4.1 Source population\nKidney transplant recipients in USRDS with a transplant before 2021.\n\n\n4.2 Eligibility at time zero (cases and controls alike)\nAt the risk-set time (Section 5.3), a person is eligible if they:\n\nHave had at least one kidney transplant before that date.\nAre aged 18 or older.\nHave no prior cryptococcosis diagnosis.\nHave Medicare fee-for-service as primary payer for both Part A and Part B for the 365 days before time zero, without gaps, so that baseline covariates and baseline cost are fully observed. Decision D1: whether Medicare as secondary payer or other payer categories are ever eligible.\nAre alive and under observation on that date.\n\n\n\n4.3 Index transplant\nThe time scale is time since the most recent kidney transplant before time zero. Retransplant recipients are eligible; prior transplants enter as covariates. Decision D2: inclusion of kidney–pancreas and other multi-organ recipients (exclude, or include with an indicator)."
+  },
+  {
+    "objectID": "analysis-plan.html#exposure-and-time-zero",
+    "href": "analysis-plan.html#exposure-and-time-zero",
+    "title": "",
+    "section": "5. Exposure and time zero",
+    "text": "5. Exposure and time zero\n\n5.1 Exposure definition\nIncident cryptococcosis, identified from ICD-9-CM and ICD-10-CM diagnosis codes on Medicare institutional or physician/supplier claims. The full code list is published as a supplementary table.\nDecision D3: the claim algorithm, meaning the claim types and diagnosis positions accepted and the number of claims required (for example, one inpatient claim, or two outpatient claims within a set window). The choice will cite any available validation literature for fungal infection codes in claims.\n\n\n5.2 Diagnosis date\nThe service date of the first qualifying claim.\n\n\n5.3 Time zero\n\nCases: the diagnosis date.\nControls: the date on which the control reaches the same number of days since their most recent transplant as the case had at diagnosis.\n\nEligibility, covariates and baseline cost are measured as of time zero, using only information available before it.\n\n\n5.4 Control eligibility\nAny person meeting Section 4.2 at the case’s risk-set time is eligible, including people who are diagnosed with cryptococcosis later. Their time before diagnosis is unexposed time. Excluding them would condition on the future.\nDecision D4: whether a person may serve as a control in more than one risk set (sampling with replacement across risk sets, as in standard incidence density sampling) or at most once."
+  },
+  {
+    "objectID": "analysis-plan.html#matching",
+    "href": "analysis-plan.html#matching",
+    "title": "",
+    "section": "6. Matching",
+    "text": "6. Matching\n\n6.1 Common elements\nWhichever method is chosen under D10:\n\nExact matching on current graft status (functioning, or failed and on dialysis).\nRatio: up to 2 controls per case.\nOrder: cases are matched in a random order fixed by a recorded seed. Ties among controls are broken at random using the same seed.\nPre-period cost: months −3 to −1 are not used for matching. They are kept to check balance on pre-diagnosis cost (Daw and Hatfield, Health Services Research 2018).\n\n\n\n6.2 Covariates\nThese are the confounders the design must address. Under Option A (Section 6.3), a subset is matched on directly and the rest are checked for balance. Under Option B (Section 6.4), all enter the score. All are measured before time zero.\n\n\n\n\n\n\n\nDomain\nCovariates\n\n\n\n\nDemographics\nAge, sex, race and ethnicity, calendar year\n\n\nTransplant\nTime since transplant (the time scale), donor type (living or deceased), retransplant and number of prior transplants, cause of kidney failure, time on dialysis before transplant, induction regimen\n\n\nGraft function\nCurrent graft status (functioning, or failed and on dialysis)\n\n\nImmunosuppression intensity\nRejection treatment in the prior 3–6 months; maintenance regimen where observable\n\n\nComorbidity\nDiabetes, cirrhosis, HIV, other solid organ transplant, a claims-based comorbidity index\n\n\nOther infections\nCMV, BK virus, Pneumocystis pneumonia, other invasive fungal infection, sepsis\n\n\nPrior use of care\nHospital admissions, emergency visits, skilled nursing days in the prior year\n\n\nPrior cost\nMedicare payments in months −12 to −4, as a smoothed measure (mean or log of monthly cost)\n\n\nPayer and place\nMedicaid dual eligibility, region\n\n\n\nEach covariate’s code list or registry field will be specified and published before analysis. Decision D5: the lookback window for rejection treatment, and the comorbidity index (Charlson or Elixhauser).\n\n\n6.3 Option A: direct covariate matching\n\nExact matching on diabetes, cirrhosis and HIV status, in addition to graft status.\nCalipers on age (±10 years) and calendar time (±3 years).\nAmong eligible controls, the closest on smoothed prior cost (months −12 to −4) is chosen first.\nThe remaining covariates in Section 6.2 are checked for balance and, if imbalanced, adjusted for in the outcome model.\n\nStrength: simple to explain and to reproduce. Weakness: exact matching becomes sparse as matching factors are added, so few of the covariates in Section 6.2 can be matched on directly.\n\n\n6.4 Option B: time-varying propensity score matching\n\nA time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months (or, equivalently, a Cox model with time-varying covariates). Each person-interval’s linear predictor is its score at that time (Lu, Biometrics 2005).\nAll covariates in Section 6.2 enter the score.\nControls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit (Austin 2011).\nDecision D6: whether to keep the hard calipers on age and calendar time from Option A on top of the score.\n\nStrength: balances many covariates at once, and the same score model serves the target-trial sensitivity analysis. Weakness: depends on a correctly specified score model and is harder to explain.\n\n\n6.5 Matching outcomes reported\n\nThe number of cases with 2, 1 and 0 matched controls.\nThe characteristics of unmatched cases compared with matched cases."
+  },
+  {
+    "objectID": "analysis-plan.html#outcome",
+    "href": "analysis-plan.html#outcome",
+    "title": "",
+    "section": "7. Outcome",
+    "text": "7. Outcome\n\n7.1 Cost measure\nMedicare paid amounts (not charges) from institutional claims and physician/supplier claims. Institutional claims spanning several days are prorated evenly across days of service.\n\n\n7.2 Inflation adjustment\nAll costs are expressed in January 2021 US dollars. Decision D7: the price index (for example, the medical care component of the CPI-U, or the PCE health price index).\n\n\n7.3 Person-month structure\n\nEach person’s follow-up is divided into 30-day months relative to time zero, from month −3 (days −90 to −61) through month 11 (days 330 to 359).\nEach person-month’s cost is the sum of prorated, inflation-adjusted payments for services in that month.\nPartial months are kept, with the number of observed days recorded as exposure.\nA month with Medicare coverage and no claims has a cost of zero. A month without qualifying coverage is not observed; it is never recorded as zero cost.\n\n\n\n7.4 End of follow-up\nFollow-up ends at the earliest of:\n\nday 365 after time zero;\ndeath;\nloss of Medicare fee-for-service primary coverage for Parts A and B;\nthe administrative end date, 2022-01-01.\n\nGraft failure after time zero does not end follow-up; it is an outcome pathway, not a censoring event.\nDecision D8: the treatment of death, which defines the estimand. In option (a), cost accrues only while alive, and death ends follow-up. In option (b), months after death count as zero cost, so the estimand includes the cost consequences of mortality. Whichever is primary, the other is a sensitivity analysis."
+  },
+  {
+    "objectID": "analysis-plan.html#statistical-analysis",
+    "href": "analysis-plan.html#statistical-analysis",
+    "title": "",
+    "section": "8. Statistical analysis",
+    "text": "8. Statistical analysis\n\n8.1 Descriptive analysis\n\nA cohort flow diagram from the source population through eligibility, case identification, and matching.\nBaseline characteristics at time zero, by group, before and after matching.\n\n\n\n8.2 Balance\n\nStandardized mean differences at time zero for every covariate in Section 6.2, and for cost in months −3, −2 and −1.\nAn absolute standardized mean difference below 0.1 is considered adequate balance.\nBalance on months −3 to −1, which were not matched on, is reported as a check on residual confounding.\n\n\n\n8.3 Estimand\nThe average treatment effect in the treated (ATT): the mean difference in total Medicare payments over months 0–11 between cases and their matched controls, per case.\n\n\n8.4 Primary model\n\nPerson-month cost is modelled with a generalized linear model with log link and Tweedie variance, including group, month (as a categorical variable), and their interaction, with log observed days as an offset.\nStandard errors are estimated with generalized estimating equations clustered on matched set; robust standard errors also cluster on patient if D4 allows a person in more than one set.\nRetransformation to dollars: predicted monthly cost for each group is computed at a full 30-day month by recycled predictions. The ATT is the sum of case-minus-control differences over months 0–11.\nConfidence intervals come from a cluster bootstrap that resamples matched sets (1,000 replicates, or more if needed for stability).\nDecision D9: whether the primary estimate subtracts the pre-period difference (months −3 to −1), giving a difference-in-differences, or relies on matching alone with the pre-period reported as a balance check.\n\n\n\n8.5 Secondary analyses\n\nThe month-by-month excess cost profile for months −3 to 11, from the primary model.\nExcess cost by care setting, using the same model on each setting’s cost.\n\n\n\n8.6 Missing data\n\nCost outcomes are observed only during covered months, by design (Section 7.3).\nFor covariates with missing registry values, missingness is described. If it exceeds 5% for any covariate in the score, multiple imputation by chained equations is used, with the score estimated within each imputation.\n\n\n\n8.7 Software\nAnalyses are run in R. Code is public at https://github.com/VagishHemmige/Cryptococcus-cost-analysis, and a website at https://vagishhemmige.github.io/Cryptococcus-cost-analysis documents each step. Data are not shared, as the data use agreement requires."
+  },
+  {
+    "objectID": "analysis-plan.html#sensitivity-analyses",
+    "href": "analysis-plan.html#sensitivity-analyses",
+    "title": "",
+    "section": "9. Sensitivity analyses",
+    "text": "9. Sensitivity analyses\n\nSequential target-trial emulation (Appendix A). Monthly trials of everyone eligible, with the newly diagnosed as the exposed group. The comparison group is weighted by propensity odds (ATT weights), trials are pooled, and robust standard errors are clustered on patient. Weights are truncated at the 1st and 99th percentiles, with untruncated results also reported.\nAlternative death handling: the option in D8 not chosen as primary.\nAlternative outcome models: Gaussian identity-link and log-cost models, to show sensitivity to distributional assumptions.\nAlternative exposure algorithm: a stricter claims definition than D3 (for example, requiring an inpatient claim), to address misclassification.\nMatching variations: a 1:1 ratio; exact matching on CMV status; under Option B, a caliper of 0.1 standard deviations. The matching method not chosen under D10 may also be run as a sensitivity analysis.\nRestriction to first transplant recipients.\nPre-2015 and 2015-or-later diagnoses, to check stability across the ICD-9-CM to ICD-10-CM transition (October 2015)."
+  },
+  {
+    "objectID": "analysis-plan.html#disclosure-control",
+    "href": "analysis-plan.html#disclosure-control",
+    "title": "",
+    "section": "10. Disclosure control",
+    "text": "10. Disclosure control\n\nNo cell with a count under 11 is reported in any table, figure, or text, including flow diagrams and website pages. Complementary cells are suppressed where they would allow a small count to be derived.\nFigures that show individual-level data (for example, beeswarm or scatter plots) are not published.\nAll outputs are reviewed against the USRDS data use agreement before release."
+  },
+  {
+    "objectID": "analysis-plan.html#limitations-to-address-in-reporting",
+    "href": "analysis-plan.html#limitations-to-address-in-reporting",
+    "title": "",
+    "section": "11. Limitations to address in reporting",
+    "text": "11. Limitations to address in reporting\n\nClaims-based diagnoses carry misclassification of both exposure and covariates.\nCosts are Medicare payments only; patient cost-sharing, other payers, and Part D are excluded unless Part D is added.\nRestricting to Medicare fee-for-service primary coverage limits generalizability to recipients with other primary payers or Medicare Advantage.\nConfounding by unmeasured immunosuppression intensity may remain despite the covariates in Section 6.2.\nCoverage requirements depend on eligibility rules that change over time, such as the end of Medicare entitlement 36 months after a successful transplant for patients without another qualifying reason."
+  },
+  {
+    "objectID": "analysis-plan.html#reporting-map",
+    "href": "analysis-plan.html#reporting-map",
+    "title": "",
+    "section": "12. Reporting map",
+    "text": "12. Reporting map\n\n\n\n\n\n\n\n\nChecklist item\nTopic\nPlan section\n\n\n\n\nSTROBE 1 / RECORD 1.1–1.3\nTitle, abstract, data type, region and period, linkage\n3\n\n\nSTROBE 2–3\nBackground, objectives\n1\n\n\nSTROBE 4\nStudy design\n2\n\n\nSTROBE 5\nSetting, dates\n3\n\n\nSTROBE 6 / RECORD 6.1–6.3\nEligibility, selection codes and algorithms, validation, linkage\n4, 5\n\n\nSTROBE 6b\nMatching criteria and number of controls\n6\n\n\nSTROBE 7 / RECORD 7.1\nVariables, with complete code lists\n5, 6.2, 7\n\n\nSTROBE 8\nData sources and measurement\n3, 7\n\n\nSTROBE 9\nBias\n5.4, 6, 9, 11\n\n\nSTROBE 10\nStudy size\n6.5, 8.1\n\n\nSTROBE 11\nQuantitative variables\n6.2, 7\n\n\nSTROBE 12 / RECORD 12.1–12.3\nStatistical methods, data access, cleaning, linkage\n3, 8\n\n\nSTROBE 12d\nMatching taken into account in analysis\n8.4\n\n\nSTROBE 12e\nSensitivity analyses\n9\n\n\nSTROBE 13 / RECORD 13.1\nParticipants, flow diagram\n8.1\n\n\nSTROBE 14–17\nDescriptive data, outcomes, main and other results\n8\n\n\nSTROBE 18–21\nDiscussion, limitations, interpretation, generalizability\n11\n\n\nRECORD 19.1\nLimitations of routinely collected data\n11\n\n\nSTROBE 22 / RECORD 22.1\nFunding; access to protocol, code and supplementary material\n8.7\n\n\nTARGET\nTarget-trial emulation\n9, Appendix A"
+  },
+  {
+    "objectID": "analysis-plan.html#open-decisions",
+    "href": "analysis-plan.html#open-decisions",
+    "title": "",
+    "section": "13. Open decisions",
+    "text": "13. Open decisions\n\n\n\n\n\n\n\n\nID\nDecision\nSection\n\n\n\n\nD1\nEligible payer categories beyond Medicare fee-for-service primary for Parts A and B\n4.2\n\n\nD2\nInclusion of kidney–pancreas and other multi-organ recipients\n4.3\n\n\nD3\nClaim algorithm for cryptococcosis: claim types, diagnosis positions, number of claims\n5.1\n\n\nD4\nControls in more than one risk set, or at most once\n5.4\n\n\nD5\nRejection-treatment lookback window; comorbidity index\n6.2\n\n\nD6\nUnder Option B, hard calipers on age and calendar time in addition to the score\n6.4\n\n\nD7\nPrice index for inflation adjustment\n7.2\n\n\nD8\nDeath: end of cost accrual, or zero cost after death\n7.4\n\n\nD9\nPrimary estimate as matched difference, or difference-in-differences\n8.4\n\n\nD10\nMatching method: direct covariate matching (Option A) or time-varying propensity score (Option B)\n2, 6"
+  },
+  {
+    "objectID": "analysis-plan.html#appendix-a-target-trial-protocol",
+    "href": "analysis-plan.html#appendix-a-target-trial-protocol",
+    "title": "",
+    "section": "Appendix A: Target-trial protocol",
+    "text": "Appendix A: Target-trial protocol\n\n\n\n\n\n\n\n\nComponent\nTarget trial\nEmulation\n\n\n\n\nEligibility\nAdult kidney transplant recipients, no prior cryptococcosis, 12 months of Medicare fee-for-service primary Parts A and B coverage\nSame criteria, applied at the start of each monthly trial\n\n\nTreatment strategies\nDevelop cryptococcosis in month t, or not\nDiagnosis in month t (exposed) versus no diagnosis in month t (comparison)\n\n\nAssignment\nNot randomizable; the trial is hypothetical\nExchangeability approximated by ATT weights from a propensity score with the covariates in Section 6.2\n\n\nTime zero\nStart of month t\nStart of each monthly trial; aligned with eligibility and exposure\n\n\nFollow-up\n12 months, ending as in Section 7.4\nSame\n\n\nOutcome\nMedicare payments over months 0–11\nSame as Section 7\n\n\nCausal contrast\nEffect in those who develop cryptococcosis (ATT)\nWeighted difference pooled across trials\n\n\nAnalysis\n—\nWeighted model as in Section 8.4; robust standard errors clustered on patient, because people appear in several trials"
+  },
+  {
+    "objectID": "analysis-plan.html#references",
+    "href": "analysis-plan.html#references",
+    "title": "",
+    "section": "References",
+    "text": "References\n\nvon Elm E, et al. The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) statement. PLoS Med 2007.\nBenchimol EI, et al. The REporting of studies Conducted using Observational Routinely-collected health Data (RECORD) statement. PLoS Med 2015.\nCashin AG, et al. Transparent reporting of observational studies emulating a target trial: the TARGET statement. JAMA and BMJ 2025.\nLu B. Propensity score matching with time-dependent covariates. Biometrics 2005.\nDaw JR, Hatfield LA. Matching and regression to the mean in difference-in-differences analysis. Health Serv Res 2018.\nAustin PC. Optimal caliper widths for propensity-score matching. Pharm Stat 2011.\nUnited States Renal Data System. Researcher’s Guide to the USRDS Database, 2025."
   }
 ]

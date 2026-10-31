@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vagish Hemmige">
+
+<title>architecture – Cryptococcus post-transplant cost</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-66ae90e4418e9d0ac3caa4b8c3bef75c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+div.callout-Rcode.callout {
+  border-left-color: pink;
+}
+div.callout-Rcode.callout-style-default > .callout-header {
+  background-color: rgb(from pink r g b / 13%);
+}
+div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
+  content: '💻';
+  background-image: none;
+}
+</style>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Cryptococcus post-transplant cost
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Cryptococcus post-transplant cost</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Background</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data loading and processing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/create_cohort.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Create cohort</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/execute_matching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Execute matching</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/postmatch_processing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Post-match processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Modeling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Code to create tables and figures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/figures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Figures</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto/about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cryptococcus-cost-analysis-architecture" id="toc-cryptococcus-cost-analysis-architecture" class="nav-link active" data-scroll-target="#cryptococcus-cost-analysis-architecture">Cryptococcus Cost Analysis Architecture</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#script-and-object-flow" id="toc-script-and-object-flow" class="nav-link" data-scroll-target="#script-and-object-flow">Script and Object Flow</a>
+  <ul class="collapse">
+  <li><a href="#hidden-dependencies" id="toc-hidden-dependencies" class="nav-link" data-scroll-target="#hidden-dependencies">Hidden dependencies</a></li>
+  </ul></li>
+  <li><a href="#components" id="toc-components" class="nav-link" data-scroll-target="#components">Components</a>
+  <ul class="collapse">
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#helper-functions" id="toc-helper-functions" class="nav-link" data-scroll-target="#helper-functions">Helper functions</a></li>
+  <li><a href="#cohort-construction" id="toc-cohort-construction" class="nav-link" data-scroll-target="#cohort-construction">Cohort construction</a></li>
+  <li><a href="#matching" id="toc-matching" class="nav-link" data-scroll-target="#matching">Matching</a></li>
+  <li><a href="#post-match-processing" id="toc-post-match-processing" class="nav-link" data-scroll-target="#post-match-processing">Post-match processing</a></li>
+  <li><a href="#modeling" id="toc-modeling" class="nav-link" data-scroll-target="#modeling">Modeling</a></li>
+  <li><a href="#tables-and-figures" id="toc-tables-and-figures" class="nav-link" data-scroll-target="#tables-and-figures">Tables and figures</a></li>
+  </ul></li>
+  <li><a href="#website-build" id="toc-website-build" class="nav-link" data-scroll-target="#website-build">Website Build</a></li>
+  <li><a href="#configuration" id="toc-configuration" class="nav-link" data-scroll-target="#configuration">Configuration</a></li>
+  <li><a href="#code-references" id="toc-code-references" class="nav-link" data-scroll-target="#code-references">Code References</a></li>
+  <li><a href="#known-architectural-gaps" id="toc-known-architectural-gaps" class="nav-link" data-scroll-target="#known-architectural-gaps">Known Architectural Gaps</a></li>
+  <li><a href="#glossary" id="toc-glossary" class="nav-link" data-scroll-target="#glossary">Glossary</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/master/ARCHITECTURE.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content"><div class="quarto-title-block"><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+</div>
+
+
+<div class="quarto-title-meta-author column-body">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Vagish Hemmige <a href="mailto:vahemmig@montefiore.org" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Montefiore Medical Center/ Albert Einstein College of Medicine
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta column-body">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="cryptococcus-cost-analysis-architecture" class="level1">
+<h1>Cryptococcus Cost Analysis Architecture</h1>
+<blockquote class="blockquote">
+<p>Describes <code>master</code> at commit <code>8a52330</code> (2026-10-23). Unpushed local changes are not reflected. Nothing was executed; this document comes from reading the code. USRDS data were not available.</p>
+</blockquote>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The project estimates excess Medicare cost after cryptococcosis in kidney transplant recipients, using USRDS data (linked UNOS and Medicare) accessed through the separate <code>usRds</code> package. It works in four stages:</p>
+<ol type="1">
+<li>Build a time-varying cohort of transplant recipients.</li>
+<li>Match each case at diagnosis to up to <code>number_controls_per_case</code> (2) never-diagnosed controls, using risk-set matching on time since transplant.</li>
+<li>Turn each person’s claims into an inflation-adjusted cost panel by month, from month −3 to month 11 around the index date.</li>
+<li>Fit cost models in which <code>patient_type × month</code> gives the case–control cost difference.</li>
+</ol>
+<p>A Quarto website in <code>quarto/</code> explains each script and displays its code in <code>eval: false</code> chunks. The site never runs the analysis: the only script sections it runs are the Setup page’s constants and ICD code lists, which define values and read nothing. It is rendered by <code>.github/workflows/publish.yml</code> and published to the <code>gh-pages</code> branch, which GitHub Pages serves; the local render in <code>docs/</code> is not committed.</p>
+</section>
+<section id="script-and-object-flow" class="level2">
+<h2 class="anchored" data-anchor-id="script-and-object-flow">Script and Object Flow</h2>
+<p><code>R/main.R</code> sources the scripts in order. Every script uses objects that earlier scripts left in the global environment; no script saves or loads intermediate files.</p>
+<pre class="mermaid"><code>flowchart TD
+    S[setup.R&lt;br/&gt;libraries, constants,&lt;br/&gt;comorbidity_ICD_list] --&gt; F[functions.R&lt;br/&gt;plot_mean_monthly_costs&lt;br/&gt;calculate_number_potential_matches&lt;br/&gt;calculate_total_excess_costs]
+    F --&gt; C[create_cohort.R]
+    C --&gt;|prematching_cohort&lt;br/&gt;medicare_history&lt;br/&gt;patients_merged2| M[execute_matching.R]
+    M --&gt;|post_match_results| P[postmatch_processing.R]
+    P --&gt;|final_data_set&lt;br/&gt;final_count_df&lt;br/&gt;cost_broken_down, cost_inflated&lt;br/&gt;patients_fc_matched| MO[modeling.R]
+    MO --&gt;|fit list&lt;br/&gt;10 outcomes × 5 models| T[tables.R]
+    MO --&gt; FG[figures.R]
+    P --&gt; T
+    P --&gt; FG
+    T --&gt; TO[(tables/ — gitignored)]
+    FG --&gt; FO[(figures/ — gitignored)]
+    U[[usRds package]] -.-&gt; C
+    U -.-&gt; M
+    U -.-&gt; P
+    D[define_cohort.R&lt;br/&gt;deprecated, not sourced]</code></pre>
+<section id="hidden-dependencies" class="level3">
+<h3 class="anchored" data-anchor-id="hidden-dependencies">Hidden dependencies</h3>
+<p>Some functions read globals instead of taking them as arguments:</p>
+<ul>
+<li><code>calculate_number_potential_matches()</code> reads <code>medicare_history</code>, created in <code>create_cohort.R</code>.</li>
+<li><code>plot_mean_monthly_costs()</code> defaults <code>countdf = final_count_df</code>, created in <code>postmatch_processing.R</code>. R evaluates the default only when the function is called, so this works from <code>figures.R</code> but not earlier.</li>
+<li><code>create_cohort.R</code> sources <code>setup.R</code> a second time. Harmless, but it reloads every library.</li>
+<li><code>define_cohort.R</code> is marked deprecated, uses the older <code>strobe</code> API, and is sourced by nothing. <code>setup.R</code> still loads <code>strobe</code> for it.</li>
+</ul>
+</section>
+</section>
+<section id="components" class="level2">
+<h2 class="anchored" data-anchor-id="components">Components</h2>
+<section id="setup" class="level3">
+<h3 class="anchored" data-anchor-id="setup">Setup</h3>
+<p><strong>Purpose</strong>: Load libraries and define analysis-wide constants and ICD code lists.</p>
+<p><strong>Location</strong>: <code>R/setup.R</code></p>
+<p><strong>Key symbols</strong>: - <code>censor_date</code>, <code>minimum_followup</code>, <code>maximum_followup</code> — follow-up window - <code>number_controls_per_case</code> — target matching ratio - <code>inflation_month</code>, <code>inflation_year</code> — inflation baseline - <code>baseline_months_cost</code>, <code>full_months</code> — pre-index months and the month range of the panel - <code>cryptococcus_ICD_list</code>, <code>comorbidity_ICD_list</code> — ICD-9-CM and ICD-10-CM code lists by condition</p>
+<p><strong>Interactions</strong>: Read by every later script.</p>
+</section>
+<section id="helper-functions" class="level3">
+<h3 class="anchored" data-anchor-id="helper-functions">Helper functions</h3>
+<p><strong>Purpose</strong>: Functions shared across scripts.</p>
+<p><strong>Location</strong>: <code>R/functions.R</code></p>
+<p><strong>Key functions</strong>: - <code>calculate_number_potential_matches()</code> — counts eligible controls for one case, used to order the greedy match - <code>calculate_total_excess_costs()</code> — sums <code>patient_type:month</code> interaction coefficients and their variance (linear branch; log branch exists) - <code>plot_mean_monthly_costs()</code> — <code>emmeans</code> predictions by group and month at <code>month_offset = 30</code>, with a risk table underneath</p>
+</section>
+<section id="cohort-construction" class="level3">
+<h3 class="anchored" data-anchor-id="cohort-construction">Cohort construction</h3>
+<p><strong>Purpose</strong>: Build the time-varying cohort of transplant recipients with cases, potential controls, and time-varying covariates.</p>
+<p><strong>Location</strong>: <code>R/create_cohort.R</code> (sections <code>load-usrds-files</code>, <code>initialize-flowchart</code>, <code>comorbidities-medicare</code>, <code>develop-flowchart</code>, <code>time-varying-cohort</code>)</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph USRDS via usRds
+      PT[patients]
+      TX[tx]
+      KI[txunos_trr_ki]
+      KP[txunos_trr_kp]
+      CL[IN + PS claims&lt;br/&gt;2006–2021]
+      PH[payhist]
+    end
+    TX --&gt; TXC[tx_clean&lt;br/&gt;cumulative_transplant_total]
+    KI --&gt; TXC
+    KP --&gt; TXC
+    TXC --&gt; TXS[tx_status&lt;br/&gt;long: TDATE→Active,&lt;br/&gt;FAILDATE→Failed]
+    PT --&gt; FC[patients_clean&lt;br/&gt;flowchart: TOTTX&gt;0,&lt;br/&gt;TX1DATE &lt; 2021]
+    CL --&gt;|get_IN_ICD / get_PS_ICD| CD[comorbidity_diagnosis_date&lt;br/&gt;one df per condition&lt;br/&gt;via establish_dx_date]
+    PH --&gt; MH[medicare_history&lt;br/&gt;+ gap check]
+    FC --&gt; PM[patients_merged&lt;br/&gt;crypto after TX1DATE, age ≥18,&lt;br/&gt;dx 2007–2020, fc_split]
+    CD --&gt;|cryptococcus| PM
+    PM --&gt;|verify_medicare_primary&lt;br/&gt;365 d, cases only| PM2[patients_merged2&lt;br/&gt;terminal_date,&lt;br/&gt;minimum follow-up]
+    PM2 --&gt; IC[initial_cohort&lt;br/&gt;cohort_join_date:&lt;br/&gt;cases = dx date&lt;br/&gt;controls = TX1DATE]
+    IC --&gt;|create_usrds_cohort| PC[prematching_cohort&lt;br/&gt;start/stop rows]
+    CD --&gt;|add_cohort_covariate ×10| PC
+    TXS --&gt;|tx count, graft status,&lt;br/&gt;last tx / failure date| PC
+    MH --&gt;|PAYER| PC</code></pre>
+<p><strong>Output</strong>: <code>prematching_cohort</code>, a counting-process data set with one row per person per interval (<code>tstart</code>, <code>tstop</code>). After <code>finalize_usrds_cohort()</code>, time is days since <code>most_recent_transplant_date</code>. Comorbidities, graft status and payer vary over time within a person.</p>
+<p>Cases enter at diagnosis, so a case’s first row has <code>tstart</code> equal to the days from their most recent transplant to diagnosis. That value is their matching time. Controls run from <code>TX1DATE</code> to <code>terminal_date</code>.</p>
+<p>The <code>flowchart</code> package objects (<code>patients_clean</code>, <code>patients_merged</code>, <code>patients_merged2</code>) carry the exclusion counts for the STROBE diagram.</p>
+</section>
+<section id="matching" class="level3">
+<h3 class="anchored" data-anchor-id="matching">Matching</h3>
+<p><strong>Purpose</strong>: Greedy risk-set matching of cases to controls without replacement.</p>
+<p><strong>Location</strong>: <code>R/execute_matching.R</code> (sections <code>prepare-cohort</code>, <code>count-potential-matches</code>, <code>matching-loop</code>)</p>
+<pre class="mermaid"><code>flowchart TD
+    A[prematching_cohort] --&gt; B[Cases: first row per ID&lt;br/&gt;Controls: all rows of&lt;br/&gt;'Potential control']
+    B --&gt; C[Count potential controls per case&lt;br/&gt;calculate_number_potential_matches]
+    C --&gt; D[Sort cases: fewest potential&lt;br/&gt;controls first]
+    D --&gt; E{Next case}
+    E --&gt; F[Eligible controls:&lt;br/&gt;exact cirrhosis, HIV, diabetes&lt;br/&gt;CMV commented out&lt;br/&gt;tstart ≤ case tstart &lt; tstop]
+    F --&gt; G[control index date =&lt;br/&gt;most_recent_transplant_date + case tstart&lt;br/&gt;±3 y calendar, age ≥18, age ±10 y&lt;br/&gt;Medicare primary at control date]
+    G --&gt; H[arrange: same cumulative&lt;br/&gt;transplant count first]
+    H --&gt; I[Take up to 2, one at a time,&lt;br/&gt;slice_head, distinct IDs]
+    I --&gt; J[Add case + controls to matched_patients&lt;br/&gt;remove controls from pool]
+    J --&gt; E
+    E --&gt;|none left| K[post_match_results&lt;br/&gt;patient_type, index_date_match,&lt;br/&gt;matched_control_indices on case rows]</code></pre>
+<p><strong>Output</strong>: <code>post_match_results</code>, which stacks cases and controls with <code>patient_type</code> and <code>index_date_match</code>. The only record of the matched set is the list column <code>matched_control_indices</code> on case rows.</p>
+</section>
+<section id="post-match-processing" class="level3">
+<h3 class="anchored" data-anchor-id="post-match-processing">Post-match processing</h3>
+<p><strong>Purpose</strong>: Attach claims, define the follow-up window, compute 365-day totals, and build the monthly cost panel.</p>
+<p><strong>Location</strong>: <code>R/postmatch_processing.R</code> (sections <code>matched-flowchart</code>, <code>raw-costs</code>, <code>merge-costs</code>, <code>total-costs</code>, <code>prorated-costs</code>, <code>inflation-adjustment</code>, <code>monthly-costs</code>, <code>final-data-set</code>)</p>
+<pre class="mermaid"><code>flowchart TD
+    R[post_match_results] --&gt; RC[costs_raw via usRds&lt;br/&gt;IN_REV, IN_CLM, PS_REV]
+    RC --&gt; CJ[cost_joined&lt;br/&gt;one nested tibble per&lt;br/&gt;claim file per person]
+    CJ --&gt; EA[end_date_analysis = min of&lt;br/&gt;index + 365, censor_date,&lt;br/&gt;coverage_end_date,&lt;br/&gt;medicare_coverage_end_date]
+    EA --&gt; T365[cost_broken_down / cost_inflated&lt;br/&gt;365-day totals, raw and adjusted,&lt;br/&gt;by HCFASAF; IN_CLM prorated by day]
+    EA --&gt; MP[cost_longitudinal&lt;br/&gt;month = days from index %/% 30&lt;br/&gt;months −3…11&lt;br/&gt;IN_CLM by service_date + PS_REV by CLM_FROM&lt;br/&gt;month_offset = observed days, max 30]
+    MP --&gt; FD[final_data_set&lt;br/&gt;drop list columns,&lt;br/&gt;drop month_offset = 0]</code></pre>
+<p>One person’s timeline in the panel:</p>
+<pre><code>day:    −90      −60      −30       0        30      ...     330      360
+month:  [  −3   ][  −2   ][  −1   ][   0   ][   1  ] ... [  11  ]
+                                   ^ index_date_match (case: dx date; control: matched date)
+month_offset = days observed in each month, capped at 30; follow-up ends at end_date_analysis</code></pre>
+<p>Details that are easy to miss:</p>
+<ul>
+<li><code>IN_REV</code> feeds only the 365-day totals. The monthly panel and all models use <code>IN_CLM</code> and <code>PS_REV</code>; <code>grand_total_cost_month</code> is <code>IN_CLM_month_total + PS_REV_month_total</code>.</li>
+<li>Monthly sums are floored at 0 with <code>pmax()</code>, which absorbs negative adjustment claims.</li>
+<li><code>final_count_df</code> (persons per group per month) is the risk table under each monthly plot.</li>
+</ul>
+</section>
+<section id="modeling" class="level3">
+<h3 class="anchored" data-anchor-id="modeling">Modeling</h3>
+<p><strong>Purpose</strong>: Fit monthly cost models for each outcome.</p>
+<p><strong>Location</strong>: <code>R/modeling.R</code> (no section labels; the page includes the whole file)</p>
+<p>For each of 10 outcomes (grand total, <code>IN_CLM</code> total, <code>PS_REV</code> total, and seven <code>IN_CLM</code> service categories), five models are fitted, all with <code>patient_type * factor(month) + offset(log(month_offset))</code>, clustered on <code>USRDS_ID</code>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Key in <code>fit[[outcome]]</code></th>
+<th>Engine</th>
+<th>Outcome scale</th>
+<th>Family</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>glmmTMB$tweedie</code></td>
+<td>glmmTMB, random intercept</td>
+<td>dollars</td>
+<td>Tweedie, log link</td>
+</tr>
+<tr class="even">
+<td><code>glmmTMB$linear</code></td>
+<td>glmmTMB, random intercept</td>
+<td>dollars</td>
+<td>Gaussian, identity</td>
+</tr>
+<tr class="odd">
+<td><code>gee$linear</code></td>
+<td>geeglm, exchangeable</td>
+<td>dollars</td>
+<td>Gaussian, identity</td>
+</tr>
+<tr class="even">
+<td><code>glmmTMB$log</code></td>
+<td>glmmTMB, random intercept</td>
+<td><code>log1p</code> dollars</td>
+<td>Gaussian, identity</td>
+</tr>
+<tr class="odd">
+<td><code>gee$log</code></td>
+<td>geeglm, exchangeable</td>
+<td><code>log1p</code> dollars</td>
+<td>Gaussian, identity</td>
+</tr>
+</tbody>
+</table>
+<p>The reference level of <code>factor(month)</code> is −3, the lowest month, so each interaction term is a case–control difference relative to month −3.</p>
+</section>
+<section id="tables-and-figures" class="level3">
+<h3 class="anchored" data-anchor-id="tables-and-figures">Tables and figures</h3>
+<p><strong>Location</strong>: <code>R/tables.R</code>, <code>R/figures.R</code></p>
+<ul>
+<li>Table 1 (<code>table1</code>) summarizes <code>post_match_results</code> by <code>patient_type</code>; saved to <code>tables/</code>.</li>
+<li>Table 2 (<code>table2_icd</code>) lists the ICD codes from <code>comorbidity_ICD_list</code>; saved to <code>tables/</code>.</li>
+<li>Cost summary tables from <code>cost_broken_down</code> and <code>cost_inflated</code> are printed, not saved.</li>
+<li>The total excess cost comes from <code>calculate_total_excess_costs()</code> on <code>fit$grand_total_cost_month$gee$linear</code>.</li>
+<li>Figures: the final flowchart (<code>patients_fc_matched</code>), a beeswarm of 365-day <code>IN_CLM</code> totals, and one monthly plot per outcome and model via <code>plot_mean_monthly_costs()</code>; saved to <code>figures/</code>.</li>
+</ul>
+<p><code>tables/</code> and <code>figures/</code> are gitignored, so saved outputs cannot be checked from GitHub.</p>
+</section>
+</section>
+<section id="website-build" class="level2">
+<h2 class="anchored" data-anchor-id="website-build">Website Build</h2>
+<pre class="mermaid"><code>flowchart LR
+    RS["R/*.R&lt;br/&gt;sections marked ## ---- label"] --&gt;|knitr::read_chunk| Q["quarto/*.qmd&lt;br/&gt;chunks with #| label + eval: false"]
+    RM[R/modeling.R] --&gt;|"#| file: whole script"| QM[quarto/modeling.qmd]
+    Y[_quarto.yml&lt;br/&gt;sidebar, custom-callout filter] --&gt; REN[quarto render]
+    Q --&gt; REN
+    QM --&gt; REN
+    IX[index.qmd] --&gt; REN
+    REN --&gt; DOCS[(gh-pages branch, rendered by&lt;br/&gt;GitHub Actions, served by GitHub Pages)]</code></pre>
+<ul>
+<li>Each page calls <code>knitr::read_chunk()</code> on its script, then shows sections by label. A script edit appears on the site at the next render, with no page edit.</li>
+<li><code>quarto/modeling.qmd</code> includes the whole script with <code>#| file:</code>, so it displays everything in <code>modeling.R</code>, including unused blocks.</li>
+<li><code>_quarto.yml</code> defines the sidebar, the <code>custom-callout</code> filter (the <code>Rcode</code> callout), and <code>output-dir: docs</code>.</li>
+<li><code>.github/workflows/publish.yml</code> renders the site on every pull request as a check and, on each push to <code>master</code>, renders it and publishes it to the <code>gh-pages</code> branch, so the live site follows every script or page change. <code>docs/</code> is the local render and is not committed.</li>
+<li>The Setup page runs the <code>constants</code> and <code>icd-code-lists</code> sections of <code>R/setup.R</code> to build its summary tables; every other imported section is shown with <code>eval: false</code>.</li>
+</ul>
+</section>
+<section id="configuration" class="level2">
+<h2 class="anchored" data-anchor-id="configuration">Configuration</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Where</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>censor_date</code></td>
+<td><code>R/setup.R</code></td>
+<td>Administrative end of follow-up</td>
+</tr>
+<tr class="even">
+<td><code>minimum_followup</code>, <code>maximum_followup</code></td>
+<td><code>R/setup.R</code></td>
+<td>Case inclusion; 365-day cost window</td>
+</tr>
+<tr class="odd">
+<td><code>number_controls_per_case</code></td>
+<td><code>R/setup.R</code></td>
+<td>Target controls per case</td>
+</tr>
+<tr class="even">
+<td><code>inflation_month</code>, <code>inflation_year</code></td>
+<td><code>R/setup.R</code></td>
+<td>Baseline for <code>adjust_costs_for_inflation()</code></td>
+</tr>
+<tr class="odd">
+<td><code>baseline_months_cost</code>, <code>full_months</code></td>
+<td><code>R/setup.R</code></td>
+<td>Pre-index months; panel month range</td>
+</tr>
+<tr class="even">
+<td><code>comorbidity_ICD_list</code></td>
+<td><code>R/setup.R</code></td>
+<td>Condition definitions for cases and covariates</td>
+</tr>
+<tr class="odd">
+<td>Matching calipers (±3 y calendar, ±10 y age, age ≥18)</td>
+<td><code>R/execute_matching.R</code>, <code>R/functions.R</code></td>
+<td>Hard-coded in both places</td>
+</tr>
+<tr class="even">
+<td>Site navigation, theme, output dir</td>
+<td><code>_quarto.yml</code></td>
+<td>Website structure</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="code-references" class="level2">
+<h2 class="anchored" data-anchor-id="code-references">Code References</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>File</th>
+<th>Key symbols</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Entry point</td>
+<td><code>R/main.R</code></td>
+<td>sourcing order</td>
+</tr>
+<tr class="even">
+<td>Constants, code lists</td>
+<td><code>R/setup.R</code></td>
+<td><code>censor_date</code>, <code>number_controls_per_case</code>, <code>full_months</code>, <code>comorbidity_ICD_list</code></td>
+</tr>
+<tr class="odd">
+<td>Helpers</td>
+<td><code>R/functions.R</code></td>
+<td><code>calculate_number_potential_matches()</code>, <code>calculate_total_excess_costs()</code>, <code>plot_mean_monthly_costs()</code></td>
+</tr>
+<tr class="even">
+<td>Cohort</td>
+<td><code>R/create_cohort.R</code></td>
+<td><code>tx_status</code>, <code>medicare_history</code>, <code>patients_merged2</code>, <code>prematching_cohort</code></td>
+</tr>
+<tr class="odd">
+<td>Matching</td>
+<td><code>R/execute_matching.R</code></td>
+<td><code>unmatched_patients</code>, matching <code>while</code> loop, <code>post_match_results</code></td>
+</tr>
+<tr class="even">
+<td>Costs and panel</td>
+<td><code>R/postmatch_processing.R</code></td>
+<td><code>end_date_analysis</code>, <code>cost_inflated</code>, <code>cost_longitudinal</code>, <code>final_data_set</code>, <code>final_count_df</code></td>
+</tr>
+<tr class="odd">
+<td>Models</td>
+<td><code>R/modeling.R</code></td>
+<td><code>temp_formula</code>, <code>fit[[outcome]][[engine]][[family]]</code></td>
+</tr>
+<tr class="even">
+<td>Outputs</td>
+<td><code>R/tables.R</code>, <code>R/figures.R</code></td>
+<td><code>table1</code>, <code>table2_icd</code>, monthly plot loop</td>
+</tr>
+<tr class="odd">
+<td>Deprecated</td>
+<td><code>R/define_cohort.R</code></td>
+<td>older <code>strobe</code>-based cohort script</td>
+</tr>
+<tr class="even">
+<td>Website</td>
+<td><code>_quarto.yml</code>, <code>index.qmd</code>, <code>quarto/*.qmd</code>, <code>_extensions/</code></td>
+<td><code>read_chunk</code>, <code>custom-callout</code></td>
+</tr>
+<tr class="odd">
+<td>External (usRds)</td>
+<td>—</td>
+<td><code>load_usrds_file</code>, <code>get_IN_ICD</code>, <code>get_PS_ICD</code>, <code>establish_dx_date</code>, <code>verify_medicare_primary</code>, <code>create_usrds_cohort</code>, <code>add_cohort_covariate</code>, <code>finalize_usrds_cohort</code>, <code>get_IN_REV_costs</code>, <code>get_IN_CLM_costs</code>, <code>get_PS_REV_costs</code>, <code>prorate_costs_by_day</code>, <code>adjust_costs_for_inflation</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="known-architectural-gaps" class="level2">
+<h2 class="anchored" data-anchor-id="known-architectural-gaps">Known Architectural Gaps</h2>
+<p>Status as of commit <code>8a52330</code>. These come from reading the code and need checking against the real data where noted.</p>
+<ul>
+<li><strong>Matched-set ID is lost before modeling.</strong> <code>matched_control_indices</code> is a list column, and <code>final_data_set</code> drops list columns. Models can cluster only on <code>USRDS_ID</code>. <em>(Needs a design decision.)</em></li>
+<li><strong>Death is not an input to <code>end_date_analysis</code>.</strong> <code>DIED</code> appears only in the <code>follow_up_final_event</code> label. Post-death months stay in the panel unless a coverage end date already equals the death date. <em>(Needs verification: count person-months after <code>DIED</code> by <code>patient_type</code>.)</em></li>
+<li><strong>Open items from earlier reviews, still present:</strong> <code>calculate_total_excess_costs()</code> sums months −2 and −1 interactions; <code>slice_head(n = 1)</code> makes <code>set.seed()</code> ineffective; the potential-match count checks coverage at a different date than the loop; controls are limited to never-diagnosed patients; graft status isn’t matched; cases with zero controls are still added as matched.</li>
+<li><strong>Partly fixed:</strong> <code>temp_formula</code> and <code>fit</code> are now initialized; the unused GEE tweedie block at the end of <code>modeling.R</code> still runs when sourced.</li>
+</ul>
+</section>
+<section id="glossary" class="level2">
+<h2 class="anchored" data-anchor-id="glossary">Glossary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Case</td>
+<td>Transplant recipient with an incident cryptococcosis claim meeting the cohort criteria; index date is the diagnosis date</td>
+</tr>
+<tr class="even">
+<td>Potential control</td>
+<td>Transplant recipient with no cryptococcosis diagnosis at any time</td>
+</tr>
+<tr class="odd">
+<td>Index date (<code>index_date_match</code>)</td>
+<td>Case: diagnosis date. Control: <code>most_recent_transplant_date</code> plus the case’s days since transplant</td>
+</tr>
+<tr class="even">
+<td>Risk-set matching</td>
+<td>Controls must be under observation at the same time since transplant as the case’s diagnosis</td>
+</tr>
+<tr class="odd">
+<td><code>tstart</code> / <code>tstop</code></td>
+<td>Interval bounds in days since most recent transplant, from <code>finalize_usrds_cohort()</code></td>
+</tr>
+<tr class="even">
+<td><code>month</code></td>
+<td>Floor of days from index divided by 30; panel covers −3 to 11</td>
+</tr>
+<tr class="odd">
+<td><code>month_offset</code></td>
+<td>Days observed in a panel month, capped at 30; used as the model offset</td>
+</tr>
+<tr class="even">
+<td>IN_CLM / IN_REV / PS_REV</td>
+<td>Institutional claims, institutional revenue-center lines, and physician/supplier lines from USRDS Medicare files</td>
+</tr>
+<tr class="odd">
+<td>HCFASAF</td>
+<td>Claim setting (inpatient, outpatient, SNF, home health, hospice, dialysis, auxiliary) used to split costs</td>
+</tr>
+<tr class="even">
+<td>usRds</td>
+<td>Separate package that loads USRDS files and provides cohort, coverage and cost helpers</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/vagishhemmige\.github\.io\/Cryptococcus-cost-analysis");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Cryptococcus Cost Analysis Architecture</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Describes </span><span class="in">`master`</span><span class="at"> at commit </span><span class="in">`8a52330`</span><span class="at"> (2026-10-23). Unpushed local changes are not reflected. Nothing was executed; this document comes from reading the code. USRDS data were not available.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>The project estimates excess Medicare cost after cryptococcosis in kidney transplant recipients, using USRDS data (linked UNOS and Medicare) accessed through the separate <span class="in">`usRds`</span> package. It works in four stages:</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Build a time-varying cohort of transplant recipients.</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Match each case at diagnosis to up to <span class="in">`number_controls_per_case`</span> (2) never-diagnosed controls, using risk-set matching on time since transplant.</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Turn each person's claims into an inflation-adjusted cost panel by month, from month −3 to month 11 around the index date.</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Fit cost models in which <span class="in">`patient_type × month`</span> gives the case–control cost difference.</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>A Quarto website in <span class="in">`quarto/`</span> explains each script and displays its code in <span class="in">`eval: false`</span> chunks. The site never runs the analysis: the only script sections it runs are the Setup page's constants and ICD code lists, which define values and read nothing. It is rendered by <span class="in">`.github/workflows/publish.yml`</span> and published to the <span class="in">`gh-pages`</span> branch, which GitHub Pages serves; the local render in <span class="in">`docs/`</span> is not committed.</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Script and Object Flow</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="in">`R/main.R`</span> sources the scripts in order. Every script uses objects that earlier scripts left in the global environment; no script saves or loads intermediate files.</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="in">```mermaid</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>flowchart TD</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    S[setup.R&lt;br/&gt;libraries, constants,&lt;br/&gt;comorbidity_ICD_list] --&gt; F[functions.R&lt;br/&gt;plot_mean_monthly_costs&lt;br/&gt;calculate_number_potential_matches&lt;br/&gt;calculate_total_excess_costs]</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    F --&gt; C[create_cohort.R]</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    C --&gt;|prematching_cohort&lt;br/&gt;medicare_history&lt;br/&gt;patients_merged2| M[execute_matching.R]</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    M --&gt;|post_match_results| P[postmatch_processing.R]</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    P --&gt;|final_data_set&lt;br/&gt;final_count_df&lt;br/&gt;cost_broken_down, cost_inflated&lt;br/&gt;patients_fc_matched| MO[modeling.R]</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    MO --&gt;|fit list&lt;br/&gt;<span class="dv">10</span> outcomes × <span class="dv">5</span> models| T[tables.R]</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    MO --&gt; FG[figures.R]</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    P --&gt; T</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    P --&gt; FG</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    T --&gt; TO[(tables/ — gitignored)]</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    FG --&gt; FO[(figures/ — gitignored)]</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    U[[usRds <span class="kw">package</span>]] -.-&gt; C</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    U -.-&gt; M</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    U -.-&gt; P</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    D[define_cohort.R&lt;br/&gt;deprecated, <span class="ot">not</span> sourced]</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="fu">### Hidden dependencies</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>Some functions read globals instead of taking them as arguments:</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`calculate_number_potential_matches()`</span> reads <span class="in">`medicare_history`</span>, created in <span class="in">`create_cohort.R`</span>.</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`plot_mean_monthly_costs()`</span> defaults <span class="in">`countdf = final_count_df`</span>, created in <span class="in">`postmatch_processing.R`</span>. R evaluates the default only when the function is called, so this works from <span class="in">`figures.R`</span> but not earlier.</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`create_cohort.R`</span> sources <span class="in">`setup.R`</span> a second time. Harmless, but it reloads every library.</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`define_cohort.R`</span> is marked deprecated, uses the older <span class="in">`strobe`</span> API, and is sourced by nothing. <span class="in">`setup.R`</span> still loads <span class="in">`strobe`</span> for it.</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## Components</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### Setup</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>**Purpose**: Load libraries and define analysis-wide constants and ICD code lists.</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>**Location**: <span class="in">`R/setup.R`</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>**Key symbols**:</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`censor_date`</span>, <span class="in">`minimum_followup`</span>, <span class="in">`maximum_followup`</span> — follow-up window</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`number_controls_per_case`</span> — target matching ratio</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`inflation_month`</span>, <span class="in">`inflation_year`</span> — inflation baseline</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`baseline_months_cost`</span>, <span class="in">`full_months`</span> — pre-index months and the month range of the panel</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`cryptococcus_ICD_list`</span>, <span class="in">`comorbidity_ICD_list`</span> — ICD-9-CM and ICD-10-CM code lists by condition</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>**Interactions**: Read by every later script.</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="fu">### Helper functions</span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>**Purpose**: Functions shared across scripts.</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>**Location**: <span class="in">`R/functions.R`</span></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>**Key functions**:</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`calculate_number_potential_matches()`</span> — counts eligible controls for one case, used to order the greedy match</span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`calculate_total_excess_costs()`</span> — sums <span class="in">`patient_type:month`</span> interaction coefficients and their variance (linear branch; log branch exists)</span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`plot_mean_monthly_costs()`</span> — <span class="in">`emmeans`</span> predictions by group and month at <span class="in">`month_offset = 30`</span>, with a risk table underneath</span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### Cohort construction</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>**Purpose**: Build the time-varying cohort of transplant recipients with cases, potential controls, and time-varying covariates.</span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>**Location**: <span class="in">`R/create_cohort.R`</span> (sections <span class="in">`load-usrds-files`</span>, <span class="in">`initialize-flowchart`</span>, <span class="in">`comorbidities-medicare`</span>, <span class="in">`develop-flowchart`</span>, <span class="in">`time-varying-cohort`</span>)</span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="in">```mermaid</span></span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>    subgraph USRDS via usRds</span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>      PT[patients]</span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>      TX[tx]</span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>      KI[txunos_trr_ki]</span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>      KP[txunos_trr_kp]</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>      CL[IN + PS claims&lt;br/&gt;<span class="dv">2006</span>–<span class="dv">2021</span>]</span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>      PH[payhist]</span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>    end</span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>    TX --&gt; TXC[tx_clean&lt;br/&gt;cumulative_transplant_total]</span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>    KI --&gt; TXC</span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>    KP --&gt; TXC</span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>    TXC --&gt; TXS[tx_status&lt;br/&gt;long: TDATE→Active,&lt;br/&gt;FAILDATE→Failed]</span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>    PT --&gt; FC[patients_clean&lt;br/&gt;flowchart: TOTTX&gt;<span class="dv">0</span>,&lt;br/&gt;TX1DATE &lt; <span class="dv">2021</span>]</span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>    CL --&gt;|get_IN_ICD / get_PS_ICD| CD[comorbidity_diagnosis_date&lt;br/&gt;one df per condition&lt;br/&gt;via establish_dx_date]</span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>    PH --&gt; MH[medicare_history&lt;br/&gt;+ gap check]</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>    FC --&gt; PM[patients_merged&lt;br/&gt;crypto after TX1DATE, age ≥<span class="dv">18</span>,&lt;br/&gt;dx <span class="dv">2007</span>–<span class="dv">2020</span>, fc_split]</span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>    CD --&gt;|cryptococcus| PM</span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>    PM --&gt;|verify_medicare_primary&lt;br/&gt;<span class="dv">365</span> d, cases only| PM2[patients_merged2&lt;br/&gt;terminal_date,&lt;br/&gt;minimum follow-up]</span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>    PM2 --&gt; IC[initial_cohort&lt;br/&gt;cohort_join_date:&lt;br/&gt;cases = dx date&lt;br/&gt;controls = TX1DATE]</span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>    IC --&gt;|create_usrds_cohort| PC[prematching_cohort&lt;br/&gt;start/stop rows]</span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>    CD --&gt;|add_cohort_covariate ×<span class="dv">10</span>| PC</span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>    TXS --&gt;|tx count, graft status,&lt;br/&gt;<span class="cf">last</span> tx / failure date| PC</span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>    MH --&gt;|PAYER| PC</span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>**Output**: <span class="in">`prematching_cohort`</span>, a counting-process data set with one row per person per interval (<span class="in">`tstart`</span>, <span class="in">`tstop`</span>). After <span class="in">`finalize_usrds_cohort()`</span>, time is days since <span class="in">`most_recent_transplant_date`</span>. Comorbidities, graft status and payer vary over time within a person.</span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>Cases enter at diagnosis, so a case's first row has <span class="in">`tstart`</span> equal to the days from their most recent transplant to diagnosis. That value is their matching time. Controls run from <span class="in">`TX1DATE`</span> to <span class="in">`terminal_date`</span>.</span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>The <span class="in">`flowchart`</span> package objects (<span class="in">`patients_clean`</span>, <span class="in">`patients_merged`</span>, <span class="in">`patients_merged2`</span>) carry the exclusion counts for the STROBE diagram.</span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a><span class="fu">### Matching</span></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>**Purpose**: Greedy risk-set matching of cases to controls without replacement.</span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>**Location**: <span class="in">`R/execute_matching.R`</span> (sections <span class="in">`prepare-cohort`</span>, <span class="in">`count-potential-matches`</span>, <span class="in">`matching-loop`</span>)</span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a><span class="in">```mermaid</span></span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a>flowchart TD</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a>    A[prematching_cohort] --&gt; B[Cases: first row per ID&lt;br/&gt;Controls: all rows of&lt;br/&gt;<span class="ot">'</span><span class="ss">Potential control</span><span class="ot">'</span>]</span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a>    B --&gt; C[Count potential controls per case&lt;br/&gt;calculate_number_potential_matches]</span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a>    C --&gt; D[Sort cases: fewest potential&lt;br/&gt;controls first]</span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a>    D --&gt; E{Next case}</span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a>    E --&gt; F[Eligible controls:&lt;br/&gt;exact cirrhosis, HIV, diabetes&lt;br/&gt;CMV commented out&lt;br/&gt;tstart ≤ case tstart &lt; tstop]</span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>    F --&gt; G[control <span class="fu">index</span> date =&lt;br/&gt;most_recent_transplant_date + case tstart&lt;br/&gt;±<span class="dv">3</span> y calendar, age ≥<span class="dv">18</span>, age ±<span class="dv">10</span> <span class="ot">y</span>&lt;br/&gt;Medicare primary at control date]</span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a>    G --&gt; H[arrange: same cumulative&lt;br/&gt;transplant count first]</span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>    H --&gt; I[Take up to <span class="dv">2</span>, one at a <span class="fu">time</span>,&lt;br/&gt;slice_head, distinct IDs]</span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a>    I --&gt; J[Add case + controls to matched_patients&lt;br/&gt;remove controls from pool]</span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a>    J --&gt; E</span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>    E --&gt;|none left| K[post_match_results&lt;br/&gt;patient_type, index_date_match,&lt;br/&gt;matched_control_indices on case rows]</span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a>**Output**: <span class="in">`post_match_results`</span>, which stacks cases and controls with <span class="in">`patient_type`</span> and <span class="in">`index_date_match`</span>. The only record of the matched set is the list column <span class="in">`matched_control_indices`</span> on case rows.</span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a><span class="fu">### Post-match processing</span></span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a>**Purpose**: Attach claims, define the follow-up window, compute 365-day totals, and build the monthly cost panel.</span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a>**Location**: <span class="in">`R/postmatch_processing.R`</span> (sections <span class="in">`matched-flowchart`</span>, <span class="in">`raw-costs`</span>, <span class="in">`merge-costs`</span>, <span class="in">`total-costs`</span>, <span class="in">`prorated-costs`</span>, <span class="in">`inflation-adjustment`</span>, <span class="in">`monthly-costs`</span>, <span class="in">`final-data-set`</span>)</span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a><span class="in">```mermaid</span></span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a>flowchart TD</span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a>    R[post_match_results] --&gt; RC[costs_raw via usRds&lt;br/&gt;IN_REV, IN_CLM, PS_REV]</span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>    RC --&gt; CJ[cost_joined&lt;br/&gt;one nested tibble per&lt;br/&gt;claim file per person]</span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a>    CJ --&gt; EA[end_date_analysis = min of&lt;br/&gt;<span class="fu">index</span> + <span class="dv">365</span>, censor_date,&lt;br/&gt;coverage_end_date,&lt;br/&gt;medicare_coverage_end_date]</span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a>    EA --&gt; T365[cost_broken_down / cost_inflated&lt;br/&gt;<span class="dv">365</span>-day totals, raw <span class="ot">and</span> adjusted,&lt;br/&gt;by HCFASAF; IN_CLM prorated by day]</span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a>    EA --&gt; MP[cost_longitudinal&lt;br/&gt;month = days from <span class="fu">index</span> %<span class="ot">/% 30&lt;br/</span>&gt;months −<span class="dv">3</span>…<span class="dv">11</span>&lt;br/&gt;IN_CLM by service_date + PS_REV by CLM_FROM&lt;br/&gt;month_offset = observed days, max <span class="dv">30</span>]</span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a>    MP --&gt; FD[final_data_set&lt;br/&gt;drop list columns,&lt;br/&gt;drop month_offset = <span class="dv">0</span>]</span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a>One person's timeline in the panel:</span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a><span class="in">day:    −90      −60      −30       0        30      ...     330      360</span></span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a><span class="in">month:  [  −3   ][  −2   ][  −1   ][   0   ][   1  ] ... [  11  ]</span></span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a><span class="in">                                   ^ index_date_match (case: dx date; control: matched date)</span></span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a><span class="in">month_offset = days observed in each month, capped at 30; follow-up ends at end_date_analysis</span></span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a>Details that are easy to miss:</span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`IN_REV`</span> feeds only the 365-day totals. The monthly panel and all models use <span class="in">`IN_CLM`</span> and <span class="in">`PS_REV`</span>; <span class="in">`grand_total_cost_month`</span> is <span class="in">`IN_CLM_month_total + PS_REV_month_total`</span>.</span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Monthly sums are floored at 0 with <span class="in">`pmax()`</span>, which absorbs negative adjustment claims.</span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`final_count_df`</span> (persons per group per month) is the risk table under each monthly plot.</span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modeling</span></span>
+<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a>**Purpose**: Fit monthly cost models for each outcome.</span>
+<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a>**Location**: <span class="in">`R/modeling.R`</span> (no section labels; the page includes the whole file)</span>
+<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a>For each of 10 outcomes (grand total, <span class="in">`IN_CLM`</span> total, <span class="in">`PS_REV`</span> total, and seven <span class="in">`IN_CLM`</span> service categories), five models are fitted, all with <span class="in">`patient_type * factor(month) + offset(log(month_offset))`</span>, clustered on <span class="in">`USRDS_ID`</span>:</span>
+<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Key in <span class="in">`fit[[outcome]]`</span> <span class="pp">|</span> Engine <span class="pp">|</span> Outcome scale <span class="pp">|</span> Family <span class="pp">|</span></span>
+<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`glmmTMB$tweedie`</span> <span class="pp">|</span> glmmTMB, random intercept <span class="pp">|</span> dollars <span class="pp">|</span> Tweedie, log link <span class="pp">|</span></span>
+<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`glmmTMB$linear`</span> <span class="pp">|</span> glmmTMB, random intercept <span class="pp">|</span> dollars <span class="pp">|</span> Gaussian, identity <span class="pp">|</span></span>
+<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`gee$linear`</span> <span class="pp">|</span> geeglm, exchangeable <span class="pp">|</span> dollars <span class="pp">|</span> Gaussian, identity <span class="pp">|</span></span>
+<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`glmmTMB$log`</span> <span class="pp">|</span> glmmTMB, random intercept <span class="pp">|</span> <span class="in">`log1p`</span> dollars <span class="pp">|</span> Gaussian, identity <span class="pp">|</span></span>
+<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`gee$log`</span> <span class="pp">|</span> geeglm, exchangeable <span class="pp">|</span> <span class="in">`log1p`</span> dollars <span class="pp">|</span> Gaussian, identity <span class="pp">|</span></span>
+<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a>The reference level of <span class="in">`factor(month)`</span> is −3, the lowest month, so each interaction term is a case–control difference relative to month −3.</span>
+<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tables and figures</span></span>
+<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a>**Location**: <span class="in">`R/tables.R`</span>, <span class="in">`R/figures.R`</span></span>
+<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Table 1 (<span class="in">`table1`</span>) summarizes <span class="in">`post_match_results`</span> by <span class="in">`patient_type`</span>; saved to <span class="in">`tables/`</span>.</span>
+<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Table 2 (<span class="in">`table2_icd`</span>) lists the ICD codes from <span class="in">`comorbidity_ICD_list`</span>; saved to <span class="in">`tables/`</span>.</span>
+<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Cost summary tables from <span class="in">`cost_broken_down`</span> and <span class="in">`cost_inflated`</span> are printed, not saved.</span>
+<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The total excess cost comes from <span class="in">`calculate_total_excess_costs()`</span> on <span class="in">`fit$grand_total_cost_month$gee$linear`</span>.</span>
+<span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Figures: the final flowchart (<span class="in">`patients_fc_matched`</span>), a beeswarm of 365-day <span class="in">`IN_CLM`</span> totals, and one monthly plot per outcome and model via <span class="in">`plot_mean_monthly_costs()`</span>; saved to <span class="in">`figures/`</span>.</span>
+<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a><span class="in">`tables/`</span> and <span class="in">`figures/`</span> are gitignored, so saved outputs cannot be checked from GitHub.</span>
+<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## Website Build</span></span>
+<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a><span class="in">```mermaid</span></span>
+<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a>    RS[<span class="ot">"</span><span class="st">R/*.R&lt;br/&gt;sections marked ## ---- label</span><span class="ot">"</span>] --&gt;|<span class="fu">knitr::read_chunk</span>| Q[<span class="ot">"</span><span class="st">quarto/*.qmd&lt;br/&gt;chunks with #| label + eval: false</span><span class="ot">"</span>]</span>
+<span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a>    RM[R/modeling.R] --&gt;|<span class="ot">"</span><span class="st">#| file: whole script</span><span class="ot">"</span>| QM[quarto/modeling.qmd]</span>
+<span id="cb7-205"><a href="#cb7-205" aria-hidden="true" tabindex="-1"></a>    Y[_quarto.yml&lt;br/&gt;sidebar, custom-callout filter] --&gt; REN[quarto render]</span>
+<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a>    Q --&gt; REN</span>
+<span id="cb7-207"><a href="#cb7-207" aria-hidden="true" tabindex="-1"></a>    QM --&gt; REN</span>
+<span id="cb7-208"><a href="#cb7-208" aria-hidden="true" tabindex="-1"></a>    IX[<span class="fu">index</span>.qmd] --&gt; REN</span>
+<span id="cb7-209"><a href="#cb7-209" aria-hidden="true" tabindex="-1"></a>    REN --&gt; DOCS[(gh-pages branch, rendered by&lt;br/&gt;GitHub Actions, served by GitHub Pages)]</span>
+<span id="cb7-210"><a href="#cb7-210" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-211"><a href="#cb7-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-212"><a href="#cb7-212" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Each page calls <span class="in">`knitr::read_chunk()`</span> on its script, then shows sections by label. A script edit appears on the site at the next render, with no page edit.</span>
+<span id="cb7-213"><a href="#cb7-213" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`quarto/modeling.qmd`</span> includes the whole script with <span class="in">`#| file:`</span>, so it displays everything in <span class="in">`modeling.R`</span>, including unused blocks.</span>
+<span id="cb7-214"><a href="#cb7-214" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`_quarto.yml`</span> defines the sidebar, the <span class="in">`custom-callout`</span> filter (the <span class="in">`Rcode`</span> callout), and <span class="in">`output-dir: docs`</span>.</span>
+<span id="cb7-215"><a href="#cb7-215" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`.github/workflows/publish.yml`</span> renders the site on every pull request as a check and, on each push to <span class="in">`master`</span>, renders it and publishes it to the <span class="in">`gh-pages`</span> branch, so the live site follows every script or page change. <span class="in">`docs/`</span> is the local render and is not committed.</span>
+<span id="cb7-216"><a href="#cb7-216" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The Setup page runs the <span class="in">`constants`</span> and <span class="in">`icd-code-lists`</span> sections of <span class="in">`R/setup.R`</span> to build its summary tables; every other imported section is shown with <span class="in">`eval: false`</span>.</span>
+<span id="cb7-217"><a href="#cb7-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-218"><a href="#cb7-218" aria-hidden="true" tabindex="-1"></a><span class="fu">## Configuration</span></span>
+<span id="cb7-219"><a href="#cb7-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-220"><a href="#cb7-220" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Setting <span class="pp">|</span> Where <span class="pp">|</span> Effect <span class="pp">|</span></span>
+<span id="cb7-221"><a href="#cb7-221" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb7-222"><a href="#cb7-222" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`censor_date`</span> <span class="pp">|</span> <span class="in">`R/setup.R`</span> <span class="pp">|</span> Administrative end of follow-up <span class="pp">|</span></span>
+<span id="cb7-223"><a href="#cb7-223" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`minimum_followup`</span>, <span class="in">`maximum_followup`</span> <span class="pp">|</span> <span class="in">`R/setup.R`</span> <span class="pp">|</span> Case inclusion; 365-day cost window <span class="pp">|</span></span>
+<span id="cb7-224"><a href="#cb7-224" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`number_controls_per_case`</span> <span class="pp">|</span> <span class="in">`R/setup.R`</span> <span class="pp">|</span> Target controls per case <span class="pp">|</span></span>
+<span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`inflation_month`</span>, <span class="in">`inflation_year`</span> <span class="pp">|</span> <span class="in">`R/setup.R`</span> <span class="pp">|</span> Baseline for <span class="in">`adjust_costs_for_inflation()`</span> <span class="pp">|</span></span>
+<span id="cb7-226"><a href="#cb7-226" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`baseline_months_cost`</span>, <span class="in">`full_months`</span> <span class="pp">|</span> <span class="in">`R/setup.R`</span> <span class="pp">|</span> Pre-index months; panel month range <span class="pp">|</span></span>
+<span id="cb7-227"><a href="#cb7-227" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`comorbidity_ICD_list`</span> <span class="pp">|</span> <span class="in">`R/setup.R`</span> <span class="pp">|</span> Condition definitions for cases and covariates <span class="pp">|</span></span>
+<span id="cb7-228"><a href="#cb7-228" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Matching calipers (±3 y calendar, ±10 y age, age ≥18) <span class="pp">|</span> <span class="in">`R/execute_matching.R`</span>, <span class="in">`R/functions.R`</span> <span class="pp">|</span> Hard-coded in both places <span class="pp">|</span></span>
+<span id="cb7-229"><a href="#cb7-229" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Site navigation, theme, output dir <span class="pp">|</span> <span class="in">`_quarto.yml`</span> <span class="pp">|</span> Website structure <span class="pp">|</span></span>
+<span id="cb7-230"><a href="#cb7-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-231"><a href="#cb7-231" aria-hidden="true" tabindex="-1"></a><span class="fu">## Code References</span></span>
+<span id="cb7-232"><a href="#cb7-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-233"><a href="#cb7-233" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Component <span class="pp">|</span> File <span class="pp">|</span> Key symbols <span class="pp">|</span></span>
+<span id="cb7-234"><a href="#cb7-234" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb7-235"><a href="#cb7-235" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Entry point <span class="pp">|</span> <span class="in">`R/main.R`</span> <span class="pp">|</span> sourcing order <span class="pp">|</span></span>
+<span id="cb7-236"><a href="#cb7-236" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Constants, code lists <span class="pp">|</span> <span class="in">`R/setup.R`</span> <span class="pp">|</span> <span class="in">`censor_date`</span>, <span class="in">`number_controls_per_case`</span>, <span class="in">`full_months`</span>, <span class="in">`comorbidity_ICD_list`</span> <span class="pp">|</span></span>
+<span id="cb7-237"><a href="#cb7-237" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Helpers <span class="pp">|</span> <span class="in">`R/functions.R`</span> <span class="pp">|</span> <span class="in">`calculate_number_potential_matches()`</span>, <span class="in">`calculate_total_excess_costs()`</span>, <span class="in">`plot_mean_monthly_costs()`</span> <span class="pp">|</span></span>
+<span id="cb7-238"><a href="#cb7-238" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Cohort <span class="pp">|</span> <span class="in">`R/create_cohort.R`</span> <span class="pp">|</span> <span class="in">`tx_status`</span>, <span class="in">`medicare_history`</span>, <span class="in">`patients_merged2`</span>, <span class="in">`prematching_cohort`</span> <span class="pp">|</span></span>
+<span id="cb7-239"><a href="#cb7-239" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Matching <span class="pp">|</span> <span class="in">`R/execute_matching.R`</span> <span class="pp">|</span> <span class="in">`unmatched_patients`</span>, matching <span class="in">`while`</span> loop, <span class="in">`post_match_results`</span> <span class="pp">|</span></span>
+<span id="cb7-240"><a href="#cb7-240" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Costs and panel <span class="pp">|</span> <span class="in">`R/postmatch_processing.R`</span> <span class="pp">|</span> <span class="in">`end_date_analysis`</span>, <span class="in">`cost_inflated`</span>, <span class="in">`cost_longitudinal`</span>, <span class="in">`final_data_set`</span>, <span class="in">`final_count_df`</span> <span class="pp">|</span></span>
+<span id="cb7-241"><a href="#cb7-241" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Models <span class="pp">|</span> <span class="in">`R/modeling.R`</span> <span class="pp">|</span> <span class="in">`temp_formula`</span>, <span class="in">`fit[[outcome]][[engine]][[family]]`</span> <span class="pp">|</span></span>
+<span id="cb7-242"><a href="#cb7-242" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Outputs <span class="pp">|</span> <span class="in">`R/tables.R`</span>, <span class="in">`R/figures.R`</span> <span class="pp">|</span> <span class="in">`table1`</span>, <span class="in">`table2_icd`</span>, monthly plot loop <span class="pp">|</span></span>
+<span id="cb7-243"><a href="#cb7-243" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Deprecated <span class="pp">|</span> <span class="in">`R/define_cohort.R`</span> <span class="pp">|</span> older <span class="in">`strobe`</span>-based cohort script <span class="pp">|</span></span>
+<span id="cb7-244"><a href="#cb7-244" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Website <span class="pp">|</span> <span class="in">`_quarto.yml`</span>, <span class="in">`index.qmd`</span>, <span class="in">`quarto/*.qmd`</span>, <span class="in">`_extensions/`</span> <span class="pp">|</span> <span class="in">`read_chunk`</span>, <span class="in">`custom-callout`</span> <span class="pp">|</span></span>
+<span id="cb7-245"><a href="#cb7-245" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> External (usRds) <span class="pp">|</span> — <span class="pp">|</span> <span class="in">`load_usrds_file`</span>, <span class="in">`get_IN_ICD`</span>, <span class="in">`get_PS_ICD`</span>, <span class="in">`establish_dx_date`</span>, <span class="in">`verify_medicare_primary`</span>, <span class="in">`create_usrds_cohort`</span>, <span class="in">`add_cohort_covariate`</span>, <span class="in">`finalize_usrds_cohort`</span>, <span class="in">`get_IN_REV_costs`</span>, <span class="in">`get_IN_CLM_costs`</span>, <span class="in">`get_PS_REV_costs`</span>, <span class="in">`prorate_costs_by_day`</span>, <span class="in">`adjust_costs_for_inflation`</span> <span class="pp">|</span></span>
+<span id="cb7-246"><a href="#cb7-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-247"><a href="#cb7-247" aria-hidden="true" tabindex="-1"></a><span class="fu">## Known Architectural Gaps</span></span>
+<span id="cb7-248"><a href="#cb7-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-249"><a href="#cb7-249" aria-hidden="true" tabindex="-1"></a>Status as of commit <span class="in">`8a52330`</span>. These come from reading the code and need checking against the real data where noted.</span>
+<span id="cb7-250"><a href="#cb7-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-251"><a href="#cb7-251" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Matched-set ID is lost before modeling.** <span class="in">`matched_control_indices`</span> is a list column, and <span class="in">`final_data_set`</span> drops list columns. Models can cluster only on <span class="in">`USRDS_ID`</span>. *(Needs a design decision.)*</span>
+<span id="cb7-252"><a href="#cb7-252" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Death is not an input to `end_date_analysis`.** <span class="in">`DIED`</span> appears only in the <span class="in">`follow_up_final_event`</span> label. Post-death months stay in the panel unless a coverage end date already equals the death date. *(Needs verification: count person-months after `DIED` by `patient_type`.)*</span>
+<span id="cb7-253"><a href="#cb7-253" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Open items from earlier reviews, still present:** <span class="in">`calculate_total_excess_costs()`</span> sums months −2 and −1 interactions; <span class="in">`slice_head(n = 1)`</span> makes <span class="in">`set.seed()`</span> ineffective; the potential-match count checks coverage at a different date than the loop; controls are limited to never-diagnosed patients; graft status isn't matched; cases with zero controls are still added as matched.</span>
+<span id="cb7-254"><a href="#cb7-254" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Partly fixed:** <span class="in">`temp_formula`</span> and <span class="in">`fit`</span> are now initialized; the unused GEE tweedie block at the end of <span class="in">`modeling.R`</span> still runs when sourced.</span>
+<span id="cb7-255"><a href="#cb7-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-256"><a href="#cb7-256" aria-hidden="true" tabindex="-1"></a><span class="fu">## Glossary</span></span>
+<span id="cb7-257"><a href="#cb7-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-258"><a href="#cb7-258" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Term <span class="pp">|</span> Definition <span class="pp">|</span></span>
+<span id="cb7-259"><a href="#cb7-259" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb7-260"><a href="#cb7-260" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Case <span class="pp">|</span> Transplant recipient with an incident cryptococcosis claim meeting the cohort criteria; index date is the diagnosis date <span class="pp">|</span></span>
+<span id="cb7-261"><a href="#cb7-261" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Potential control <span class="pp">|</span> Transplant recipient with no cryptococcosis diagnosis at any time <span class="pp">|</span></span>
+<span id="cb7-262"><a href="#cb7-262" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Index date (<span class="in">`index_date_match`</span>) <span class="pp">|</span> Case: diagnosis date. Control: <span class="in">`most_recent_transplant_date`</span> plus the case's days since transplant <span class="pp">|</span></span>
+<span id="cb7-263"><a href="#cb7-263" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Risk-set matching <span class="pp">|</span> Controls must be under observation at the same time since transplant as the case's diagnosis <span class="pp">|</span></span>
+<span id="cb7-264"><a href="#cb7-264" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`tstart`</span> / <span class="in">`tstop`</span> <span class="pp">|</span> Interval bounds in days since most recent transplant, from <span class="in">`finalize_usrds_cohort()`</span> <span class="pp">|</span></span>
+<span id="cb7-265"><a href="#cb7-265" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`month`</span> <span class="pp">|</span> Floor of days from index divided by 30; panel covers −3 to 11 <span class="pp">|</span></span>
+<span id="cb7-266"><a href="#cb7-266" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`month_offset`</span> <span class="pp">|</span> Days observed in a panel month, capped at 30; used as the model offset <span class="pp">|</span></span>
+<span id="cb7-267"><a href="#cb7-267" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> IN_CLM / IN_REV / PS_REV <span class="pp">|</span> Institutional claims, institutional revenue-center lines, and physician/supplier lines from USRDS Medicare files <span class="pp">|</span></span>
+<span id="cb7-268"><a href="#cb7-268" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> HCFASAF <span class="pp">|</span> Claim setting (inpatient, outpatient, SNF, home health, hospice, dialysis, auxiliary) used to split costs <span class="pp">|</span></span>
+<span id="cb7-269"><a href="#cb7-269" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> usRds <span class="pp">|</span> Separate package that loads USRDS files and provides cohort, coverage and cost helpers <span class="pp">|</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/master/ARCHITECTURE.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
