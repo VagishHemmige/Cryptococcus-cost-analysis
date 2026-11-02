@@ -27,6 +27,8 @@ knitr::read_chunk("../R/functions.R")
 
 ## Plotting mean monthly costs
 
+`plot_mean_monthly_costs()`
+
 The following function uses `ggplot2` to create a plot of monthly costs with a risk table underneath.
 
 Its inputs are as follows:
@@ -37,6 +39,8 @@ to create a risk table
 
 The function uses the `emmeans` function from the package of the same name to estimate monthly costs.  The x-axis (months) is shifted to the right so that the vertical line at x=0 cleanly separates pre-index and post-index months, and cases and controls are dodged slightly so that the error bars do not overlap.
 
+**Used in the analysis:** Figures: [Month-by-month plots](figures.qmd#month-by-month-plots).
+
 ```{r}
 #| label: plot-mean-monthly-costs
 #| eval: false
@@ -45,8 +49,12 @@ The function uses the `emmeans` function from the package of the same name to es
 
 ## Calculating the number of potential matches
 
+`calculate_number_potential_matches()`
+
 The following function is passed a control df and a number of values for a case patient, and returns the number of distinct controls which are potential matches.
 The matching algorithm is hard-coded.
+
+**Used in the analysis:** 2. Execute matching: [Counting the potential number of matched controls for each case](execute_matching.qmd#counting-the-potential-number-of-matched-controls-for-each-case).
 
 ```{r}
 #| label: calculate-number-potential-matches
@@ -56,8 +64,12 @@ The matching algorithm is hard-coded.
 
 ## Total excess costs
 
+`calculate_total_excess_costs()`
+
 This function takes a `fit` object from a model and calculates the total estimated excess costs and confidence intervals.
 This object currently only works for models with linear links.
+
+**Used in the analysis:** Tables: [Modeled total excess costs](tables.qmd#modeled-total-excess-costs).
 
 ```{r}
 #| label: calculate-total-excess-costs
