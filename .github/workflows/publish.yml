@@ -7,7 +7,9 @@
 #
 # These pages run R: the hidden knitr::read_chunk() imports, and on the Setup
 # page the constants and ICD code lists from R/setup.R (definitions only) and
-# the tables that summarize them. They never run anything that reads data
+# the tables that summarize them, and on the Architecture page a chunk that
+# reads ARCHITECTURE.md as text so its diagrams are drawn. They never run
+# anything that reads data
 # (AGENTS.md, "Quarto website"), and this machine has no USRDS data. A failed
 # render publishes nothing, so the last good site stays live.
 
@@ -51,7 +53,8 @@ jobs:
 
       # Only what the pages run: knitr and rmarkdown for the R chunks, and the
       # two packages the Setup page attaches (tidyverse also provides tibble
-      # and purrr). Current CRAN versions.
+      # and purrr), plus yaml for the cross-reference check. Current CRAN
+      # versions.
       - name: Install the R packages the pages use
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -60,6 +63,12 @@ jobs:
             any::rmarkdown
             any::tidyverse
             any::gt
+            any::yaml
+
+      # The functions page and the method pages must link each other as the
+      # code says (AGENTS.md, "Quarto website"); see the script for how to fix
+      - name: Check function cross-references
+        run: Rscript tests/check-crosslinks.R check
 
       - name: Render (pull requests only)
         if: github.event_name == 'pull_request'
