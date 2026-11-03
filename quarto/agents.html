@@ -84,6 +84,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-66ae90e4418e9d0ac3caa4b8c3bef75c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/issue-comments-0.3.0/issue-comments.js"></script>
+<link href="../site_libs/quarto-contrib/issue-comments-0.3.0/issue-comments.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -135,6 +137,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
   background-image: none;
 }
 </style>
+<script>window.ISSUE_COMMENTS = {"contact":"mailto:vagish.hemmige@gmail.com","endpoint":"https://script.google.com/macros/s/AKfycbyE8fNBvy3vfuAnuQqdjpCTR8i2zYI-KSvGzhkGlQRYevI1I6auqq9H-mIk2yrXCaIROA/exec","owner":"Vagish Hemmige","pageButton":false,"passcode":true,"preview":true};</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -413,23 +416,16 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </div>
 
 
-<div class="quarto-title-meta-author column-body">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Vagish Hemmige <a href="mailto:vahemmig@montefiore.org" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Montefiore Medical Center/ Albert Einstein College of Medicine
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta column-body">
 
-      
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Vagish Hemmige <a href="mailto:vagish.hemmige@gmail.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+          </div>
+  </div>
+    
   
     
   </div>
@@ -528,7 +524,7 @@ edit that file, not this page. Its first heading is the page title.
 <h2 class="anchored" data-anchor-id="quarto-website">Quarto website</h2>
 <p>The Quarto site documents the code. It does not run the analysis.</p>
 <ul>
-<li><p><strong>Setup files:</strong> <code>_quarto.yml</code>, <code>index.qmd</code> and <code>404.qmd</code> (the page GitHub Pages shows for a missing address) sit at the root. There is one page per pipeline script in <code>quarto/</code>, named after the script (for example, <code>quarto/create_cohort.qmd</code> for <code>R/create_cohort.R</code>). <code>quarto/results.qmd</code> is a placeholder for results and says they are pending. The <code>custom-callout</code> extension in <code>_extensions/</code> provides the <code>Rcode</code> and <code>Results</code> callouts.</p></li>
+<li><p><strong>Setup files:</strong> <code>_quarto.yml</code>, <code>index.qmd</code> and <code>404.qmd</code> (the page GitHub Pages shows for a missing address) sit at the root. There is one page per pipeline script in <code>quarto/</code>, named after the script (for example, <code>quarto/create_cohort.qmd</code> for <code>R/create_cohort.R</code>). <code>quarto/results.qmd</code> is a placeholder for results and says they are pending. The <code>custom-callout</code> extension in <code>_extensions/</code> provides the <code>Rcode</code> and <code>Results</code> callouts, and the <code>issue-comments</code> extension lets readers highlight text and leave a comment, which a relay files as a GitHub issue in this repository.</p></li>
 <li><p><strong>Showing code:</strong> each page loads its script with <code>knitr::read_chunk("../R/&lt;script&gt;.R")</code> in a hidden chunk. It then shows each labelled section in a chunk with <code>#| eval: false</code>, with prose explaining what the section does and why. Pages link to the script on GitHub and to the scripts it depends on.</p></li>
 <li><p><strong>Visual cues.</strong> Each kind of page has one icon and colour, set by its sidebar entry’s <code>icon:</code> in <code>_quarto.yml</code> and coloured by <code>styles.css</code>; pages mark the same kind of content with the callout of that colour:</p>
 <table class="caption-top table">
