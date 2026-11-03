@@ -39,9 +39,20 @@ website:
             text: Methodological background
             icon: book
 
-      - href: quarto/study_methods.qmd
-        text: Study design and methods
-        icon: signpost-split
+      - section: Study design and methods
+        contents:
+          - href: quarto/study_overview.qmd
+            text: Overview
+            icon: diagram-3
+          - href: quarto/study_cases_controls.qmd
+            text: Cases and controls
+            icon: diagram-3
+          - href: quarto/study_costs.qmd
+            text: Costs and follow-up
+            icon: diagram-3
+          - href: quarto/study_analysis.qmd
+            text: Analysis and reporting
+            icon: diagram-3
 
       - section: Code
         contents:
@@ -120,12 +131,18 @@ custom-callout:
     icon: true
     icon-symbol: "📊"
     color: "#198754"
+  Pending:
+    icon: true
+    icon-symbol: "⏳"
+    color: "#f0c400"
 
 filters:
+  # Yellow marks for provisional content, and their Pending callout
+  # (AGENTS.md, "Provisional content"). It runs before custom-callout,
+  # which turns the callout it adds into a styled box.
+  - quarto/_pending.lua
   - custom-callout
   - issue-comments
-  # Yellow marks for provisional content, and their legend (AGENTS.md, Visual cues)
-  - quarto/_pending.lua
 
 # Readers can highlight text and comment; the relay files each comment as
 # a GitHub issue in this repository, worked out from the page's address

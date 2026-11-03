@@ -1,0 +1,86 @@
+---
+title: "Analysis and reporting"
+format: html
+---
+
+This page is part of the study's design and methods. The **Specified in**, **Current code** and **Decision pending** notes are explained on the [Overview](study_overview.qmd), and the general background is on [Methodological background](methodological_background.qmd).
+
+## Statistical analysis
+
+### The primary model
+
+Why the model describes mean cost directly is explained under [Why cost data are hard to model](methodological_background.qmd#why-cost-data-are-hard-to-model). Each person-month's cost is modelled with a generalized linear model that has:
+
+- a **log link** and a **Tweedie distribution**;
+- terms for group (case or control), month (as a category) and their interaction, so that the difference between cases and controls can differ in every month;
+- the logarithm of the number of days observed as an **offset**.
+
+What each of these does is explained under [Models for costs](methodological_background.qmd#models-for-costs). Standard errors come from generalized estimating equations clustered on matched set, and also on patient if one person can appear in more than one matched set.
+
+**Specified in:** [§8.4 Primary model](analysis-plan.qmd#84-primary-model).
+
+### From the model to a dollar estimate
+
+1. For each month, the model predicts the mean cost of a full 30-day month for cases and for controls.
+2. The case-minus-control difference is taken for each month.
+3. The differences for months 0 to 11 are added up. That total is the excess cost per case.
+4. A 95% confidence interval comes from a cluster bootstrap: matched sets are resampled with replacement 1,000 times (or more if needed), and the whole calculation is repeated each time.
+
+The same model gives the month-by-month profile of excess cost from month −3 to month 11, and fitting it separately to each care setting (inpatient, outpatient, skilled nursing, home health, hospice, dialysis, physician/supplier) divides the excess by setting.
+
+**Specified in:** [§8.4 Primary model](analysis-plan.qmd#84-primary-model), [§8.5 Secondary analyses](analysis-plan.qmd#85-secondary-analyses).
+
+**Decision pending:** whether the estimate relies on matching alone, with months −3 to −1 reported as a balance check, or subtracts the difference between cases and controls before diagnosis as well, which gives a difference-in-differences estimate ([D9](analysis-plan.qmd#13-open-decisions)).
+
+### What the code does now
+
+The code fits five models to each of ten monthly cost outcomes: total cost, institutional cost, physician/supplier cost, and seven institutional categories (inpatient, outpatient, skilled nursing, home health, hospice, dialysis, and a non-claim/auxiliary category). None is yet the primary model as specified, and the total currently reported is not yet the planned estimate.
+
+| Model | Outcome scale | Correlation handled by | Role in the plan |
+|---|---|---|---|
+| Tweedie, log link, mixed model | Dollars | Random intercept per patient | Closest to the primary model, but the plan uses generalized estimating equations clustered on matched set |
+| Gaussian, identity link, mixed model | Dollars | Random intercept per patient | Sensitivity analysis |
+| Gaussian, identity link, generalized estimating equations | Dollars | Exchangeable correlation within patient | Sensitivity analysis; currently used for the reported total |
+| Gaussian on log(cost + 1), mixed model | Log dollars | Random intercept per patient | Sensitivity analysis |
+| Gaussian on log(cost + 1), generalized estimating equations | Log dollars | Exchangeable correlation within patient | Sensitivity analysis |
+
+Known differences from the plan:
+
+- the reported total adds up each month's case–control difference measured relative to month −3, including months −2 and −1, so it is not the sum of differences over months 0 to 11 ([#2](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/2));
+- the models on the dollar and log(cost + 1) scales include the days-observed offset in a way that only makes sense with a log link ([#4](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/4));
+- the calculation for log-link models adds ratios rather than dollar differences ([#5](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/5));
+- plots label back-transformed predictions from the log(cost + 1) and mixed models as mean dollars ([#14](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/14));
+- the identifier of each matched set is not carried into the modelling data, so models can cluster only on patient (see also [#12](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/12));
+- the cluster bootstrap is not yet implemented.
+
+### Missing covariate data
+
+Cost is observed only during covered months, by design. For covariates from the registry, missingness is described, and if it exceeds 5% for any covariate in a propensity score, multiple imputation by chained equations is used.
+
+**Specified in:** [§8.6 Missing data](analysis-plan.qmd#86-missing-data).
+
+## Sensitivity analyses
+
+The planned sensitivity analyses test whether the result depends on particular choices:
+
+- a sequential target-trial emulation, which compares people newly diagnosed in each month with everyone else eligible that month. The comparison group is weighted by the odds of diagnosis from a propensity score rather than matched, with weights truncated at the 1st and 99th percentiles and untruncated results also reported;
+- the other way of handling death ([D8](analysis-plan.qmd#13-open-decisions));
+- outcome models on the dollar scale and on log cost;
+- a stricter claims definition of cryptococcosis;
+- one control per case, exact matching on cytomegalovirus infection, a narrower propensity score caliper under Option B, and the matching method not chosen as primary;
+- recipients of a first transplant only;
+- diagnoses before and after the October 2015 change in diagnosis codes.
+
+**Specified in:** [§9 Sensitivity analyses](analysis-plan.qmd#9-sensitivity-analyses), [Appendix A](analysis-plan.qmd#appendix-a-target-trial-protocol).
+
+## Disclosure rules
+
+No table, figure, diagram or text shows a count under 11, including counts that could be worked out from other cells. Figures that plot individual patients are not published. Every output is checked against the data use agreement before release.
+
+**Specified in:** [§10 Disclosure control](analysis-plan.qmd#10-disclosure-control).
+
+## Reporting and limitations
+
+The study will be reported following STROBE, its RECORD extension for routinely collected health data, and, for the target-trial analysis, TARGET. The limitations to be addressed include misclassification of diagnoses in claims, the restriction to Medicare payments and to fee-for-service Medicare, confounding by immunosuppression intensity that claims cannot fully measure, and coverage rules that change over time.
+
+**Specified in:** [§11 Limitations](analysis-plan.qmd#11-limitations-to-address-in-reporting), [§12 Reporting map](analysis-plan.qmd#12-reporting-map).

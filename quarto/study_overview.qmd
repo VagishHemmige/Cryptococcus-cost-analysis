@@ -1,0 +1,58 @@
+---
+title: "Study overview"
+format: html
+---
+
+These pages explain, in plain language and without code, what this study chose and why. The general background they rely on, such as what USRDS and Medicare claims are and how risk-set matching works, is on [Methodological background](methodological_background.qmd). The formal specification is the [analysis plan](analysis-plan.qmd); each section on these pages ends by linking the part of the plan that governs it. Three kinds of note mark where the description stands:
+
+- **Specified in:** the section of the analysis plan that defines the method.
+- **Current code:** where the code does not yet do what the plan says, what it does now, with a link to the GitHub issue tracking the difference.
+- **Decision pending:** a choice the plan has not yet made. These are listed in the plan's [open decisions](analysis-plan.qmd#13-open-decisions).
+
+This is a methods-and-code site. No results are shown, because the analysis is not complete and the data cannot be shared.
+
+The methods are set out over four pages: this overview, [Cases and controls](study_cases_controls.qmd), [Costs and follow-up](study_costs.qmd), and [Analysis and reporting](study_analysis.qmd).
+
+## The question and the design in brief
+
+**Question.** Among adult kidney transplant recipients, how much more does Medicare pay for a patient's care in the 12 months after cryptococcosis is diagnosed than it would have paid had they not developed it?
+
+**Approach.** Each patient diagnosed with cryptococcosis (a *case*) is compared with up to two similar recipients who have reached the same time since transplant without being diagnosed (*controls*). Cases and controls are followed for 12 months from the same starting point, and the difference in their Medicare payments is the excess cost of cryptococcosis.
+
+**What is estimated.** The average excess cost among people who develop cryptococcosis (the average treatment effect in the treated, or ATT): the mean difference in total Medicare payments over months 0 to 11 between cases and their matched controls, per case.
+
+**Specified in:** [§1 Objective](analysis-plan.qmd#1-objective), [§2 Design](analysis-plan.qmd#2-design), [§8.3 Estimand](analysis-plan.qmd#83-estimand).
+
+## Data used
+
+The data come from the United States Renal Data System and its linked Medicare claims, described on [Methodological background](methodological_background.qmd#the-united-states-renal-data-system). This study uses the patient, transplant, payer history, treatment history and death files, and Medicare Part A and Part B claims. Part D prescription records are planned only where a covariate needs them. Claims from 2006 to 2021 are used, cases are diagnosed between 2007 and 2020, and follow-up ends on 1 January 2022. The data are used under a data use agreement and are not published.
+
+Both institutional and physician/supplier claims are used ([Medicare claims](methodological_background.qmd#medicare-claims)). Because claims are complete only under fee-for-service primary coverage ([Medicare as primary payer](methodological_background.qmd#medicare-as-primary-payer)), a person is observed only during periods when fee-for-service Medicare is their primary payer for both Part A and Part B, as recorded in the USRDS payer history file. Many kidney transplant recipients lose Medicare coverage over time: Medicare entitlement based only on kidney failure ends 36 months after a successful transplant, unless the person qualifies another way (for example by age or disability). The study's findings therefore apply to recipients with fee-for-service Medicare as their primary payer.
+
+**Specified in:** [§3 Data source](analysis-plan.qmd#3-data-source), [§4.2 Eligibility](analysis-plan.qmd#42-eligibility-at-time-zero-cases-and-controls-alike), [§11 Limitations](analysis-plan.qmd#11-limitations-to-address-in-reporting).
+
+**Current code:** two payer history categories count as coverage: "Medicare fee-for-service primary pay, for both Part A and Part B" and "Medicare fee-for-service primary pay, for other". This follows the USRDS Researcher's Guide definition of Medicare as primary payer. The guide does not say which Medicare parts the second category covers.
+
+**Decision pending:** whether other payer arrangements, such as Medicare as secondary payer, are ever eligible ([D1](analysis-plan.qmd#13-open-decisions)).
+
+## Who is studied
+
+The source population is kidney transplant recipients in USRDS with a transplant before 2021. Cases and controls must meet the same criteria at their own time zero (defined under [Time zero](study_cases_controls.qmd#time-zero)). A person is eligible if they:
+
+1. have had at least one kidney transplant before that date;
+2. are aged 18 or older;
+3. have no earlier cryptococcosis diagnosis;
+4. have had fee-for-service Medicare as primary payer for Parts A and B for the whole 365 days before that date, without gaps, so that their baseline health and baseline cost are fully observed;
+5. are alive and under observation on that date.
+
+The time scale is time since the **most recent** kidney transplant. People with more than one transplant are eligible, and their earlier transplants are counted as a covariate.
+
+**Specified in:** [§4 Study population](analysis-plan.qmd#4-study-population).
+
+**Current code:**
+
+- The 365-day coverage window is counted back from time zero, and it can begin before the transplant, for example in a recipient covered by Medicare during dialysis. The plan does not say whether the window must fall after transplant.
+- Recipients of a kidney–pancreas transplant are included. A pancreas transplant flag taken from diagnosis codes is described in the baseline table, but the transplant records are not used to identify these recipients, and the flag is not used in matching or the models.
+- A diagnosis on the day of the first transplant is treated as a diagnosis before transplant, and the patient is excluded.
+
+**Decision pending:** whether kidney–pancreas and other multi-organ recipients are excluded or included with an indicator ([D2](analysis-plan.qmd#13-open-decisions)).
