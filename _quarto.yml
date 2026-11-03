@@ -124,6 +124,8 @@ custom-callout:
 filters:
   - custom-callout
   - issue-comments
+  # Yellow marks for provisional content, and their legend (AGENTS.md, Visual cues)
+  - quarto/_pending.lua
 
 # Readers can highlight text and comment; the relay files each comment as
 # a GitHub issue in this repository, worked out from the page's address
