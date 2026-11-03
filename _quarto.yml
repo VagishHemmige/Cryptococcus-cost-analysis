@@ -37,9 +37,6 @@ website:
           - href: quarto/analysis_methods.qmd
             text: Methods background
             icon: book
-          - href: quarto/analysis-plan.qmd
-            text: Analysis plan
-            icon: book
 
       - section: Setup and helper functions
         contents:
@@ -82,6 +79,9 @@ website:
 
       - section: Project documents
         contents:
+          - href: quarto/analysis-plan.qmd
+            text: Analysis plan
+            icon: file-earmark-ruled
           - href: quarto/architecture.qmd
             text: Architecture
             icon: file-earmark-ruled
