@@ -16,6 +16,16 @@ This project uses the [**United States Renal Data System**](https://www.niddk.ni
 
 
 
+## Study timeline and cost trajectories {#study-timeline}
+
+@fig-cost-timeline illustrates how the planned study windows relate to case and control costs. The 365-day eligibility lookback is longer than the monthly cost-outcome window. Disease-related care and diagnostic workup can raise costs before the recorded diagnosis, so the prediagnosis trajectory is part of what the study aims to describe.
+
+![Conceptual study timeframes and mean cost trajectories; no patient data or study estimates are shown. The monthly outcome panel spans days −90 to 359. Earlier dashed curves provide context outside that panel. Shaded differences are illustrative and do not establish causal attribution.](quarto/assets/integrated-cost-timeline.svg){#fig-cost-timeline width=100% fig-alt="Line diagram of mean costs over time for cases and controls. The eligibility bar spans days minus 365 to minus 1. Pale dashed curves precede the cost-outcome window. During intervals minus 3 to minus 1, cases rise above zigzagging controls, peak near the case diagnosis or matched control index date, and decline gradually while remaining higher through interval 11."}
+
+[Open the figure at full size](quarto/assets/integrated-cost-timeline.svg).
+
+For cases, time zero is the first qualifying diagnosis claim; controls are aligned at the same time since their most recent transplant, so their calendar dates may differ. The figure explains the intended windows, not the completeness of observation: coverage loss, death, and partial months require the handling specified in the [analysis plan](quarto/analysis-plan.qmd). Earlier costs may also inform planned matching covariates; they are outside the monthly outcome panel shown here.
+
 ## Methods
 
 We selected cryptococcus cases based on the following inclusion criteria:
