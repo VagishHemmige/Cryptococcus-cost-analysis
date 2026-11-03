@@ -67,11 +67,12 @@ This component identifies baseline comorbidities among transplant recipients usi
 
 This portion makes use of the `get_IN_ICD()` and `get_PS_ICD()` functions from the `usRds` package to obtain dates that specific ICD codes are used for patients with a history of at least one kidney transplant in the study period.
 
-The `establish_dx_date()` function from the `usRds` package uses the results of this analysis to ascertain the date when comorbidities meet the criteria for a formal diagnosis:
+The `establish_dx_date()` function from the `usRds` package uses the results of this analysis to ascertain the date when each condition meets the criteria for a diagnosis. It counts a diagnosis as established on the first of:
 
-- **Two** outpatient encounters
-or
-- **One** inpatient encounter
+- **one inpatient claim** carrying a code from the condition's list; or
+- **a second record of any other kind** carrying one: hospital outpatient, physician/supplier, skilled nursing, home health or other institutional claims.
+
+Records are counted one at a time rather than grouped into visits, and the diagnosis date is the first day of service on the record that establishes the diagnosis. The rule, and the decision still open on it, are set out under [How a case is found in claims](study_cases_controls.qmd#how-a-case-is-found-in-claims).
 
 In parallel, Medicare coverage history is retrieved for all transplant recipients from the `payhist` file, which is part of the Core dataset.  These data will be used to confirm continuous enrollment during the analytic period. We verify the absence of gaps indicating missing data, noting that every subsequent period in the dataset for a patient starts the day after the previous period ends and thereby supporting valid longitudinal assessment of diagnoses and downstream cost analyses. 
 
@@ -88,7 +89,7 @@ Subsequently, key diagnosis dates, including the date of cryptococcosis diagnosi
 
 This code block then extends the STROBE flowchart by integrating diagnosis timing, eligibility criteria, and coverage requirements to finalize the analytic cohorts. Patients are classified as cryptococcosis cases or potential controls based on the presence and timing of diagnosis, and sequential exclusion criteria are applied to ensure incident disease, adult status at diagnosis, and appropriate calendar-time eligibility. 
 
-The `verify_medicare_primary()` function from the `usRds` package is used to confirm that patients with a cryptococcus diagnosis have Medicare primary coverage for at least 365 days prior to the cryptococcus diagnosis date to ensure that the diagnosis is new and not a carryover from an unobserved period.
+The `verify_medicare_primary()` function from the `usRds` package is used to confirm that patients with a cryptococcus diagnosis have Medicare primary coverage for at least 365 days prior to the cryptococcus diagnosis date, so that a diagnosis established earlier in that year would have been seen. This makes it more likely that the diagnosis is new, but does not prove it ([What a claims-based definition can and cannot show](study_cases_controls.qmd#what-a-claims-based-definition-can-and-cannot-show)).
 
 These steps culminate in the final case and control cohorts, with all inclusion and exclusion decisions explicitly tracked and visualized in the updated STROBE flow diagram.
 

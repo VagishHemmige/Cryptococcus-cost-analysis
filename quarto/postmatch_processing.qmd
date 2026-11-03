@@ -88,9 +88,11 @@ We now write code that totals costs for each patient, accounting for the start a
 
 - Start: The index date for each patient
 - Finish: The earliest of
+  - 365 days after the index date (`maximum_followup`)
   - End of Medicare coverage (minimum 1 day)
-  - Death
   - Censoring date for end of data (1/1/2022)
+
+**Current code:** death is not yet an end point of follow-up; it is recorded as the reason follow-up ended only when it falls on one of the dates above ([#10](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/10)). See [End of follow-up](study_costs.qmd#end-of-follow-up).
 
 In addition to total costs, we also calculated total costs grouped by type (Inpatient, Outpatient, Home Health, etc.).
 

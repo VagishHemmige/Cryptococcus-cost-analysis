@@ -28,48 +28,18 @@ For cases, time zero is the first qualifying diagnosis claim; controls are align
 
 ## Methods
 
-We selected cryptococcus cases based on the following inclusion criteria:
+Each patient diagnosed with cryptococcosis (a *case*) is compared with up to two similar recipients who have reached the same time since transplant without being diagnosed (*controls*). Cases and controls are followed for 12 months from the same starting point, and the difference in their Medicare payments is the excess cost of cryptococcosis.
 
-- Age 18 or greater
-- Prior kidney transplant
-- ICD9 or ICD10 codes for cryptococcus (2 outpatient or 1 inpatient)
-- One year of Medicare primary coverage lead-in
-
-Controls were matched 2:1 to cases based on risk-set sampling on the following:
-
-- Time since transplant
-- Diabetes
-- HIV/AIDS
-- Age within 10 years
-- Sampling date for control within 3 years of sampling date for case
-
-Institutional claims data were abstracted as well as Physician/Supplier line-item data.
+The [Study design and methods](quarto/study_overview.qmd) pages set out who is studied, how cases are found, how controls are matched, how costs are built and how they are analysed, with what the plan specifies and where the code stands.
 
 
 ## Results
 
 Pending. The [Main results](quarto/results.qmd) page will hold them once they are cleared for release.
 
-## Site navigation
+## Reproducibility
 
--   [**Setup**](quarto/setup.qmd): Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.
--   [**Functions**](quarto/functions.qmd): Reusable helper functions for cohort construction, matching, costing, and modeling.
--   [**Create cohort**](quarto/create_cohort.qmd): Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.
--   [**Execute matching**](quarto/execute_matching.qmd): Implements risk-set–based greedy matching without replacement to construct the analytic cohort.
--   [**Post-match processing**](quarto/postmatch_processing.qmd): Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.
--   [**Modeling**](quarto/modeling.qmd): Fits prespecified cost and outcome models using the matched cohort.
--   [**Tables**](quarto/tables.qmd): Summary tables and regression outputs generated from the final models.
--   [**Figures**](quarto/figures.qmd):Visualizations of costs, risks, and model-based estimates.
--   [**Main results**](quarto/results.qmd): Pending; will hold the main tables and figures once they are cleared for release.
--   [**About**](quarto/about.qmd): methods, assumptions, and disclosures
-
-
-
-### Reproducibility
-
-All analyses presented on this website are fully reproducible.  
-
-The complete source code used to perform the full analysis and generate the tables and figures is publicly available at this [GitHub repo](https://github.com/VagishHemmige/Cryptococcus-cost-analysis).  The R script `R/main.R` will run the R subscripts needed for this analysis in the order they are to be run.  Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse.
+The complete source code used to perform the full analysis and generate the tables and figures is publicly available at this [GitHub repo](https://github.com/VagishHemmige/Cryptococcus-cost-analysis).  The R script `R/main.R` will run the R subscripts needed for this analysis in the order they are to be run.  Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse. The USRDS data are restricted, so the analysis can be rerun only by an analyst with authorized access to them.
 
 
 ## Abstracts/manuscripts
