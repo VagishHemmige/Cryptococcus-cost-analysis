@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../quarto/analysis-plan.html" rel="next">
+<link href="../quarto/architecture.html" rel="next">
 <link href="../quarto/tables.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -179,6 +179,35 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../quarto/background.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clinical background</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/analysis_methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Methods background</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/analysis-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analysis plan</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Setup and helper functions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../quarto/setup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Setup</span></a>
   </div>
@@ -193,13 +222,13 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Data loading and processing</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto/create_cohort.html" class="sidebar-item-text sidebar-link">
@@ -228,13 +257,13 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Code to create tables and figures</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto/tables.html" class="sidebar-item-text sidebar-link">
@@ -251,19 +280,13 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">Project documents</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../quarto/analysis-plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Analysis plan</span></a>
-  </div>
-</li>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quarto/architecture.html" class="sidebar-item-text sidebar-link">
@@ -398,7 +421,7 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
 </section>
 <section id="month-by-month-plots" class="level2">
 <h2 class="anchored" data-anchor-id="month-by-month-plots">Month-by-month plots</h2>
-<p>In order to plot monthly costs predicted from the longitudinal models generated in the <code>R/models.R</code> script, we use the <code>plot_mean_monthly_costs()</code> function from the <code>R/functions.R</code> script to create the ggplot objects, and then save as <code>.svg</code> files.</p>
+<p>In order to plot monthly costs predicted from the longitudinal models generated in the <code>R/modeling.R</code> script, we use the <code>plot_mean_monthly_costs()</code> function from the <code>R/functions.R</code> script to create the ggplot objects, and then save as <code>.svg</code> files.</p>
 <p><strong>Functions used:</strong> <a href="../quarto/functions.html#plotting-mean-monthly-costs"><code>plot_mean_monthly_costs()</code></a>.</p>
 <div class="cell">
 <details class="code-fold">
@@ -925,8 +948,8 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../quarto/analysis-plan.html" class="pagination-link" aria-label="Analysis plan">
-        <span class="nav-page-text">Analysis plan</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../quarto/architecture.html" class="pagination-link" aria-label="Architecture">
+        <span class="nav-page-text">Architecture</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -978,7 +1001,7 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
 <span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## Month-by-month plots</span></span>
 <span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>In order to plot monthly costs predicted from the longitudinal models generated in the <span class="in">`R/models.R`</span> script, we use the </span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>In order to plot monthly costs predicted from the longitudinal models generated in the <span class="in">`R/modeling.R`</span> script, we use the </span>
 <span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="in">`plot_mean_monthly_costs()`</span> function from the <span class="in">`R/functions.R`</span> script to create the ggplot objects, and then save as <span class="in">`.svg`</span> files.</span>
 <span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>**Functions used:** <span class="co">[</span><span class="ot">`plot_mean_monthly_costs()`</span><span class="co">](functions.qmd#plotting-mean-monthly-costs)</span>.</span>
