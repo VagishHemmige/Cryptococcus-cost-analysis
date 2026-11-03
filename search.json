@@ -313,7 +313,7 @@
     "href": "quarto/study_analysis.html",
     "title": "Analysis and reporting",
     "section": "",
-    "text": "PendingProvisional\n\n\n\nText highlighted like this is provisional: it depends on a decision the analysis plan has not yet made. To comment on any part of this page, highlight the text and use the Comment button.\nThis page is part of the study’s design and methods. The Specified in, Current code and Decision pending notes are explained on the Overview, and the general background is on Methodological background.",
+    "text": "PendingProvisional\n\n\n\nText highlighted like this is provisional: it depends on a decision the analysis plan has not yet made. To comment on any part of this page, highlight the text and use the 💬 Comment button.\nThis page is part of the study’s design and methods. The Specified in, Current code and Decision pending notes are explained on the Overview, and the general background is on Methodological background.",
     "crumbs": [
       "Study design and methods",
       "Analysis and reporting"
@@ -743,7 +743,7 @@
     "href": "quarto/study_overview.html",
     "title": "Study overview",
     "section": "",
-    "text": "PendingProvisional\n\n\n\nText highlighted like this is provisional: it depends on a decision the analysis plan has not yet made. To comment on any part of this page, highlight the text and use the Comment button.\nThese pages explain, in plain language and without code, what this study chose and why. The general background they rely on, such as what USRDS and Medicare claims are and how risk-set matching works, is on Methodological background. The formal specification is the analysis plan; each section on these pages ends by linking the part of the plan that governs it. Three kinds of note mark where the description stands:\nThis is a methods-and-code site. No results are shown, because the analysis is not complete and the data cannot be shared.\nThe methods are set out over four pages: this overview, Cases and controls, Costs and follow-up, and Analysis and reporting.",
+    "text": "PendingProvisional\n\n\n\nText highlighted like this is provisional: it depends on a decision the analysis plan has not yet made. To comment on any part of this page, highlight the text and use the 💬 Comment button.\nThese pages explain, in plain language and without code, what this study chose and why. The general background they rely on, such as what USRDS and Medicare claims are and how risk-set matching works, is on Methodological background. The formal specification is the analysis plan; each section on these pages ends by linking the part of the plan that governs it. Three kinds of note mark where the description stands:\nThis is a methods-and-code site. No results are shown, because the analysis is not complete and the data cannot be shared.\nThe methods are set out over four pages: this overview, Cases and controls, Costs and follow-up, and Analysis and reporting.",
     "crumbs": [
       "Study design and methods",
       "Overview"
@@ -835,7 +835,7 @@
     "href": "quarto/study_cases_controls.html",
     "title": "Cases and controls",
     "section": "",
-    "text": "PendingProvisional\n\n\n\nText highlighted like this is provisional: it depends on a decision the analysis plan has not yet made. To comment on any part of this page, highlight the text and use the Comment button.\nThis page is part of the study’s design and methods. The Specified in, Current code and Decision pending notes are explained on the Overview, and the general background is on Methodological background.",
+    "text": "PendingProvisional\n\n\n\nText highlighted like this is provisional: it depends on a decision the analysis plan has not yet made. To comment on any part of this page, highlight the text and use the 💬 Comment button.\nThis page is part of the study’s design and methods. The Specified in, Current code and Decision pending notes are explained on the Overview, and the general background is on Methodological background.",
     "crumbs": [
       "Study design and methods",
       "Cases and controls"
@@ -1037,7 +1037,7 @@
     "href": "quarto/study_costs.html",
     "title": "Costs and follow-up",
     "section": "",
-    "text": "PendingProvisional\n\n\n\nText highlighted like this is provisional: it depends on a decision the analysis plan has not yet made. To comment on any part of this page, highlight the text and use the Comment button.\nThis page is part of the study’s design and methods. The Specified in, Current code and Decision pending notes are explained on the Overview, and the general background is on Methodological background.",
+    "text": "PendingProvisional\n\n\n\nText highlighted like this is provisional: it depends on a decision the analysis plan has not yet made. To comment on any part of this page, highlight the text and use the 💬 Comment button.\nThis page is part of the study’s design and methods. The Specified in, Current code and Decision pending notes are explained on the Overview, and the general background is on Methodological background.",
     "crumbs": [
       "Study design and methods",
       "Costs and follow-up"
