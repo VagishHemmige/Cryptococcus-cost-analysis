@@ -30,6 +30,15 @@ website:
 
       - section: Background
         contents:
+          - href: quarto/background.qmd
+            text: Clinical background
+          - href: quarto/analysis_methods.qmd
+            text: Methods background
+          - href: quarto/analysis-plan.qmd
+            text: Analysis plan
+
+      - section: Setup and helper functions
+        contents:
           - href: quarto/setup.qmd
             text: Setup
           - href: quarto/functions.qmd
@@ -55,8 +64,6 @@ website:
 
       - section: Project documents
         contents:
-          - href: quarto/analysis-plan.qmd
-            text: Analysis plan
           - href: quarto/architecture.qmd
             text: Architecture
           - href: quarto/agents.qmd
