@@ -23,6 +23,8 @@ website:
 
   sidebar:
     style: docked
+    # Every section starts open, including those inside Code
+    collapse-level: 3
     search: true
     contents:
       - href: index.qmd
@@ -38,38 +40,40 @@ website:
             text: Methods background
             icon: book
 
-      - section: Setup and helper functions
+      - section: Code
         contents:
-          - href: quarto/setup.qmd
-            text: Setup
-            icon: laptop
-          - href: quarto/functions.qmd
-            text: Functions
-            icon: laptop
+          - section: Setup and helper functions
+            contents:
+              - href: quarto/setup.qmd
+                text: Setup
+                icon: laptop
+              - href: quarto/functions.qmd
+                text: Functions
+                icon: laptop
 
-      - section: Data loading and processing
-        contents:
-          - href: quarto/create_cohort.qmd
-            text: 1. Create cohort
-            icon: laptop
-          - href: quarto/execute_matching.qmd
-            text: 2. Execute matching
-            icon: laptop
-          - href: quarto/postmatch_processing.qmd
-            text: 3. Post-match processing
-            icon: laptop
-          - href: quarto/modeling.qmd
-            text: 4. Modeling
-            icon: laptop
+          - section: Data loading and processing
+            contents:
+              - href: quarto/create_cohort.qmd
+                text: 1. Create cohort
+                icon: laptop
+              - href: quarto/execute_matching.qmd
+                text: 2. Execute matching
+                icon: laptop
+              - href: quarto/postmatch_processing.qmd
+                text: 3. Post-match processing
+                icon: laptop
+              - href: quarto/modeling.qmd
+                text: 4. Modeling
+                icon: laptop
 
-      - section: Code to create tables and figures
-        contents:
-          - href: quarto/tables.qmd
-            text: Tables
-            icon: laptop
-          - href: quarto/figures.qmd
-            text: Figures
-            icon: laptop
+          - section: Tables and figures
+            contents:
+              - href: quarto/tables.qmd
+                text: Tables
+                icon: laptop
+              - href: quarto/figures.qmd
+                text: Figures
+                icon: laptop
 
       - section: Results
         contents:
