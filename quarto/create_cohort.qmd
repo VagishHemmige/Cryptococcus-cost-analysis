@@ -118,14 +118,3 @@ Patients with cryptococcus infection join the cohort on the date of cryptococcos
 ```
 
 The analysis then proceeds on to the [execute_matching](execute_matching.qmd) component.
-
-## Other portions of the analysis
-
--   [**Setup**](setup.qmd): Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.
--   [**Functions**](functions.qmd): Reusable helper functions for cohort construction, matching, costing, and modeling.
--   [**Execute matching**](execute_matching.qmd): Implements risk-set–based greedy matching without replacement to construct the analytic cohort.
--   [**Post-match processing**](postmatch_processing.qmd): Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.
--   [**Modeling**](modeling.qmd): Fits prespecified cost and outcome models using the matched cohort.
--   [**Tables**](tables.qmd): Summary tables and regression outputs generated from the final models.
--   [**Figures**](figures.qmd):Visualizations of costs, risks, and model-based estimates.
--   [**About**](about.qmd): methods, assumptions, and disclosures

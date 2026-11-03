@@ -3,17 +3,45 @@ title: "About"
 format: html
 ---
 
-Pending
+## The study
 
+This study estimates the excess Medicare payments in the 12 months after cryptococcosis is diagnosed among adult kidney transplant recipients, compared with similar recipients at the same time since transplant, using United States Renal Data System (USRDS) data. [Study design and methods](study_methods.qmd) explains how.
 
-## Other portions of the analysis
+The analysis is preliminary and not for citation. No results are shown yet; see [Main results](results.qmd).
 
--   [**Setup**](setup.qmd): Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.
--   [**Functions**](functions.qmd): Reusable helper functions for cohort construction, matching, costing, and modeling.
--   [**Create cohort**](create_cohort.qmd): Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.
--   [**Execute matching**](execute_matching.qmd): Implements risk-set–based greedy matching without replacement to construct the analytic cohort.
--   [**Post-match processing**](postmatch_processing.qmd): Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.
--   [**Modeling**](modeling.qmd): Fits prespecified cost and outcome models using the matched cohort.
--   [**Tables**](tables.qmd): Summary tables and regression outputs generated from the final models.
--   [**Figures**](figures.qmd):Visualizations of costs, risks, and model-based estimates.
--   [**About**](about.qmd): methods, assumptions, and disclosures
+-   **Vagish Hemmige** (investigator, statistical analysis and this repository)
+
+Scientific decisions are made by Vagish Hemmige, and open ones are listed in the analysis plan's [open decisions](analysis-plan.qmd#13-open-decisions).
+
+## This repository
+
+The analysis is written as scripts run in order by `R/main.R`, using [`usRds`](https://github.com/VagishHemmige/usRds) to load the USRDS files and `flowchart` to build the cohort. The USRDS data are restricted and are not in the repository; the code finds them through `usRds` on the computer of an authorized analyst.
+
+Contributions follow the rules in [`AGENTS.md`](agents.qmd); known issues and gaps between the code and the plan are tracked in [Issues](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues). To comment on any page, highlight the text and use the Comment button; comments are filed as GitHub issues.
+
+## How this website was created
+
+The site is built with [Quarto](https://quarto.org) from the analysis scripts themselves. Each code page imports the labelled sections of its script from `R/` and shows them with an explanation; the site never runs the analysis, so it is built without the restricted USRDS data.
+
+The repository is maintained with the [R Analysis Workflow](https://github.com/VagishHemmige/r-analysis-workflow) plugin for AI coding assistants, written by Vagish Hemmige. The plugin provides the repository layout, the conventions for the analysis plan and `AGENTS.md`, and the format of these pages. AI assistants drafted code, documentation and suggestions under the rules in `AGENTS.md`: they work only with code, documentation and synthetic data, never with USRDS data, and every scientific decision is made by the investigator.
+
+Four documents describe the project. In short: the plan is the scientific intent, the architecture is the workflow as implemented, and `AGENTS.md` holds the rules for working together.
+
+-   [**Analysis plan**](analysis-plan.qmd): *what the analysis is meant to do, and why.* The question, the study population, the exposure, matching, cost construction, the statistical methods, and the open decisions. Code implements it and does not redefine it.
+-   [**Architecture**](architecture.qmd): *how the code does it.* The scripts, the order they run in, what each needs and produces, and how data flow between them.
+-   [**AGENTS.md**](agents.qmd): *how people and AI assistants work on the project.* Rules for restricted data, coding, checks, proposing changes and getting a person's approval.
+-   [**Repository blueprint**](repository-blueprint.qmd): *the layout every project of this kind starts from*, which the architecture document then describes as built.
+
+## Pages
+
+-   [**Clinical background**](background.qmd): cryptococcosis after kidney transplant, and why its cost matters.
+-   [**Methodological background**](methodological_background.qmd): USRDS, Medicare claims and costs, matching and cost models, in general terms.
+-   [**Study design and methods**](study_methods.qmd): what this study chose, linked to the plan, with where the code stands.
+-   [**Setup**](setup.qmd): packages, constants and the ICD code lists.
+-   [**Functions**](functions.qmd): helper functions, linked to the steps that use them.
+-   [**1. Create cohort**](create_cohort.qmd): the time-varying cohort of kidney transplant recipients.
+-   [**2. Execute matching**](execute_matching.qmd): risk-set matching of cases to controls.
+-   [**3. Post-match processing**](postmatch_processing.qmd): claims, follow-up and the monthly cost panel.
+-   [**4. Modeling**](modeling.qmd): the monthly cost models.
+-   [**Tables**](tables.qmd) and [**Figures**](figures.qmd): building and exporting the outputs.
+-   [**Main results**](results.qmd): pending.
