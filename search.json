@@ -457,6 +457,16 @@
     ]
   },
   {
+    "objectID": "index.html#study-timeline",
+    "href": "index.html#study-timeline",
+    "title": "Overview",
+    "section": "Study timeline and cost trajectories",
+    "text": "Study timeline and cost trajectories\nFigure 1 illustrates how the planned study windows relate to case and control costs. The 365-day eligibility lookback is longer than the monthly cost-outcome window. Disease-related care and diagnostic workup can raise costs before the recorded diagnosis, so the prediagnosis trajectory is part of what the study aims to describe.\n\n\n\n\n\n\nFigure 1: Conceptual study timeframes and mean cost trajectories; no patient data or study estimates are shown. The monthly outcome panel spans days −90 to 359. Earlier dashed curves provide context outside that panel. Shaded differences are illustrative and do not establish causal attribution.\n\n\n\nOpen the figure at full size.\nFor cases, time zero is the first qualifying diagnosis claim; controls are aligned at the same time since their most recent transplant, so their calendar dates may differ. The figure explains the intended windows, not the completeness of observation: coverage loss, death, and partial months require the handling specified in the analysis plan. Earlier costs may also inform planned matching covariates; they are outside the monthly outcome panel shown here.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
     "objectID": "index.html#methods",
     "href": "index.html#methods",
     "title": "Overview",

@@ -301,6 +301,7 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
   <ul>
   <li><a href="#clinical-background" id="toc-clinical-background" class="nav-link active" data-scroll-target="#clinical-background">Clinical background</a></li>
   <li><a href="#what-this-analysis-does" id="toc-what-this-analysis-does" class="nav-link" data-scroll-target="#what-this-analysis-does">What this analysis does</a></li>
+  <li><a href="#study-timeline" id="toc-study-timeline" class="nav-link" data-scroll-target="#study-timeline">Study timeline and cost trajectories</a></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
   <li><a href="#site-navigation" id="toc-site-navigation" class="nav-link" data-scroll-target="#site-navigation">Site navigation</a>
@@ -354,6 +355,22 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
 <section id="what-this-analysis-does" class="level2">
 <h2 class="anchored" data-anchor-id="what-this-analysis-does">What this analysis does</h2>
 <p>This project uses the <a href="https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds"><strong>United States Renal Data System</strong></a> to analyze the impact of cryptococcus on costs.</p>
+</section>
+<section id="study-timeline" class="level2">
+<h2 class="anchored" data-anchor-id="study-timeline">Study timeline and cost trajectories</h2>
+<p><a href="#fig-cost-timeline" class="quarto-xref">Figure&nbsp;1</a> illustrates how the planned study windows relate to case and control costs. The 365-day eligibility lookback is longer than the monthly cost-outcome window. Disease-related care and diagnostic workup can raise costs before the recorded diagnosis, so the prediagnosis trajectory is part of what the study aims to describe.</p>
+<div id="fig-cost-timeline" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Line diagram of mean costs over time for cases and controls. The eligibility bar spans days minus 365 to minus 1. Pale dashed curves precede the cost-outcome window. During intervals minus 3 to minus 1, cases rise above zigzagging controls, peak near the case diagnosis or matched control index date, and decline gradually while remaining higher through interval 11.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cost-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="quarto/assets/integrated-cost-timeline.svg" class="img-fluid figure-img" style="width:100.0%" alt="Line diagram of mean costs over time for cases and controls. The eligibility bar spans days minus 365 to minus 1. Pale dashed curves precede the cost-outcome window. During intervals minus 3 to minus 1, cases rise above zigzagging controls, peak near the case diagnosis or matched control index date, and decline gradually while remaining higher through interval 11.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cost-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Conceptual study timeframes and mean cost trajectories; no patient data or study estimates are shown. The monthly outcome panel spans days −90 to 359. Earlier dashed curves provide context outside that panel. Shaded differences are illustrative and do not establish causal attribution.
+</figcaption>
+</figure>
+</div>
+<p><a href="quarto/assets/integrated-cost-timeline.svg">Open the figure at full size</a>.</p>
+<p>For cases, time zero is the first qualifying diagnosis claim; controls are aligned at the same time since their most recent transplant, so their calendar dates may differ. The figure explains the intended windows, not the completeness of observation: coverage loss, death, and partial months require the handling specified in the <a href="./quarto/analysis-plan.html">analysis plan</a>. Earlier costs may also inform planned matching covariates; they are outside the monthly outcome panel shown here.</p>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
@@ -885,54 +902,64 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methods</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Study timeline and cost trajectories {#study-timeline}</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>We selected cryptococcus cases based on the following inclusion criteria:</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>@fig-cost-timeline illustrates how the planned study windows relate to case and control costs. The 365-day eligibility lookback is longer than the monthly cost-outcome window. Disease-related care and diagnostic workup can raise costs before the recorded diagnosis, so the prediagnosis trajectory is part of what the study aims to describe.</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Age 18 or greater</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Prior kidney transplant</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ICD9 or ICD10 codes for cryptococcus (2 outpatient or 1 inpatient)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>One year of Medicare primary coverage lead-in</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>Controls were matched 2:1 to cases based on risk-set sampling on the following:</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Time since transplant</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Diabetes</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>HIV/AIDS</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Age within 10 years</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sampling date for control within 3 years of sampling date for case</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>Institutional claims data were abstracted as well as Physician/Supplier line-item data.</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="al">![Conceptual study timeframes and mean cost trajectories; no patient data or study estimates are shown. The monthly outcome panel spans days −90 to 359. Earlier dashed curves provide context outside that panel. Shaded differences are illustrative and do not establish causal attribution.](quarto/assets/integrated-cost-timeline.svg)</span>{#fig-cost-timeline width=100% fig-alt="Line diagram of mean costs over time for cases and controls. The eligibility bar spans days minus 365 to minus 1. Pale dashed curves precede the cost-outcome window. During intervals minus 3 to minus 1, cases rise above zigzagging controls, peak near the case diagnosis or matched control index date, and decline gradually while remaining higher through interval 11."}</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Open the figure at full size</span><span class="co">](quarto/assets/integrated-cost-timeline.svg)</span>.</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>For cases, time zero is the first qualifying diagnosis claim; controls are aligned at the same time since their most recent transplant, so their calendar dates may differ. The figure explains the intended windows, not the completeness of observation: coverage loss, death, and partial months require the handling specified in the <span class="co">[</span><span class="ot">analysis plan</span><span class="co">](quarto/analysis-plan.qmd)</span>. Earlier costs may also inform planned matching covariates; they are outside the monthly outcome panel shown here.</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methods</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>We selected cryptococcus cases based on the following inclusion criteria:</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Age 18 or greater</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Prior kidney transplant</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ICD9 or ICD10 codes for cryptococcus (2 outpatient or 1 inpatient)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>One year of Medicare primary coverage lead-in</span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>Pending</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## Site navigation</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Setup**</span><span class="co">](quarto/setup.qmd)</span>: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Functions**</span><span class="co">](quarto/functions.qmd)</span>: Reusable helper functions for cohort construction, matching, costing, and modeling.</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Create cohort**</span><span class="co">](quarto/create_cohort.qmd)</span>: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Execute matching**</span><span class="co">](quarto/execute_matching.qmd)</span>: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Post-match processing**</span><span class="co">](quarto/postmatch_processing.qmd)</span>: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Modeling**</span><span class="co">](quarto/modeling.qmd)</span>: Fits prespecified cost and outcome models using the matched cohort.</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Tables**</span><span class="co">](quarto/tables.qmd)</span>: Summary tables and regression outputs generated from the final models.</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Figures**</span><span class="co">](quarto/figures.qmd)</span>:Visualizations of costs, risks, and model-based estimates.</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**About**</span><span class="co">](quarto/about.qmd)</span>: methods, assumptions, and disclosures</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>Controls were matched 2:1 to cases based on risk-set sampling on the following:</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Time since transplant</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Diabetes</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>HIV/AIDS</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Age within 10 years</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sampling date for control within 3 years of sampling date for case</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>Institutional claims data were abstracted as well as Physician/Supplier line-item data.</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>Pending</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## Site navigation</span></span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="fu">### Reproducibility</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>All analyses presented on this website are fully reproducible.  </span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>The complete source code used to perform the full analysis and generate the tables and figures is publicly available at this <span class="co">[</span><span class="ot">GitHub repo</span><span class="co">](https://github.com/VagishHemmige/Cryptococcus-cost-analysis)</span>.  The R script <span class="in">`R/main.R`</span> will run the R subscripts needed for this analysis in the order they are to be run.  Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse.</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## Abstracts/manuscripts</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Setup**</span><span class="co">](quarto/setup.qmd)</span>: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Functions**</span><span class="co">](quarto/functions.qmd)</span>: Reusable helper functions for cohort construction, matching, costing, and modeling.</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Create cohort**</span><span class="co">](quarto/create_cohort.qmd)</span>: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Execute matching**</span><span class="co">](quarto/execute_matching.qmd)</span>: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Post-match processing**</span><span class="co">](quarto/postmatch_processing.qmd)</span>: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Modeling**</span><span class="co">](quarto/modeling.qmd)</span>: Fits prespecified cost and outcome models using the matched cohort.</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Tables**</span><span class="co">](quarto/tables.qmd)</span>: Summary tables and regression outputs generated from the final models.</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Figures**</span><span class="co">](quarto/figures.qmd)</span>:Visualizations of costs, risks, and model-based estimates.</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**About**</span><span class="co">](quarto/about.qmd)</span>: methods, assumptions, and disclosures</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>This analysis has yet to be published to date.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="fu">### Reproducibility</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>All analyses presented on this website are fully reproducible.  </span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>The complete source code used to perform the full analysis and generate the tables and figures is publicly available at this <span class="co">[</span><span class="ot">GitHub repo</span><span class="co">](https://github.com/VagishHemmige/Cryptococcus-cost-analysis)</span>.  The R script <span class="in">`R/main.R`</span> will run the R subscripts needed for this analysis in the order they are to be run.  Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse.</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## Abstracts/manuscripts</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>This analysis has yet to be published to date.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
