@@ -62,7 +62,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -114,17 +133,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>
-div.callout-Results.callout {
-  border-left-color: #198754;
-}
-div.callout-Results.callout-style-default > .callout-header {
-  background-color: rgba(25, 135, 84, 0.13);
-}
-div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
-  content: '📊';
-  background-image: none;
-}
 div.callout-Pending.callout {
   border-left-color: #f0c400;
 }
@@ -145,6 +153,17 @@ div.callout-Rcode.callout-style-default > .callout-header {
 div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
   content: '💻';
+  background-image: none;
+}
+div.callout-Results.callout {
+  border-left-color: #198754;
+}
+div.callout-Results.callout-style-default > .callout-header {
+  background-color: rgba(25, 135, 84, 0.13);
+}
+div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
+  content: '📊';
   background-image: none;
 }
 </style>
@@ -445,6 +464,8 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
   <li><a href="#death-and-what-is-estimated" id="toc-death-and-what-is-estimated" class="nav-link" data-scroll-target="#death-and-what-is-estimated">Death and what is estimated</a></li>
   <li><a href="#why-cost-data-are-hard-to-model" id="toc-why-cost-data-are-hard-to-model" class="nav-link" data-scroll-target="#why-cost-data-are-hard-to-model">Why cost data are hard to model</a></li>
   <li><a href="#models-for-costs" id="toc-models-for-costs" class="nav-link" data-scroll-target="#models-for-costs">Models for costs</a></li>
+  <li><a href="#earlier-usrds-studies-of-cost-after-an-event" id="toc-earlier-usrds-studies-of-cost-after-an-event" class="nav-link" data-scroll-target="#earlier-usrds-studies-of-cost-after-an-event">Earlier USRDS studies of cost after an event</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/master/quarto/methodological_background.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -479,7 +500,7 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
 <p>This page explains, in general terms and without code, the data and methods a study like this one rests on: what the United States Renal Data System and Medicare claims are, how claims become costs, how comparison patients are chosen, and why cost data need particular models. What this study chose, and how its code stands against its plan, is on <a href="../quarto/study_overview.html">Study design and methods</a>.</p>
 <section id="the-united-states-renal-data-system" class="level2">
 <h2 class="anchored" data-anchor-id="the-united-states-renal-data-system">The United States Renal Data System</h2>
-<p>The United States Renal Data System (USRDS) is a national data system on chronic kidney disease and kidney failure in the United States, funded by the National Institute of Diabetes and Digestive and Kidney Diseases. It links three kinds of record under one patient identifier:</p>
+<p>The United States Renal Data System (USRDS) is a national data system on chronic kidney disease and kidney failure in the United States, funded by the National Institute of Diabetes and Digestive and Kidney Diseases. It links three kinds of record under one patient identifier<span class="citation" data-cites="usrds2025guide"><sup><a href="#ref-usrds2025guide" role="doc-biblioref">1</a></sup></span>:</p>
 <ul>
 <li>registry records for people with kidney failure, including dates of dialysis, transplant and death;</li>
 <li>transplant records from the Organ Procurement and Transplantation Network (OPTN), for kidney and kidney–pancreas recipients;</li>
@@ -488,7 +509,7 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
 </section>
 <section id="medicare-claims" class="level2">
 <h2 class="anchored" data-anchor-id="medicare-claims">Medicare claims</h2>
-<p>A claim is a bill submitted to Medicare for a service. There are two kinds:</p>
+<p>A claim is a bill submitted to Medicare for a service. There are two kinds<span class="citation" data-cites="usrds2025guide"><sup><a href="#ref-usrds2025guide" role="doc-biblioref">1</a></sup></span>:</p>
 <ul>
 <li><strong>Institutional claims</strong> are bills from facilities: hospital inpatient stays, hospital outpatient care, skilled nursing facilities, home health agencies, hospices and dialysis facilities. Each claim covers one stay or episode, with dates from its first to its last day of service.</li>
 <li><strong>Physician/supplier claims</strong> are bills from clinicians, laboratories and suppliers. Each line of a claim is one service.</li>
@@ -496,68 +517,146 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
 </section>
 <section id="medicare-as-primary-payer" class="level2">
 <h2 class="anchored" data-anchor-id="medicare-as-primary-payer">Medicare as primary payer</h2>
-<p>Medicare claims give a complete picture of a person’s care only when traditional (fee-for-service) Medicare pays first. When a Medicare Advantage plan or an employer’s insurance pays first, many services never appear in the Medicare claims.</p>
+<p>Medicare claims give a complete picture of a person’s care only when traditional (fee-for-service) Medicare pays first. When a Medicare Advantage plan or an employer’s insurance pays first, many services never appear in the Medicare claims, so the USRDS recommends building claims-based cohorts from periods when Medicare is the primary payer<span class="citation" data-cites="usrds2025guide"><sup><a href="#ref-usrds2025guide" role="doc-biblioref">1</a></sup></span>.</p>
 <p>For a month outside a period of fee-for-service primary coverage, the Medicare claims are incomplete: care may have been billed to someone else. Such a month cannot be treated as a month with no cost.</p>
-<p>Many kidney transplant recipients lose Medicare coverage over time: Medicare entitlement based only on kidney failure ends 36 months after a successful transplant, unless the person qualifies another way (for example by age or disability).</p>
+<p>Many kidney transplant recipients lose Medicare coverage over time: Medicare entitlement based only on kidney failure ends with the 36th month after the month of transplant<span class="citation" data-cites="ssa226a"><sup><a href="#ref-ssa226a" role="doc-biblioref">2</a></sup></span>, unless the person qualifies another way (for example by age or disability).</p>
 </section>
 <section id="finding-a-diagnosis-in-claims" class="level2">
 <h2 class="anchored" data-anchor-id="finding-a-diagnosis-in-claims">Finding a diagnosis in claims</h2>
-<p>A claim shows that a clinician recorded a diagnosis for billing. It does not show that the diagnosis was confirmed, and codes are sometimes recorded while a diagnosis is being ruled out. Diagnoses identified from claims are therefore sometimes wrong.</p>
+<p>A claim shows that a clinician recorded a diagnosis for billing. It does not show that the diagnosis was confirmed, and codes are sometimes recorded while a diagnosis is being ruled out. Diagnoses identified from claims are therefore sometimes wrong<span class="citation" data-cites="schneeweiss2005databases"><sup><a href="#ref-schneeweiss2005databases" role="doc-biblioref">3</a></sup></span>. For invasive aspergillosis in stem cell and solid organ transplant recipients, for example, the positive predictive value of single ICD-9 codes against medical-record review was 15% for one code and 71% for another<span class="citation" data-cites="chang2008aspergillosis"><sup><a href="#ref-chang2008aspergillosis" role="doc-biblioref">4</a></sup></span>. We found no comparable validation study of cryptococcosis codes.</p>
 </section>
 <section id="risk-set-matching" class="level2">
 <h2 class="anchored" data-anchor-id="risk-set-matching">Risk-set matching</h2>
-<p>In <strong>risk-set matching</strong> (also called incidence density sampling), each case is compared with people drawn from its <em>risk set</em>: everyone who, at the point the case is diagnosed on the study’s time scale (for example, time since transplant), is still eligible and has not been diagnosed. That point is the case’s <em>time zero</em>, the date from which outcomes are counted, and controls are given the same time zero.</p>
-<p>Because controls are chosen using only what was known at time zero, a person who is diagnosed later can serve as a control before their own diagnosis. Their time before diagnosis is unexposed time, and excluding them would condition on the future.</p>
+<p>In <strong>risk-set matching</strong> (also called incidence density sampling), each case is compared with people drawn from its <em>risk set</em><span class="citation" data-cites="richardson2004incidence"><sup><a href="#ref-richardson2004incidence" role="doc-biblioref">5</a></sup></span>: everyone who, at the point the case is diagnosed on the study’s time scale (for example, time since transplant), is still eligible and has not been diagnosed. That point is the case’s <em>time zero</em>, the date from which outcomes are counted, and controls are given the same time zero.</p>
+<p>Because controls are chosen using only what was known at time zero, a person who is diagnosed later can serve as a control before their own diagnosis. Their time before diagnosis is unexposed time, and excluding them would condition on the future and bias the comparison<span class="citation" data-cites="lubin1984controls"><sup><a href="#ref-lubin1984controls" role="doc-biblioref">6</a></sup></span>.</p>
 </section>
 <section id="ways-of-matching" class="level2">
 <h2 class="anchored" data-anchor-id="ways-of-matching">Ways of matching</h2>
 <p>Two common ways to choose controls within a risk set are:</p>
 <ul>
 <li><strong>Direct covariate matching:</strong> matching on the characteristics themselves, for example exactly on some and within set limits on others.</li>
-<li><strong>Propensity score matching:</strong> a model estimates each person’s probability of being diagnosed from their characteristics, and each case is matched to controls with a similar score. When the probability is estimated for each month, the score is time-varying.</li>
+<li><strong>Propensity score matching:</strong> a model estimates each person’s probability of being diagnosed from their characteristics, and each case is matched to controls with a similar score<span class="citation" data-cites="austin2011introduction"><sup><a href="#ref-austin2011introduction" role="doc-biblioref">7</a></sup></span>. When the probability is estimated over time, the score is time-varying<span class="citation" data-cites="lu2005propensity"><sup><a href="#ref-lu2005propensity" role="doc-biblioref">8</a></sup></span>.</li>
 </ul>
-<p>A common check of whether cases and controls are similar after matching is the standardized mean difference of each characteristic.</p>
+<p>A common check of whether cases and controls are similar after matching is the standardized mean difference of each characteristic<span class="citation" data-cites="austin2009balance"><sup><a href="#ref-austin2009balance" role="doc-biblioref">9</a></sup></span>.</p>
 </section>
 <section id="payments-not-charges" class="level2">
 <h2 class="anchored" data-anchor-id="payments-not-charges">Payments, not charges</h2>
-<p>Charges, which are the prices providers list on their bills, are much higher than what is paid.</p>
-<p>Outpatient, home health and hospice claims also list payments for each revenue center (each department or type of service on the bill). These describe the same services as the claim’s payment, so the two should not be added together.</p>
+<p>Charges, which are the prices providers list on their bills, are much higher than what is paid, and they are a poor measure of cost<span class="citation" data-cites="finkler1982charges"><sup><a href="#ref-finkler1982charges" role="doc-biblioref">10</a></sup></span>.</p>
+<p>Outpatient, home health and hospice claims also list payments for each revenue center (each department or type of service on the bill). These describe the same services as the claim’s payment, so the two should not be added together<span class="citation" data-cites="usrds2025guide"><sup><a href="#ref-usrds2025guide" role="doc-biblioref">1</a></sup></span>.</p>
 </section>
 <section id="spreading-a-stay-across-days" class="level2">
 <h2 class="anchored" data-anchor-id="spreading-a-stay-across-days">Spreading a stay across days</h2>
-<p>An institutional claim that covers several days can be spread evenly across them. For example, a 10-day hospital stay with a Medicare payment of $20,000 counts as $2,000 per day. If the stay runs from 2 days before time zero to 7 days after it, $4,000 falls before time zero and $16,000 after it.</p>
+<p>An institutional claim that covers several days can be spread evenly across them; this study does so. For example, a 10-day hospital stay with a Medicare payment of $20,000 counts as $2,000 per day. If the stay runs from 2 days before time zero to 7 days after it, $4,000 falls before time zero and $16,000 after it.</p>
 </section>
 <section id="missing-versus-zero-cost" class="level2">
 <h2 class="anchored" data-anchor-id="missing-versus-zero-cost">Missing versus zero cost</h2>
 <ul>
 <li>A month in which the person is covered but has no claims has a cost of <strong>zero</strong>: had they needed care, Medicare would have paid for it.</li>
-<li>A month in which the person is not covered is <strong>not observed</strong>, and is left out rather than recorded as zero.</li>
+<li>A month in which the person is not covered is <strong>not observed</strong>, and is left out rather than recorded as zero, because its claims are incomplete<span class="citation" data-cites="usrds2025guide"><sup><a href="#ref-usrds2025guide" role="doc-biblioref">1</a></sup></span>.</li>
 <li>A month that is only partly observed, because follow-up ended partway through, is kept. The number of days observed is recorded, so the analysis can account for it.</li>
 </ul>
 </section>
 <section id="death-and-what-is-estimated" class="level2">
 <h2 class="anchored" data-anchor-id="death-and-what-is-estimated">Death and what is estimated</h2>
-<p>How death is handled defines what is being estimated. If death ends follow-up, the estimate describes the cost of care while people are alive. If the months after death count as zero cost, the estimate also reflects the cost consequences of mortality.</p>
+<p>How death is handled defines what is being estimated. If death ends follow-up, the estimate describes the cost of care while people are alive. If the months after death count as zero cost, the estimate also reflects the cost consequences of mortality. How death and incomplete follow-up are handled is a central issue in estimating costs over a period of illness<span class="citation" data-cites="basu2010censoring"><sup><a href="#ref-basu2010censoring" role="doc-biblioref">11</a></sup></span>.</p>
 </section>
 <section id="why-cost-data-are-hard-to-model" class="level2">
 <h2 class="anchored" data-anchor-id="why-cost-data-are-hard-to-model">Why cost data are hard to model</h2>
-<p>Monthly cost data have three awkward features:</p>
+<p>Monthly cost data have three awkward features<span class="citation" data-cites="mihaylova2011review"><sup><a href="#ref-mihaylova2011review" role="doc-biblioref">12</a></sup></span>:</p>
 <ul>
 <li>many months have no cost at all;</li>
 <li>a few months, usually those with a hospital stay, cost a great deal;</li>
 <li>the distribution is therefore strongly skewed to the right.</li>
 </ul>
-<p>The quantity of interest is the <strong>mean</strong> cost, because the total spent equals the mean times the number of patients. Transforming costs to a log scale makes them easier to model but estimates something else (roughly a geometric mean), and converting back to dollars needs extra steps that can be biased. Models that describe the mean directly avoid this.</p>
+<p>The quantity of interest is the <strong>mean</strong> cost, because the total spent equals the mean times the number of patients. Transforming costs to a log scale makes them easier to model but estimates something else (roughly a geometric mean), and converting back to dollars needs extra steps that can be biased<span class="citation" data-cites="duan1983smearing manning1998logged"><sup><a href="#ref-duan1983smearing" role="doc-biblioref">13</a>,<a href="#ref-manning1998logged" role="doc-biblioref">14</a></sup></span>. Models that describe the mean directly avoid this<span class="citation" data-cites="manning2001transform"><sup><a href="#ref-manning2001transform" role="doc-biblioref">15</a></sup></span>.</p>
 </section>
 <section id="models-for-costs" class="level2">
 <h2 class="anchored" data-anchor-id="models-for-costs">Models for costs</h2>
 <p>A generalized linear model for monthly cost can include:</p>
 <ul>
 <li>a <strong>log link</strong>, so that the model describes the logarithm of the mean cost rather than the mean of logged costs;</li>
-<li>a <strong>Tweedie distribution</strong>, which allows exact zeros and a long right tail in the same model;</li>
+<li>a <strong>Tweedie distribution</strong>, which allows exact zeros and a long right tail in the same model<span class="citation" data-cites="kurz2017tweedie"><sup><a href="#ref-kurz2017tweedie" role="doc-biblioref">16</a></sup></span>;</li>
 <li>the logarithm of the number of days observed as an <strong>offset</strong>, so that a partly observed month counts in proportion to its length.</li>
 </ul>
-<p>Months from the same person, and people in the same matched set, are not independent. Generalized estimating equations give standard errors that allow for this, clustered on the matched set, and also on the patient if one person can appear in more than one matched set. A <strong>cluster bootstrap</strong> gives a confidence interval by resampling whole matched sets with replacement and repeating the whole calculation each time.</p>
+<p>Months from the same person, and people in the same matched set, are not independent. Generalized estimating equations give standard errors that allow for this<span class="citation" data-cites="liang1986gee"><sup><a href="#ref-liang1986gee" role="doc-biblioref">17</a></sup></span>, clustered on the matched set, and also on the patient if one person can appear in more than one matched set. A <strong>cluster bootstrap</strong> gives a confidence interval by resampling whole matched sets with replacement and repeating the whole calculation each time<span class="citation" data-cites="austin2014bootstrap"><sup><a href="#ref-austin2014bootstrap" role="doc-biblioref">18</a></sup></span>.</p>
+</section>
+<section id="earlier-usrds-studies-of-cost-after-an-event" class="level2">
+<h2 class="anchored" data-anchor-id="earlier-usrds-studies-of-cost-after-an-event">Earlier USRDS studies of cost after an event</h2>
+<p>Other studies have estimated excess Medicare payments after an event in kidney transplant recipients using USRDS data, each with a different design:</p>
+<ul>
+<li>pneumonia, sepsis and urinary tract infection in the first year after transplant, as marginal first-year costs<span class="citation" data-cites="naik2016infections"><sup><a href="#ref-naik2016infections" role="doc-biblioref">19</a></sup></span>;</li>
+<li>post-transplant lymphoproliferative disease, as costs per patient-year, with Medicare eligibility limited to three years after transplant for most recipients<span class="citation" data-cites="hart2021ptld"><sup><a href="#ref-hart2021ptld" role="doc-biblioref">20</a></sup></span>;</li>
+<li>dementia, compared with propensity-matched recipients at the equivalent time after transplant, as monthly and cumulative costs<span class="citation" data-cites="lentine2025dementia"><sup><a href="#ref-lentine2025dementia" role="doc-biblioref">21</a></sup></span>.</li>
+</ul>
+<p>This study’s design and how it differs are described under <a href="../quarto/study_overview.html">Study design and methods</a>.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-usrds2025guide" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">United States Renal Data System. <em>2025 Researcher’s Guide to the <span>USRDS</span> Database</em>. <span>National Institutes of Health, National Institute of Diabetes and Digestive and Kidney Diseases</span>; 2025. <a href="https://www.niddk.nih.gov/-/media/Files/USRDS/For-Researchers/2025/USRDS_Researcher_Guide_2025.pdf">https://www.niddk.nih.gov/-/media/Files/USRDS/For-Researchers/2025/USRDS_Researcher_Guide_2025.pdf</a></div>
+</div>
+<div id="ref-ssa226a" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Social Security Administration. Social security act, section 226A: Special provisions relating to coverage under medicare program for end stage renal disease. Accessed November 3, 2026. <a href="https://www.ssa.gov/OP_Home/ssact/title02/0226A.htm">https://www.ssa.gov/OP_Home/ssact/title02/0226A.htm</a></div>
+</div>
+<div id="ref-schneeweiss2005databases" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Schneeweiss S, Avorn J. A review of uses of health care utilization databases for epidemiologic research on therapeutics. <em>J Clin Epidemiol</em>. 2005;58(4):323-337. doi:<a href="https://doi.org/10.1016/j.jclinepi.2004.10.012">10.1016/j.jclinepi.2004.10.012</a></div>
+</div>
+<div id="ref-chang2008aspergillosis" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline"><span class="nocase">Chang DC, Burwell LA, Lyon GM, et al.</span> Comparison of the use of administrative data and an active system for surveillance of invasive aspergillosis. <em>Infect Control Hosp Epidemiol</em>. 2008;29(1):25-30. doi:<a href="https://doi.org/10.1086/524324">10.1086/524324</a></div>
+</div>
+<div id="ref-richardson2004incidence" class="csl-entry" role="listitem">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Richardson DB. An incidence density sampling program for nested case-control analyses. <em>Occup Environ Med</em>. 2004;61(12):e59. doi:<a href="https://doi.org/10.1136/oem.2004.014472">10.1136/oem.2004.014472</a></div>
+</div>
+<div id="ref-lubin1984controls" class="csl-entry" role="listitem">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Lubin JH, Gail MH. <a href="https://www.ncbi.nlm.nih.gov/pubmed/6375751">Biased selection of controls for case-control analyses of cohort studies</a>. <em>Biometrics</em>. 1984;40(1):63-75.</div>
+</div>
+<div id="ref-austin2011introduction" class="csl-entry" role="listitem">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Austin PC. An introduction to propensity score methods for reducing the effects of confounding in observational studies. <em>Multivariate Behav Res</em>. 2011;46(3):399-424. doi:<a href="https://doi.org/10.1080/00273171.2011.568786">10.1080/00273171.2011.568786</a></div>
+</div>
+<div id="ref-lu2005propensity" class="csl-entry" role="listitem">
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Lu B. Propensity score matching with time-dependent covariates. <em>Biometrics</em>. 2005;61(3):721-728. doi:<a href="https://doi.org/10.1111/j.1541-0420.2005.00356.x">10.1111/j.1541-0420.2005.00356.x</a></div>
+</div>
+<div id="ref-austin2009balance" class="csl-entry" role="listitem">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Austin PC. Balance diagnostics for comparing the distribution of baseline covariates between treatment groups in propensity-score matched samples. <em>Stat Med</em>. 2009;28(25):3083-3107. doi:<a href="https://doi.org/10.1002/sim.3697">10.1002/sim.3697</a></div>
+</div>
+<div id="ref-finkler1982charges" class="csl-entry" role="listitem">
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">Finkler SA. The distinction between cost and charges. <em>Ann Intern Med</em>. 1982;96(1):102-109. doi:<a href="https://doi.org/10.7326/0003-4819-96-1-102">10.7326/0003-4819-96-1-102</a></div>
+</div>
+<div id="ref-basu2010censoring" class="csl-entry" role="listitem">
+<div class="csl-left-margin">11. </div><div class="csl-right-inline">Basu A, Manning WG. Estimating lifetime or episode-of-illness costs under censoring. <em>Health Econ</em>. 2010;19(9):1010-1028. doi:<a href="https://doi.org/10.1002/hec.1640">10.1002/hec.1640</a></div>
+</div>
+<div id="ref-mihaylova2011review" class="csl-entry" role="listitem">
+<div class="csl-left-margin">12. </div><div class="csl-right-inline">Mihaylova B, Briggs A, O’Hagan A, Thompson SG. Review of statistical methods for analysing healthcare resources and costs. <em>Health Econ</em>. 2011;20(8):897-916. doi:<a href="https://doi.org/10.1002/hec.1653">10.1002/hec.1653</a></div>
+</div>
+<div id="ref-duan1983smearing" class="csl-entry" role="listitem">
+<div class="csl-left-margin">13. </div><div class="csl-right-inline">Duan N. Smearing estimate: A nonparametric retransformation method. <em>J Am Stat Assoc</em>. 1983;78(383):605-610. doi:<a href="https://doi.org/10.1080/01621459.1983.10478017">10.1080/01621459.1983.10478017</a></div>
+</div>
+<div id="ref-manning1998logged" class="csl-entry" role="listitem">
+<div class="csl-left-margin">14. </div><div class="csl-right-inline">Manning WG. The logged dependent variable, heteroscedasticity, and the retransformation problem. <em>J Health Econ</em>. 1998;17(3):283-295. doi:<a href="https://doi.org/10.1016/s0167-6296(98)00025-3">10.1016/s0167-6296(98)00025-3</a></div>
+</div>
+<div id="ref-manning2001transform" class="csl-entry" role="listitem">
+<div class="csl-left-margin">15. </div><div class="csl-right-inline">Manning WG, Mullahy J. Estimating log models: To transform or not to transform? <em>J Health Econ</em>. 2001;20(4):461-494. doi:<a href="https://doi.org/10.1016/s0167-6296(01)00086-8">10.1016/s0167-6296(01)00086-8</a></div>
+</div>
+<div id="ref-kurz2017tweedie" class="csl-entry" role="listitem">
+<div class="csl-left-margin">16. </div><div class="csl-right-inline">Kurz CF. Tweedie distributions for fitting semicontinuous health care utilization cost data. <em>BMC Med Res Methodol</em>. 2017;17(1):171. doi:<a href="https://doi.org/10.1186/s12874-017-0445-y">10.1186/s12874-017-0445-y</a></div>
+</div>
+<div id="ref-liang1986gee" class="csl-entry" role="listitem">
+<div class="csl-left-margin">17. </div><div class="csl-right-inline">Liang KY, Zeger SL. Longitudinal data analysis using generalized linear models. <em>Biometrika</em>. 1986;73(1):13-22. doi:<a href="https://doi.org/10.1093/biomet/73.1.13">10.1093/biomet/73.1.13</a></div>
+</div>
+<div id="ref-austin2014bootstrap" class="csl-entry" role="listitem">
+<div class="csl-left-margin">18. </div><div class="csl-right-inline">Austin PC, Small DS. The use of bootstrapping when using propensity-score matching without replacement: A simulation study. <em>Stat Med</em>. 2014;33(24):4306-4319. doi:<a href="https://doi.org/10.1002/sim.6276">10.1002/sim.6276</a></div>
+</div>
+<div id="ref-naik2016infections" class="csl-entry" role="listitem">
+<div class="csl-left-margin">19. </div><div class="csl-right-inline"><span class="nocase">Naik AS, Dharnidharka VR, Schnitzler MA, et al.</span> Clinical and economic consequences of first-year urinary tract infections, sepsis, and pneumonia in contemporary kidney transplantation practice. <em>Transpl Int</em>. 2016;29(2):241-252. doi:<a href="https://doi.org/10.1111/tri.12711">10.1111/tri.12711</a></div>
+</div>
+<div id="ref-hart2021ptld" class="csl-entry" role="listitem">
+<div class="csl-left-margin">20. </div><div class="csl-right-inline"><span class="nocase">Hart A, Ahn YS, Watson C, et al.</span> Cost burden of post-transplant lymphoproliferative disease following kidney transplants in <span>Medicare</span>-eligible patients by survival status. <em>J Med Econ</em>. 2021;24(1):620-627. doi:<a href="https://doi.org/10.1080/13696998.2021.1915793">10.1080/13696998.2021.1915793</a></div>
+</div>
+<div id="ref-lentine2025dementia" class="csl-entry" role="listitem">
+<div class="csl-left-margin">21. </div><div class="csl-right-inline"><span class="nocase">Lentine KL, Swee ML, Cheungpasitporn W, et al.</span> Economic impact of dementia after kidney transplantation: A matched cohort analysis. <em>Clin Transplant</em>. 2025;39(6):e70189. doi:<a href="https://doi.org/10.1111/ctr.70189">10.1111/ctr.70189</a></div>
+</div>
+</div>
 
 
 <!-- -->
@@ -1037,7 +1136,7 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## The United States Renal Data System</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>The United States Renal Data System (USRDS) is a national data system on chronic kidney disease and kidney failure in the United States, funded by the National Institute of Diabetes and Digestive and Kidney Diseases. It links three kinds of record under one patient identifier:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>The United States Renal Data System (USRDS) is a national data system on chronic kidney disease and kidney failure in the United States, funded by the National Institute of Diabetes and Digestive and Kidney Diseases. It links three kinds of record under one patient identifier <span class="co">[</span><span class="ot">@usrds2025guide</span><span class="co">]</span>:</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>registry records for people with kidney failure, including dates of dialysis, transplant and death;</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>transplant records from the Organ Procurement and Transplantation Network (OPTN), for kidney and kidney–pancreas recipients;</span>
@@ -1045,77 +1144,92 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Medicare claims</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>A claim is a bill submitted to Medicare for a service. There are two kinds:</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>A claim is a bill submitted to Medicare for a service. There are two kinds <span class="co">[</span><span class="ot">@usrds2025guide</span><span class="co">]</span>:</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Institutional claims** are bills from facilities: hospital inpatient stays, hospital outpatient care, skilled nursing facilities, home health agencies, hospices and dialysis facilities. Each claim covers one stay or episode, with dates from its first to its last day of service.</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Physician/supplier claims** are bills from clinicians, laboratories and suppliers. Each line of a claim is one service.</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Medicare as primary payer</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Medicare claims give a complete picture of a person's care only when traditional (fee-for-service) Medicare pays first. When a Medicare Advantage plan or an employer's insurance pays first, many services never appear in the Medicare claims.</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Medicare claims give a complete picture of a person's care only when traditional (fee-for-service) Medicare pays first. When a Medicare Advantage plan or an employer's insurance pays first, many services never appear in the Medicare claims, so the USRDS recommends building claims-based cohorts from periods when Medicare is the primary payer <span class="co">[</span><span class="ot">@usrds2025guide</span><span class="co">]</span>.</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>For a month outside a period of fee-for-service primary coverage, the Medicare claims are incomplete: care may have been billed to someone else. Such a month cannot be treated as a month with no cost.</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>Many kidney transplant recipients lose Medicare coverage over time: Medicare entitlement based only on kidney failure ends 36 months after a successful transplant, unless the person qualifies another way (for example by age or disability).</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>Many kidney transplant recipients lose Medicare coverage over time: Medicare entitlement based only on kidney failure ends with the 36th month after the month of transplant <span class="co">[</span><span class="ot">@ssa226a</span><span class="co">]</span>, unless the person qualifies another way (for example by age or disability).</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Finding a diagnosis in claims</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>A claim shows that a clinician recorded a diagnosis for billing. It does not show that the diagnosis was confirmed, and codes are sometimes recorded while a diagnosis is being ruled out. Diagnoses identified from claims are therefore sometimes wrong.</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>A claim shows that a clinician recorded a diagnosis for billing. It does not show that the diagnosis was confirmed, and codes are sometimes recorded while a diagnosis is being ruled out. Diagnoses identified from claims are therefore sometimes wrong <span class="co">[</span><span class="ot">@schneeweiss2005databases</span><span class="co">]</span>. For invasive aspergillosis in stem cell and solid organ transplant recipients, for example, the positive predictive value of single ICD-9 codes against medical-record review was 15% for one code and 71% for another <span class="co">[</span><span class="ot">@chang2008aspergillosis</span><span class="co">]</span>. We found no comparable validation study of cryptococcosis codes.</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## Risk-set matching</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>In **risk-set matching** (also called incidence density sampling), each case is compared with people drawn from its *risk set*: everyone who, at the point the case is diagnosed on the study's time scale (for example, time since transplant), is still eligible and has not been diagnosed. That point is the case's *time zero*, the date from which outcomes are counted, and controls are given the same time zero.</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>In **risk-set matching** (also called incidence density sampling), each case is compared with people drawn from its *risk set* [@richardson2004incidence]: everyone who, at the point the case is diagnosed on the study's time scale (for example, time since transplant), is still eligible and has not been diagnosed. That point is the case's *time zero*, the date from which outcomes are counted, and controls are given the same time zero.</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>Because controls are chosen using only what was known at time zero, a person who is diagnosed later can serve as a control before their own diagnosis. Their time before diagnosis is unexposed time, and excluding them would condition on the future.</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>Because controls are chosen using only what was known at time zero, a person who is diagnosed later can serve as a control before their own diagnosis. Their time before diagnosis is unexposed time, and excluding them would condition on the future and bias the comparison <span class="co">[</span><span class="ot">@lubin1984controls</span><span class="co">]</span>.</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ways of matching</span></span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>Two common ways to choose controls within a risk set are:</span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Direct covariate matching:** matching on the characteristics themselves, for example exactly on some and within set limits on others.</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Propensity score matching:** a model estimates each person's probability of being diagnosed from their characteristics, and each case is matched to controls with a similar score. When the probability is estimated for each month, the score is time-varying.</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Propensity score matching:** a model estimates each person's probability of being diagnosed from their characteristics, and each case is matched to controls with a similar score <span class="co">[</span><span class="ot">@austin2011introduction</span><span class="co">]</span>. When the probability is estimated over time, the score is time-varying <span class="co">[</span><span class="ot">@lu2005propensity</span><span class="co">]</span>.</span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>A common check of whether cases and controls are similar after matching is the standardized mean difference of each characteristic.</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>A common check of whether cases and controls are similar after matching is the standardized mean difference of each characteristic <span class="co">[</span><span class="ot">@austin2009balance</span><span class="co">]</span>.</span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Payments, not charges</span></span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>Charges, which are the prices providers list on their bills, are much higher than what is paid.</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>Charges, which are the prices providers list on their bills, are much higher than what is paid, and they are a poor measure of cost <span class="co">[</span><span class="ot">@finkler1982charges</span><span class="co">]</span>.</span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>Outpatient, home health and hospice claims also list payments for each revenue center (each department or type of service on the bill). These describe the same services as the claim's payment, so the two should not be added together.</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>Outpatient, home health and hospice claims also list payments for each revenue center (each department or type of service on the bill). These describe the same services as the claim's payment, so the two should not be added together <span class="co">[</span><span class="ot">@usrds2025guide</span><span class="co">]</span>.</span>
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## Spreading a stay across days</span></span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>An institutional claim that covers several days can be spread evenly across them. For example, a 10-day hospital stay with a Medicare payment of $20,000 counts as $2,000 per day. If the stay runs from 2 days before time zero to 7 days after it, $4,000 falls before time zero and $16,000 after it.</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>An institutional claim that covers several days can be spread evenly across them; this study does so. For example, a 10-day hospital stay with a Medicare payment of $20,000 counts as $2,000 per day. If the stay runs from 2 days before time zero to 7 days after it, $4,000 falls before time zero and $16,000 after it.</span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## Missing versus zero cost</span></span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A month in which the person is covered but has no claims has a cost of **zero**: had they needed care, Medicare would have paid for it.</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A month in which the person is not covered is **not observed**, and is left out rather than recorded as zero.</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A month in which the person is not covered is **not observed**, and is left out rather than recorded as zero, because its claims are incomplete <span class="co">[</span><span class="ot">@usrds2025guide</span><span class="co">]</span>.</span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A month that is only partly observed, because follow-up ended partway through, is kept. The number of days observed is recorded, so the analysis can account for it.</span>
 <span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## Death and what is estimated</span></span>
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>How death is handled defines what is being estimated. If death ends follow-up, the estimate describes the cost of care while people are alive. If the months after death count as zero cost, the estimate also reflects the cost consequences of mortality.</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>How death is handled defines what is being estimated. If death ends follow-up, the estimate describes the cost of care while people are alive. If the months after death count as zero cost, the estimate also reflects the cost consequences of mortality. How death and incomplete follow-up are handled is a central issue in estimating costs over a period of illness <span class="co">[</span><span class="ot">@basu2010censoring</span><span class="co">]</span>.</span>
 <span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why cost data are hard to model</span></span>
 <span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>Monthly cost data have three awkward features:</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>Monthly cost data have three awkward features <span class="co">[</span><span class="ot">@mihaylova2011review</span><span class="co">]</span>:</span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>many months have no cost at all;</span>
 <span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a few months, usually those with a hospital stay, cost a great deal;</span>
 <span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the distribution is therefore strongly skewed to the right.</span>
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>The quantity of interest is the **mean** cost, because the total spent equals the mean times the number of patients. Transforming costs to a log scale makes them easier to model but estimates something else (roughly a geometric mean), and converting back to dollars needs extra steps that can be biased. Models that describe the mean directly avoid this.</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>The quantity of interest is the **mean** cost, because the total spent equals the mean times the number of patients. Transforming costs to a log scale makes them easier to model but estimates something else (roughly a geometric mean), and converting back to dollars needs extra steps that can be biased <span class="co">[</span><span class="ot">@duan1983smearing; @manning1998logged</span><span class="co">]</span>. Models that describe the mean directly avoid this <span class="co">[</span><span class="ot">@manning2001transform</span><span class="co">]</span>.</span>
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="fu">## Models for costs</span></span>
 <span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>A generalized linear model for monthly cost can include:</span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a **log link**, so that the model describes the logarithm of the mean cost rather than the mean of logged costs;</span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a **Tweedie distribution**, which allows exact zeros and a long right tail in the same model;</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a **Tweedie distribution**, which allows exact zeros and a long right tail in the same model <span class="co">[</span><span class="ot">@kurz2017tweedie</span><span class="co">]</span>;</span>
 <span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the logarithm of the number of days observed as an **offset**, so that a partly observed month counts in proportion to its length.</span>
 <span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>Months from the same person, and people in the same matched set, are not independent. Generalized estimating equations give standard errors that allow for this, clustered on the matched set, and also on the patient if one person can appear in more than one matched set. A **cluster bootstrap** gives a confidence interval by resampling whole matched sets with replacement and repeating the whole calculation each time.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>Months from the same person, and people in the same matched set, are not independent. Generalized estimating equations give standard errors that allow for this <span class="co">[</span><span class="ot">@liang1986gee</span><span class="co">]</span>, clustered on the matched set, and also on the patient if one person can appear in more than one matched set. A **cluster bootstrap** gives a confidence interval by resampling whole matched sets with replacement and repeating the whole calculation each time <span class="co">[</span><span class="ot">@austin2014bootstrap</span><span class="co">]</span>.</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## Earlier USRDS studies of cost after an event</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>Other studies have estimated excess Medicare payments after an event in kidney transplant recipients using USRDS data, each with a different design:</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>pneumonia, sepsis and urinary tract infection in the first year after transplant, as marginal first-year costs <span class="co">[</span><span class="ot">@naik2016infections</span><span class="co">]</span>;</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>post-transplant lymphoproliferative disease, as costs per patient-year, with Medicare eligibility limited to three years after transplant for most recipients <span class="co">[</span><span class="ot">@hart2021ptld</span><span class="co">]</span>;</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>dementia, compared with propensity-matched recipients at the equivalent time after transplant, as monthly and cumulative costs <span class="co">[</span><span class="ot">@lentine2025dementia</span><span class="co">]</span>.</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>This study's design and how it differs are described under <span class="co">[</span><span class="ot">Study design and methods</span><span class="co">](study_overview.qmd)</span>.</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

@@ -1316,7 +1316,7 @@
     "href": "quarto/methodological_background.html#the-united-states-renal-data-system",
     "title": "Methodological background",
     "section": "The United States Renal Data System",
-    "text": "The United States Renal Data System\nThe United States Renal Data System (USRDS) is a national data system on chronic kidney disease and kidney failure in the United States, funded by the National Institute of Diabetes and Digestive and Kidney Diseases. It links three kinds of record under one patient identifier:\n\nregistry records for people with kidney failure, including dates of dialysis, transplant and death;\ntransplant records from the Organ Procurement and Transplantation Network (OPTN), for kidney and kidney–pancreas recipients;\nMedicare enrollment and claims.",
+    "text": "The United States Renal Data System\nThe United States Renal Data System (USRDS) is a national data system on chronic kidney disease and kidney failure in the United States, funded by the National Institute of Diabetes and Digestive and Kidney Diseases. It links three kinds of record under one patient identifier1:\n\nregistry records for people with kidney failure, including dates of dialysis, transplant and death;\ntransplant records from the Organ Procurement and Transplantation Network (OPTN), for kidney and kidney–pancreas recipients;\nMedicare enrollment and claims.",
     "crumbs": [
       "Background",
       "Methodological background"
@@ -1327,7 +1327,7 @@
     "href": "quarto/methodological_background.html#medicare-claims",
     "title": "Methodological background",
     "section": "Medicare claims",
-    "text": "Medicare claims\nA claim is a bill submitted to Medicare for a service. There are two kinds:\n\nInstitutional claims are bills from facilities: hospital inpatient stays, hospital outpatient care, skilled nursing facilities, home health agencies, hospices and dialysis facilities. Each claim covers one stay or episode, with dates from its first to its last day of service.\nPhysician/supplier claims are bills from clinicians, laboratories and suppliers. Each line of a claim is one service.",
+    "text": "Medicare claims\nA claim is a bill submitted to Medicare for a service. There are two kinds1:\n\nInstitutional claims are bills from facilities: hospital inpatient stays, hospital outpatient care, skilled nursing facilities, home health agencies, hospices and dialysis facilities. Each claim covers one stay or episode, with dates from its first to its last day of service.\nPhysician/supplier claims are bills from clinicians, laboratories and suppliers. Each line of a claim is one service.",
     "crumbs": [
       "Background",
       "Methodological background"
@@ -1338,7 +1338,7 @@
     "href": "quarto/methodological_background.html#medicare-as-primary-payer",
     "title": "Methodological background",
     "section": "Medicare as primary payer",
-    "text": "Medicare as primary payer\nMedicare claims give a complete picture of a person’s care only when traditional (fee-for-service) Medicare pays first. When a Medicare Advantage plan or an employer’s insurance pays first, many services never appear in the Medicare claims.\nFor a month outside a period of fee-for-service primary coverage, the Medicare claims are incomplete: care may have been billed to someone else. Such a month cannot be treated as a month with no cost.\nMany kidney transplant recipients lose Medicare coverage over time: Medicare entitlement based only on kidney failure ends 36 months after a successful transplant, unless the person qualifies another way (for example by age or disability).",
+    "text": "Medicare as primary payer\nMedicare claims give a complete picture of a person’s care only when traditional (fee-for-service) Medicare pays first. When a Medicare Advantage plan or an employer’s insurance pays first, many services never appear in the Medicare claims, so the USRDS recommends building claims-based cohorts from periods when Medicare is the primary payer1.\nFor a month outside a period of fee-for-service primary coverage, the Medicare claims are incomplete: care may have been billed to someone else. Such a month cannot be treated as a month with no cost.\nMany kidney transplant recipients lose Medicare coverage over time: Medicare entitlement based only on kidney failure ends with the 36th month after the month of transplant2, unless the person qualifies another way (for example by age or disability).",
     "crumbs": [
       "Background",
       "Methodological background"
@@ -1349,7 +1349,7 @@
     "href": "quarto/methodological_background.html#finding-a-diagnosis-in-claims",
     "title": "Methodological background",
     "section": "Finding a diagnosis in claims",
-    "text": "Finding a diagnosis in claims\nA claim shows that a clinician recorded a diagnosis for billing. It does not show that the diagnosis was confirmed, and codes are sometimes recorded while a diagnosis is being ruled out. Diagnoses identified from claims are therefore sometimes wrong.",
+    "text": "Finding a diagnosis in claims\nA claim shows that a clinician recorded a diagnosis for billing. It does not show that the diagnosis was confirmed, and codes are sometimes recorded while a diagnosis is being ruled out. Diagnoses identified from claims are therefore sometimes wrong3. For invasive aspergillosis in stem cell and solid organ transplant recipients, for example, the positive predictive value of single ICD-9 codes against medical-record review was 15% for one code and 71% for another4. We found no comparable validation study of cryptococcosis codes.",
     "crumbs": [
       "Background",
       "Methodological background"
@@ -1360,7 +1360,7 @@
     "href": "quarto/methodological_background.html#risk-set-matching",
     "title": "Methodological background",
     "section": "Risk-set matching",
-    "text": "Risk-set matching\nIn risk-set matching (also called incidence density sampling), each case is compared with people drawn from its risk set: everyone who, at the point the case is diagnosed on the study’s time scale (for example, time since transplant), is still eligible and has not been diagnosed. That point is the case’s time zero, the date from which outcomes are counted, and controls are given the same time zero.\nBecause controls are chosen using only what was known at time zero, a person who is diagnosed later can serve as a control before their own diagnosis. Their time before diagnosis is unexposed time, and excluding them would condition on the future.",
+    "text": "Risk-set matching\nIn risk-set matching (also called incidence density sampling), each case is compared with people drawn from its risk set5: everyone who, at the point the case is diagnosed on the study’s time scale (for example, time since transplant), is still eligible and has not been diagnosed. That point is the case’s time zero, the date from which outcomes are counted, and controls are given the same time zero.\nBecause controls are chosen using only what was known at time zero, a person who is diagnosed later can serve as a control before their own diagnosis. Their time before diagnosis is unexposed time, and excluding them would condition on the future and bias the comparison6.",
     "crumbs": [
       "Background",
       "Methodological background"
@@ -1371,7 +1371,7 @@
     "href": "quarto/methodological_background.html#ways-of-matching",
     "title": "Methodological background",
     "section": "Ways of matching",
-    "text": "Ways of matching\nTwo common ways to choose controls within a risk set are:\n\nDirect covariate matching: matching on the characteristics themselves, for example exactly on some and within set limits on others.\nPropensity score matching: a model estimates each person’s probability of being diagnosed from their characteristics, and each case is matched to controls with a similar score. When the probability is estimated for each month, the score is time-varying.\n\nA common check of whether cases and controls are similar after matching is the standardized mean difference of each characteristic.",
+    "text": "Ways of matching\nTwo common ways to choose controls within a risk set are:\n\nDirect covariate matching: matching on the characteristics themselves, for example exactly on some and within set limits on others.\nPropensity score matching: a model estimates each person’s probability of being diagnosed from their characteristics, and each case is matched to controls with a similar score7. When the probability is estimated over time, the score is time-varying8.\n\nA common check of whether cases and controls are similar after matching is the standardized mean difference of each characteristic9.",
     "crumbs": [
       "Background",
       "Methodological background"
@@ -1382,7 +1382,7 @@
     "href": "quarto/methodological_background.html#payments-not-charges",
     "title": "Methodological background",
     "section": "Payments, not charges",
-    "text": "Payments, not charges\nCharges, which are the prices providers list on their bills, are much higher than what is paid.\nOutpatient, home health and hospice claims also list payments for each revenue center (each department or type of service on the bill). These describe the same services as the claim’s payment, so the two should not be added together.",
+    "text": "Payments, not charges\nCharges, which are the prices providers list on their bills, are much higher than what is paid, and they are a poor measure of cost10.\nOutpatient, home health and hospice claims also list payments for each revenue center (each department or type of service on the bill). These describe the same services as the claim’s payment, so the two should not be added together1.",
     "crumbs": [
       "Background",
       "Methodological background"
@@ -1393,7 +1393,7 @@
     "href": "quarto/methodological_background.html#spreading-a-stay-across-days",
     "title": "Methodological background",
     "section": "Spreading a stay across days",
-    "text": "Spreading a stay across days\nAn institutional claim that covers several days can be spread evenly across them. For example, a 10-day hospital stay with a Medicare payment of $20,000 counts as $2,000 per day. If the stay runs from 2 days before time zero to 7 days after it, $4,000 falls before time zero and $16,000 after it.",
+    "text": "Spreading a stay across days\nAn institutional claim that covers several days can be spread evenly across them; this study does so. For example, a 10-day hospital stay with a Medicare payment of $20,000 counts as $2,000 per day. If the stay runs from 2 days before time zero to 7 days after it, $4,000 falls before time zero and $16,000 after it.",
     "crumbs": [
       "Background",
       "Methodological background"
@@ -1404,7 +1404,7 @@
     "href": "quarto/methodological_background.html#missing-versus-zero-cost",
     "title": "Methodological background",
     "section": "Missing versus zero cost",
-    "text": "Missing versus zero cost\n\nA month in which the person is covered but has no claims has a cost of zero: had they needed care, Medicare would have paid for it.\nA month in which the person is not covered is not observed, and is left out rather than recorded as zero.\nA month that is only partly observed, because follow-up ended partway through, is kept. The number of days observed is recorded, so the analysis can account for it.",
+    "text": "Missing versus zero cost\n\nA month in which the person is covered but has no claims has a cost of zero: had they needed care, Medicare would have paid for it.\nA month in which the person is not covered is not observed, and is left out rather than recorded as zero, because its claims are incomplete1.\nA month that is only partly observed, because follow-up ended partway through, is kept. The number of days observed is recorded, so the analysis can account for it.",
     "crumbs": [
       "Background",
       "Methodological background"
@@ -1415,7 +1415,7 @@
     "href": "quarto/methodological_background.html#death-and-what-is-estimated",
     "title": "Methodological background",
     "section": "Death and what is estimated",
-    "text": "Death and what is estimated\nHow death is handled defines what is being estimated. If death ends follow-up, the estimate describes the cost of care while people are alive. If the months after death count as zero cost, the estimate also reflects the cost consequences of mortality.",
+    "text": "Death and what is estimated\nHow death is handled defines what is being estimated. If death ends follow-up, the estimate describes the cost of care while people are alive. If the months after death count as zero cost, the estimate also reflects the cost consequences of mortality. How death and incomplete follow-up are handled is a central issue in estimating costs over a period of illness11.",
     "crumbs": [
       "Background",
       "Methodological background"
@@ -1426,7 +1426,7 @@
     "href": "quarto/methodological_background.html#why-cost-data-are-hard-to-model",
     "title": "Methodological background",
     "section": "Why cost data are hard to model",
-    "text": "Why cost data are hard to model\nMonthly cost data have three awkward features:\n\nmany months have no cost at all;\na few months, usually those with a hospital stay, cost a great deal;\nthe distribution is therefore strongly skewed to the right.\n\nThe quantity of interest is the mean cost, because the total spent equals the mean times the number of patients. Transforming costs to a log scale makes them easier to model but estimates something else (roughly a geometric mean), and converting back to dollars needs extra steps that can be biased. Models that describe the mean directly avoid this.",
+    "text": "Why cost data are hard to model\nMonthly cost data have three awkward features12:\n\nmany months have no cost at all;\na few months, usually those with a hospital stay, cost a great deal;\nthe distribution is therefore strongly skewed to the right.\n\nThe quantity of interest is the mean cost, because the total spent equals the mean times the number of patients. Transforming costs to a log scale makes them easier to model but estimates something else (roughly a geometric mean), and converting back to dollars needs extra steps that can be biased13,14. Models that describe the mean directly avoid this15.",
     "crumbs": [
       "Background",
       "Methodological background"
@@ -1437,7 +1437,29 @@
     "href": "quarto/methodological_background.html#models-for-costs",
     "title": "Methodological background",
     "section": "Models for costs",
-    "text": "Models for costs\nA generalized linear model for monthly cost can include:\n\na log link, so that the model describes the logarithm of the mean cost rather than the mean of logged costs;\na Tweedie distribution, which allows exact zeros and a long right tail in the same model;\nthe logarithm of the number of days observed as an offset, so that a partly observed month counts in proportion to its length.\n\nMonths from the same person, and people in the same matched set, are not independent. Generalized estimating equations give standard errors that allow for this, clustered on the matched set, and also on the patient if one person can appear in more than one matched set. A cluster bootstrap gives a confidence interval by resampling whole matched sets with replacement and repeating the whole calculation each time.",
+    "text": "Models for costs\nA generalized linear model for monthly cost can include:\n\na log link, so that the model describes the logarithm of the mean cost rather than the mean of logged costs;\na Tweedie distribution, which allows exact zeros and a long right tail in the same model16;\nthe logarithm of the number of days observed as an offset, so that a partly observed month counts in proportion to its length.\n\nMonths from the same person, and people in the same matched set, are not independent. Generalized estimating equations give standard errors that allow for this17, clustered on the matched set, and also on the patient if one person can appear in more than one matched set. A cluster bootstrap gives a confidence interval by resampling whole matched sets with replacement and repeating the whole calculation each time18.",
+    "crumbs": [
+      "Background",
+      "Methodological background"
+    ]
+  },
+  {
+    "objectID": "quarto/methodological_background.html#earlier-usrds-studies-of-cost-after-an-event",
+    "href": "quarto/methodological_background.html#earlier-usrds-studies-of-cost-after-an-event",
+    "title": "Methodological background",
+    "section": "Earlier USRDS studies of cost after an event",
+    "text": "Earlier USRDS studies of cost after an event\nOther studies have estimated excess Medicare payments after an event in kidney transplant recipients using USRDS data, each with a different design:\n\npneumonia, sepsis and urinary tract infection in the first year after transplant, as marginal first-year costs19;\npost-transplant lymphoproliferative disease, as costs per patient-year, with Medicare eligibility limited to three years after transplant for most recipients20;\ndementia, compared with propensity-matched recipients at the equivalent time after transplant, as monthly and cumulative costs21.\n\nThis study’s design and how it differs are described under Study design and methods.",
+    "crumbs": [
+      "Background",
+      "Methodological background"
+    ]
+  },
+  {
+    "objectID": "quarto/methodological_background.html#references",
+    "href": "quarto/methodological_background.html#references",
+    "title": "Methodological background",
+    "section": "References",
+    "text": "References\n\n\n1. United States Renal Data System. 2025 Researcher’s Guide to the USRDS Database. National Institutes of Health, National Institute of Diabetes and Digestive and Kidney Diseases; 2025. https://www.niddk.nih.gov/-/media/Files/USRDS/For-Researchers/2025/USRDS_Researcher_Guide_2025.pdf\n\n\n2. Social Security Administration. Social security act, section 226A: Special provisions relating to coverage under medicare program for end stage renal disease. Accessed November 3, 2026. https://www.ssa.gov/OP_Home/ssact/title02/0226A.htm\n\n\n3. Schneeweiss S, Avorn J. A review of uses of health care utilization databases for epidemiologic research on therapeutics. J Clin Epidemiol. 2005;58(4):323-337. doi:10.1016/j.jclinepi.2004.10.012\n\n\n4. Chang DC, Burwell LA, Lyon GM, et al. Comparison of the use of administrative data and an active system for surveillance of invasive aspergillosis. Infect Control Hosp Epidemiol. 2008;29(1):25-30. doi:10.1086/524324\n\n\n5. Richardson DB. An incidence density sampling program for nested case-control analyses. Occup Environ Med. 2004;61(12):e59. doi:10.1136/oem.2004.014472\n\n\n6. Lubin JH, Gail MH. Biased selection of controls for case-control analyses of cohort studies. Biometrics. 1984;40(1):63-75.\n\n\n7. Austin PC. An introduction to propensity score methods for reducing the effects of confounding in observational studies. Multivariate Behav Res. 2011;46(3):399-424. doi:10.1080/00273171.2011.568786\n\n\n8. Lu B. Propensity score matching with time-dependent covariates. Biometrics. 2005;61(3):721-728. doi:10.1111/j.1541-0420.2005.00356.x\n\n\n9. Austin PC. Balance diagnostics for comparing the distribution of baseline covariates between treatment groups in propensity-score matched samples. Stat Med. 2009;28(25):3083-3107. doi:10.1002/sim.3697\n\n\n10. Finkler SA. The distinction between cost and charges. Ann Intern Med. 1982;96(1):102-109. doi:10.7326/0003-4819-96-1-102\n\n\n11. Basu A, Manning WG. Estimating lifetime or episode-of-illness costs under censoring. Health Econ. 2010;19(9):1010-1028. doi:10.1002/hec.1640\n\n\n12. Mihaylova B, Briggs A, O’Hagan A, Thompson SG. Review of statistical methods for analysing healthcare resources and costs. Health Econ. 2011;20(8):897-916. doi:10.1002/hec.1653\n\n\n13. Duan N. Smearing estimate: A nonparametric retransformation method. J Am Stat Assoc. 1983;78(383):605-610. doi:10.1080/01621459.1983.10478017\n\n\n14. Manning WG. The logged dependent variable, heteroscedasticity, and the retransformation problem. J Health Econ. 1998;17(3):283-295. doi:10.1016/s0167-6296(98)00025-3\n\n\n15. Manning WG, Mullahy J. Estimating log models: To transform or not to transform? J Health Econ. 2001;20(4):461-494. doi:10.1016/s0167-6296(01)00086-8\n\n\n16. Kurz CF. Tweedie distributions for fitting semicontinuous health care utilization cost data. BMC Med Res Methodol. 2017;17(1):171. doi:10.1186/s12874-017-0445-y\n\n\n17. Liang KY, Zeger SL. Longitudinal data analysis using generalized linear models. Biometrika. 1986;73(1):13-22. doi:10.1093/biomet/73.1.13\n\n\n18. Austin PC, Small DS. The use of bootstrapping when using propensity-score matching without replacement: A simulation study. Stat Med. 2014;33(24):4306-4319. doi:10.1002/sim.6276\n\n\n19. Naik AS, Dharnidharka VR, Schnitzler MA, et al. Clinical and economic consequences of first-year urinary tract infections, sepsis, and pneumonia in contemporary kidney transplantation practice. Transpl Int. 2016;29(2):241-252. doi:10.1111/tri.12711\n\n\n20. Hart A, Ahn YS, Watson C, et al. Cost burden of post-transplant lymphoproliferative disease following kidney transplants in Medicare-eligible patients by survival status. J Med Econ. 2021;24(1):620-627. doi:10.1080/13696998.2021.1915793\n\n\n21. Lentine KL, Swee ML, Cheungpasitporn W, et al. Economic impact of dementia after kidney transplantation: A matched cohort analysis. Clin Transplant. 2025;39(6):e70189. doi:10.1111/ctr.70189",
     "crumbs": [
       "Background",
       "Methodological background"
