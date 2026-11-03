@@ -62,7 +62,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -125,17 +144,6 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
   content: '💻';
   background-image: none;
 }
-div.callout-Pending.callout {
-  border-left-color: #f0c400;
-}
-div.callout-Pending.callout-style-default > .callout-header {
-  background-color: rgba(240, 196, 0, 0.13);
-}
-div.callout-Pending .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Pending.callout-style-default .callout-icon::before, div.callout-Pending.callout-titled .callout-icon::before {
-  content: '⏳';
-  background-image: none;
-}
 div.callout-Results.callout {
   border-left-color: #198754;
 }
@@ -145,6 +153,17 @@ div.callout-Results.callout-style-default > .callout-header {
 div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
   content: '📊';
+  background-image: none;
+}
+div.callout-Pending.callout {
+  border-left-color: #f0c400;
+}
+div.callout-Pending.callout-style-default > .callout-header {
+  background-color: rgba(240, 196, 0, 0.13);
+}
+div.callout-Pending .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Pending.callout-style-default .callout-icon::before, div.callout-Pending.callout-titled .callout-icon::before {
+  content: '⏳';
   background-image: none;
 }
 </style>
@@ -434,6 +453,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
    
   <ul>
   <li><a href="#longitudinal-cost-data-models" id="toc-longitudinal-cost-data-models" class="nav-link active" data-scroll-target="#longitudinal-cost-data-models">Longitudinal cost data models</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/master/quarto/modeling.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -503,14 +523,10 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <li>Institutional Auxiliary costs</li>
 <li>Institutional Hospice costs</li>
 </ul>
-<p>Analyzing cost data is notoriously challenging. While <a href="https://www.herc.research.va.gov/include/page.asp?id=analyzing-cost-data">guides exist online</a>, experts have also devoted <a href="https://www.stata.com/bookstore/health-econometrics-using-stata/">entire books</a> to the topic.</p>
-<p>To account for the repeated-observations nature of the data, both <a href="https://en.wikipedia.org/wiki/Generalized_estimating_equation">generalized estimating equations</a> as well as <a href="https://en.wikipedia.org/wiki/Mixed_model">mixed-effects models</a> with patient as a random effect were explored.</p>
-<p>Modeling cost data is challenging due to the highly skewed nature of medical cost data. We explored linear models, log(Cost) models, and <a href="https://mbounthavong.github.io/Tweedie-distribution/">Tweedie</a> models.</p>
-<p>Accounting for missingness and censoring of costs due to lack of coverage and death is itself a challenging topic, covered well in a <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3377439/">recent review</a>. Seminal papers have been written by:</p>
-<ul>
-<li><a href="https://dlin.web.unc.edu/wp-content/uploads/sites/1568/2013/04/LinEA97.pdf">Lin <em>et al</em></a></li>
-<li><a href="https://www.jstor.org/stable/2673467">Bang <em>et al</em></a></li>
-</ul>
+<p>Analyzing cost data is notoriously challenging<span class="citation" data-cites="mihaylova2011review"><sup><a href="#ref-mihaylova2011review" role="doc-biblioref">1</a></sup></span>. The VA Health Economics Resource Center has a <a href="https://www.herc.research.va.gov/include/page.asp?id=analyzing-cost-data">practical guide</a>, and whole textbooks cover the topic<span class="citation" data-cites="deb2017econometrics"><sup><a href="#ref-deb2017econometrics" role="doc-biblioref">2</a></sup></span>.</p>
+<p>To account for the repeated-observations nature of the data, both generalized estimating equations<span class="citation" data-cites="liang1986gee"><sup><a href="#ref-liang1986gee" role="doc-biblioref">3</a></sup></span> and mixed-effects models with patient as a random effect<span class="citation" data-cites="laird1982random"><sup><a href="#ref-laird1982random" role="doc-biblioref">4</a></sup></span> were explored.</p>
+<p>Medical cost data are highly skewed, with many zeros. We explored linear models, log(cost) models<span class="citation" data-cites="manning2001transform"><sup><a href="#ref-manning2001transform" role="doc-biblioref">5</a></sup></span> and Tweedie models<span class="citation" data-cites="kurz2017tweedie"><sup><a href="#ref-kurz2017tweedie" role="doc-biblioref">6</a></sup></span>.</p>
+<p>Accounting for costs that are incomplete because follow-up ends, through loss of coverage or death, is itself a challenging topic, reviewed for health services researchers by Wijeysundera and colleagues<span class="citation" data-cites="wijeysundera2012censored"><sup><a href="#ref-wijeysundera2012censored" role="doc-biblioref">7</a></sup></span>. Seminal methods papers include Lin and colleagues<span class="citation" data-cites="lin1997costs"><sup><a href="#ref-lin1997costs" role="doc-biblioref">8</a></sup></span> and <a href="https://www.jstor.org/stable/2673467">Bang <em>et al</em></a>.</p>
 <p>We trialed multiple types of models:</p>
 <ul>
 <li>Naive estimation (patients do not contribute observations if uncovered or dead)</li>
@@ -627,6 +643,35 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>    <span class="at">var.power =</span> <span class="fl">1.7</span></span>
 <span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+</div>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-mihaylova2011review" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Mihaylova B, Briggs A, O’Hagan A, Thompson SG. Review of statistical methods for analysing healthcare resources and costs. <em>Health Econ</em>. 2011;20(8):897-916. doi:<a href="https://doi.org/10.1002/hec.1653">10.1002/hec.1653</a></div>
+</div>
+<div id="ref-deb2017econometrics" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Deb P, Norton EC, Manning WG. <em>Health Econometrics Using Stata</em>. Stata Press; 2017.</div>
+</div>
+<div id="ref-liang1986gee" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Liang KY, Zeger SL. Longitudinal data analysis using generalized linear models. <em>Biometrika</em>. 1986;73(1):13-22. doi:<a href="https://doi.org/10.1093/biomet/73.1.13">10.1093/biomet/73.1.13</a></div>
+</div>
+<div id="ref-laird1982random" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Laird NM, Ware JH. Random-effects models for longitudinal data. <em>Biometrics</em>. 1982;38(4):963. doi:<a href="https://doi.org/10.2307/2529876">10.2307/2529876</a></div>
+</div>
+<div id="ref-manning2001transform" class="csl-entry" role="listitem">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Manning WG, Mullahy J. Estimating log models: To transform or not to transform? <em>J Health Econ</em>. 2001;20(4):461-494. doi:<a href="https://doi.org/10.1016/s0167-6296(01)00086-8">10.1016/s0167-6296(01)00086-8</a></div>
+</div>
+<div id="ref-kurz2017tweedie" class="csl-entry" role="listitem">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Kurz CF. Tweedie distributions for fitting semicontinuous health care utilization cost data. <em>BMC Med Res Methodol</em>. 2017;17(1):171. doi:<a href="https://doi.org/10.1186/s12874-017-0445-y">10.1186/s12874-017-0445-y</a></div>
+</div>
+<div id="ref-wijeysundera2012censored" class="csl-entry" role="listitem">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Wijeysundera HC, Wang X, Tomlinson G, Ko DT, Krahn MD. Techniques for estimating health care costs with censored data: An overview for the health services researcher. <em>Clinicoecon Outcomes Res</em>. 2012;4:145-155. doi:<a href="https://doi.org/10.2147/CEOR.S31552">10.2147/CEOR.S31552</a></div>
+</div>
+<div id="ref-lin1997costs" class="csl-entry" role="listitem">
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Lin DY, Feuer EJ, Etzioni R, Wax Y. <a href="https://www.ncbi.nlm.nih.gov/pubmed/9192444">Estimating medical costs from incomplete follow-up data</a>. <em>Biometrics</em>. 1997;53(2):419-434.</div>
+</div>
 </div>
 
 
@@ -1135,29 +1180,30 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Institutional Auxiliary costs</span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Institutional Hospice costs</span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>Analyzing cost data is notoriously challenging.  While <span class="co">[</span><span class="ot">guides exist online</span><span class="co">](https://www.herc.research.va.gov/include/page.asp?id=analyzing-cost-data)</span>, </span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>experts have also devoted <span class="co">[</span><span class="ot">entire books</span><span class="co">](https://www.stata.com/bookstore/health-econometrics-using-stata/)</span> to the topic.</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>To account for the repeated-observations nature of the data, both <span class="co">[</span><span class="ot">generalized estimating equations</span><span class="co">](https://en.wikipedia.org/wiki/Generalized_estimating_equation)</span> as well as <span class="co">[</span><span class="ot">mixed-effects models</span><span class="co">](https://en.wikipedia.org/wiki/Mixed_model)</span> with patient as a random effect were explored.</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>Modeling cost data is challenging due to the highly skewed nature of medical cost data.  We explored linear models, log(Cost) models, and <span class="co">[</span><span class="ot">Tweedie</span><span class="co">](https://mbounthavong.github.io/Tweedie-distribution/)</span> models.</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>Accounting for missingness and censoring of costs due to lack of coverage and death is itself a challenging topic, covered well in a <span class="co">[</span><span class="ot">recent review</span><span class="co">](https://pmc.ncbi.nlm.nih.gov/articles/PMC3377439/)</span>.  Seminal papers have been written by:</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>Analyzing cost data is notoriously challenging <span class="co">[</span><span class="ot">@mihaylova2011review</span><span class="co">]</span>. The VA Health Economics Resource Center has a <span class="co">[</span><span class="ot">practical guide</span><span class="co">](https://www.herc.research.va.gov/include/page.asp?id=analyzing-cost-data)</span>, and whole textbooks cover the topic <span class="co">[</span><span class="ot">@deb2017econometrics</span><span class="co">]</span>.</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>To account for the repeated-observations nature of the data, both generalized estimating equations <span class="co">[</span><span class="ot">@liang1986gee</span><span class="co">]</span> and mixed-effects models with patient as a random effect <span class="co">[</span><span class="ot">@laird1982random</span><span class="co">]</span> were explored.</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>Medical cost data are highly skewed, with many zeros. We explored linear models, log(cost) models <span class="co">[</span><span class="ot">@manning2001transform</span><span class="co">]</span> and Tweedie models <span class="co">[</span><span class="ot">@kurz2017tweedie</span><span class="co">]</span>.</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>Accounting for costs that are incomplete because follow-up ends, through loss of coverage or death, is itself a challenging topic, reviewed for health services researchers by Wijeysundera and colleagues <span class="co">[</span><span class="ot">@wijeysundera2012censored</span><span class="co">]</span>. Seminal methods papers include Lin and colleagues <span class="co">[</span><span class="ot">@lin1997costs</span><span class="co">]</span> and <span class="co">[</span><span class="ot">Bang *et al*</span><span class="co">](https://www.jstor.org/stable/2673467)</span>.</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Lin *et al*</span><span class="co">](https://dlin.web.unc.edu/wp-content/uploads/sites/1568/2013/04/LinEA97.pdf)</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Bang *et al*</span><span class="co">](https://www.jstor.org/stable/2673467)</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>We trialed multiple types of models:</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>We trialed multiple types of models:</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Naive estimation (patients do not contribute observations if uncovered or dead)</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Treating post-death costs as zero, ignoring months with costs uncovered (note: not done yet)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Treating post-death costs as zero, weighting to adjust for uncovered months (note: not done yet)</span>
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Naive estimation (patients do not contribute observations if uncovered or dead)</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Treating post-death costs as zero, ignoring months with costs uncovered (note: not done yet)</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Treating post-death costs as zero, weighting to adjust for uncovered months (note: not done yet)</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="co">#| file: "../R/modeling.R"</span></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="co">#| file: "../R/modeling.R"</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

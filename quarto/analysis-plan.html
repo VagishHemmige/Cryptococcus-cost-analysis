@@ -144,17 +144,6 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
   content: '📊';
   background-image: none;
 }
-div.callout-Rcode.callout {
-  border-left-color: #d63384;
-}
-div.callout-Rcode.callout-style-default > .callout-header {
-  background-color: rgba(214, 51, 132, 0.13);
-}
-div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
-  content: '💻';
-  background-image: none;
-}
 div.callout-Pending.callout {
   border-left-color: #f0c400;
 }
@@ -164,6 +153,17 @@ div.callout-Pending.callout-style-default > .callout-header {
 div.callout-Pending .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-Pending.callout-style-default .callout-icon::before, div.callout-Pending.callout-titled .callout-icon::before {
   content: '⏳';
+  background-image: none;
+}
+div.callout-Rcode.callout {
+  border-left-color: #d63384;
+}
+div.callout-Rcode.callout-style-default > .callout-header {
+  background-color: rgba(214, 51, 132, 0.13);
+}
+div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
+  content: '💻';
   background-image: none;
 }
 </style>
@@ -545,7 +545,7 @@ gives this page GitHub-style IDs and those links work on both.
 <h1>Statistical Analysis Plan: Medicare Costs of Cryptococcosis After Kidney Transplant</h1>
 <p><strong>Version:</strong> 0.1 (draft) · <strong>Date:</strong> 2026-10-23 · <strong>Author:</strong> Vagish Hemmige</p>
 <p>This plan states the intended design and analysis. It does not describe the current state of the code; implementation status is tracked separately. Items marked <strong>Decision D<em>n</em></strong> are intended choices not yet made; they are collected in <a href="#13-open-decisions">Open decisions</a>.</p>
-<p>Reporting will follow STROBE<span class="citation" data-cites="vonelm2007strobe"><sup><a href="#ref-vonelm2007strobe" role="doc-biblioref">1</a></sup></span>, its RECORD extension for routinely collected health data<span class="citation" data-cites="benchimol2015record"><sup><a href="#ref-benchimol2015record" role="doc-biblioref">2</a></sup></span>, and, for the target-trial sensitivity analysis, the TARGET guideline<span class="citation" data-cites="cashin2025target cashin2025targetbmj"><sup><a href="#ref-cashin2025target" role="doc-biblioref">3</a>,<a href="#ref-cashin2025targetbmj" role="doc-biblioref">4</a></sup></span>. The <a href="#12-reporting-map">reporting map</a> links each checklist item to a section of this plan.</p>
+<p>Reporting will follow STROBE<span class="citation" data-cites="vonelm2007strobe"><sup><a href="#ref-vonelm2007strobe" role="doc-biblioref">1</a></sup></span>, its RECORD extension for routinely collected health data<span class="citation" data-cites="benchimol2015record"><sup><a href="#ref-benchimol2015record" role="doc-biblioref">2</a></sup></span>, and, for the target-trial sensitivity analysis, the TARGET guideline<span class="citation" data-cites="cashin2025target cashin2025targetbmj"><sup><a href="#ref-cashin2025target" role="doc-biblioref">3</a>,<a href="#ref-cashin2025targetbmj" role="doc-biblioref">4</a></sup></span>, adapted because the exposure is a disease rather than an intervention and the trials are sequential. The <a href="#12-reporting-map">reporting map</a> links each checklist item to a section of this plan.</p>
 <hr>
 <section id="1-objective" class="level2">
 <h2 class="anchored" data-anchor-id="1-objective">1. Objective</h2>
@@ -694,7 +694,7 @@ gives this page GitHub-style IDs and those links work on both.
 <h3 class="anchored" data-anchor-id="63-option-a-direct-covariate-matching">6.3 Option A: direct covariate matching</h3>
 <ul>
 <li>Exact matching on diabetes, cirrhosis and HIV status, in addition to graft status.</li>
-<li>Calipers on age (±10 years) and calendar time (±3 years).</li>
+<li>Calipers on age (±10 years) and calendar time (±3 years), widths chosen for this study.</li>
 <li>Among eligible controls, the closest on smoothed prior cost (months −12 to −4) is chosen first.</li>
 <li>The remaining covariates in Section 6.2 are checked for balance and, if imbalanced, adjusted for in the outcome model.</li>
 </ul>
@@ -703,9 +703,9 @@ gives this page GitHub-style IDs and those links work on both.
 <section id="64-option-b-time-varying-propensity-score-matching" class="level3">
 <h3 class="anchored" data-anchor-id="64-option-b-time-varying-propensity-score-matching">6.4 Option B: time-varying propensity score matching</h3>
 <ul>
-<li>A time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months (or, equivalently, a Cox model with time-varying covariates). Each person-interval’s linear predictor is its score at that time<span class="citation" data-cites="lu2005propensity"><sup><a href="#ref-lu2005propensity" role="doc-biblioref">7</a></sup></span>.</li>
+<li>A time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months, which approximates a Cox model with time-varying covariates when the monthly risk is low. Each person-interval’s linear predictor is its score at that time; matching within risk sets on such a score follows Lu, who used a Cox model<span class="citation" data-cites="lu2005propensity"><sup><a href="#ref-lu2005propensity" role="doc-biblioref">7</a></sup></span>.</li>
 <li>All covariates in Section 6.2 enter the score.</li>
-<li>Controls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit<span class="citation" data-cites="austin2011caliper"><sup><a href="#ref-austin2011caliper" role="doc-biblioref">8</a></sup></span>.</li>
+<li>Controls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit, the width Austin recommended for a score estimated at baseline<span class="citation" data-cites="austin2011caliper"><sup><a href="#ref-austin2011caliper" role="doc-biblioref">8</a></sup></span>.</li>
 <li><strong>Decision D6:</strong> whether to keep the hard calipers on age and calendar time from Option A on top of the score.</li>
 </ul>
 <p><strong>Strength:</strong> balances many covariates at once, and the same score model serves the target-trial sensitivity analysis. <strong>Weakness:</strong> depends on a correctly specified score model and is harder to explain.</p>
@@ -792,7 +792,7 @@ gives this page GitHub-style IDs and those links work on both.
 <h3 class="anchored" data-anchor-id="86-missing-data">8.6 Missing data</h3>
 <ul>
 <li>Cost outcomes are observed only during covered months, by design (<a href="#73-person-month-structure">Section 7.3</a>).</li>
-<li>For covariates with missing registry values, missingness is described. If it exceeds 5% for any covariate in the score, multiple imputation by chained equations is used, with the score estimated within each imputation.</li>
+<li>For covariates with missing registry values, missingness is described. If it exceeds 5% for any covariate in the score (a threshold chosen for this study), multiple imputation by chained equations<span class="citation" data-cites="white2011mice"><sup><a href="#ref-white2011mice" role="doc-biblioref">9</a></sup></span> is used, with the score estimated within each imputation.</li>
 </ul>
 </section>
 <section id="87-software" class="level3">
@@ -1112,6 +1112,9 @@ gives this page GitHub-style IDs and those links work on both.
 </div>
 <div id="ref-austin2011caliper" class="csl-entry" role="listitem">
 <div class="csl-left-margin">8. </div><div class="csl-right-inline">Austin PC. Optimal caliper widths for propensity-score matching when estimating differences in means and differences in proportions in observational studies. <em>Pharm Stat</em>. 2011;10(2):150-161. doi:<a href="https://doi.org/10.1002/pst.433">10.1002/pst.433</a></div>
+</div>
+<div id="ref-white2011mice" class="csl-entry" role="listitem">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">White IR, Royston P, Wood AM. Multiple imputation using chained equations: Issues and guidance for practice. <em>Stat Med</em>. 2011;30(4):377-399. doi:<a href="https://doi.org/10.1002/sim.4067">10.1002/sim.4067</a></div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
