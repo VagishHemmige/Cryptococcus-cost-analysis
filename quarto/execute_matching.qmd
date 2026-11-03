@@ -14,7 +14,7 @@ Characteristics of the matching algorithm:
 - **[Risk set sampling (incidence density sampling):](https://epiville.ccnmtl.columbia.edu/popup/sampling_techniques.html)** If a case patient develops cryptococcosis at 243 days after their most recent kidney transplant, then all potential controls are
 chosen based on their covariate values at exactly 243 days post-transplant.
 - **[Greedy matching:](https://www.ncss.com/wp-content/themes/ncss/pdf/Procedures/NCSS/Data_Matching-Optimal_and_Greedy.pdf)** Cases are ranked by the number of potential controls at the onset, and then matches chosen without replacement without subsequent reordering.
-- **Mix of **exact matching** and **caliper matching**
+- **Mix of exact matching and caliper matching**
   - Exact matching on the following:
     - Cirrhosis
     - HIV

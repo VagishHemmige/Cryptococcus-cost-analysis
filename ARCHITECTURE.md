@@ -54,6 +54,7 @@ Some functions read globals instead of taking them as arguments:
 **Location**: `R/setup.R`
 
 **Key symbols**:
+
 - `censor_date`, `minimum_followup`, `maximum_followup` — follow-up window
 - `number_controls_per_case` — target matching ratio
 - `inflation_month`, `inflation_year` — inflation baseline
@@ -69,6 +70,7 @@ Some functions read globals instead of taking them as arguments:
 **Location**: `R/functions.R`
 
 **Key functions**:
+
 - `calculate_number_potential_matches()` — counts eligible controls for one case, used to order the greedy match
 - `calculate_total_excess_costs()` — sums `patient_type:month` interaction coefficients and their variance (linear branch; log branch exists)
 - `plot_mean_monthly_costs()` — `emmeans` predictions by group and month at `month_offset = 30`, with a risk table underneath
