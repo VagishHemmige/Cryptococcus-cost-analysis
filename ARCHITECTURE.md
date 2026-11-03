@@ -206,6 +206,9 @@ flowchart LR
     Q --> REN
     QM --> REN
     IX[index.qmd] --> REN
+    PD["analysis-plan.md, ARCHITECTURE.md,<br/>AGENTS.md, REPOSITORY-BLUEPRINT.md"] -->|include, or read as text<br/>for ARCHITECTURE.md| QD[quarto/ project-document pages]
+    QD --> REN
+    CK[tests/check-crosslinks.R] -.->|checks links between<br/>functions page and method pages| Q
     REN --> DOCS[(gh-pages branch, rendered by<br/>GitHub Actions, served by GitHub Pages)]
 ```
 
@@ -214,6 +217,8 @@ flowchart LR
 - `_quarto.yml` defines the sidebar, the `custom-callout` filter (the `Rcode` callout), and `output-dir: docs`.
 - `.github/workflows/publish.yml` renders the site on every pull request as a check and, on each push to `master`, renders it and publishes it to the `gh-pages` branch, so the live site follows every script or page change. `docs/` is the local render and is not committed.
 - The Setup page runs the `constants` and `icd-code-lists` sections of `R/setup.R` to build its summary tables; every other imported section is shown with `eval: false`.
+- `quarto/functions.qmd` links each helper to the method-page sections that call it, and those sections link back. `tests/check-crosslinks.R` derives the links from the code and runs in the workflow before the render.
+- The Project documents pages (`quarto/analysis-plan.qmd`, `architecture.qmd`, `agents.qmd`, `repository-blueprint.qmd`) show the root files. The plan page uses GitHub-style heading IDs. The Architecture page reads `ARCHITECTURE.md` as text and turns its `mermaid` blocks into Quarto diagrams. `render:` in `_quarto.yml` limits rendering to `index.qmd` and `quarto/`, so the root files are not rendered as pages of their own.
 
 ## Configuration
 
@@ -241,7 +246,7 @@ flowchart LR
 | Models | `R/modeling.R` | `temp_formula`, `fit[[outcome]][[engine]][[family]]` |
 | Outputs | `R/tables.R`, `R/figures.R` | `table1`, `table2_icd`, monthly plot loop |
 | Deprecated | `R/define_cohort.R` | older `strobe`-based cohort script |
-| Website | `_quarto.yml`, `index.qmd`, `quarto/*.qmd`, `_extensions/` | `read_chunk`, `custom-callout` |
+| Website | `_quarto.yml`, `index.qmd`, `quarto/*.qmd`, `_extensions/`, `tests/check-crosslinks.R` | `read_chunk`, `custom-callout`, `render:` list |
 | External (usRds) | — | `load_usrds_file`, `get_IN_ICD`, `get_PS_ICD`, `establish_dx_date`, `verify_medicare_primary`, `create_usrds_cohort`, `add_cohort_covariate`, `finalize_usrds_cohort`, `get_IN_REV_costs`, `get_IN_CLM_costs`, `get_PS_REV_costs`, `prorate_costs_by_day`, `adjust_costs_for_inflation` |
 
 ## Known Architectural Gaps

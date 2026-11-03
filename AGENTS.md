@@ -62,7 +62,11 @@ The Quarto site documents the code. It does not run the analysis.
 
 - **Setup files:** `_quarto.yml` and `index.qmd` sit at the root. There is one page per pipeline script in `quarto/`, named after the script (for example, `quarto/create_cohort.qmd` for `R/create_cohort.R`). The `custom-callout` extension in `_extensions/` provides the `Rcode` callout.
 - **Showing code:** each page loads its script with `knitr::read_chunk("../R/<script>.R")` in a hidden chunk. It then shows each labelled section in a chunk with `#| eval: false`, with prose explaining what the section does and why. Pages link to the script on GitHub and to the scripts it depends on.
-- **Never evaluate analysis code in the site.** Pages must render without USRDS data. The rendered site therefore contains code and explanation only, never results. The one exception is the Setup page, which runs the `constants` and `icd-code-lists` sections of `R/setup.R` and the tables that summarize them; those sections only define values and read nothing. No other section may run, and those two must never read data.
+- **Never evaluate analysis code in the site.** Pages must render without USRDS data. The rendered site therefore contains code and explanation only, never results. The one exception is the Setup page, which runs the `constants` and `icd-code-lists` sections of `R/setup.R` and the tables that summarize them; those sections only define values and read nothing. No other section may run, and those two must never read data. The Architecture page also runs one chunk, which reads `ARCHITECTURE.md` as text so its diagrams are drawn (see "Project documents").
+- **Function cross-references.** `R/functions.R` has one top-level function per labelled chunk, and the functions page one section per chunk. Under each heading is the function's name; after the explanation, **Used in the analysis:** links the method-page sections that call it, and **Called by:** the functions on the page that call it. Each method-page section whose code calls a helper ends its prose with **Functions used:**. `tests/check-crosslinks.R` derives all of these from the code and runs on every pull request; when it fails, run `Rscript tests/check-crosslinks.R draft` and copy what it prints, rather than writing the links by hand.
+- **Project documents.** `analysis-plan.md`, `ARCHITECTURE.md`, `AGENTS.md` and `REPOSITORY-BLUEPRINT.md` are shown on the site by pages in `quarto/` that only include the root file, which stays the one source: edit the root file, not the page. The `render:` list in `_quarto.yml` keeps Quarto from also rendering the root files as pages of their own. Two adjustments keep links and diagrams working on both GitHub and the site:
+  - The plan page uses GitHub-style heading IDs (`from: markdown+gfm_auto_identifiers`), so links such as `#13-open-decisions` resolve.
+  - The Architecture page reads `ARCHITECTURE.md` as text and marks its ```` ```mermaid ```` diagrams as Quarto diagrams. It reads only that file. Write diagrams in `ARCHITECTURE.md` with plain ```` ```mermaid ```` fences.
 - **Rendering:** the site renders to `docs/`, which is not committed. `.github/workflows/publish.yml` renders it on every pull request as a check and, on each push to `master`, publishes it to the `gh-pages` branch, which GitHub Pages serves. Render locally to preview a change to a script's labels or a page's prose, but do not commit the output.
 - **New scripts:** when you add a script, add its page and its sidebar entry in `_quarto.yml` in the same commit.
 - **Prose must match the code.** If a change alters what a section does, update that section's explanation in the same pull request.
@@ -228,7 +232,8 @@ Before opening a pull request, check the items below that apply to your change.
 - Does `ARCHITECTURE.md` still describe the scripts and the data flow?
 - Are the chunk labels unique, and does each script's Quarto page still find every label it uses?
 - Does every script have a Quarto page and a sidebar entry, and does the pull request's render check pass?
-- Are all site chunks `eval: false`, apart from the Setup page's `constants` and `icd-code-lists` sections and their summary tables?
+- Are all site chunks `eval: false`, apart from the Setup page's `constants` and `icd-code-lists` sections and their summary tables, and the Architecture page's chunk that reads `ARCHITECTURE.md`?
+- Does `Rscript tests/check-crosslinks.R check` pass?
 - Are new derived variables labelled?
 
 **Execution**

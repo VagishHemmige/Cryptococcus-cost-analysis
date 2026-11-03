@@ -65,6 +65,8 @@ sorts the cases so that those with the lowest number of potential matches are ma
 
 (Note the following code took ~2 hours to execute on a laptop given the size of the dataset.)
 
+**Functions used:** [`calculate_number_potential_matches()`](functions.qmd#calculating-the-number-of-potential-matches).
+
 ```{r}
 #| label: count-potential-matches
 #| eval: false

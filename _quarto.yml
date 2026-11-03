@@ -1,6 +1,12 @@
 project:
   type: website
   output-dir: docs
+  # Only the site's pages. Without this list Quarto also renders the root
+  # .md files (analysis-plan.md, ARCHITECTURE.md, ...) as pages outside the
+  # sidebar; they are shown through quarto/ pages instead.
+  render:
+    - index.qmd
+    - quarto/**
 
 author:
   - name: Vagish Hemmige
@@ -19,35 +25,46 @@ website:
     style: docked
     search: true
     contents:
-      - href: index.html
+      - href: index.qmd
         text: Home
 
       - section: Background
         contents:
-          - href: quarto/setup.html
+          - href: quarto/setup.qmd
             text: Setup
-          - href: quarto/functions.html
+          - href: quarto/functions.qmd
             text: Functions
 
       - section: Data loading and processing
         contents:
-          - href: quarto/create_cohort.html
+          - href: quarto/create_cohort.qmd
             text: 1. Create cohort
-          - href: quarto/execute_matching.html
+          - href: quarto/execute_matching.qmd
             text: 2. Execute matching
-          - href: quarto/postmatch_processing.html
+          - href: quarto/postmatch_processing.qmd
             text: 3. Post-match processing
-          - href: quarto/modeling.html
+          - href: quarto/modeling.qmd
             text: 4. Modeling
 
       - section: Code to create tables and figures
         contents:
-          - href: quarto/tables.html
+          - href: quarto/tables.qmd
             text: Tables
-          - href: quarto/figures.html
+          - href: quarto/figures.qmd
             text: Figures
 
-      - href: quarto/about.html
+      - section: Project documents
+        contents:
+          - href: quarto/analysis-plan.qmd
+            text: Analysis plan
+          - href: quarto/architecture.qmd
+            text: Architecture
+          - href: quarto/agents.qmd
+            text: AGENTS.md
+          - href: quarto/repository-blueprint.qmd
+            text: Repository blueprint
+
+      - href: quarto/about.qmd
         text: About
 
   page-navigation: true

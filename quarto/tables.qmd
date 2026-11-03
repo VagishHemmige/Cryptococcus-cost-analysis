@@ -67,6 +67,8 @@ These tables use the total costs, not the modeled longitudinal costs.  Cases and
 This code uses the `calculate_total_excess_costs()` function in the `R/functions.R` file to estimate the total excess cost in cases compared with controls.
 see the [functions](functions.qmd) site for more details about the internal workings of the function.
 
+**Functions used:** [`calculate_total_excess_costs()`](functions.qmd#total-excess-costs).
+
 ```{r}
 #| label: total-excess-costs
 #| eval: false

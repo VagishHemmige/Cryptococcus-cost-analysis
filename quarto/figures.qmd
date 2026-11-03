@@ -49,6 +49,8 @@ The following code uses the `ggbeeswarm` add-on to `ggplot2` to compare cases an
 In order to plot monthly costs predicted from the longitudinal models generated in the `R/models.R` script, we use the 
 `plot_mean_monthly_costs()` function from the `R/functions.R` script to create the ggplot objects, and then save as `.svg` files.
 
+**Functions used:** [`plot_mean_monthly_costs()`](functions.qmd#plotting-mean-monthly-costs).
+
 ```{r}
 #| label: monthly-cost-plots
 #| eval: false
