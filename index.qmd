@@ -48,7 +48,7 @@ Institutional claims data were abstracted as well as Physician/Supplier line-ite
 
 ## Results
 
-Pending
+Pending. The [Main results](quarto/results.qmd) page will hold them once they are cleared for release.
 
 ## Site navigation
 
@@ -60,6 +60,7 @@ Pending
 -   [**Modeling**](quarto/modeling.qmd): Fits prespecified cost and outcome models using the matched cohort.
 -   [**Tables**](quarto/tables.qmd): Summary tables and regression outputs generated from the final models.
 -   [**Figures**](quarto/figures.qmd):Visualizations of costs, risks, and model-based estimates.
+-   [**Main results**](quarto/results.qmd): Pending; will hold the main tables and figures once they are cleared for release.
 -   [**About**](quarto/about.qmd): methods, assumptions, and disclosures
 
 
