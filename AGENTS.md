@@ -60,7 +60,7 @@ Scripts are divided into labelled sections, so that Quarto pages can show the co
 
 The Quarto site documents the code. It does not run the analysis.
 
-- **Setup files:** `_quarto.yml`, `index.qmd` and `404.qmd` (the page GitHub Pages shows for a missing address) sit at the root. There is one page per pipeline script in `quarto/`, named after the script (for example, `quarto/create_cohort.qmd` for `R/create_cohort.R`). `quarto/results.qmd` is a placeholder for results and says they are pending. The `custom-callout` extension in `_extensions/` provides the `Rcode` and `Results` callouts.
+- **Setup files:** `_quarto.yml`, `index.qmd` and `404.qmd` (the page GitHub Pages shows for a missing address) sit at the root. There is one page per pipeline script in `quarto/`, named after the script (for example, `quarto/create_cohort.qmd` for `R/create_cohort.R`). `quarto/results.qmd` is a placeholder for results and says they are pending. The `custom-callout` extension in `_extensions/` provides the `Rcode` and `Results` callouts, and the `issue-comments` extension lets readers highlight text and leave a comment, which a relay files as a GitHub issue in this repository.
 - **Showing code:** each page loads its script with `knitr::read_chunk("../R/<script>.R")` in a hidden chunk. It then shows each labelled section in a chunk with `#| eval: false`, with prose explaining what the section does and why. Pages link to the script on GitHub and to the scripts it depends on.
 - **Visual cues.** Each kind of page has one icon and colour, set by its sidebar entry's `icon:` in `_quarto.yml` and coloured by `styles.css`; pages mark the same kind of content with the callout of that colour:
 
