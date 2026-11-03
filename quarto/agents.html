@@ -199,13 +199,20 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/analysis_methods.html" class="sidebar-item-text sidebar-link"><i class="bi bi-book" role="img">
+  <a href="../quarto/methodological_background.html" class="sidebar-item-text sidebar-link"><i class="bi bi-book" role="img">
 </i> 
- <span class="menu-text">Methods background</span></a>
+ <span class="menu-text">Methodological background</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/study_methods.html" class="sidebar-item-text sidebar-link"><i class="bi bi-signpost-split" role="img">
+</i> 
+ <span class="menu-text">Study design and methods</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -521,7 +528,7 @@ edit that file, not this page. Its first heading is the page title.
 <h2 class="anchored" data-anchor-id="quarto-website">Quarto website</h2>
 <p>The Quarto site documents the code. It does not run the analysis.</p>
 <ul>
-<li><p><strong>Setup files:</strong> <code>_quarto.yml</code> and <code>index.qmd</code> sit at the root. There is one page per pipeline script in <code>quarto/</code>, named after the script (for example, <code>quarto/create_cohort.qmd</code> for <code>R/create_cohort.R</code>). <code>quarto/results.qmd</code> is a placeholder for results and says they are pending. The <code>custom-callout</code> extension in <code>_extensions/</code> provides the <code>Rcode</code> and <code>Results</code> callouts.</p></li>
+<li><p><strong>Setup files:</strong> <code>_quarto.yml</code>, <code>index.qmd</code> and <code>404.qmd</code> (the page GitHub Pages shows for a missing address) sit at the root. There is one page per pipeline script in <code>quarto/</code>, named after the script (for example, <code>quarto/create_cohort.qmd</code> for <code>R/create_cohort.R</code>). <code>quarto/results.qmd</code> is a placeholder for results and says they are pending. The <code>custom-callout</code> extension in <code>_extensions/</code> provides the <code>Rcode</code> and <code>Results</code> callouts.</p></li>
 <li><p><strong>Showing code:</strong> each page loads its script with <code>knitr::read_chunk("../R/&lt;script&gt;.R")</code> in a hidden chunk. It then shows each labelled section in a chunk with <code>#| eval: false</code>, with prose explaining what the section does and why. Pages link to the script on GitHub and to the scripts it depends on.</p></li>
 <li><p><strong>Visual cues.</strong> Each kind of page has one icon and colour, set by its sidebar entry’s <code>icon:</code> in <code>_quarto.yml</code> and coloured by <code>styles.css</code>; pages mark the same kind of content with the callout of that colour:</p>
 <table class="caption-top table">
@@ -541,18 +548,24 @@ edit that file, not this page. Its first heading is the page title.
 <td>—</td>
 </tr>
 <tr class="even">
+<td>Study design and methods</td>
+<td><code>signpost-split</code></td>
+<td>orange</td>
+<td>—</td>
+</tr>
+<tr class="odd">
 <td>R code</td>
 <td><code>laptop</code></td>
 <td>pink</td>
 <td><code>Rcode</code> (💻)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Results</td>
 <td><code>clipboard-data</code></td>
 <td>green</td>
 <td><code>Results</code> (📊)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Project documents</td>
 <td><code>file-earmark-ruled</code></td>
 <td>grey</td>

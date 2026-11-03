@@ -202,13 +202,20 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/analysis_methods.html" class="sidebar-item-text sidebar-link"><i class="bi bi-book" role="img">
+  <a href="../quarto/methodological_background.html" class="sidebar-item-text sidebar-link"><i class="bi bi-book" role="img">
 </i> 
- <span class="menu-text">Methods background</span></a>
+ <span class="menu-text">Methodological background</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/study_methods.html" class="sidebar-item-text sidebar-link"><i class="bi bi-signpost-split" role="img">
+</i> 
+ <span class="menu-text">Study design and methods</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -743,8 +750,8 @@ month_offset = days observed in each month, capped at 30; follow-up ends at end_
 <li><code>.github/workflows/publish.yml</code> renders the site on every pull request as a check and, on each push to <code>master</code>, renders it and publishes it to the <code>gh-pages</code> branch, so the live site follows every script or page change. <code>docs/</code> is the local render and is not committed.</li>
 <li>The Setup page runs the <code>constants</code> and <code>icd-code-lists</code> sections of <code>R/setup.R</code> to build its summary tables; every other imported section is shown with <code>eval: false</code>.</li>
 <li><code>quarto/functions.qmd</code> links each helper to the method-page sections that call it, and those sections link back. <code>tests/check-crosslinks.R</code> derives the links from the code and runs in the workflow before the render.</li>
-<li>The Background pages, <code>quarto/background.qmd</code> (clinical background) and <code>quarto/analysis_methods.qmd</code> (the methods in plain language, linking each step to its section of the plan), are prose only and run no code.</li>
-<li>The project-document pages (<code>quarto/analysis-plan.qmd</code>, <code>architecture.qmd</code>, <code>agents.qmd</code>, <code>repository-blueprint.qmd</code>) show the root files. The sidebar lists all four under Project documents, because they are written for the people and agents working on the code; the Background pages explain the plan in plain language and link to its sections. The plan page uses GitHub-style heading IDs. The Architecture page reads <code>ARCHITECTURE.md</code> as text and turns its <code>mermaid</code> blocks into Quarto diagrams. <code>render:</code> in <code>_quarto.yml</code> limits rendering to <code>index.qmd</code> and <code>quarto/</code>, so the root files are not rendered as pages of their own.</li>
+<li>The Background pages, <code>quarto/background.qmd</code> (clinical background) and <code>quarto/methodological_background.qmd</code> (the data and methods in general terms), and the Study design and methods page, <code>quarto/study_methods.qmd</code> (this study’s choices in plain language, linking each step to its section of the plan), are prose only and run no code.</li>
+<li>The project-document pages (<code>quarto/analysis-plan.qmd</code>, <code>architecture.qmd</code>, <code>agents.qmd</code>, <code>repository-blueprint.qmd</code>) show the root files. The sidebar lists all four under Project documents, because they are written for the people and agents working on the code; the Background pages explain the plan in plain language and link to its sections. The plan page uses GitHub-style heading IDs. The Architecture page reads <code>ARCHITECTURE.md</code> as text and turns its <code>mermaid</code> blocks into Quarto diagrams. <code>render:</code> in <code>_quarto.yml</code> limits rendering to <code>index.qmd</code>, <code>404.qmd</code> and <code>quarto/</code>, so the root files are not rendered as pages of their own.</li>
 </ul>
 </section>
 <section id="configuration" class="level2">
