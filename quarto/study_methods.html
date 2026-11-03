@@ -455,6 +455,9 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </header>
 
 
+<div class="pending-legend">
+<p><span class="pending">Text highlighted like this</span> is provisional: it depends on a decision the analysis plan has not yet made. To comment on any part of this page, highlight the text and use the Comment button.</p>
+</div>
 <p>This page explains, in plain language and without code, what this study chose and why. The general background it relies on, such as what USRDS and Medicare claims are and how risk-set matching works, is on <a href="../quarto/methodological_background.html">Methodological background</a>. The formal specification is the <a href="../quarto/analysis-plan.html">analysis plan</a>; each section below ends by linking the part of the plan that governs it. Three kinds of note mark where the description stands:</p>
 <ul>
 <li><strong>Specified in:</strong> the section of the analysis plan that defines the method.</li>
@@ -475,7 +478,9 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <p>Both institutional and physician/supplier claims are used (<a href="../quarto/methodological_background.html#medicare-claims">Medicare claims</a>). Because claims are complete only under fee-for-service primary coverage (<a href="../quarto/methodological_background.html#medicare-as-primary-payer">Medicare as primary payer</a>), a person is observed only during periods when fee-for-service Medicare is their primary payer for both Part A and Part B, as recorded in the USRDS payer history file. Many kidney transplant recipients lose Medicare coverage over time: Medicare entitlement based only on kidney failure ends 36 months after a successful transplant, unless the person qualifies another way (for example by age or disability). The study’s findings therefore apply to recipients with fee-for-service Medicare as their primary payer.</p>
 <p><strong>Specified in:</strong> <a href="../quarto/analysis-plan.html#3-data-source">§3 Data source</a>, <a href="../quarto/analysis-plan.html#42-eligibility-at-time-zero-cases-and-controls-alike">§4.2 Eligibility</a>, <a href="../quarto/analysis-plan.html#11-limitations-to-address-in-reporting">§11 Limitations</a>.</p>
 <p><strong>Current code:</strong> two payer history categories count as coverage: “Medicare fee-for-service primary pay, for both Part A and Part B” and “Medicare fee-for-service primary pay, for other”. This follows the USRDS Researcher’s Guide definition of Medicare as primary payer. The guide does not say which Medicare parts the second category covers.</p>
+<div class="pending-note">
 <p><strong>Decision pending:</strong> whether other payer arrangements, such as Medicare as secondary payer, are ever eligible (<a href="../quarto/analysis-plan.html#13-open-decisions">D1</a>).</p>
+</div>
 </section>
 <section id="who-is-studied" class="level2">
 <h2 class="anchored" data-anchor-id="who-is-studied">Who is studied</h2>
@@ -495,7 +500,9 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <li>Recipients of a kidney–pancreas transplant are included. A pancreas transplant flag taken from diagnosis codes is described in the baseline table, but the transplant records are not used to identify these recipients, and the flag is not used in matching or the models.</li>
 <li>A diagnosis on the day of the first transplant is treated as a diagnosis before transplant, and the patient is excluded.</li>
 </ul>
+<div class="pending-note">
 <p><strong>Decision pending:</strong> whether kidney–pancreas and other multi-organ recipients are excluded or included with an indicator (<a href="../quarto/analysis-plan.html#13-open-decisions">D2</a>).</p>
+</div>
 </section>
 <section id="identifying-cryptococcosis-and-time-zero" class="level2">
 <h2 class="anchored" data-anchor-id="identifying-cryptococcosis-and-time-zero">Identifying cryptococcosis and time zero</h2>
@@ -509,7 +516,9 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </ul>
 <p>A code in any diagnosis position counts. There is no time limit between the two records, and two on the same day count as two. Records are counted one at a time rather than grouped into visits, so a single outpatient visit that lists the code more than once may be enough. The diagnosis date is the first day of service on the record that establishes the diagnosis.</p>
 <p><strong>Specified in:</strong> <a href="../quarto/analysis-plan.html#51-exposure-definition">§5.1 Exposure definition</a> (the code list), <a href="../quarto/analysis-plan.html#52-diagnosis-date">§5.2 Diagnosis date</a>. The plan gives the diagnosis date as the service date of the “first qualifying claim”. Under a two-claim rule that could mean the first coded claim or the one that completes the rule; the code uses the second.</p>
+<div class="pending-note">
 <p><strong>Decision pending:</strong> the claim algorithm, meaning which claim types and diagnosis positions count, how many claims are needed and within what window (<a href="../quarto/analysis-plan.html#13-open-decisions">D3</a>). The rule above is what the code does now.</p>
+</div>
 </section>
 <section id="what-a-claims-based-definition-can-and-cannot-show" class="level3">
 <h3 class="anchored" data-anchor-id="what-a-claims-based-definition-can-and-cannot-show">What a claims-based definition can and cannot show</h3>
@@ -541,7 +550,9 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <p>Under the plan, a person who is diagnosed later can serve as a control before their own diagnosis.</p>
 <p><strong>Specified in:</strong> <a href="../quarto/analysis-plan.html#54-control-eligibility">§5.4 Control eligibility</a>, <a href="../quarto/analysis-plan.html#6-matching">§6 Matching</a>.</p>
 <p><strong>Current code:</strong> only people who are never diagnosed are used as controls (<a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/7">#7</a>).</p>
+<div class="pending-note">
 <p><strong>Decision pending:</strong> whether one person may serve as a control in more than one risk set, as in standard incidence density sampling, or at most once (<a href="../quarto/analysis-plan.html#13-open-decisions">D4</a>).</p>
+</div>
 </section>
 <section id="what-cases-and-controls-are-matched-on" class="level3">
 <h3 class="anchored" data-anchor-id="what-cases-and-controls-are-matched-on">What cases and controls are matched on</h3>
@@ -567,7 +578,9 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <li>the count of potential controls used to order cases checks Medicare coverage on a different date from the matching itself (<a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/6">#6</a>);</li>
 <li>cases for whom no control is found remain in the matched data (<a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/12">#12</a>).</li>
 </ul>
+<div class="pending-note">
 <p><strong>Decision pending:</strong> the lookback window for rejection treatment and the comorbidity index (<a href="../quarto/analysis-plan.html#13-open-decisions">D5</a>); the matching method (<a href="../quarto/analysis-plan.html#13-open-decisions">D10</a>); and, under Option B, whether to keep the limits on age and calendar date as well (<a href="../quarto/analysis-plan.html#13-open-decisions">D6</a>).</p>
+</div>
 </section>
 <section id="checking-the-match" class="level3">
 <h3 class="anchored" data-anchor-id="checking-the-match">Checking the match</h3>
@@ -595,7 +608,9 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <p>All costs are expressed in January 2021 US dollars.</p>
 <p><strong>Specified in:</strong> <a href="../quarto/analysis-plan.html#72-inflation-adjustment">§7.2 Inflation adjustment</a>.</p>
 <p><strong>Current code:</strong> costs are adjusted with the medical care component of the Consumer Price Index, according to the month in which each claim began.</p>
+<div class="pending-note">
 <p><strong>Decision pending:</strong> the price index (<a href="../quarto/analysis-plan.html#13-open-decisions">D7</a>).</p>
+</div>
 </section>
 <section id="months-partial-months-and-missing-versus-zero" class="level3">
 <h3 class="anchored" data-anchor-id="months-partial-months-and-missing-versus-zero">Months, partial months, and missing versus zero</h3>
@@ -616,7 +631,9 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <p>How death is handled defines what is being estimated (<a href="../quarto/methodological_background.html#death-and-what-is-estimated">Death and what is estimated</a>). If death ends follow-up, the estimate describes the excess cost of care while people are alive. If the months after death count as zero cost, the estimate also reflects the cost consequences of mortality. Whichever is chosen as primary, the other is a sensitivity analysis.</p>
 <p><strong>Specified in:</strong> <a href="../quarto/analysis-plan.html#74-end-of-follow-up">§7.4 End of follow-up</a>.</p>
 <p><strong>Current code:</strong> follow-up ends at day 365, at 1 January 2022, or at the end of the period of Medicare coverage containing time zero. Death is not yet an end point (<a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/10">#10</a>).</p>
+<div class="pending-note">
 <p><strong>Decision pending:</strong> the treatment of death (<a href="../quarto/analysis-plan.html#13-open-decisions">D8</a>).</p>
+</div>
 </section>
 </section>
 <section id="statistical-analysis" class="level2">
@@ -642,7 +659,9 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </ol>
 <p>The same model gives the month-by-month profile of excess cost from month −3 to month 11, and fitting it separately to each care setting (inpatient, outpatient, skilled nursing, home health, hospice, dialysis, physician/supplier) divides the excess by setting.</p>
 <p><strong>Specified in:</strong> <a href="../quarto/analysis-plan.html#84-primary-model">§8.4 Primary model</a>, <a href="../quarto/analysis-plan.html#85-secondary-analyses">§8.5 Secondary analyses</a>.</p>
+<div class="pending-note">
 <p><strong>Decision pending:</strong> whether the estimate relies on matching alone, with months −3 to −1 reported as a balance check, or subtracts the difference between cases and controls before diagnosis as well, which gives a difference-in-differences estimate (<a href="../quarto/analysis-plan.html#13-open-decisions">D9</a>).</p>
+</div>
 </section>
 <section id="what-the-code-does-now" class="level3">
 <h3 class="anchored" data-anchor-id="what-the-code-does-now">What the code does now</h3>
