@@ -1,0 +1,95 @@
+---
+title: "Cases and controls"
+format: html
+---
+
+This page is part of the study's design and methods. The **Specified in**, **Current code** and **Decision pending** notes are explained on the [Overview](study_overview.qmd), and the general background is on [Methodological background](methodological_background.qmd).
+
+## Identifying cryptococcosis and time zero
+
+### How a case is found in claims
+
+Cryptococcosis is identified from diagnosis codes on Medicare claims: ICD-9-CM codes for services before 1 October 2015 and ICD-10-CM codes from that date on. The code list is shown on the [Setup page](setup.qmd).
+
+The current rule counts a diagnosis as established on the first of:
+
+- **one inpatient claim** carrying a cryptococcosis code; or
+- **a second record of any other kind** carrying a code: hospital outpatient, physician/supplier, skilled nursing, home health or other institutional claims.
+
+A code in any diagnosis position counts. There is no time limit between the two records, and two on the same day count as two. Records are counted one at a time rather than grouped into visits, so a single outpatient visit that lists the code more than once may be enough. The diagnosis date is the first day of service on the record that establishes the diagnosis.
+
+**Specified in:** [§5.1 Exposure definition](analysis-plan.qmd#51-exposure-definition) (the code list), [§5.2 Diagnosis date](analysis-plan.qmd#52-diagnosis-date). The plan gives the diagnosis date as the service date of the "first qualifying claim". Under a two-claim rule that could mean the first coded claim or the one that completes the rule; the code uses the second.
+
+**Decision pending:** the claim algorithm, meaning which claim types and diagnosis positions count, how many claims are needed and within what window ([D3](analysis-plan.qmd#13-open-decisions)). The rule above is what the code does now.
+
+### What a claims-based definition can and cannot show
+
+A claim shows that a clinician recorded the diagnosis for billing. It does not show that the infection was confirmed by culture, antigen testing or histopathology, and codes are sometimes recorded while a diagnosis is being ruled out. Some cases will therefore be misclassified ([Finding a diagnosis in claims](methodological_background.qmd#finding-a-diagnosis-in-claims)).
+
+The 365-day window of complete coverage before diagnosis means that, had the rule been met earlier in that year, it would have been seen. An earlier single record carrying the code can still fall inside the window: when the diagnosis is established by a second record, the first always comes before it. Complete coverage makes it more likely the diagnosis is new, but it does not prove the infection began then. A person with a diagnosis before their first transplant is excluded.
+
+Two planned sensitivity analyses address this: a stricter claims definition, and separate analyses of diagnoses before and after the October 2015 change from ICD-9-CM to ICD-10-CM ([§9](analysis-plan.qmd#9-sensitivity-analyses)).
+
+### Time zero
+
+Time zero is the day from which costs are counted, and before which everything used for matching or adjustment is measured.
+
+- **Cases:** the diagnosis date.
+- **Controls:** the day on which the control reaches the same number of days since their own most recent transplant as the case had at diagnosis.
+
+For example, if a case is diagnosed 243 days after their transplant, each of their controls has time zero 243 days after the control's own transplant. That is usually a different calendar date from the case's. The [study timeline](../index.qmd#study-timeline) on the home page shows how time zero, the eligibility lookback and the monthly cost windows fit together.
+
+**Specified in:** [§5.3 Time zero](analysis-plan.qmd#53-time-zero).
+
+## Choosing comparison patients
+
+### Risk-set matching
+
+Controls are chosen by risk-set matching ([Risk-set matching](methodological_background.qmd#risk-set-matching)). For each case, the risk set is everyone who, at the case's time since transplant, is still eligible and has not been diagnosed.
+
+Two reasons make time since transplant the right time scale:
+
+- Both the risk of infection and the cost of care change with time since transplant, so cases and controls are compared at the same point in their post-transplant course.
+- Choosing controls among everyone ever transplanted without cryptococcosis would compare cases with people whose follow-up was selected using the future. Risk-set matching uses only what was known at the case's time zero.
+
+Under the plan, a person who is diagnosed later can serve as a control before their own diagnosis.
+
+**Specified in:** [§5.4 Control eligibility](analysis-plan.qmd#54-control-eligibility), [§6 Matching](analysis-plan.qmd#6-matching).
+
+**Current code:** only people who are never diagnosed are used as controls ([#7](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/7)).
+
+**Decision pending:** whether one person may serve as a control in more than one risk set, as in standard incidence density sampling, or at most once ([D4](analysis-plan.qmd#13-open-decisions)).
+
+### What cases and controls are matched on
+
+Under the plan, whichever matching method is chosen:
+
+- cases and controls have the same current graft status (functioning, or failed and on dialysis);
+- each case has up to 2 controls;
+- cases are matched in a random order fixed by a recorded seed, and ties between controls are broken at random;
+- cost in the 3 months before time zero is **not** used for matching. It is kept to check whether cases and controls had similar costs before diagnosis.
+
+The plan sets out two matching methods, one of each kind described under [Ways of matching](methodological_background.qmd#ways-of-matching), and has not chosen between them:
+
+- **Option A, direct covariate matching:** exact matching on diabetes, cirrhosis and HIV, limits on the difference in age and in calendar date, and preference for the control closest in earlier cost (months −12 to −4). Covariates not matched on are checked for balance and, if imbalanced, adjusted for in the outcome model.
+- **Option B, time-varying propensity score matching:** a model estimates each person's probability of being diagnosed in each month from all the covariates in the plan, and each case is matched to the controls with the closest score at the same time since transplant, within 0.2 standard deviations of the logit of the score.
+
+The covariates cover demographics, transplant history, graft function, immunosuppression intensity, comorbidity, other infections, earlier use of care, earlier cost, dual Medicaid eligibility and region, all measured before time zero.
+
+**Specified in:** [§6.1 Common elements](analysis-plan.qmd#61-common-elements), [§6.2 Covariates](analysis-plan.qmd#62-covariates), [§6.3 Option A](analysis-plan.qmd#63-option-a-direct-covariate-matching), [§6.4 Option B](analysis-plan.qmd#64-option-b-time-varying-propensity-score-matching).
+
+**Current code:** the code implements a form of Option A. Controls are matched exactly on cirrhosis, HIV and diabetes, within 10 years of age and with time zero within 3 years of the case's, and a control with the same number of transplants is preferred. Each control is used once. It differs from the plan in these ways:
+
+- cases are matched in order of how few potential controls they have, not in random order;
+- among eligible controls, the first in row order is chosen, so the recorded seed has no effect ([#3](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/3));
+- graft status and earlier cost are not matched on ([#8](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/8));
+- the count of potential controls used to order cases checks Medicare coverage on a different date from the matching itself ([#6](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/6));
+- cases for whom no control is found remain in the matched data ([#12](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/12)).
+
+**Decision pending:** the lookback window for rejection treatment and the comorbidity index ([D5](analysis-plan.qmd#13-open-decisions)); the matching method ([D10](analysis-plan.qmd#13-open-decisions)); and, under Option B, whether to keep the limits on age and calendar date as well ([D6](analysis-plan.qmd#13-open-decisions)).
+
+### Checking the match
+
+A flow diagram follows the cohort from the source population through eligibility, case identification and matching, and baseline characteristics are reported by group before and after matching. Balance between cases and controls is judged with standardized mean differences at time zero, for every covariate in the plan and for cost in each of months −3, −2 and −1. An absolute standardized mean difference below 0.1 is taken as adequate. The number of cases with 2, 1 and 0 controls is reported, and unmatched cases are compared with matched ones.
+
+**Specified in:** [§6.5 Matching outcomes reported](analysis-plan.qmd#65-matching-outcomes-reported), [§8.1 Descriptive analysis](analysis-plan.qmd#81-descriptive-analysis), [§8.2 Balance](analysis-plan.qmd#82-balance).

@@ -3,7 +3,7 @@ title: "Methodological background"
 format: html
 ---
 
-This page explains, in general terms and without code, the data and methods a study like this one rests on: what the United States Renal Data System and Medicare claims are, how claims become costs, how comparison patients are chosen, and why cost data need particular models. What this study chose, and how its code stands against its plan, is on [Study design and methods](study_methods.qmd).
+This page explains, in general terms and without code, the data and methods a study like this one rests on: what the United States Renal Data System and Medicare claims are, how claims become costs, how comparison patients are chosen, and why cost data need particular models. What this study chose, and how its code stands against its plan, is on [Study design and methods](study_overview.qmd).
 
 ## The United States Renal Data System
 
@@ -89,5 +89,5 @@ Months from the same person, and people in the same matched set, are not indepen
 
 ## Where to read more
 
-- [Study design and methods](study_methods.qmd): what this study chose, and where its code stands.
+- [Study design and methods](study_overview.qmd): what this study chose, and where its code stands.
 - [Clinical background](background.qmd): the disease, what is known about its cost, and why this question matters.

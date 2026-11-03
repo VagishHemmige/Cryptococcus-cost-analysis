@@ -35,7 +35,7 @@ This page is a placeholder. Its sections and points are an outline for the final
 *To be written.* Points to cover:
 
 - Why an attributable, longitudinal estimate is needed: for payers, for transplant programs, and as an input to decisions such as donor screening and prophylaxis.
-- The study question: the excess Medicare payments in the 12 months after diagnosis among adult kidney transplant recipients, compared with similar recipients at the same time since transplant. [Study design and methods](study_methods.qmd) explains how it is answered.
+- The study question: the excess Medicare payments in the 12 months after diagnosis among adult kidney transplant recipients, compared with similar recipients at the same time since transplant. [Study design and methods](study_overview.qmd) explains how it is answered.
 
 ## References
 

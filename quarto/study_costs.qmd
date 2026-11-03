@@ -1,0 +1,63 @@
+---
+title: "Costs and follow-up"
+format: html
+---
+
+This page is part of the study's design and methods. The **Specified in**, **Current code** and **Decision pending** notes are explained on the [Overview](study_overview.qmd), and the general background is on [Methodological background](methodological_background.qmd).
+
+## Turning claims into costs
+
+### Payments, not charges
+
+Cost is measured as the amount **Medicare paid**; charges are not used ([Payments, not charges](methodological_background.qmd#payments-not-charges)). Payments made by patients, other insurers and Medicare Part D are not included.
+
+Two payment fields are used: the Medicare payment on each institutional claim, and the Medicare payment on each physician/supplier line. Outpatient, home health and hospice claims also list payments for each revenue center (each department or type of service on the bill). These describe the same services as the claim's payment, so the two are never added together.
+
+**Specified in:** [§7.1 Cost measure](analysis-plan.qmd#71-cost-measure); exclusions in [§11 Limitations](analysis-plan.qmd#11-limitations-to-address-in-reporting). The payment fields and the rule against adding revenue-center payments to claim payments come from the repository's [AGENTS.md](agents.qmd).
+
+**Current code:** a separate 365-day summary also totals revenue-center payments, but separately from the claim totals, not added to them. The monthly costs used in the models come from institutional claim payments and physician/supplier line payments only.
+
+### Spreading a stay across days
+
+An institutional claim that covers several days is spread evenly across them ([Spreading a stay across days](methodological_background.qmd#spreading-a-stay-across-days) has a worked example).
+
+**Specified in:** [§7.1 Cost measure](analysis-plan.qmd#71-cost-measure).
+
+**Current code:** institutional claims are spread across days in the monthly costs. Physician/supplier lines are assigned to their first day of service. In the separate 365-day summary, institutional costs are spread across days but then selected by the claim's first day ([#11](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/11)).
+
+### Adjusting for inflation
+
+All costs are expressed in January 2021 US dollars.
+
+**Specified in:** [§7.2 Inflation adjustment](analysis-plan.qmd#72-inflation-adjustment).
+
+**Current code:** costs are adjusted with the medical care component of the Consumer Price Index, according to the month in which each claim began.
+
+**Decision pending:** the price index ([D7](analysis-plan.qmd#13-open-decisions)).
+
+### Months, partial months, and missing versus zero
+
+Each person's follow-up is divided into 30-day months counted from time zero: month 0 is days 0 to 29, month −3 is days −90 to −61, and month 11, the last, is days 330 to 359. A person-month's cost is the sum of the spread, inflation-adjusted payments for that month. Covered months with no claims count as zero, uncovered months are left out, and partly observed months are kept with their days observed ([Missing versus zero cost](methodological_background.qmd#missing-versus-zero-cost)).
+
+**Specified in:** [§7.3 Person-month structure](analysis-plan.qmd#73-person-month-structure).
+
+**Current code:** a monthly total below zero, which can arise from claim adjustments, is set to zero. The plan does not yet describe this step. The separate 365-day summary covers days 0 to 365 (366 days), while the monthly costs cover days 0 to 359 ([#13](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/13)).
+
+### End of follow-up
+
+Follow-up ends at the earliest of:
+
+- day 365 after time zero;
+- death;
+- loss of fee-for-service Medicare as primary payer;
+- 1 January 2022.
+
+Graft failure after time zero does not end follow-up. It is one of the ways cryptococcosis may lead to higher cost.
+
+How death is handled defines what is being estimated ([Death and what is estimated](methodological_background.qmd#death-and-what-is-estimated)). If death ends follow-up, the estimate describes the excess cost of care while people are alive. If the months after death count as zero cost, the estimate also reflects the cost consequences of mortality. Whichever is chosen as primary, the other is a sensitivity analysis.
+
+**Specified in:** [§7.4 End of follow-up](analysis-plan.qmd#74-end-of-follow-up).
+
+**Current code:** follow-up ends at day 365, at 1 January 2022, or at the end of the period of Medicare coverage containing time zero. Death is not yet an end point ([#10](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/10)).
+
+**Decision pending:** the treatment of death ([D8](analysis-plan.qmd#13-open-decisions)).

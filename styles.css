@@ -11,7 +11,7 @@
   --cue-rules: #6c757d;   /* project rules: grey */
 }
 .sidebar-navigation .bi-book { color: var(--cue-prose); }
-.sidebar-navigation .bi-signpost-split { color: var(--cue-study); }
+.sidebar-navigation .bi-diagram-3 { color: var(--cue-study); }
 .sidebar-navigation .bi-laptop { color: var(--cue-code); }
 .sidebar-navigation .bi-clipboard-data { color: var(--cue-results); }
 .sidebar-navigation .bi-file-earmark-ruled { color: var(--cue-rules); }

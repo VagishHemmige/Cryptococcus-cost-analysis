@@ -67,7 +67,7 @@ The Quarto site documents the code. It does not run the analysis.
   | Kind | Sidebar icon | Colour | Callout |
   |---|---|---|---|
   | Background prose | `book` | blue | — |
-  | Study design and methods | `signpost-split` | orange | — |
+  | Study design and methods | `diagram-3` | orange | — |
   | R code | `laptop` | pink | `Rcode` (💻) |
   | Results | `clipboard-data` | green | `Results` (📊) |
   | Project documents | `file-earmark-ruled` | grey | — |

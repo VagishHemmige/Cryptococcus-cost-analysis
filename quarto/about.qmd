@@ -5,7 +5,7 @@ format: html
 
 ## The study
 
-This study estimates the excess Medicare payments in the 12 months after cryptococcosis is diagnosed among adult kidney transplant recipients, compared with similar recipients at the same time since transplant, using United States Renal Data System (USRDS) data. [Study design and methods](study_methods.qmd) explains how.
+This study estimates the excess Medicare payments in the 12 months after cryptococcosis is diagnosed among adult kidney transplant recipients, compared with similar recipients at the same time since transplant, using United States Renal Data System (USRDS) data. [Study design and methods](study_overview.qmd) explains how.
 
 The analysis is preliminary and not for citation. No results are shown yet; see [Main results](results.qmd).
 
@@ -36,7 +36,11 @@ Four documents describe the project. In short: the plan is the scientific intent
 
 -   [**Clinical background**](background.qmd): cryptococcosis after kidney transplant, and why its cost matters.
 -   [**Methodological background**](methodological_background.qmd): USRDS, Medicare claims and costs, matching and cost models, in general terms.
--   [**Study design and methods**](study_methods.qmd): what this study chose, linked to the plan, with where the code stands.
+-   [**Study design and methods**](study_overview.qmd): what this study chose, linked to the plan, with where the code stands, over four pages:
+    -   [**Overview**](study_overview.qmd): the question, the data and who is studied.
+    -   [**Cases and controls**](study_cases_controls.qmd): finding cases, time zero, and matching.
+    -   [**Costs and follow-up**](study_costs.qmd): turning claims into monthly costs, and when follow-up ends.
+    -   [**Analysis and reporting**](study_analysis.qmd): the models, sensitivity analyses, disclosure and reporting.
 -   [**Setup**](setup.qmd): packages, constants and the ICD code lists.
 -   [**Functions**](functions.qmd): helper functions, linked to the steps that use them.
 -   [**1. Create cohort**](create_cohort.qmd): the time-varying cohort of kidney transplant recipients.
