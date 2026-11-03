@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Vagish Hemmige">
+
+<title>AGENTS.md – Cryptococcus post-transplant cost</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../quarto/repository-blueprint.html" rel="next">
+<link href="../quarto/architecture.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-66ae90e4418e9d0ac3caa4b8c3bef75c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+div.callout-Rcode.callout {
+  border-left-color: pink;
+}
+div.callout-Rcode.callout-style-default > .callout-header {
+  background-color: rgb(from pink r g b / 13%);
+}
+div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
+  content: '💻';
+  background-image: none;
+}
+</style>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto/analysis-plan.html">Project documents</a></li><li class="breadcrumb-item"><a href="../quarto/agents.html">AGENTS.md</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Cryptococcus post-transplant cost</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Background</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data loading and processing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/create_cohort.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Create cohort</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/execute_matching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Execute matching</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/postmatch_processing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Post-match processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Modeling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Code to create tables and figures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/figures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Figures</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Project documents</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/analysis-plan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analysis plan</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Architecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/agents.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">AGENTS.md</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/repository-blueprint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repository blueprint</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#agents.md" id="toc-agents.md" class="nav-link active" data-scroll-target="#agents.md">AGENTS.md</a>
+  <ul class="collapse">
+  <li><a href="#the-project" id="toc-the-project" class="nav-link" data-scroll-target="#the-project">The project</a></li>
+  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts">R scripts</a></li>
+  <li><a href="#chunk-labels" id="toc-chunk-labels" class="nav-link" data-scroll-target="#chunk-labels">Chunk labels</a></li>
+  <li><a href="#variable-labels" id="toc-variable-labels" class="nav-link" data-scroll-target="#variable-labels">Variable labels</a></li>
+  <li><a href="#quarto-website" id="toc-quarto-website" class="nav-link" data-scroll-target="#quarto-website">Quarto website</a></li>
+  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a></li>
+  <li><a href="#restricted-data-applies-to-everyone" id="toc-restricted-data-applies-to-everyone" class="nav-link" data-scroll-target="#restricted-data-applies-to-everyone">Restricted data (applies to everyone)</a></li>
+  <li><a href="#look-in-usrds-first" id="toc-look-in-usrds-first" class="nav-link" data-scroll-target="#look-in-usrds-first">Look in usRds first</a></li>
+  <li><a href="#usrds-data-facts" id="toc-usrds-data-facts" class="nav-link" data-scroll-target="#usrds-data-facts">USRDS data facts</a></li>
+  <li><a href="#coding-conventions" id="toc-coding-conventions" class="nav-link" data-scroll-target="#coding-conventions">Coding conventions</a></li>
+  <li><a href="#checks-for-any-change" id="toc-checks-for-any-change" class="nav-link" data-scroll-target="#checks-for-any-change">Checks for any change</a></li>
+  <li><a href="#working-with-agents" id="toc-working-with-agents" class="nav-link" data-scroll-target="#working-with-agents">Working with agents</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/master/quarto/agents.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content"><div class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto/analysis-plan.html">Project documents</a></li><li class="breadcrumb-item"><a href="../quarto/agents.html">AGENTS.md</a></li></ol></nav><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+</div>
+
+
+<div class="quarto-title-meta-author column-body">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Vagish Hemmige <a href="mailto:vahemmig@montefiore.org" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Montefiore Medical Center/ Albert Einstein College of Medicine
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta column-body">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!--
+This page only shows AGENTS.md from the repository root, which is the one source:
+edit that file, not this page. Its first heading is the page title.
+-->
+<section id="agents.md" class="level1">
+<h1>AGENTS.md</h1>
+<p>Guidance for everyone working on this repository: the maintainer, collaborators, and any AI coding agents working for them. It covers how to work here: conventions, data handling, and checks.</p>
+<p>Four places divide the documentation:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Where</th>
+<th>Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>analysis-plan.md</code></td>
+<td>Study design and statistics: what the analysis is meant to do</td>
+</tr>
+<tr class="even">
+<td><code>ARCHITECTURE.md</code></td>
+<td>Code structure: scripts, data flow, and the objects passed between them</td>
+</tr>
+<tr class="odd">
+<td><code>AGENTS.md</code> (this file)</td>
+<td>How to work in the repository: rules, conventions, and checks</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues">GitHub Issues</a></td>
+<td>Implementation status: where the code does not yet match the plan, and known defects</td>
+</tr>
+</tbody>
+</table>
+<p>Read the three files before making changes. Each covers its own topic and does not repeat the others.</p>
+<section id="the-project" class="level2">
+<h2 class="anchored" data-anchor-id="the-project">The project</h2>
+<p>This repository estimates the excess Medicare payments attributable to cryptococcosis after kidney transplant. It uses United States Renal Data System (USRDS) data, which link OPTN/UNOS transplant records to Medicare claims, and it publishes its code and methods as a Quarto website.</p>
+<ul>
+<li><strong><code>analysis-plan.md</code> is the source of truth for design.</strong> It covers the cohort, exposure, time zero, matching, cost construction, estimands, models, and sensitivity analyses. Code implements the plan; it does not redefine it.
+<ul>
+<li>If the code needs to depart from the plan, change the plan in the same pull request.</li>
+<li>Plan changes are tracked in git, not in a change log inside the plan. Commit each design change on its own, with a message that gives the reason and says whether any results that depend on it had already been seen.</li>
+<li>The plan lists open design choices as <strong>Decision D<em>n</em></strong> in its “Open decisions” table. Do not settle one in code. Raise it with the maintainer.</li>
+</ul></li>
+<li><strong>This is an analysis project, not an R package</strong>, even though the scripts live in <code>R/</code> and there is an <code>.Rbuildignore</code>. Do not add DESCRIPTION, NAMESPACE, roxygen, or pkgdown infrastructure. Do not apply CRAN conventions.</li>
+<li><strong>Implementation status lives in GitHub Issues</strong>, not in these files. When you find a gap between the code and the plan, or a defect, open or update an issue. Reference the issue in the pull request that closes it.</li>
+</ul>
+</section>
+<section id="r-scripts" class="level2">
+<h2 class="anchored" data-anchor-id="r-scripts">R scripts</h2>
+<ul>
+<li><strong>Running the analysis.</strong> Open the <code>.Rproj</code> and run <code>R/main.R</code> from the project root. <code>main.R</code> sources the other scripts in dependency order. <code>ARCHITECTURE.md</code> describes what each script does and how data flows between them.</li>
+<li><strong>One job per script:</strong> setup, cohort construction, matching, cost processing, modeling, tables, figures. When you add a script:
+<ul>
+<li>source it from <code>main.R</code> at the right point</li>
+<li>update <code>ARCHITECTURE.md</code> in the same commit</li>
+</ul></li>
+<li><strong>Header comment.</strong> Each script begins with a comment saying what it does and which objects it needs from earlier scripts.</li>
+<li><strong>Constants, libraries, and code lists</strong> live in <code>R/setup.R</code>. Other scripts do not call <code>library()</code>, re-source <code>setup.R</code>, or hard-code values. Any number a reader might want to change, such as a window length, a year, a caliper, or the matching ratio, is a named constant in <code>setup.R</code>.</li>
+<li><strong>Helper functions</strong> go in <code>R/functions.R</code>, sourced after <code>setup.R</code>. A function takes its inputs as arguments and does not read global objects, including through default arguments.</li>
+<li><strong>No side effects outside the project.</strong> Do not use <code>setwd()</code>, absolute paths, or writes outside the project. Locate data only through usRds’s <code>set_USRDS_wd()</code>.</li>
+<li><strong>Exploration code</strong> does not stay in pipeline scripts. Delete it, or move it below a chunk label that no Quarto page uses. The website shows the scripts as they are.</li>
+<li><strong>Deprecated scripts.</strong> <code>R/define_cohort.R</code> is deprecated (it uses <code>strobe</code>) and is not sourced. Do not build on it; <code>R/create_cohort.R</code> is the active script.</li>
+</ul>
+</section>
+<section id="chunk-labels" class="level2">
+<h2 class="anchored" data-anchor-id="chunk-labels">Chunk labels</h2>
+<p>Scripts are divided into labelled sections, so that Quarto pages can show the code without copying it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ---- merge-costs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Every logical step has a label. A label covers the code from its line to the next label.</li>
+<li>Labels are kebab-case, describe the step, and are <strong>unique across all scripts</strong>. Quarto pulls chunks by label, so a duplicate label silently picks up the wrong code.</li>
+<li>Renaming or deleting a label breaks the Quarto page that uses it. Search the <code>.qmd</code> files before you change one.</li>
+<li>Scripts must still run end to end through <code>main.R</code>. Labels are comments and must never change what the code does.</li>
+</ul>
+</section>
+<section id="variable-labels" class="level2">
+<h2 class="anchored" data-anchor-id="variable-labels">Variable labels</h2>
+<ul>
+<li>Label analysis variables with human-readable descriptions, for example with <code>labelled::set_variable_labels()</code>. Tables then show readable names without renaming code by hand.</li>
+<li>For USRDS variables, use usRds’s <code>apply_usrds_varlabels()</code> and <code>apply_usrds_factors()</code> rather than writing labels by hand.</li>
+<li>Label each derived variable where it is created. Include units, the price year for costs, and windows where they apply (for example, “Medicare payments, month 0, January 2021 dollars”).</li>
+</ul>
+</section>
+<section id="quarto-website" class="level2">
+<h2 class="anchored" data-anchor-id="quarto-website">Quarto website</h2>
+<p>The Quarto site documents the code. It does not run the analysis.</p>
+<ul>
+<li><strong>Setup files:</strong> <code>_quarto.yml</code> and <code>index.qmd</code> sit at the root. There is one page per pipeline script in <code>quarto/</code>, named after the script (for example, <code>quarto/create_cohort.qmd</code> for <code>R/create_cohort.R</code>). The <code>custom-callout</code> extension in <code>_extensions/</code> provides the <code>Rcode</code> callout.</li>
+<li><strong>Showing code:</strong> each page loads its script with <code>knitr::read_chunk("../R/&lt;script&gt;.R")</code> in a hidden chunk. It then shows each labelled section in a chunk with <code>#| eval: false</code>, with prose explaining what the section does and why. Pages link to the script on GitHub and to the scripts it depends on.</li>
+<li><strong>Never evaluate analysis code in the site.</strong> Pages must render without USRDS data. The rendered site therefore contains code and explanation only, never results. The one exception is the Setup page, which runs the <code>constants</code> and <code>icd-code-lists</code> sections of <code>R/setup.R</code> and the tables that summarize them; those sections only define values and read nothing. No other section may run, and those two must never read data. The Architecture page also runs one chunk, which reads <code>ARCHITECTURE.md</code> as text so its diagrams are drawn (see “Project documents”).</li>
+<li><strong>Function cross-references.</strong> <code>R/functions.R</code> has one top-level function per labelled chunk, and the functions page one section per chunk. Under each heading is the function’s name; after the explanation, <strong>Used in the analysis:</strong> links the method-page sections that call it, and <strong>Called by:</strong> the functions on the page that call it. Each method-page section whose code calls a helper ends its prose with <strong>Functions used:</strong>. <code>tests/check-crosslinks.R</code> derives all of these from the code and runs on every pull request; when it fails, run <code>Rscript tests/check-crosslinks.R draft</code> and copy what it prints, rather than writing the links by hand.</li>
+<li><strong>Project documents.</strong> <code>analysis-plan.md</code>, <code>ARCHITECTURE.md</code>, <code>AGENTS.md</code> and <code>REPOSITORY-BLUEPRINT.md</code> are shown on the site by pages in <code>quarto/</code> that only include the root file, which stays the one source: edit the root file, not the page. The <code>render:</code> list in <code>_quarto.yml</code> keeps Quarto from also rendering the root files as pages of their own. Two adjustments keep links and diagrams working on both GitHub and the site:
+<ul>
+<li>The plan page uses GitHub-style heading IDs (<code>from: markdown+gfm_auto_identifiers</code>), so links such as <code>#13-open-decisions</code> resolve.</li>
+<li>The Architecture page reads <code>ARCHITECTURE.md</code> as text and marks its <code>```mermaid</code> diagrams as Quarto diagrams. It reads only that file. Write diagrams in <code>ARCHITECTURE.md</code> with plain <code>```mermaid</code> fences.</li>
+</ul></li>
+<li><strong>Rendering:</strong> the site renders to <code>docs/</code>, which is not committed. <code>.github/workflows/publish.yml</code> renders it on every pull request as a check and, on each push to <code>master</code>, publishes it to the <code>gh-pages</code> branch, which GitHub Pages serves. Render locally to preview a change to a script’s labels or a page’s prose, but do not commit the output.</li>
+<li><strong>New scripts:</strong> when you add a script, add its page and its sidebar entry in <code>_quarto.yml</code> in the same commit.</li>
+<li><strong>Prose must match the code.</strong> If a change alters what a section does, update that section’s explanation in the same pull request.</li>
+</ul>
+</section>
+<section id="outputs" class="level2">
+<h2 class="anchored" data-anchor-id="outputs">Outputs</h2>
+<ul>
+<li><strong>Exported files:</strong> tables and figures are exported by <code>R/tables.R</code> and <code>R/figures.R</code> to <code>tables/</code> and <code>figures/</code>. Both folders are gitignored, because their contents are results under the disclosure rules below.</li>
+<li><strong>Figures</strong> need alt text when they are published.</li>
+<li><code>README.Rmd</code> is the source of <code>README.md</code>. Edit the <code>.Rmd</code> and re-knit; do not edit <code>README.md</code> directly.</li>
+</ul>
+</section>
+<section id="restricted-data-applies-to-everyone" class="level2">
+<h2 class="anchored" data-anchor-id="restricted-data-applies-to-everyone">Restricted data (applies to everyone)</h2>
+<p>USRDS and Medicare data are covered by a data use agreement (DUA). The rules below apply to people and agents alike.</p>
+<ul>
+<li><strong>Never commit data.</strong> That includes USRDS files, extracts, and any saved R object or output derived from patient-level data (<code>.rds</code>, <code>.RData</code>, <code>.parquet</code>, <code>.csv</code>, and the like). Keep data outside the repository, and check <code>.gitignore</code> before adding a new output type.</li>
+<li><strong>AI agents must not read restricted data.</strong> Anything an agent opens, prints, or summarizes is sent to the model provider. Agents therefore must not:
+<ul>
+<li>open data files or patient-level objects</li>
+<li>print rows or <code>head()</code> of them</li>
+<li>display USRDS IDs, person-level dates, ZIP codes, or individual cost records</li>
+</ul>
+This applies unless your own DUA explicitly permits that use. Agents may write code, review it, and run it on <strong>synthetic data</strong> that mimics the column names and types. Results on real data are produced by an authorized person.</li>
+<li><strong>Use synthetic data for development and tests.</strong> Build small synthetic data frames in code, label them clearly as synthetic, and never derive them from real records.</li>
+<li><strong>Disclosure.</strong> No table, figure, flowchart box, or text may show a count from 1 to 10. That includes counts that can be recovered by subtraction or from complementary cells, and counts in risk tables under plots. Figures that plot individual people (beeswarm, scatter) are not published. Check every output before it leaves the secure environment, and check the exact wording of the governing DUA before dissemination.</li>
+</ul>
+</section>
+<section id="look-in-usrds-first" class="level2">
+<h2 class="anchored" data-anchor-id="look-in-usrds-first">Look in usRds first</h2>
+<p>The <a href="https://github.com/VagishHemmige/usRds">usRds</a> package is the <strong>first place to look</strong> for anything that touches USRDS files: loading files, extracting claims, diagnosis dates, Medicare coverage, cohort helpers, costs, proration, and inflation adjustment.</p>
+<ul>
+<li>Check the package’s function reference before writing project-specific code. Use an existing function, or extend it.</li>
+<li><strong>Package problems belong in the package.</strong> If a usRds function is wrong, or does almost but not exactly what the plan needs, open an issue in the <a href="https://github.com/VagishHemmige/usRds/issues">usRds repository</a> rather than documenting it here. Then do one of two things:
+<ul>
+<li>fix it in usRds, which is preferred when the behavior is generally useful</li>
+<li>wrap it in this project, with a code comment that links the issue</li>
+</ul>
+Remove the wrapper when the issue is fixed.</li>
+<li>Before relying on a function’s behavior, read its documentation and its open issues. This matters most for <code>verify_medicare_primary()</code>, <code>establish_dx_date()</code>, <code>prorate_costs_by_day()</code>, and <code>adjust_costs_for_inflation()</code>, whose behavior directly sets the cohort and the cost outcome.</li>
+<li>Record the usRds version (or commit) used for any result.</li>
+</ul>
+</section>
+<section id="usrds-data-facts" class="level2">
+<h2 class="anchored" data-anchor-id="usrds-data-facts">USRDS data facts</h2>
+<p>Sources: USRDS 2025 Researcher’s Guide, Appendix B (data file descriptions), and Appendix C (formats). Check these against the release you are using.</p>
+<p><strong>Institutional (“IN”) claims cover more than inpatient care.</strong> They include inpatient, outpatient, skilled nursing facility (SNF), home health, and hospice claims.</p>
+<ul>
+<li><code>HCFASAF</code> gives the claim type: <code>I</code> inpatient, <code>O</code> outpatient, <code>N</code> SNF, <code>H</code> home health, <code>S</code> hospice. In older files, <code>M</code> is a REBUS inpatient stay.</li>
+<li>From 2002 on, each type has its own files: <code>ip_*</code>, <code>op_*</code>, <code>sn_*</code>, <code>hh_*</code>, and <code>hs_*</code>, each with a CLM (claim), DXP (diagnosis/procedure), and DET (revenue center) file.</li>
+<li>Institutional claims are uniquely identified by <code>USRDS_ID</code>, <code>CLM_FROM</code>, and <code>SEQ_KEYC</code>.</li>
+</ul>
+<p><strong>Physician/supplier (PS) claims</strong> come as a CLM (claim), LINE (line item), and DX (diagnosis) file.</p>
+<ul>
+<li>Each line carries one diagnosis and one procedure code.</li>
+<li>One visit produces several lines, so lines must be grouped into encounters for counts of visits.</li>
+<li>Be explicit about whether you use line-level or claim-level amounts and diagnoses.</li>
+</ul>
+<p><strong>Payment and charge fields.</strong> The cost outcome uses Medicare <strong>payments</strong>, never charges.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Medicare payment</th>
+<th>Charges (do not use as cost)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Institutional claim (<code>*_CLM</code>)</td>
+<td><code>CLM_AMT</code></td>
+<td><code>CLM_TOT</code></td>
+</tr>
+<tr class="even">
+<td>Institutional revenue center (<code>*_DET</code>)</td>
+<td><code>REVPMT</code></td>
+<td><code>REV_CH</code></td>
+</tr>
+<tr class="odd">
+<td>Physician/supplier claim (<code>PS_CLM</code>)</td>
+<td><code>CLM_PMT_AMT</code></td>
+<td><code>NCH_CARR_SBMT_CHRG_AMT</code> (submitted), <code>NCH_CARR_ALOW_CHRG_AMT</code> (allowed)</td>
+</tr>
+<tr class="even">
+<td>Physician/supplier line</td>
+<td><code>PMTAMT</code></td>
+<td><code>SBMTCH</code> (submitted), <code>ALOWCH</code> (allowed)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>IP_DET</code> and <code>SN_DET</code> have no <code>REVPMT</code>. Revenue-center payments exist only for outpatient, home health, and hospice lines, so revenue-center payment totals do not include inpatient or SNF care.</li>
+<li>Summed <code>REVPMT</code> for an outpatient claim does not always equal that claim’s <code>CLM_AMT</code> (about 3% higher overall). Never add institutional claim payments and revenue-center payments together; they describe the same services.</li>
+<li>Revenue center code <code>0001</code> is the sum of a claim’s other revenue-center charges. Exclude it when summing revenue-center lines.</li>
+<li>Inpatient <code>CLM_AMT</code> excludes CMS pass-through payments (indirect medical education, capital, kidney acquisition). The pass-through amount is <code>PER_DIEM × CVR_DCNT</code>. Whether to include it is a design choice for the plan.</li>
+<li>From the 2015 files on, <code>PRPAYAMT</code> (primary payer paid amount) and <code>TDEDAMT</code> (beneficiary deductible and coinsurance) are also available.</li>
+</ul>
+<p><strong>Claims year.</strong> Claims are assigned to a SAF year by the service <strong>end</strong> date, not the start date.</p>
+<p><strong>Data currency (2025 release).</strong></p>
+<ul>
+<li>Claims are complete through 2023-12-31, except for the Q1 2024 inpatient file.</li>
+<li>The core files, including deaths, run through 2024-12-31.</li>
+<li>Vital status runs ahead of claims by about a year.</li>
+</ul>
+<p><strong>Payer history (<code>payhist</code>)</strong></p>
+<ul>
+<li>Eligible Medicare fee-for-service primary coverage: <code>PAYER</code> is <code>MPAB</code> or <code>MPO</code>. This is the Researcher’s Guide definition (Example 8), and claims are complete only for these periods.</li>
+<li>Not eligible: <code>HMO</code> (Medicare Advantage), <code>MSP-EGHP</code>, <code>MSP-nonEGHP</code>, <code>OTH</code>, <code>WAIT</code>.</li>
+<li>A month without eligible coverage is unobserved, not zero cost. Code must never turn missing claims during uncovered time into zeros.</li>
+<li>Medicare entitlement based only on ESRD ends three years after a successful transplant. Expect coverage loss after that point.</li>
+</ul>
+<p><strong>ICD transition.</strong> ICD-9-CM applies to services before 2015-10-01. ICD-10-CM and ICD-10-PCS apply on or after that date.</p>
+<ul>
+<li>Codes are stored without periods.</li>
+<li>Decide, and document, which date sets the code system for a hospital stay that crosses the transition.</li>
+</ul>
+<p><strong>Unclear variables.</strong> If a variable’s meaning is unclear, check Appendix B and Appendix C. Do not guess from the name.</p>
+</section>
+<section id="coding-conventions" class="level2">
+<h2 class="anchored" data-anchor-id="coding-conventions">Coding conventions</h2>
+<ul>
+<li><strong>Flowchart labels and text</strong> are built from the constants in <code>setup.R</code>, not hard-coded. For example, a label that says “2007-2020” or “365+ days” goes stale when the constants change.</li>
+<li><strong>Code lists</strong>
+<ul>
+<li>Each code carries its category, its ICD version or code type (diagnosis or procedure), and its matching rule (exact or prefix).</li>
+<li>Each code belongs to exactly one category.</li>
+<li>Check every code against the official CMS ICD-9-CM, ICD-10-CM, ICD-10-PCS, and HCPCS code sets.</li>
+<li>Never invent codes, variables, files, or clinical definitions.</li>
+</ul></li>
+<li><strong>Cohort flow</strong> uses the <code>flowchart</code> package (<code>as_fc()</code>, <code>fc_filter()</code>, <code>fc_split()</code>, <code>fc_draw()</code>). Every inclusion or exclusion goes through <code>fc_filter()</code>. Never drop rows from <code>$data</code> outside the flowchart; the diagram must reproduce the cohort exactly. The cohort used downstream is the data from the final flowchart step.</li>
+<li><strong>Matching</strong>
+<ul>
+<li>Matching must be reproducible from a recorded seed. Control selection must not depend on row order.</li>
+<li>The matched-set identifier is kept as an ordinary column through to the modeling data, so models and bootstraps can cluster on it.</li>
+<li>Report the number of cases with each number of matched controls, including zero.</li>
+</ul></li>
+<li><strong>Costs</strong>
+<ul>
+<li>Each person-month records both its cost and its number of observed days, so partial months are explicit.</li>
+<li>Every cost carries its price year. Inflation adjustment uses the constants in <code>setup.R</code>.</li>
+<li>Floors, caps, or other changes to cost values (for example, setting negative months to zero) are design choices. They belong in the plan before they go in code.</li>
+</ul></li>
+<li><strong>Joins</strong>
+<ul>
+<li>Use <code>join_by()</code> with an explicit <code>relationship</code> where you can.</li>
+<li>After every interval join (<code>between()</code>, <code>closest()</code>, <code>overlaps()</code>) and every join of claims to people, assert that it did not multiply rows.</li>
+<li>Decide deliberately what happens to people with no match (NA rows): keep them, exclude them through a flowchart step, or stop with an error.</li>
+</ul></li>
+<li><strong>Dates and windows</strong>
+<ul>
+<li>Write windows as inclusive day offsets from time zero, matching the plan (for example, month 0 is days 0 to 29).</li>
+<li>Test the window edges on synthetic data.</li>
+</ul></li>
+<li><strong>Models.</strong> Keep the code that turns model coefficients into reported dollars (contrasts, retransformation, sums over months) in named functions in <code>R/functions.R</code>, and test them on synthetic data with a known answer.</li>
+<li><strong>Style:</strong> the tidyverse style guide. Style changes go in their own commits, separate from changes that alter analytical behavior.</li>
+</ul>
+</section>
+<section id="checks-for-any-change" class="level2">
+<h2 class="anchored" data-anchor-id="checks-for-any-change">Checks for any change</h2>
+<p>Before opening a pull request, check the items below that apply to your change.</p>
+<p><strong>Cohort construction</strong></p>
+<ul>
+<li>Do the order, the denominator, and the labels of each flowchart step match the condition it applies?</li>
+<li>Can each count be reproduced from the code?</li>
+<li>Is the downstream cohort the data from the final flowchart step?</li>
+</ul>
+<p><strong>Exposure and time zero</strong></p>
+<ul>
+<li>Which claim files, claim types (<code>HCFASAF</code>), diagnosis positions, and date fields define cryptococcosis?</li>
+<li>Is matching exact or prefix, and are both ICD-9 and ICD-10 covered for the right dates?</li>
+<li>Is time zero defined as in the plan for cases and for controls?</li>
+<li>Is every covariate measured using only information from before time zero?</li>
+</ul>
+<p><strong>Matching</strong></p>
+<ul>
+<li>Are controls at risk and undiagnosed at the case’s time since transplant?</li>
+<li>Does control eligibility use only information available at that time, with no conditioning on future events?</li>
+<li>Is selection reproducible from the seed, and independent of row order?</li>
+<li>Are unmatched and partially matched cases counted and reported?</li>
+</ul>
+<p><strong>Coverage and follow-up</strong></p>
+<ul>
+<li>Does Medicare coverage span the whole look-back window, not just its start?</li>
+<li>Are adjacent coverage spans merged without allowing uncovered days?</li>
+<li>Does follow-up end at every event the plan lists (death, loss of coverage, maximum follow-up, administrative end)?</li>
+</ul>
+<p><strong>Costs</strong></p>
+<ul>
+<li>Are payment fields used, not charge fields?</li>
+<li>Is any service counted twice (claim plus revenue-center amounts, or revenue code <code>0001</code>)?</li>
+<li>Are uncovered months excluded rather than recorded as zero?</li>
+<li>Are claims assigned to the right month around time zero, including multi-day claims?</li>
+</ul>
+<p><strong>Models and reported numbers</strong></p>
+<ul>
+<li>Does the reported estimate match the estimand in the plan (which months, which scale, which contrast)?</li>
+<li>Do standard errors account for clustering as the plan specifies?</li>
+<li>Do the tables, figures, and website prose say what the model actually estimates?</li>
+</ul>
+<p><strong>Structure and documentation</strong></p>
+<ul>
+<li>Does <code>ARCHITECTURE.md</code> still describe the scripts and the data flow?</li>
+<li>Are the chunk labels unique, and does each script’s Quarto page still find every label it uses?</li>
+<li>Does every script have a Quarto page and a sidebar entry, and does the pull request’s render check pass?</li>
+<li>Are all site chunks <code>eval: false</code>, apart from the Setup page’s <code>constants</code> and <code>icd-code-lists</code> sections and their summary tables, and the Architecture page’s chunk that reads <code>ARCHITECTURE.md</code>?</li>
+<li>Does <code>Rscript tests/check-crosslinks.R check</code> pass?</li>
+<li>Are new derived variables labelled?</li>
+</ul>
+<p><strong>Execution</strong></p>
+<ul>
+<li>Does <code>main.R</code> run from a clean session (<code>Ctrl+Shift+F10</code> in RStudio, then source <code>main.R</code>), with no objects left over from earlier work?</li>
+<li>Are paths relative, with no hard-coded data directories? Use <code>set_USRDS_wd()</code>.</li>
+<li>Are package versions recorded?</li>
+<li>Are any saved intermediates stale?</li>
+</ul>
+<p><strong>Validation on real data</strong> (run by an authorized person; report only aggregate, suppressed results)</p>
+<ul>
+<li>row counts before and after each join of claims to people</li>
+<li>the number of cases with 2, 1, and 0 matched controls</li>
+<li>standardized mean differences at time zero, including cost in months −3 to −1</li>
+<li>person-months by group and coverage status, and person-months after death</li>
+<li>case counts by ICD-9 versus ICD-10 era</li>
+</ul>
+</section>
+<section id="working-with-agents" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-agents">Working with agents</h2>
+<ul>
+<li><strong>Autonomy.</strong> The person directing an agent decides how much it may do. That person may also give the agent stricter rules of their own, and those take precedence over this section. By default, an agent may:
+<ul>
+<li>edit code and documentation</li>
+<li>add scripts and tests</li>
+<li>run code and render the site on synthetic data</li>
+<li>commit to a branch and open a pull request</li>
+</ul></li>
+<li><strong>Collaborators:</strong> <code>master</code> is protected. Changes reach it only through a pull request that the maintainer reviews.</li>
+<li><strong>Every agent, under any level of autonomy:</strong>
+<ul>
+<li>follows the restricted-data rules above</li>
+<li>asks before any step that would read real data, run the full pipeline, or make expensive calls</li>
+<li>does not settle an open decision in the plan</li>
+</ul></li>
+<li>Keep pull requests focused. In each one, state which section of the plan or which issue it addresses, and what was checked. Say whether it was checked on synthetic data or by reading only. Never describe synthetic results as results.</li>
+<li>For references, use the USRDS Researcher’s Guide and its appendices, the CMS code sets, and PubMed. Cite what you used.</li>
+</ul>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/vagishhemmige\.github\.io\/Cryptococcus-cost-analysis");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../quarto/architecture.html" class="pagination-link" aria-label="Architecture">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Architecture</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../quarto/repository-blueprint.html" class="pagination-link" aria-label="Repository blueprint">
+        <span class="nav-page-text">Repository blueprint</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">pagetitle:</span><span class="co"> "AGENTS.md"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">This page only shows AGENTS.md from the repository root, which is the one source:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">edit that file, not this page. Its first heading is the page title.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>{{&lt; include ../AGENTS.md &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/master/quarto/agents.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
