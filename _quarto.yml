@@ -6,6 +6,7 @@ project:
   # sidebar; they are shown through quarto/ pages instead.
   render:
     - index.qmd
+    - 404.qmd
     - quarto/**
 
 author:
@@ -36,9 +37,13 @@ website:
           - href: quarto/background.qmd
             text: Clinical background
             icon: book
-          - href: quarto/analysis_methods.qmd
-            text: Methods background
+          - href: quarto/methodological_background.qmd
+            text: Methodological background
             icon: book
+
+      - href: quarto/study_methods.qmd
+        text: Study design and methods
+        icon: signpost-split
 
       - section: Code
         contents:
