@@ -114,17 +114,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>
-div.callout-Rcode.callout {
-  border-left-color: pink;
-}
-div.callout-Rcode.callout-style-default > .callout-header {
-  background-color: rgb(from pink r g b / 13%);
-}
-div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
-  content: '💻';
-  background-image: none;
-}
 div.callout-Results.callout {
   border-left-color: #198754;
 }
@@ -134,6 +123,17 @@ div.callout-Results.callout-style-default > .callout-header {
 div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
   content: '📊';
+  background-image: none;
+}
+div.callout-Rcode.callout {
+  border-left-color: pink;
+}
+div.callout-Rcode.callout-style-default > .callout-header {
+  background-color: rgb(from pink r g b / 13%);
+}
+div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
+  content: '💻';
   background-image: none;
 }
 </style>
@@ -393,7 +393,6 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
   <li><a href="#plotting-mean-monthly-costs" id="toc-plotting-mean-monthly-costs" class="nav-link active" data-scroll-target="#plotting-mean-monthly-costs">Plotting mean monthly costs</a></li>
   <li><a href="#calculating-the-number-of-potential-matches" id="toc-calculating-the-number-of-potential-matches" class="nav-link" data-scroll-target="#calculating-the-number-of-potential-matches">Calculating the number of potential matches</a></li>
   <li><a href="#total-excess-costs" id="toc-total-excess-costs" class="nav-link" data-scroll-target="#total-excess-costs">Total excess costs</a></li>
-  <li><a href="#other-portions-of-the-analysis" id="toc-other-portions-of-the-analysis" class="nav-link" data-scroll-target="#other-portions-of-the-analysis">Other portions of the analysis</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/master/quarto/functions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -673,19 +672,6 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-</section>
-<section id="other-portions-of-the-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="other-portions-of-the-analysis">Other portions of the analysis</h2>
-<ul>
-<li><a href="../quarto/setup.html"><strong>Setup</strong></a>: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.</li>
-<li><a href="../quarto/create_cohort.html"><strong>Create cohort</strong></a>: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.</li>
-<li><a href="../quarto/execute_matching.html"><strong>Execute matching</strong></a>: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.</li>
-<li><a href="../quarto/postmatch_processing.html"><strong>Post-match processing</strong></a>: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.</li>
-<li><a href="../quarto/modeling.html"><strong>Modeling</strong></a>: Fits prespecified cost and outcome models using the matched cohort.</li>
-<li><a href="../quarto/tables.html"><strong>Tables</strong></a>: Summary tables and regression outputs generated from the final models.</li>
-<li><a href="../quarto/figures.html"><strong>Figures</strong></a>:Visualizations of costs, risks, and model-based estimates.</li>
-<li><a href="../quarto/about.html"><strong>About</strong></a>: methods, assumptions, and disclosures</li>
-</ul>
 
 
 <!-- -->
@@ -1233,20 +1219,6 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: calculate-total-excess-costs</span></span>
 <span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
 <span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="fu">## Other portions of the analysis</span></span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Setup**</span><span class="co">](setup.qmd)</span>: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.</span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Create cohort**</span><span class="co">](create_cohort.qmd)</span>: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.</span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Execute matching**</span><span class="co">](execute_matching.qmd)</span>: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Post-match processing**</span><span class="co">](postmatch_processing.qmd)</span>: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.</span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Modeling**</span><span class="co">](modeling.qmd)</span>: Fits prespecified cost and outcome models using the matched cohort.</span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Tables**</span><span class="co">](tables.qmd)</span>: Summary tables and regression outputs generated from the final models.</span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Figures**</span><span class="co">](figures.qmd)</span>:Visualizations of costs, risks, and model-based estimates.</span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**About**</span><span class="co">](about.qmd)</span>: methods, assumptions, and disclosures</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

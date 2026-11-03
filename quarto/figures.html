@@ -393,7 +393,6 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
   <li><a href="#final-flowchart" id="toc-final-flowchart" class="nav-link active" data-scroll-target="#final-flowchart">Final flowchart</a></li>
   <li><a href="#beeswarm-plot-of-total-inflated-costs" id="toc-beeswarm-plot-of-total-inflated-costs" class="nav-link" data-scroll-target="#beeswarm-plot-of-total-inflated-costs">Beeswarm plot of total inflated costs</a></li>
   <li><a href="#month-by-month-plots" id="toc-month-by-month-plots" class="nav-link" data-scroll-target="#month-by-month-plots">Month-by-month plots</a></li>
-  <li><a href="#other-portions-of-the-analysis" id="toc-other-portions-of-the-analysis" class="nav-link" data-scroll-target="#other-portions-of-the-analysis">Other portions of the analysis</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/master/quarto/figures.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -530,19 +529,6 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-</section>
-<section id="other-portions-of-the-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="other-portions-of-the-analysis">Other portions of the analysis</h2>
-<ul>
-<li><a href="../quarto/setup.html"><strong>Setup</strong></a>: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.</li>
-<li><a href="../quarto/functions.html"><strong>Functions</strong></a>: Reusable helper functions for cohort construction, matching, costing, and modeling.</li>
-<li><a href="../quarto/create_cohort.html"><strong>Create cohort</strong></a>: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.</li>
-<li><a href="../quarto/execute_matching.html"><strong>Execute matching</strong></a>: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.</li>
-<li><a href="../quarto/postmatch_processing.html"><strong>Post-match processing</strong></a>: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.</li>
-<li><a href="../quarto/modeling.html"><strong>Modeling</strong></a>: Fits prespecified cost and outcome models using the matched cohort.</li>
-<li><a href="../quarto/tables.html"><strong>Tables</strong></a>: Summary tables and regression outputs generated from the final models.</li>
-<li><a href="../quarto/about.html"><strong>About</strong></a>: methods, assumptions, and disclosures</li>
-</ul>
 
 
 <!-- -->
@@ -1070,21 +1056,6 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: monthly-cost-plots</span></span>
 <span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
 <span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## Other portions of the analysis</span></span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Setup**</span><span class="co">](setup.qmd)</span>: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Functions**</span><span class="co">](functions.qmd)</span>: Reusable helper functions for cohort construction, matching, costing, and modeling.</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Create cohort**</span><span class="co">](create_cohort.qmd)</span>: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Execute matching**</span><span class="co">](execute_matching.qmd)</span>: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Post-match processing**</span><span class="co">](postmatch_processing.qmd)</span>: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Modeling**</span><span class="co">](modeling.qmd)</span>: Fits prespecified cost and outcome models using the matched cohort.</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**Tables**</span><span class="co">](tables.qmd)</span>: Summary tables and regression outputs generated from the final models.</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">**About**</span><span class="co">](about.qmd)</span>: methods, assumptions, and disclosures</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
