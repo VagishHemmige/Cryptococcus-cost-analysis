@@ -62,7 +62,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -114,15 +133,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>
-div.callout-Rcode.callout {
-  border-left-color: #d63384;
+div.callout-Results.callout {
+  border-left-color: #198754;
 }
-div.callout-Rcode.callout-style-default > .callout-header {
-  background-color: rgba(214, 51, 132, 0.13);
+div.callout-Results.callout-style-default > .callout-header {
+  background-color: rgba(25, 135, 84, 0.13);
 }
-div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
-  content: '💻';
+div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
+  content: '📊';
   background-image: none;
 }
 div.callout-Pending.callout {
@@ -136,15 +155,15 @@ div.callout-Pending.callout-style-default .callout-icon::before, div.callout-Pen
   content: '⏳';
   background-image: none;
 }
-div.callout-Results.callout {
-  border-left-color: #198754;
+div.callout-Rcode.callout {
+  border-left-color: #d63384;
 }
-div.callout-Results.callout-style-default > .callout-header {
-  background-color: rgba(25, 135, 84, 0.13);
+div.callout-Rcode.callout-style-default > .callout-header {
+  background-color: rgba(214, 51, 132, 0.13);
 }
-div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
-  content: '📊';
+div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
+  content: '💻';
   background-image: none;
 }
 </style>
@@ -515,12 +534,15 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </section>
 <section id="obtain-raw-costs-from-raw-claims-data" class="level2">
 <h2 class="anchored" data-anchor-id="obtain-raw-costs-from-raw-claims-data">Obtain raw costs from raw claims data</h2>
-<p>We use the <code>get_IN_REV_costs()</code>, <code>get_IN_CLM_costs()</code>, and <code>get_PS_REV_costs()</code> functions to extract raw Medicare claims with cost information for patients in the matched cohort.</p>
-<p>Medicare claims data are organized into <strong>claim-level (CLM)</strong> files and <strong>revenue center (REV)</strong> files, which differ in their level of aggregation. CLM files summarize costs at the claim level, while REV files contain detailed line-item charges associated with individual services within a claim.</p>
-<p>For example, a home health agency may submit a single claim covering a multi-day episode of care. This episode appears as <strong>one row in a CLM file</strong> and as <strong>multiple rows in the corresponding REV file</strong>, reflecting individual billed services. As a result, costs from CLM and REV files for the same service year should not be summed, as this would lead to double counting.</p>
-<p>For <strong>inpatient (Part A) services</strong>, Medicare reimbursement is based on diagnosis-related groups (DRGs), and itemized line-item billing is not permitted. Accordingly, inpatient costs are obtained exclusively from CLM files, which capture the full reimbursed amount for each inpatient stay.</p>
-<p>For <strong>physician/supplier (Part B) services</strong>, claim-level CLM files are not available prior to 2012 in the USRDS. Therefore, revenue center files are used to capture physician/supplier-related costs for earlier years.</p>
-<p>These distinctions follow standard guidance in the <a href="https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds/for-researchers/researchers-guide">USRDS Researcher’s Guide</a> and <a href="https://www.cms.gov/medicare/payment/prospective-payment-systems/ipps">CMS Medicare billing documentation</a>.</p>
+<p>We use the <code>usRds</code> functions <code>get_IN_REV_costs()</code>, <code>get_IN_CLM_costs()</code> and <code>get_PS_REV_costs()</code> to extract Medicare claims with payment amounts for 2006 to 2021, for patients in the matched cohort.</p>
+<p>The USRDS claims files hold payments at more than one level<span class="citation" data-cites="usrds2025guide"><sup><a href="#ref-usrds2025guide" role="doc-biblioref">1</a></sup></span>:</p>
+<ul>
+<li><strong>Institutional claims</strong> (inpatient, outpatient, skilled nursing, home health and hospice) come as a claim file, with one row per claim and the Medicare payment for the whole claim (<code>CLM_AMT</code>), and a revenue-center detail file, with one row per revenue center on the claim. <code>get_IN_CLM_costs()</code> reads the claim files and <code>get_IN_REV_costs()</code> the detail files.</li>
+<li><strong>Revenue-center lines</strong> carry charges (<code>REV_CH</code>) and, for outpatient, home health and hospice claims, a payment (<code>REVPMT</code>). Inpatient and skilled nursing lines have no payment field (Appendix B), so inpatient payments come from the claim file only.</li>
+<li><strong>Claim payments and revenue-center payments describe the same services</strong>, so adding them would count those services twice. For outpatient claims, summed <code>REVPMT</code> is about 3% higher than <code>CLM_AMT</code> overall<span class="citation" data-cites="usrds2025guide"><sup><a href="#ref-usrds2025guide" role="doc-biblioref">1</a></sup></span>.</li>
+<li><strong>Physician/supplier claims</strong> are read at the line level: <code>get_PS_REV_costs()</code> returns each line’s payment (<code>PMTAMT</code>), with its submitted and allowed charges. Despite the function’s name, these are line files, not revenue-center files. In the files available to this project, physician/supplier claims before 2013 come as combined files rather than separate claim and line files, as listed in <code>usRds</code>.</li>
+</ul>
+<p>The cost outcome uses payment fields (<code>CLM_AMT</code>, <code>REVPMT</code>, <code>PMTAMT</code>), never charges.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Click to show/hide R Code</summary>
@@ -960,9 +982,14 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 
 <!-- -->
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-usrds2025guide" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">United States Renal Data System. <em>2025 Researcher’s Guide to the <span>USRDS</span> Database</em>. <span>National Institutes of Health, National Institute of Diabetes and Digestive and Kidney Diseases</span>; 2025. <a href="https://www.niddk.nih.gov/-/media/Files/USRDS/For-Researchers/2025/USRDS_Researcher_Guide_2025.pdf">https://www.niddk.nih.gov/-/media/Files/USRDS/For-Researchers/2025/USRDS_Researcher_Guide_2025.pdf</a></div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -1465,101 +1492,99 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Obtain raw costs from raw claims data</span></span>
 <span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>We use the <span class="in">`get_IN_REV_costs()`</span>, <span class="in">`get_IN_CLM_costs()`</span>, and <span class="in">`get_PS_REV_costs()`</span> functions to extract raw Medicare claims with cost information for patients in the matched cohort.</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>We use the <span class="in">`usRds`</span> functions <span class="in">`get_IN_REV_costs()`</span>, <span class="in">`get_IN_CLM_costs()`</span> and <span class="in">`get_PS_REV_costs()`</span> to extract Medicare claims with payment amounts for 2006 to 2021, for patients in the matched cohort.</span>
 <span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>Medicare claims data are organized into **claim-level (CLM)** files and **revenue center (REV)** files, which differ in their level of aggregation. CLM files summarize costs at the claim level, while REV files contain detailed line-item charges associated with individual services within a claim.</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>The USRDS claims files hold payments at more than one level <span class="co">[</span><span class="ot">@usrds2025guide</span><span class="co">]</span>:</span>
 <span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>For example, a home health agency may submit a single claim covering a multi-day episode of care. This episode appears as **one row in a CLM file** and as **multiple rows in the corresponding REV file**, reflecting individual billed services. As a result, costs from CLM and REV files for the same service year should not be summed, as this would lead to double counting.</span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>For **inpatient (Part A) services**, Medicare reimbursement is based on diagnosis-related groups (DRGs), and itemized line-item billing is not permitted. Accordingly, inpatient costs are obtained exclusively from CLM files, which capture the full reimbursed amount for each inpatient stay.</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>For **physician/supplier (Part B) services**, claim-level CLM files are not available prior to 2012 in the USRDS. Therefore, revenue center files are used to capture physician/supplier-related costs for earlier years.</span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>These distinctions follow standard guidance in the <span class="co">[</span><span class="ot">USRDS Researcher’s Guide</span><span class="co">](https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds/for-researchers/researchers-guide)</span> and <span class="co">[</span><span class="ot">CMS Medicare billing documentation</span><span class="co">](  https://www.cms.gov/medicare/payment/prospective-payment-systems/ipps)</span>.</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: raw-costs</span></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Institutional claims** (inpatient, outpatient, skilled nursing, home health and hospice) come as a claim file, with one row per claim and the Medicare payment for the whole claim (<span class="in">`CLM_AMT`</span>), and a revenue-center detail file, with one row per revenue center on the claim. <span class="in">`get_IN_CLM_costs()`</span> reads the claim files and <span class="in">`get_IN_REV_costs()`</span> the detail files.</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Revenue-center lines** carry charges (<span class="in">`REV_CH`</span>) and, for outpatient, home health and hospice claims, a payment (<span class="in">`REVPMT`</span>). Inpatient and skilled nursing lines have no payment field (Appendix B), so inpatient payments come from the claim file only.</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Claim payments and revenue-center payments describe the same services**, so adding them would count those services twice. For outpatient claims, summed <span class="in">`REVPMT`</span> is about 3% higher than <span class="in">`CLM_AMT`</span> overall <span class="co">[</span><span class="ot">@usrds2025guide</span><span class="co">]</span>.</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Physician/supplier claims** are read at the line level: <span class="in">`get_PS_REV_costs()`</span> returns each line's payment (<span class="in">`PMTAMT`</span>), with its submitted and allowed charges. Despite the function's name, these are line files, not revenue-center files. In the files available to this project, physician/supplier claims before 2013 come as combined files rather than separate claim and line files, as listed in <span class="in">`usRds`</span>.</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>The cost outcome uses payment fields (<span class="in">`CLM_AMT`</span>, <span class="in">`REVPMT`</span>, <span class="in">`PMTAMT`</span>), never charges.</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: raw-costs</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## Merge cost data to cohort</span></span>
 <span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## Merge cost data to cohort</span></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>We take the raw claims data and add it to the previously obtained patient cohort data.</span>
 <span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>We take the raw claims data and add it to the previously obtained patient cohort data.</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>This is done as a <span class="co">[</span><span class="ot">nested data frame</span><span class="co">](https://bookdown.org/Maxine/r4ds/nesting.html)</span> for convenience in subsequent analysis.  A single column is a list, with each element of the list being all cost-related entries for a specific patient.  See <span class="co">[</span><span class="ot">https://bookdown.org/Maxine/r4ds/nesting.html</span><span class="co">](https://bookdown.org/Maxine/r4ds/nesting.html)</span> for more information on nested data in R.</span>
 <span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>This is done as a <span class="co">[</span><span class="ot">nested data frame</span><span class="co">](https://bookdown.org/Maxine/r4ds/nesting.html)</span> for convenience in subsequent analysis.  A single column is a list, with each element of the list being all cost-related entries for a specific patient.  See <span class="co">[</span><span class="ot">https://bookdown.org/Maxine/r4ds/nesting.html</span><span class="co">](https://bookdown.org/Maxine/r4ds/nesting.html)</span> for more information on nested data in R.</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>Patients with no observed claims in a given cost category are assigned empty <span class="co">[</span><span class="ot">tibbles</span><span class="co">](https://tibble.tidyverse.org/)</span> to ensure consistent downstream processing.</span>
 <span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>Patients with no observed claims in a given cost category are assigned empty <span class="co">[</span><span class="ot">tibbles</span><span class="co">](https://tibble.tidyverse.org/)</span> to ensure consistent downstream processing.</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>This structure allows costs to be prorated, inflated, and aggregated relative to patient-specific index dates without repeatedly reshaping the data.</span>
 <span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>This structure allows costs to be prorated, inflated, and aggregated relative to patient-specific index dates without repeatedly reshaping the data.</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>While nested data is convenient from many perspectives, it does require the use of the <span class="in">`map()`</span> family of functions from the <span class="co">[</span><span class="ot">`purrr`</span><span class="co">](https://purrr.tidyverse.org/)</span> package.</span>
 <span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>While nested data is convenient from many perspectives, it does require the use of the <span class="in">`map()`</span> family of functions from the <span class="co">[</span><span class="ot">`purrr`</span><span class="co">](https://purrr.tidyverse.org/)</span> package.</span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: merge-costs</span></span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: merge-costs</span></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## Totalling costs</span></span>
 <span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a><span class="fu">## Totalling costs</span></span>
-<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>We start by testing the data frame to make sure that the analysis worked by writing appropriate code to calculate all costs in the USRDS for each patient,</span>
-<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>starting from the index date.  This is for validation only and is not used for modeling.</span>
-<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: total-costs</span></span>
-<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>We start by testing the data frame to make sure that the analysis worked by writing appropriate code to calculate all costs in the USRDS for each patient,</span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>starting from the index date.  This is for validation only and is not used for modeling.</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: total-costs</span></span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="fu">## Costs from start date to end date</span></span>
 <span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Costs from start date to end date</span></span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>We now write code that totals costs for each patient, accounting for the start and finish dates:</span>
 <span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a>We now write code that totals costs for each patient, accounting for the start and finish dates:</span>
-<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Start: The index date for each patient</span>
-<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Finish: The earliest of</span>
-<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>365 days after the index date (<span class="in">`maximum_followup`</span>)</span>
-<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>End of Medicare coverage (minimum 1 day)</span>
-<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Censoring date for end of data (1/1/2022)</span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Start: The index date for each patient</span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Finish: The earliest of</span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>365 days after the index date (<span class="in">`maximum_followup`</span>)</span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>End of Medicare coverage (minimum 1 day)</span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Censoring date for end of data (1/1/2022)</span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>**Current code:** death is not yet an end point of follow-up; it is recorded as the reason follow-up ended only when it falls on one of the dates above (<span class="co">[</span><span class="ot">#10</span><span class="co">](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/10)</span>). See <span class="co">[</span><span class="ot">End of follow-up</span><span class="co">](study_costs.qmd#end-of-follow-up)</span>.</span>
 <span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a>**Current code:** death is not yet an end point of follow-up; it is recorded as the reason follow-up ended only when it falls on one of the dates above (<span class="co">[</span><span class="ot">#10</span><span class="co">](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/10)</span>). See <span class="co">[</span><span class="ot">End of follow-up</span><span class="co">](study_costs.qmd#end-of-follow-up)</span>.</span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a>In addition to total costs, we also calculated total costs grouped by type (Inpatient, Outpatient, Home Health, etc.).</span>
 <span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>In addition to total costs, we also calculated total costs grouped by type (Inpatient, Outpatient, Home Health, etc.).</span>
-<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a>Since claims can span many days, we use the <span class="in">`prorate_costs_by_day()`</span> function from the <span class="in">`usRds`</span> package to divide the costs evenly among the days spanned by</span>
-<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>each claim.  Proration is applied before date filtering so that only the portion of each claim overlapping the analytic window contributes to total cost.</span>
-<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: prorated-costs</span></span>
-<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>Since claims can span many days, we use the <span class="in">`prorate_costs_by_day()`</span> function from the <span class="in">`usRds`</span> package to divide the costs evenly among the days spanned by</span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a>each claim.  Proration is applied before date filtering so that only the portion of each claim overlapping the analytic window contributes to total cost.</span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: prorated-costs</span></span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Accounting for inflation</span></span>
 <span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a><span class="fu">## Accounting for inflation</span></span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>We repeat the analysis above, except that we use the <span class="in">`adjust_costs_for_inflation()`</span> function from the <span class="in">`usRds`</span> package to adjust costs for medical inflation, using the month and year listed in the <span class="in">`R/setup.R`</span> file to establish the time point at which all costs are anchored based on the <span class="co">[</span><span class="ot">medical Consumer Price Index</span><span class="co">](https://www.bls.gov/cpi/factsheets/medical-care.htm)</span>.</span>
 <span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a>We repeat the analysis above, except that we use the <span class="in">`adjust_costs_for_inflation()`</span> function from the <span class="in">`usRds`</span> package to adjust costs for medical inflation, using the month and year listed in the <span class="in">`R/setup.R`</span> file to establish the time point at which all costs are anchored based on the <span class="co">[</span><span class="ot">medical Consumer Price Index</span><span class="co">](https://www.bls.gov/cpi/factsheets/medical-care.htm)</span>.</span>
-<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: inflation-adjustment</span></span>
-<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: inflation-adjustment</span></span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a><span class="fu">## Grouping by month</span></span>
 <span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a><span class="fu">## Grouping by month</span></span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a>In order to model costs appropriately, we group costs for each patient into 30-day increments, starting from the beginning of the look-back period defined in the <span class="in">`R/setup.R`</span> file.  This will allow us to estimate full-year costs for patients who lose their coverage or are censored before the end of a full-year but do not experience death.</span>
 <span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a>In order to model costs appropriately, we group costs for each patient into 30-day increments, starting from the beginning of the look-back period defined in the <span class="in">`R/setup.R`</span> file.  This will allow us to estimate full-year costs for patients who lose their coverage or are censored before the end of a full-year but do not experience death.</span>
-<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: monthly-costs</span></span>
-<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: monthly-costs</span></span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a><span class="fu">## Final preparation</span></span>
 <span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a><span class="fu">## Final preparation</span></span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a>We prepare a final data-set for modeling from the monthly data set by removing the granular cost data and removing months where the patients are not under observation.  We also create a dataframe with the number of patients under observation in each month from the beginning of the look-back period to the end of follow-up.</span>
 <span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a>We prepare a final data-set for modeling from the monthly data set by removing the granular cost data and removing months where the patients are not under observation.  We also create a dataframe with the number of patients under observation in each month from the beginning of the look-back period to the end of follow-up.</span>
-<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: final-data-set</span></span>
-<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a>The resulting data frames are used in the <span class="in">`R/modeling.R`</span>, <span class="in">`R/tables.R`</span>, and <span class="in">`R/figures.R`</span> scripts.</span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: final-data-set</span></span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a>The resulting data frames are used in the <span class="in">`R/modeling.R`</span>, <span class="in">`R/tables.R`</span>, and <span class="in">`R/figures.R`</span> scripts.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
