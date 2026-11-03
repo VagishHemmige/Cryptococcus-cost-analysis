@@ -1,0 +1,93 @@
+---
+title: "Methodological background"
+format: html
+---
+
+This page explains, in general terms and without code, the data and methods a study like this one rests on: what the United States Renal Data System and Medicare claims are, how claims become costs, how comparison patients are chosen, and why cost data need particular models. What this study chose, and how its code stands against its plan, is on [Study design and methods](study_methods.qmd).
+
+## The United States Renal Data System
+
+The United States Renal Data System (USRDS) is a national data system on chronic kidney disease and kidney failure in the United States, funded by the National Institute of Diabetes and Digestive and Kidney Diseases. It links three kinds of record under one patient identifier:
+
+- registry records for people with kidney failure, including dates of dialysis, transplant and death;
+- transplant records from the Organ Procurement and Transplantation Network (OPTN), for kidney and kidney–pancreas recipients;
+- Medicare enrollment and claims.
+
+## Medicare claims
+
+A claim is a bill submitted to Medicare for a service. There are two kinds:
+
+- **Institutional claims** are bills from facilities: hospital inpatient stays, hospital outpatient care, skilled nursing facilities, home health agencies, hospices and dialysis facilities. Each claim covers one stay or episode, with dates from its first to its last day of service.
+- **Physician/supplier claims** are bills from clinicians, laboratories and suppliers. Each line of a claim is one service.
+
+## Medicare as primary payer
+
+Medicare claims give a complete picture of a person's care only when traditional (fee-for-service) Medicare pays first. When a Medicare Advantage plan or an employer's insurance pays first, many services never appear in the Medicare claims.
+
+For a month outside a period of fee-for-service primary coverage, the Medicare claims are incomplete: care may have been billed to someone else. Such a month cannot be treated as a month with no cost.
+
+Many kidney transplant recipients lose Medicare coverage over time: Medicare entitlement based only on kidney failure ends 36 months after a successful transplant, unless the person qualifies another way (for example by age or disability).
+
+## Finding a diagnosis in claims
+
+A claim shows that a clinician recorded a diagnosis for billing. It does not show that the diagnosis was confirmed, and codes are sometimes recorded while a diagnosis is being ruled out. Diagnoses identified from claims are therefore sometimes wrong.
+
+## Risk-set matching
+
+In **risk-set matching** (also called incidence density sampling), each case is compared with people drawn from its *risk set*: everyone who, at the point the case is diagnosed on the study's time scale (for example, time since transplant), is still eligible and has not been diagnosed. That point is the case's *time zero*, the date from which outcomes are counted, and controls are given the same time zero.
+
+Because controls are chosen using only what was known at time zero, a person who is diagnosed later can serve as a control before their own diagnosis. Their time before diagnosis is unexposed time, and excluding them would condition on the future.
+
+## Ways of matching
+
+Two common ways to choose controls within a risk set are:
+
+- **Direct covariate matching:** matching on the characteristics themselves, for example exactly on some and within set limits on others.
+- **Propensity score matching:** a model estimates each person's probability of being diagnosed from their characteristics, and each case is matched to controls with a similar score. When the probability is estimated for each month, the score is time-varying.
+
+A common check of whether cases and controls are similar after matching is the standardized mean difference of each characteristic.
+
+## Payments, not charges
+
+Charges, which are the prices providers list on their bills, are much higher than what is paid.
+
+Outpatient, home health and hospice claims also list payments for each revenue center (each department or type of service on the bill). These describe the same services as the claim's payment, so the two should not be added together.
+
+## Spreading a stay across days
+
+An institutional claim that covers several days can be spread evenly across them. For example, a 10-day hospital stay with a Medicare payment of $20,000 counts as $2,000 per day. If the stay runs from 2 days before time zero to 7 days after it, $4,000 falls before time zero and $16,000 after it.
+
+## Missing versus zero cost
+
+- A month in which the person is covered but has no claims has a cost of **zero**: had they needed care, Medicare would have paid for it.
+- A month in which the person is not covered is **not observed**, and is left out rather than recorded as zero.
+- A month that is only partly observed, because follow-up ended partway through, is kept. The number of days observed is recorded, so the analysis can account for it.
+
+## Death and what is estimated
+
+How death is handled defines what is being estimated. If death ends follow-up, the estimate describes the cost of care while people are alive. If the months after death count as zero cost, the estimate also reflects the cost consequences of mortality.
+
+## Why cost data are hard to model
+
+Monthly cost data have three awkward features:
+
+- many months have no cost at all;
+- a few months, usually those with a hospital stay, cost a great deal;
+- the distribution is therefore strongly skewed to the right.
+
+The quantity of interest is the **mean** cost, because the total spent equals the mean times the number of patients. Transforming costs to a log scale makes them easier to model but estimates something else (roughly a geometric mean), and converting back to dollars needs extra steps that can be biased. Models that describe the mean directly avoid this.
+
+## Models for costs
+
+A generalized linear model for monthly cost can include:
+
+- a **log link**, so that the model describes the logarithm of the mean cost rather than the mean of logged costs;
+- a **Tweedie distribution**, which allows exact zeros and a long right tail in the same model;
+- the logarithm of the number of days observed as an **offset**, so that a partly observed month counts in proportion to its length.
+
+Months from the same person, and people in the same matched set, are not independent. Generalized estimating equations give standard errors that allow for this, clustered on the matched set, and also on the patient if one person can appear in more than one matched set. A **cluster bootstrap** gives a confidence interval by resampling whole matched sets with replacement and repeating the whole calculation each time.
+
+## Where to read more
+
+- [Study design and methods](study_methods.qmd): what this study chose, and where its code stands.
+- [Clinical background](background.qmd): the disease, what is known about its cost, and why this question matters.

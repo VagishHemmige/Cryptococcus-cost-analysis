@@ -1,9 +1,9 @@
 ---
-title: "Methods background"
+title: "Study design and methods"
 format: html
 ---
 
-This page explains the study's methods in plain language, without code. The formal specification is the [analysis plan](analysis-plan.qmd); each section below ends by linking the part of the plan that governs it. Three kinds of note mark where the description stands:
+This page explains, in plain language and without code, what this study chose and why. The general background it relies on, such as what USRDS and Medicare claims are and how risk-set matching works, is on [Methodological background](methodological_background.qmd). The formal specification is the [analysis plan](analysis-plan.qmd); each section below ends by linking the part of the plan that governs it. Three kinds of note mark where the description stands:
 
 - **Specified in:** the section of the analysis plan that defines the method.
 - **Current code:** where the code does not yet do what the plan says, what it does now, with a link to the GitHub issue tracking the difference.
@@ -21,32 +21,11 @@ This is a methods-and-code site. No results are shown, because the analysis is n
 
 **Specified in:** [§1 Objective](analysis-plan.qmd#1-objective), [§2 Design](analysis-plan.qmd#2-design), [§8.3 Estimand](analysis-plan.qmd#83-estimand).
 
-## Data source
+## Data used
 
-### The United States Renal Data System
+The data come from the United States Renal Data System and its linked Medicare claims, described on [Methodological background](methodological_background.qmd#the-united-states-renal-data-system). This study uses the patient, transplant, payer history, treatment history and death files, and Medicare Part A and Part B claims. Part D prescription records are planned only where a covariate needs them. Claims from 2006 to 2021 are used, cases are diagnosed between 2007 and 2020, and follow-up ends on 1 January 2022. The data are used under a data use agreement and are not published.
 
-The United States Renal Data System (USRDS) is a national data system on chronic kidney disease and kidney failure in the United States, funded by the National Institute of Diabetes and Digestive and Kidney Diseases. It links three kinds of record under one patient identifier:
-
-- registry records for people with kidney failure, including dates of dialysis, transplant and death;
-- transplant records from the Organ Procurement and Transplantation Network (OPTN), for kidney and kidney–pancreas recipients;
-- Medicare enrollment and claims.
-
-This study uses the patient, transplant, payer history, treatment history and death files, and Medicare Part A and Part B claims. Part D prescription records are planned only where a covariate needs them. Claims from 2006 to 2021 are used, cases are diagnosed between 2007 and 2020, and follow-up ends on 1 January 2022. The data are used under a data use agreement and are not published.
-
-### Medicare claims
-
-A claim is a bill submitted to Medicare for a service. Two kinds are used:
-
-- **Institutional claims** are bills from facilities: hospital inpatient stays, hospital outpatient care, skilled nursing facilities, home health agencies, hospices and dialysis facilities. Each claim covers one stay or episode, with dates from its first to its last day of service.
-- **Physician/supplier claims** are bills from clinicians, laboratories and suppliers. Each line of a claim is one service.
-
-### Why Medicare must be the primary payer
-
-Medicare claims give a complete picture of a person's care only when traditional (fee-for-service) Medicare pays first. When a Medicare Advantage plan or an employer's insurance pays first, many services never appear in the Medicare claims. A person is therefore observed only during periods when fee-for-service Medicare is their primary payer for both Part A and Part B, as recorded in the USRDS payer history file.
-
-A month outside such a period is **not observed**. It is never treated as a month with no cost, because care during that month would have been billed to someone else.
-
-Many kidney transplant recipients lose Medicare coverage over time: Medicare entitlement based only on kidney failure ends 36 months after a successful transplant, unless the person qualifies another way (for example by age or disability). The study's findings therefore apply to recipients with fee-for-service Medicare as their primary payer.
+Both institutional and physician/supplier claims are used ([Medicare claims](methodological_background.qmd#medicare-claims)). Because claims are complete only under fee-for-service primary coverage ([Medicare as primary payer](methodological_background.qmd#medicare-as-primary-payer)), a person is observed only during periods when fee-for-service Medicare is their primary payer for both Part A and Part B, as recorded in the USRDS payer history file. Many kidney transplant recipients lose Medicare coverage over time: Medicare entitlement based only on kidney failure ends 36 months after a successful transplant, unless the person qualifies another way (for example by age or disability). The study's findings therefore apply to recipients with fee-for-service Medicare as their primary payer.
 
 **Specified in:** [§3 Data source](analysis-plan.qmd#3-data-source), [§4.2 Eligibility](analysis-plan.qmd#42-eligibility-at-time-zero-cases-and-controls-alike), [§11 Limitations](analysis-plan.qmd#11-limitations-to-address-in-reporting).
 
@@ -95,7 +74,7 @@ A code in any diagnosis position counts. There is no time limit between the two 
 
 ### What a claims-based definition can and cannot show
 
-A claim shows that a clinician recorded the diagnosis for billing. It does not show that the infection was confirmed by culture, antigen testing or histopathology, and codes are sometimes recorded while a diagnosis is being ruled out. Some cases will therefore be misclassified.
+A claim shows that a clinician recorded the diagnosis for billing. It does not show that the infection was confirmed by culture, antigen testing or histopathology, and codes are sometimes recorded while a diagnosis is being ruled out. Some cases will therefore be misclassified ([Finding a diagnosis in claims](methodological_background.qmd#finding-a-diagnosis-in-claims)).
 
 The 365-day window of complete coverage before diagnosis means that, had the rule been met earlier in that year, it would have been seen. An earlier single record carrying the code can still fall inside the window: when the diagnosis is established by a second record, the first always comes before it. Complete coverage makes it more likely the diagnosis is new, but it does not prove the infection began then. A person with a diagnosis before their first transplant is excluded.
 
@@ -116,14 +95,14 @@ For example, if a case is diagnosed 243 days after their transplant, each of the
 
 ### Risk-set matching
 
-Controls are chosen by **risk-set matching** (also called incidence density sampling). For each case, the *risk set* is everyone who, at the case's time since transplant, is still eligible and has not been diagnosed. Controls are drawn from that set.
+Controls are chosen by risk-set matching ([Risk-set matching](methodological_background.qmd#risk-set-matching)). For each case, the risk set is everyone who, at the case's time since transplant, is still eligible and has not been diagnosed.
 
 Two reasons make time since transplant the right time scale:
 
 - Both the risk of infection and the cost of care change with time since transplant, so cases and controls are compared at the same point in their post-transplant course.
 - Choosing controls among everyone ever transplanted without cryptococcosis would compare cases with people whose follow-up was selected using the future. Risk-set matching uses only what was known at the case's time zero.
 
-For the same reason, a person who is diagnosed later can serve as a control before their own diagnosis. Their time before diagnosis is unexposed time, and excluding them would condition on the future.
+Under the plan, a person who is diagnosed later can serve as a control before their own diagnosis.
 
 **Specified in:** [§5.4 Control eligibility](analysis-plan.qmd#54-control-eligibility), [§6 Matching](analysis-plan.qmd#6-matching).
 
@@ -140,7 +119,7 @@ Under the plan, whichever matching method is chosen:
 - cases are matched in a random order fixed by a recorded seed, and ties between controls are broken at random;
 - cost in the 3 months before time zero is **not** used for matching. It is kept to check whether cases and controls had similar costs before diagnosis.
 
-The plan sets out two matching methods, and has not chosen between them:
+The plan sets out two matching methods, one of each kind described under [Ways of matching](methodological_background.qmd#ways-of-matching), and has not chosen between them:
 
 - **Option A, direct covariate matching:** exact matching on diabetes, cirrhosis and HIV, limits on the difference in age and in calendar date, and preference for the control closest in earlier cost (months −12 to −4). Covariates not matched on are checked for balance and, if imbalanced, adjusted for in the outcome model.
 - **Option B, time-varying propensity score matching:** a model estimates each person's probability of being diagnosed in each month from all the covariates in the plan, and each case is matched to the controls with the closest score at the same time since transplant, within 0.2 standard deviations of the logit of the score.
@@ -169,7 +148,7 @@ A flow diagram follows the cohort from the source population through eligibility
 
 ### Payments, not charges
 
-Cost is measured as the amount **Medicare paid**. Charges, which are the prices providers list on their bills, are much higher than what is paid and are not used. Payments made by patients, other insurers and Medicare Part D are not included.
+Cost is measured as the amount **Medicare paid**; charges are not used ([Payments, not charges](methodological_background.qmd#payments-not-charges)). Payments made by patients, other insurers and Medicare Part D are not included.
 
 Two payment fields are used: the Medicare payment on each institutional claim, and the Medicare payment on each physician/supplier line. Outpatient, home health and hospice claims also list payments for each revenue center (each department or type of service on the bill). These describe the same services as the claim's payment, so the two are never added together.
 
@@ -179,7 +158,7 @@ Two payment fields are used: the Medicare payment on each institutional claim, a
 
 ### Spreading a stay across days
 
-An institutional claim that covers several days is spread evenly across them. For example, a 10-day hospital stay with a Medicare payment of $20,000 counts as $2,000 per day. If the stay runs from 2 days before time zero to 7 days after it, $4,000 falls before time zero and $16,000 after it.
+An institutional claim that covers several days is spread evenly across them ([Spreading a stay across days](methodological_background.qmd#spreading-a-stay-across-days) has a worked example).
 
 **Specified in:** [§7.1 Cost measure](analysis-plan.qmd#71-cost-measure).
 
@@ -197,11 +176,7 @@ All costs are expressed in January 2021 US dollars.
 
 ### Months, partial months, and missing versus zero
 
-Each person's follow-up is divided into 30-day months counted from time zero: month 0 is days 0 to 29, month −3 is days −90 to −61, and month 11, the last, is days 330 to 359. A person-month's cost is the sum of the spread, inflation-adjusted payments for that month.
-
-- A month in which the person is covered but has no claims has a cost of **zero**: had they needed care, Medicare would have paid for it.
-- A month in which the person is not covered is **not observed**, and is left out rather than recorded as zero.
-- A month that is only partly observed, because follow-up ended partway through, is kept. The number of days observed is recorded, and the model accounts for it.
+Each person's follow-up is divided into 30-day months counted from time zero: month 0 is days 0 to 29, month −3 is days −90 to −61, and month 11, the last, is days 330 to 359. A person-month's cost is the sum of the spread, inflation-adjusted payments for that month. Covered months with no claims count as zero, uncovered months are left out, and partly observed months are kept with their days observed ([Missing versus zero cost](methodological_background.qmd#missing-versus-zero-cost)).
 
 **Specified in:** [§7.3 Person-month structure](analysis-plan.qmd#73-person-month-structure).
 
@@ -218,7 +193,7 @@ Follow-up ends at the earliest of:
 
 Graft failure after time zero does not end follow-up. It is one of the ways cryptococcosis may lead to higher cost.
 
-How death is handled defines what is being estimated. If death ends follow-up, the estimate describes the excess cost of care while people are alive. If the months after death count as zero cost, the estimate also reflects the cost consequences of mortality. Whichever is chosen as primary, the other is a sensitivity analysis.
+How death is handled defines what is being estimated ([Death and what is estimated](methodological_background.qmd#death-and-what-is-estimated)). If death ends follow-up, the estimate describes the excess cost of care while people are alive. If the months after death count as zero cost, the estimate also reflects the cost consequences of mortality. Whichever is chosen as primary, the other is a sensitivity analysis.
 
 **Specified in:** [§7.4 End of follow-up](analysis-plan.qmd#74-end-of-follow-up).
 
@@ -228,26 +203,15 @@ How death is handled defines what is being estimated. If death ends follow-up, t
 
 ## Statistical analysis
 
-### Why cost data are hard to model
-
-Monthly cost data have three awkward features:
-
-- many months have no cost at all;
-- a few months, usually those with a hospital stay, cost a great deal;
-- the distribution is therefore strongly skewed to the right.
-
-The quantity of interest is the **mean** cost, because the total spent equals the mean times the number of patients. Transforming costs to a log scale makes them easier to model but estimates something else (roughly a geometric mean), and converting back to dollars needs extra steps that can be biased. Models that describe the mean directly avoid this.
-
 ### The primary model
 
-Each person-month's cost is modelled with a generalized linear model that has:
+Why the model describes mean cost directly is explained under [Why cost data are hard to model](methodological_background.qmd#why-cost-data-are-hard-to-model). Each person-month's cost is modelled with a generalized linear model that has:
 
-- a **log link**, so that the model describes the logarithm of the mean cost rather than the mean of logged costs;
-- a **Tweedie distribution**, which allows exact zeros and a long right tail in the same model;
+- a **log link** and a **Tweedie distribution**;
 - terms for group (case or control), month (as a category) and their interaction, so that the difference between cases and controls can differ in every month;
-- the logarithm of the number of days observed as an **offset**, so that a partly observed month counts in proportion to its length.
+- the logarithm of the number of days observed as an **offset**.
 
-Months from the same person, and people in the same matched set, are not independent. Standard errors therefore come from generalized estimating equations clustered on matched set, and also on patient if one person can appear in more than one matched set.
+What each of these does is explained under [Models for costs](methodological_background.qmd#models-for-costs). Standard errors come from generalized estimating equations clustered on matched set, and also on patient if one person can appear in more than one matched set.
 
 **Specified in:** [§8.4 Primary model](analysis-plan.qmd#84-primary-model).
 
@@ -320,5 +284,6 @@ The study will be reported following STROBE, its RECORD extension for routinely 
 ## Where to read more
 
 - [Clinical background](background.qmd): the disease, what is known about its cost, and why this question matters.
+- [Methodological background](methodological_background.qmd): the data and methods this page relies on, in general terms.
 - [Analysis plan](analysis-plan.qmd): the formal specification and the open decisions.
 - The code pages, starting with [Create cohort](create_cohort.qmd), show how each step is implemented.
