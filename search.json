@@ -48,7 +48,7 @@
     "href": "quarto/architecture.html#website-build",
     "title": "",
     "section": "Website Build",
-    "text": "Website Build\n\n\n\n\n\nflowchart LR\n    RS[\"R/*.R&lt;br/&gt;sections marked ## ---- label\"] --&gt;|knitr::read_chunk| Q[\"quarto/*.qmd&lt;br/&gt;chunks with #| label + eval: false\"]\n    RM[R/modeling.R] --&gt;|\"#| file: whole script\"| QM[quarto/modeling.qmd]\n    Y[_quarto.yml&lt;br/&gt;sidebar, custom-callout filter] --&gt; REN[quarto render]\n    Q --&gt; REN\n    QM --&gt; REN\n    IX[index.qmd] --&gt; REN\n    PD[\"analysis-plan.md, ARCHITECTURE.md,&lt;br/&gt;AGENTS.md, REPOSITORY-BLUEPRINT.md\"] --&gt;|include, or read as text&lt;br/&gt;for ARCHITECTURE.md| QD[quarto/ project-document pages]\n    QD --&gt; REN\n    CK[tests/check-crosslinks.R] -.-&gt;|checks links between&lt;br/&gt;functions page and method pages| Q\n    REN --&gt; DOCS[(gh-pages branch, rendered by&lt;br/&gt;GitHub Actions, served by GitHub Pages)]\n\n\n\n\n\n\n\nEach page calls knitr::read_chunk() on its script, then shows sections by label. A script edit appears on the site at the next render, with no page edit.\nquarto/modeling.qmd includes the whole script with #| file:, so it displays everything in modeling.R, including unused blocks.\n_quarto.yml defines the sidebar, the custom-callout filter (the Rcode callout), and output-dir: docs.\n.github/workflows/publish.yml renders the site on every pull request as a check and, on each push to master, renders it and publishes it to the gh-pages branch, so the live site follows every script or page change. docs/ is the local render and is not committed.\nThe Setup page runs the constants and icd-code-lists sections of R/setup.R to build its summary tables; every other imported section is shown with eval: false.\nquarto/functions.qmd links each helper to the method-page sections that call it, and those sections link back. tests/check-crosslinks.R derives the links from the code and runs in the workflow before the render.\nThe Background pages, quarto/background.qmd (clinical background) and quarto/analysis_methods.qmd (the methods in plain language, linking each step to its section of the plan), are prose only and run no code.\nThe project-document pages (quarto/analysis-plan.qmd, architecture.qmd, agents.qmd, repository-blueprint.qmd) show the root files. The sidebar lists the plan under Background and the other three under Project documents. The plan page uses GitHub-style heading IDs. The Architecture page reads ARCHITECTURE.md as text and turns its mermaid blocks into Quarto diagrams. render: in _quarto.yml limits rendering to index.qmd and quarto/, so the root files are not rendered as pages of their own.",
+    "text": "Website Build\n\n\n\n\n\nflowchart LR\n    RS[\"R/*.R&lt;br/&gt;sections marked ## ---- label\"] --&gt;|knitr::read_chunk| Q[\"quarto/*.qmd&lt;br/&gt;chunks with #| label + eval: false\"]\n    RM[R/modeling.R] --&gt;|\"#| file: whole script\"| QM[quarto/modeling.qmd]\n    Y[_quarto.yml&lt;br/&gt;sidebar, custom-callout filter] --&gt; REN[quarto render]\n    Q --&gt; REN\n    QM --&gt; REN\n    IX[index.qmd] --&gt; REN\n    PD[\"analysis-plan.md, ARCHITECTURE.md,&lt;br/&gt;AGENTS.md, REPOSITORY-BLUEPRINT.md\"] --&gt;|include, or read as text&lt;br/&gt;for ARCHITECTURE.md| QD[quarto/ project-document pages]\n    QD --&gt; REN\n    CK[tests/check-crosslinks.R] -.-&gt;|checks links between&lt;br/&gt;functions page and method pages| Q\n    REN --&gt; DOCS[(gh-pages branch, rendered by&lt;br/&gt;GitHub Actions, served by GitHub Pages)]\n\n\n\n\n\n\n\nEach page calls knitr::read_chunk() on its script, then shows sections by label. A script edit appears on the site at the next render, with no page edit.\nquarto/modeling.qmd includes the whole script with #| file:, so it displays everything in modeling.R, including unused blocks.\n_quarto.yml defines the sidebar, with an icon for each page’s kind (background, code, results, project documents), the custom-callout filter (the Rcode and Results callouts), and output-dir: docs. styles.css colours the sidebar icons to match the callouts.\nquarto/results.qmd is a placeholder under Results that says results are pending. It runs no code.\n.github/workflows/publish.yml renders the site on every pull request as a check and, on each push to master, renders it and publishes it to the gh-pages branch, so the live site follows every script or page change. docs/ is the local render and is not committed.\nThe Setup page runs the constants and icd-code-lists sections of R/setup.R to build its summary tables; every other imported section is shown with eval: false.\nquarto/functions.qmd links each helper to the method-page sections that call it, and those sections link back. tests/check-crosslinks.R derives the links from the code and runs in the workflow before the render.\nThe Background pages, quarto/background.qmd (clinical background) and quarto/analysis_methods.qmd (the methods in plain language, linking each step to its section of the plan), are prose only and run no code.\nThe project-document pages (quarto/analysis-plan.qmd, architecture.qmd, agents.qmd, repository-blueprint.qmd) show the root files. The sidebar lists the plan under Background and the other three under Project documents. The plan page uses GitHub-style heading IDs. The Architecture page reads ARCHITECTURE.md as text and turns its mermaid blocks into Quarto diagrams. render: in _quarto.yml limits rendering to index.qmd and quarto/, so the root files are not rendered as pages of their own.",
     "crumbs": [
       "Project documents",
       "Architecture"
@@ -59,7 +59,7 @@
     "href": "quarto/architecture.html#configuration",
     "title": "",
     "section": "Configuration",
-    "text": "Configuration\n\n\n\n\n\n\n\n\nSetting\nWhere\nEffect\n\n\n\n\ncensor_date\nR/setup.R\nAdministrative end of follow-up\n\n\nminimum_followup, maximum_followup\nR/setup.R\nCase inclusion; 365-day cost window\n\n\nnumber_controls_per_case\nR/setup.R\nTarget controls per case\n\n\ninflation_month, inflation_year\nR/setup.R\nBaseline for adjust_costs_for_inflation()\n\n\nbaseline_months_cost, full_months\nR/setup.R\nPre-index months; panel month range\n\n\ncomorbidity_ICD_list\nR/setup.R\nCondition definitions for cases and covariates\n\n\nMatching calipers (±3 y calendar, ±10 y age, age ≥18)\nR/execute_matching.R, R/functions.R\nHard-coded in both places\n\n\nSite navigation, theme, output dir\n_quarto.yml\nWebsite structure",
+    "text": "Configuration\n\n\n\n\n\n\n\n\nSetting\nWhere\nEffect\n\n\n\n\ncensor_date\nR/setup.R\nAdministrative end of follow-up\n\n\nminimum_followup, maximum_followup\nR/setup.R\nCase inclusion; 365-day cost window\n\n\nnumber_controls_per_case\nR/setup.R\nTarget controls per case\n\n\ninflation_month, inflation_year\nR/setup.R\nBaseline for adjust_costs_for_inflation()\n\n\nbaseline_months_cost, full_months\nR/setup.R\nPre-index months; panel month range\n\n\ncomorbidity_ICD_list\nR/setup.R\nCondition definitions for cases and covariates\n\n\nMatching calipers (±3 y calendar, ±10 y age, age ≥18)\nR/execute_matching.R, R/functions.R\nHard-coded in both places\n\n\nSite navigation, theme, output dir\n_quarto.yml\nWebsite structure\n\n\nSidebar colours\nstyles.css\nColour of each kind of page’s icon",
     "crumbs": [
       "Project documents",
       "Architecture"
@@ -70,7 +70,7 @@
     "href": "quarto/architecture.html#code-references",
     "title": "",
     "section": "Code References",
-    "text": "Code References\n\n\n\n\n\n\n\n\nComponent\nFile\nKey symbols\n\n\n\n\nEntry point\nR/main.R\nsourcing order\n\n\nConstants, code lists\nR/setup.R\ncensor_date, number_controls_per_case, full_months, comorbidity_ICD_list\n\n\nHelpers\nR/functions.R\ncalculate_number_potential_matches(), calculate_total_excess_costs(), plot_mean_monthly_costs()\n\n\nCohort\nR/create_cohort.R\ntx_status, medicare_history, patients_merged2, prematching_cohort\n\n\nMatching\nR/execute_matching.R\nunmatched_patients, matching while loop, post_match_results\n\n\nCosts and panel\nR/postmatch_processing.R\nend_date_analysis, cost_inflated, cost_longitudinal, final_data_set, final_count_df\n\n\nModels\nR/modeling.R\ntemp_formula, fit[[outcome]][[engine]][[family]]\n\n\nOutputs\nR/tables.R, R/figures.R\ntable1, table2_icd, monthly plot loop\n\n\nDeprecated\nR/define_cohort.R\nolder strobe-based cohort script\n\n\nWebsite\n_quarto.yml, index.qmd, quarto/*.qmd, _extensions/, tests/check-crosslinks.R\nread_chunk, custom-callout, render: list\n\n\nExternal (usRds)\n—\nload_usrds_file, get_IN_ICD, get_PS_ICD, establish_dx_date, verify_medicare_primary, create_usrds_cohort, add_cohort_covariate, finalize_usrds_cohort, get_IN_REV_costs, get_IN_CLM_costs, get_PS_REV_costs, prorate_costs_by_day, adjust_costs_for_inflation",
+    "text": "Code References\n\n\n\n\n\n\n\n\nComponent\nFile\nKey symbols\n\n\n\n\nEntry point\nR/main.R\nsourcing order\n\n\nConstants, code lists\nR/setup.R\ncensor_date, number_controls_per_case, full_months, comorbidity_ICD_list\n\n\nHelpers\nR/functions.R\ncalculate_number_potential_matches(), calculate_total_excess_costs(), plot_mean_monthly_costs()\n\n\nCohort\nR/create_cohort.R\ntx_status, medicare_history, patients_merged2, prematching_cohort\n\n\nMatching\nR/execute_matching.R\nunmatched_patients, matching while loop, post_match_results\n\n\nCosts and panel\nR/postmatch_processing.R\nend_date_analysis, cost_inflated, cost_longitudinal, final_data_set, final_count_df\n\n\nModels\nR/modeling.R\ntemp_formula, fit[[outcome]][[engine]][[family]]\n\n\nOutputs\nR/tables.R, R/figures.R\ntable1, table2_icd, monthly plot loop\n\n\nDeprecated\nR/define_cohort.R\nolder strobe-based cohort script\n\n\nWebsite\n_quarto.yml, styles.css, index.qmd, quarto/*.qmd, _extensions/, tests/check-crosslinks.R\nread_chunk, custom-callout, render: list\n\n\nExternal (usRds)\n—\nload_usrds_file, get_IN_ICD, get_PS_ICD, establish_dx_date, verify_medicare_primary, create_usrds_cohort, add_cohort_covariate, finalize_usrds_cohort, get_IN_REV_costs, get_IN_CLM_costs, get_PS_REV_costs, prorate_costs_by_day, adjust_costs_for_inflation",
     "crumbs": [
       "Project documents",
       "Architecture"
@@ -374,23 +374,457 @@
     ]
   },
   {
-    "objectID": "quarto/about.html",
-    "href": "quarto/about.html",
-    "title": "About",
+    "objectID": "quarto/results.html",
+    "href": "quarto/results.html",
+    "title": "Main results",
     "section": "",
-    "text": "Pending",
+    "text": "ResultsPending\n\n\n\nNo results are shown yet. This page will hold the study’s main tables and figures once they have been produced on the USRDS data by an authorized person, checked against the analysis plan, and cleared for release under the USRDS data use agreement.\n\n\nUntil then, the code that will produce them is on the Tables and Figures pages, and what they are meant to estimate is set out in the analysis plan. The rest of this site shows code and explanation only; it never runs the analysis.",
     "crumbs": [
-      "About"
+      "Results",
+      "Main results"
     ]
   },
   {
-    "objectID": "quarto/about.html#other-portions-of-the-analysis",
-    "href": "quarto/about.html#other-portions-of-the-analysis",
-    "title": "About",
+    "objectID": "quarto/functions.html",
+    "href": "quarto/functions.html",
+    "title": "Functions",
+    "section": "",
+    "text": "The code in this script defines helper functions used throughout the analysis.",
+    "crumbs": [
+      "Setup and helper functions",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "quarto/functions.html#plotting-mean-monthly-costs",
+    "href": "quarto/functions.html#plotting-mean-monthly-costs",
+    "title": "Functions",
+    "section": "Plotting mean monthly costs",
+    "text": "Plotting mean monthly costs\nplot_mean_monthly_costs()\nThe following function uses ggplot2 to create a plot of monthly costs with a risk table underneath.\nIts inputs are as follows:\n\nfitted_model: the fit object from models created in the R/modeling.R script\ncountdf: a data frame containing the appropriate count data for cases and controls at each time point, used to create a risk table\n\nThe function uses the emmeans function from the package of the same name to estimate monthly costs. The x-axis (months) is shifted to the right so that the vertical line at x=0 cleanly separates pre-index and post-index months, and cases and controls are dodged slightly so that the error bars do not overlap.\nUsed in the analysis: Figures: Month-by-month plots.\n\n\nClick to show/hide R Code\n#Function that returns a ggplot of the mean cost (with confidence interval) for cryptococcus cases and controls by month\nplot_mean_monthly_costs&lt;-function(fitted_model, countdf=final_count_df) {\n\n  #First, use emmeans to calculate the predicted values from the model assuming 30-day months, then convert to data frame\n  emm_df &lt;- emmeans(\n    fitted_model,\n    ~ patient_type | month,\n    at = list(month_offset = 30),\n    type = \"response\"\n  )%&gt;%as.data.frame()%&gt;%\n    \n    #Shifts all points and error_bars 0.5 to the right to avoid the zero-line\n    mutate(month=0.5+as.numeric(month))%&gt;%\n    \n    #Move cases 0.1 to the right and controls 0.1 to the left to improve legibility\n  mutate(month=ifelse(patient_type==\"Case\", month+0.1, month-0.1))%&gt;%\n    mutate(\n      estimate = if (\"response\" %in% names(.)) response else emmean)\n  \n  monthly_plot &lt;- list()\n  \n  # Main plot\n  monthly_plot[[\"main\"]] &lt;- ggplot(data = emm_df) +\n    geom_point(aes(x = month, y = estimate, color = patient_type)) +\n    geom_errorbar(\n      aes(\n        x = month,\n        ymin = asymp.LCL,\n        ymax = asymp.UCL,\n        color = patient_type\n      ),\n      width = 0.1\n    ) +\n    geom_vline(xintercept = 0,\n               linetype = \"dashed\",\n               color = \"gray50\") +\n    theme_classic() +\n    labs(\n      x = \"Month\",\n      y = \"Inflation-adjusted cost per month (dollars)\",\n      color = \"Patient group\"\n    )+\n    theme(legend.position = \"bottom\")\n  \n  # Risk table\n  monthly_plot[[\"risk_table\"]] &lt;- countdf %&gt;%\n    mutate(month = 0.5 + as.numeric(month),\n           y_position = ifelse(patient_type == \"Case\", 0.4, 0.6)) %&gt;%\n    ggplot() +\n    geom_text(\n      aes(x = month, y = y_position, label = n, color=patient_type),\n      size = 3\n    )+\n    coord_cartesian(ylim = c(0.3, 0.7)) +\n    theme_void() +\n    theme(\n      plot.margin = margin(t = -5, b = 5),\n      legend.position = \"none\")\n  \n  # Combine plots\n  monthly_plot[[\"main\"]] /\n    monthly_plot[[\"risk_table\"]] +\n    plot_layout(heights = c(9, 1), guides = \"keep\")+\n    plot_annotation(\n      caption = \"Bottom panel shows N at risk by month\"\n    )\n  \n}",
+    "crumbs": [
+      "Setup and helper functions",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "quarto/functions.html#calculating-the-number-of-potential-matches",
+    "href": "quarto/functions.html#calculating-the-number-of-potential-matches",
+    "title": "Functions",
+    "section": "Calculating the number of potential matches",
+    "text": "Calculating the number of potential matches\ncalculate_number_potential_matches()\nThe following function is passed a control df and a number of values for a case patient, and returns the number of distinct controls which are potential matches. The matching algorithm is hard-coded.\nUsed in the analysis: 2. Execute matching: Counting the potential number of matched controls for each case.\n\n\nClick to show/hide R Code\n#Function that defines the number of potential control matches for a case\ncalculate_number_potential_matches&lt;-function(control_df,\n                                             USRDS_ID,\n                                             birthdate,\n                                             cirrhosis_status,\n                                             cmv_status,\n                                             hiv_status,\n                                             diabetes_status,\n                                             matching_date,\n                                             matching_days_since_transplant) {\n  \n  print(paste0(\"Calculating number of potential controls for patient: \", USRDS_ID))\n  control_df%&gt;%\n    \n    #Exact match on cirrhosis, CMV, HIV, and diabetes status\n    filter(cirrhosis==cirrhosis_status)%&gt;%\n    #  filter(CMV==cmv_status)%&gt;%\n    filter(HIV==hiv_status)%&gt;%\n    filter(diabetes==diabetes_status)%&gt;%\n    \n    #Risk set matching\n    filter(tstart&lt;=matching_days_since_transplant)%&gt;%\n    filter(tstop&gt;matching_days_since_transplant)%&gt;%\n    \n    #Calculate date for age calculations/etc.\n    mutate(.baseline_control_date=matching_days_since_transplant+most_recent_transplant_date)%&gt;%\n    \n    #Make sure case and control are sampled within 3 years of each other\n    filter(abs(time_length(interval(.baseline_control_date, matching_date), \"years\")) &lt;=3)%&gt;%\n    \n    #Date matching\n    #  filter(cohort_start_date&lt;=matching_date)%&gt;%\n    #  filter(cohort_stop_date&gt;matching_date)%&gt;%\n    \n    #Age&gt;=18 on index date\n    filter(time_length(interval(BORN, .baseline_control_date), \"years\") &gt;= 18)%&gt;%\n    \n    #Age difference under 10 years, calculated at sampling date\n    filter(abs(time_length(interval(BORN,.baseline_control_date), \"years\")-\n                 time_length(interval(birthdate,matching_date), \"years\")) &lt;=10)%&gt;%\n    \n    #Confirming 365 day Medicare lookback available for potential match\n    verify_medicare_primary(index_date = matching_date, medicare_coverage_df = medicare_history, cache=TRUE)%&gt;%\n    filter(medicare_primary_TF==TRUE)%&gt;%\n    \n    #Count rows after ensuring controls with mult transplants are only counted once \n    distinct(USRDS_ID)%&gt;%\n    nrow()%&gt;%\n    return()\n  \n}",
+    "crumbs": [
+      "Setup and helper functions",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "quarto/functions.html#total-excess-costs",
+    "href": "quarto/functions.html#total-excess-costs",
+    "title": "Functions",
+    "section": "Total excess costs",
+    "text": "Total excess costs\ncalculate_total_excess_costs()\nThis function takes a fit object from a model and calculates the total estimated excess costs and confidence intervals. This object currently only works for models with linear links.\nUsed in the analysis: Tables: Modeled total excess costs.\n\n\nClick to show/hide R Code\n# Calculate total excess costs in a model\ncalculate_total_excess_costs &lt;- function(fitted_model, link = \"linear\") {\n  \n  # Extract coefficients and vcov matrix\n  coef_df &lt;- tidy(fitted_model)\n  vcov_matrix &lt;- vcov(fitted_model)\n  \n  # Get interaction terms\n  interaction_names &lt;- coef_df %&gt;% \n    filter(str_detect(term, \":\")) %&gt;% \n    pull(term)\n  \n  if (link == \"linear\") {\n    # Sum of coefficients\n    sum_estimate &lt;- coef_df %&gt;% \n      filter(term %in% interaction_names) %&gt;% \n      pull(estimate) %&gt;% \n      sum()\n    \n    # Variance of sum\n    sum_variance &lt;- vcov_matrix[interaction_names, interaction_names] %&gt;% \n      sum()\n    \n    # Standard error and CI\n    sum_se &lt;- sqrt(sum_variance)\n    df &lt;- df.residual(fitted_model)\n    \n    tibble(\n      estimate = sum_estimate,\n      std_error = sum_se,\n      conf_low = estimate - qt(0.975, df) * std_error,\n      conf_high = estimate + qt(0.975, df) * std_error,\n      statistic = estimate / std_error,\n      p_value = 2 * pt(-abs(statistic), df)\n    )\n    \n  } else if (link == \"log\") {\n    # Get coefficients for interactions\n    coefs &lt;- coef(fitted_model)[interaction_names]\n    vcov_sub &lt;- vcov_matrix[interaction_names, interaction_names]\n    \n    # Exponentiate each coefficient\n    exp_coefs &lt;- exp(coefs)\n    \n    # Sum of exponentiated coefficients\n    sum_estimate &lt;- sum(exp_coefs)\n    \n    # Delta method for variance\n    # Gradient: derivative of sum(exp(beta)) w.r.t. each beta is exp(beta)\n    gradient &lt;- exp_coefs\n    \n    # Variance using delta method\n    sum_variance &lt;- as.numeric(t(gradient) %*% vcov_sub %*% gradient)\n    sum_se &lt;- sqrt(sum_variance)\n    \n    # CI using normal approximation (GLM)\n    tibble(\n      estimate = sum_estimate,\n      std_error = sum_se,\n      conf_low = estimate - qnorm(0.975) * std_error,\n      conf_high = estimate + qnorm(0.975) * std_error,\n      statistic = estimate / std_error,\n      p_value = 2 * pnorm(-abs(statistic))\n    )\n    \n  } else {\n    stop(\"link must be either 'linear' or 'log'\")\n  }\n}",
+    "crumbs": [
+      "Setup and helper functions",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "quarto/functions.html#other-portions-of-the-analysis",
+    "href": "quarto/functions.html#other-portions-of-the-analysis",
+    "title": "Functions",
+    "section": "Other portions of the analysis",
+    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures",
+    "crumbs": [
+      "Setup and helper functions",
+      "Functions"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html",
+    "href": "quarto/agents.html",
+    "title": "",
+    "section": "",
+    "text": "Project documentsAGENTS.md Code",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html#the-project",
+    "href": "quarto/agents.html#the-project",
+    "title": "",
+    "section": "The project",
+    "text": "The project\nThis repository estimates the excess Medicare payments attributable to cryptococcosis after kidney transplant. It uses United States Renal Data System (USRDS) data, which link OPTN/UNOS transplant records to Medicare claims, and it publishes its code and methods as a Quarto website.\n\nanalysis-plan.md is the source of truth for design. It covers the cohort, exposure, time zero, matching, cost construction, estimands, models, and sensitivity analyses. Code implements the plan; it does not redefine it.\n\nIf the code needs to depart from the plan, change the plan in the same pull request.\nPlan changes are tracked in git, not in a change log inside the plan. Commit each design change on its own, with a message that gives the reason and says whether any results that depend on it had already been seen.\nThe plan lists open design choices as Decision Dn in its “Open decisions” table. Do not settle one in code. Raise it with the maintainer.\n\nThis is an analysis project, not an R package, even though the scripts live in R/ and there is an .Rbuildignore. Do not add DESCRIPTION, NAMESPACE, roxygen, or pkgdown infrastructure. Do not apply CRAN conventions.\nImplementation status lives in GitHub Issues, not in these files. When you find a gap between the code and the plan, or a defect, open or update an issue. Reference the issue in the pull request that closes it.",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html#r-scripts",
+    "href": "quarto/agents.html#r-scripts",
+    "title": "",
+    "section": "R scripts",
+    "text": "R scripts\n\nRunning the analysis. Open the .Rproj and run R/main.R from the project root. main.R sources the other scripts in dependency order. ARCHITECTURE.md describes what each script does and how data flows between them.\nOne job per script: setup, cohort construction, matching, cost processing, modeling, tables, figures. When you add a script:\n\nsource it from main.R at the right point\nupdate ARCHITECTURE.md in the same commit\n\nHeader comment. Each script begins with a comment saying what it does and which objects it needs from earlier scripts.\nConstants, libraries, and code lists live in R/setup.R. Other scripts do not call library(), re-source setup.R, or hard-code values. Any number a reader might want to change, such as a window length, a year, a caliper, or the matching ratio, is a named constant in setup.R.\nHelper functions go in R/functions.R, sourced after setup.R. A function takes its inputs as arguments and does not read global objects, including through default arguments.\nNo side effects outside the project. Do not use setwd(), absolute paths, or writes outside the project. Locate data only through usRds’s set_USRDS_wd().\nExploration code does not stay in pipeline scripts. Delete it, or move it below a chunk label that no Quarto page uses. The website shows the scripts as they are.\nDeprecated scripts. R/define_cohort.R is deprecated (it uses strobe) and is not sourced. Do not build on it; R/create_cohort.R is the active script.",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html#chunk-labels",
+    "href": "quarto/agents.html#chunk-labels",
+    "title": "",
+    "section": "Chunk labels",
+    "text": "Chunk labels\nScripts are divided into labelled sections, so that Quarto pages can show the code without copying it:\n## ---- merge-costs\n\nEvery logical step has a label. A label covers the code from its line to the next label.\nLabels are kebab-case, describe the step, and are unique across all scripts. Quarto pulls chunks by label, so a duplicate label silently picks up the wrong code.\nRenaming or deleting a label breaks the Quarto page that uses it. Search the .qmd files before you change one.\nScripts must still run end to end through main.R. Labels are comments and must never change what the code does.",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html#variable-labels",
+    "href": "quarto/agents.html#variable-labels",
+    "title": "",
+    "section": "Variable labels",
+    "text": "Variable labels\n\nLabel analysis variables with human-readable descriptions, for example with labelled::set_variable_labels(). Tables then show readable names without renaming code by hand.\nFor USRDS variables, use usRds’s apply_usrds_varlabels() and apply_usrds_factors() rather than writing labels by hand.\nLabel each derived variable where it is created. Include units, the price year for costs, and windows where they apply (for example, “Medicare payments, month 0, January 2021 dollars”).",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html#quarto-website",
+    "href": "quarto/agents.html#quarto-website",
+    "title": "",
+    "section": "Quarto website",
+    "text": "Quarto website\nThe Quarto site documents the code. It does not run the analysis.\n\nSetup files: _quarto.yml and index.qmd sit at the root. There is one page per pipeline script in quarto/, named after the script (for example, quarto/create_cohort.qmd for R/create_cohort.R). quarto/results.qmd is a placeholder for results and says they are pending. The custom-callout extension in _extensions/ provides the Rcode and Results callouts.\nShowing code: each page loads its script with knitr::read_chunk(\"../R/&lt;script&gt;.R\") in a hidden chunk. It then shows each labelled section in a chunk with #| eval: false, with prose explaining what the section does and why. Pages link to the script on GitHub and to the scripts it depends on.\nVisual cues. Each kind of page has one icon and colour, set by its sidebar entry’s icon: in _quarto.yml and coloured by styles.css; pages mark the same kind of content with the callout of that colour:\n\n\n\nKind\nSidebar icon\nColour\nCallout\n\n\n\n\nBackground prose\nbook\nblue\n—\n\n\nR code\nlaptop\npink\nRcode (💻)\n\n\nResults\nclipboard-data\ngreen\nResults (📊)\n\n\nProject documents\nfile-earmark-ruled\ngrey\n—\n\n\n\nGive every new page the icon for its kind. styles.css keys colours to icons, not to positions, so adding or moving pages needs no CSS change.\nNever evaluate analysis code in the site. Pages must render without USRDS data. The rendered site therefore contains code and explanation only, never results. The one exception is the Setup page, which runs the constants and icd-code-lists sections of R/setup.R and the tables that summarize them; those sections only define values and read nothing. No other section may run, and those two must never read data. The Architecture page also runs one chunk, which reads ARCHITECTURE.md as text so its diagrams are drawn (see “Project documents”).\nFunction cross-references. R/functions.R has one top-level function per labelled chunk, and the functions page one section per chunk. Under each heading is the function’s name; after the explanation, Used in the analysis: links the method-page sections that call it, and Called by: the functions on the page that call it. Each method-page section whose code calls a helper ends its prose with Functions used:. tests/check-crosslinks.R derives all of these from the code and runs on every pull request; when it fails, run Rscript tests/check-crosslinks.R draft and copy what it prints, rather than writing the links by hand.\nProject documents. analysis-plan.md, ARCHITECTURE.md, AGENTS.md and REPOSITORY-BLUEPRINT.md are shown on the site by pages in quarto/ that only include the root file, which stays the one source: edit the root file, not the page. The render: list in _quarto.yml keeps Quarto from also rendering the root files as pages of their own. Two adjustments keep links and diagrams working on both GitHub and the site:\n\nThe plan page uses GitHub-style heading IDs (from: markdown+gfm_auto_identifiers), so links such as #13-open-decisions resolve.\nThe Architecture page reads ARCHITECTURE.md as text and marks its ```mermaid diagrams as Quarto diagrams. It reads only that file. Write diagrams in ARCHITECTURE.md with plain ```mermaid fences.\n\nRendering: the site renders to docs/, which is not committed. .github/workflows/publish.yml renders it on every pull request as a check and, on each push to master, publishes it to the gh-pages branch, which GitHub Pages serves. Render locally to preview a change to a script’s labels or a page’s prose, but do not commit the output.\nNew scripts: when you add a script, add its page and its sidebar entry in _quarto.yml in the same commit.\nProse must match the code. If a change alters what a section does, update that section’s explanation in the same pull request.",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html#outputs",
+    "href": "quarto/agents.html#outputs",
+    "title": "",
+    "section": "Outputs",
+    "text": "Outputs\n\nExported files: tables and figures are exported by R/tables.R and R/figures.R to tables/ and figures/. Both folders are gitignored, because their contents are results under the disclosure rules below.\nFigures need alt text when they are published.\nREADME.Rmd is the source of README.md. Edit the .Rmd and re-knit; do not edit README.md directly.",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html#restricted-data-applies-to-everyone",
+    "href": "quarto/agents.html#restricted-data-applies-to-everyone",
+    "title": "",
+    "section": "Restricted data (applies to everyone)",
+    "text": "Restricted data (applies to everyone)\nUSRDS and Medicare data are covered by a data use agreement (DUA). The rules below apply to people and agents alike.\n\nNever commit data. That includes USRDS files, extracts, and any saved R object or output derived from patient-level data (.rds, .RData, .parquet, .csv, and the like). Keep data outside the repository, and check .gitignore before adding a new output type.\nAI agents must not read restricted data. Anything an agent opens, prints, or summarizes is sent to the model provider. Agents therefore must not:\n\nopen data files or patient-level objects\nprint rows or head() of them\ndisplay USRDS IDs, person-level dates, ZIP codes, or individual cost records\n\nThis applies unless your own DUA explicitly permits that use. Agents may write code, review it, and run it on synthetic data that mimics the column names and types. Results on real data are produced by an authorized person.\nUse synthetic data for development and tests. Build small synthetic data frames in code, label them clearly as synthetic, and never derive them from real records.\nDisclosure. No table, figure, flowchart box, or text may show a count from 1 to 10. That includes counts that can be recovered by subtraction or from complementary cells, and counts in risk tables under plots. Figures that plot individual people (beeswarm, scatter) are not published. Check every output before it leaves the secure environment, and check the exact wording of the governing DUA before dissemination.",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html#look-in-usrds-first",
+    "href": "quarto/agents.html#look-in-usrds-first",
+    "title": "",
+    "section": "Look in usRds first",
+    "text": "Look in usRds first\nThe usRds package is the first place to look for anything that touches USRDS files: loading files, extracting claims, diagnosis dates, Medicare coverage, cohort helpers, costs, proration, and inflation adjustment.\n\nCheck the package’s function reference before writing project-specific code. Use an existing function, or extend it.\nPackage problems belong in the package. If a usRds function is wrong, or does almost but not exactly what the plan needs, open an issue in the usRds repository rather than documenting it here. Then do one of two things:\n\nfix it in usRds, which is preferred when the behavior is generally useful\nwrap it in this project, with a code comment that links the issue\n\nRemove the wrapper when the issue is fixed.\nBefore relying on a function’s behavior, read its documentation and its open issues. This matters most for verify_medicare_primary(), establish_dx_date(), prorate_costs_by_day(), and adjust_costs_for_inflation(), whose behavior directly sets the cohort and the cost outcome.\nRecord the usRds version (or commit) used for any result.",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html#usrds-data-facts",
+    "href": "quarto/agents.html#usrds-data-facts",
+    "title": "",
+    "section": "USRDS data facts",
+    "text": "USRDS data facts\nSources: USRDS 2025 Researcher’s Guide, Appendix B (data file descriptions), and Appendix C (formats). Check these against the release you are using.\nInstitutional (“IN”) claims cover more than inpatient care. They include inpatient, outpatient, skilled nursing facility (SNF), home health, and hospice claims.\n\nHCFASAF gives the claim type: I inpatient, O outpatient, N SNF, H home health, S hospice. In older files, M is a REBUS inpatient stay.\nFrom 2002 on, each type has its own files: ip_*, op_*, sn_*, hh_*, and hs_*, each with a CLM (claim), DXP (diagnosis/procedure), and DET (revenue center) file.\nInstitutional claims are uniquely identified by USRDS_ID, CLM_FROM, and SEQ_KEYC.\n\nPhysician/supplier (PS) claims come as a CLM (claim), LINE (line item), and DX (diagnosis) file.\n\nEach line carries one diagnosis and one procedure code.\nOne visit produces several lines, so lines must be grouped into encounters for counts of visits.\nBe explicit about whether you use line-level or claim-level amounts and diagnoses.\n\nPayment and charge fields. The cost outcome uses Medicare payments, never charges.\n\n\n\n\n\n\n\n\nFile\nMedicare payment\nCharges (do not use as cost)\n\n\n\n\nInstitutional claim (*_CLM)\nCLM_AMT\nCLM_TOT\n\n\nInstitutional revenue center (*_DET)\nREVPMT\nREV_CH\n\n\nPhysician/supplier claim (PS_CLM)\nCLM_PMT_AMT\nNCH_CARR_SBMT_CHRG_AMT (submitted), NCH_CARR_ALOW_CHRG_AMT (allowed)\n\n\nPhysician/supplier line\nPMTAMT\nSBMTCH (submitted), ALOWCH (allowed)\n\n\n\n\nIP_DET and SN_DET have no REVPMT. Revenue-center payments exist only for outpatient, home health, and hospice lines, so revenue-center payment totals do not include inpatient or SNF care.\nSummed REVPMT for an outpatient claim does not always equal that claim’s CLM_AMT (about 3% higher overall). Never add institutional claim payments and revenue-center payments together; they describe the same services.\nRevenue center code 0001 is the sum of a claim’s other revenue-center charges. Exclude it when summing revenue-center lines.\nInpatient CLM_AMT excludes CMS pass-through payments (indirect medical education, capital, kidney acquisition). The pass-through amount is PER_DIEM × CVR_DCNT. Whether to include it is a design choice for the plan.\nFrom the 2015 files on, PRPAYAMT (primary payer paid amount) and TDEDAMT (beneficiary deductible and coinsurance) are also available.\n\nClaims year. Claims are assigned to a SAF year by the service end date, not the start date.\nData currency (2025 release).\n\nClaims are complete through 2023-12-31, except for the Q1 2024 inpatient file.\nThe core files, including deaths, run through 2024-12-31.\nVital status runs ahead of claims by about a year.\n\nPayer history (payhist)\n\nEligible Medicare fee-for-service primary coverage: PAYER is MPAB or MPO. This is the Researcher’s Guide definition (Example 8), and claims are complete only for these periods.\nNot eligible: HMO (Medicare Advantage), MSP-EGHP, MSP-nonEGHP, OTH, WAIT.\nA month without eligible coverage is unobserved, not zero cost. Code must never turn missing claims during uncovered time into zeros.\nMedicare entitlement based only on ESRD ends three years after a successful transplant. Expect coverage loss after that point.\n\nICD transition. ICD-9-CM applies to services before 2015-10-01. ICD-10-CM and ICD-10-PCS apply on or after that date.\n\nCodes are stored without periods.\nDecide, and document, which date sets the code system for a hospital stay that crosses the transition.\n\nUnclear variables. If a variable’s meaning is unclear, check Appendix B and Appendix C. Do not guess from the name.",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html#coding-conventions",
+    "href": "quarto/agents.html#coding-conventions",
+    "title": "",
+    "section": "Coding conventions",
+    "text": "Coding conventions\n\nFlowchart labels and text are built from the constants in setup.R, not hard-coded. For example, a label that says “2007-2020” or “365+ days” goes stale when the constants change.\nCode lists\n\nEach code carries its category, its ICD version or code type (diagnosis or procedure), and its matching rule (exact or prefix).\nEach code belongs to exactly one category.\nCheck every code against the official CMS ICD-9-CM, ICD-10-CM, ICD-10-PCS, and HCPCS code sets.\nNever invent codes, variables, files, or clinical definitions.\n\nCohort flow uses the flowchart package (as_fc(), fc_filter(), fc_split(), fc_draw()). Every inclusion or exclusion goes through fc_filter(). Never drop rows from $data outside the flowchart; the diagram must reproduce the cohort exactly. The cohort used downstream is the data from the final flowchart step.\nMatching\n\nMatching must be reproducible from a recorded seed. Control selection must not depend on row order.\nThe matched-set identifier is kept as an ordinary column through to the modeling data, so models and bootstraps can cluster on it.\nReport the number of cases with each number of matched controls, including zero.\n\nCosts\n\nEach person-month records both its cost and its number of observed days, so partial months are explicit.\nEvery cost carries its price year. Inflation adjustment uses the constants in setup.R.\nFloors, caps, or other changes to cost values (for example, setting negative months to zero) are design choices. They belong in the plan before they go in code.\n\nJoins\n\nUse join_by() with an explicit relationship where you can.\nAfter every interval join (between(), closest(), overlaps()) and every join of claims to people, assert that it did not multiply rows.\nDecide deliberately what happens to people with no match (NA rows): keep them, exclude them through a flowchart step, or stop with an error.\n\nDates and windows\n\nWrite windows as inclusive day offsets from time zero, matching the plan (for example, month 0 is days 0 to 29).\nTest the window edges on synthetic data.\n\nModels. Keep the code that turns model coefficients into reported dollars (contrasts, retransformation, sums over months) in named functions in R/functions.R, and test them on synthetic data with a known answer.\nStyle: the tidyverse style guide. Style changes go in their own commits, separate from changes that alter analytical behavior.",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html#checks-for-any-change",
+    "href": "quarto/agents.html#checks-for-any-change",
+    "title": "",
+    "section": "Checks for any change",
+    "text": "Checks for any change\nBefore opening a pull request, check the items below that apply to your change.\nCohort construction\n\nDo the order, the denominator, and the labels of each flowchart step match the condition it applies?\nCan each count be reproduced from the code?\nIs the downstream cohort the data from the final flowchart step?\n\nExposure and time zero\n\nWhich claim files, claim types (HCFASAF), diagnosis positions, and date fields define cryptococcosis?\nIs matching exact or prefix, and are both ICD-9 and ICD-10 covered for the right dates?\nIs time zero defined as in the plan for cases and for controls?\nIs every covariate measured using only information from before time zero?\n\nMatching\n\nAre controls at risk and undiagnosed at the case’s time since transplant?\nDoes control eligibility use only information available at that time, with no conditioning on future events?\nIs selection reproducible from the seed, and independent of row order?\nAre unmatched and partially matched cases counted and reported?\n\nCoverage and follow-up\n\nDoes Medicare coverage span the whole look-back window, not just its start?\nAre adjacent coverage spans merged without allowing uncovered days?\nDoes follow-up end at every event the plan lists (death, loss of coverage, maximum follow-up, administrative end)?\n\nCosts\n\nAre payment fields used, not charge fields?\nIs any service counted twice (claim plus revenue-center amounts, or revenue code 0001)?\nAre uncovered months excluded rather than recorded as zero?\nAre claims assigned to the right month around time zero, including multi-day claims?\n\nModels and reported numbers\n\nDoes the reported estimate match the estimand in the plan (which months, which scale, which contrast)?\nDo standard errors account for clustering as the plan specifies?\nDo the tables, figures, and website prose say what the model actually estimates?\n\nStructure and documentation\n\nDoes ARCHITECTURE.md still describe the scripts and the data flow?\nAre the chunk labels unique, and does each script’s Quarto page still find every label it uses?\nDoes every script have a Quarto page and a sidebar entry, and does the pull request’s render check pass?\nAre all site chunks eval: false, apart from the Setup page’s constants and icd-code-lists sections and their summary tables, and the Architecture page’s chunk that reads ARCHITECTURE.md?\nDoes Rscript tests/check-crosslinks.R check pass?\nAre new derived variables labelled?\n\nExecution\n\nDoes main.R run from a clean session (Ctrl+Shift+F10 in RStudio, then source main.R), with no objects left over from earlier work?\nAre paths relative, with no hard-coded data directories? Use set_USRDS_wd().\nAre package versions recorded?\nAre any saved intermediates stale?\n\nValidation on real data (run by an authorized person; report only aggregate, suppressed results)\n\nrow counts before and after each join of claims to people\nthe number of cases with 2, 1, and 0 matched controls\nstandardized mean differences at time zero, including cost in months −3 to −1\nperson-months by group and coverage status, and person-months after death\ncase counts by ICD-9 versus ICD-10 era",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/agents.html#working-with-agents",
+    "href": "quarto/agents.html#working-with-agents",
+    "title": "",
+    "section": "Working with agents",
+    "text": "Working with agents\n\nAutonomy. The person directing an agent decides how much it may do. That person may also give the agent stricter rules of their own, and those take precedence over this section. By default, an agent may:\n\nedit code and documentation\nadd scripts and tests\nrun code and render the site on synthetic data\ncommit to a branch and open a pull request\n\nCollaborators: master is protected. Changes reach it only through a pull request that the maintainer reviews.\nEvery agent, under any level of autonomy:\n\nfollows the restricted-data rules above\nasks before any step that would read real data, run the full pipeline, or make expensive calls\ndoes not settle an open decision in the plan\n\nKeep pull requests focused. In each one, state which section of the plan or which issue it addresses, and what was checked. Say whether it was checked on synthetic data or by reading only. Never describe synthetic results as results.\nFor references, use the USRDS Researcher’s Guide and its appendices, the CMS code sets, and PubMed. Cite what you used.",
+    "crumbs": [
+      "Project documents",
+      "AGENTS.md"
+    ]
+  },
+  {
+    "objectID": "quarto/figures.html",
+    "href": "quarto/figures.html",
+    "title": "Figures",
+    "section": "",
+    "text": "The code in this script generates figures for the manuscript.",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Figures"
+    ]
+  },
+  {
+    "objectID": "quarto/figures.html#final-flowchart",
+    "href": "quarto/figures.html#final-flowchart",
+    "title": "Figures",
+    "section": "Final flowchart",
+    "text": "Final flowchart\nThe following code uses the flowchart package to create a STROBE flowchart for the study.\n\n\nClick to show/hide R Code\n#Final STROBE flowchart\npatients_fc_matched%&gt;%\n  fc_draw()%&gt;%\n  fc_export(\"figures/flowchart.svg\",\n            width=20,\n            height=10)",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Figures"
+    ]
+  },
+  {
+    "objectID": "quarto/figures.html#beeswarm-plot-of-total-inflated-costs",
+    "href": "quarto/figures.html#beeswarm-plot-of-total-inflated-costs",
+    "title": "Figures",
+    "section": "Beeswarm plot of total inflated costs",
+    "text": "Beeswarm plot of total inflated costs\nThe following code uses the ggbeeswarm add-on to ggplot2 to compare cases and controls in terms of total inflated costs post-index. No attempt is made to adjust for censoring or death.\n\n\nClick to show/hide R Code\n#GGplot that is beeswarm of adjusted total costs\ncost_inflated%&gt;%\n  mutate(IN_CLM_365d_cost_adjusted_total=ifelse(IN_CLM_365d_cost_adjusted_total==0, 1, IN_CLM_365d_cost_adjusted_total))%&gt;%\n  ggplot()+\n  geom_quasirandom(mapping=aes(x=patient_type, y=IN_CLM_365d_cost_adjusted_total), alpha=0.1)+\n  scale_y_log10()+\n  theme_classic()",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Figures"
+    ]
+  },
+  {
+    "objectID": "quarto/figures.html#month-by-month-plots",
+    "href": "quarto/figures.html#month-by-month-plots",
+    "title": "Figures",
+    "section": "Month-by-month plots",
+    "text": "Month-by-month plots\nIn order to plot monthly costs predicted from the longitudinal models generated in the R/modeling.R script, we use the plot_mean_monthly_costs() function from the R/functions.R script to create the ggplot objects, and then save as .svg files.\nFunctions used: plot_mean_monthly_costs().\n\n\nClick to show/hide R Code\n#Loop that plots the different outcomes longitudinally\n\nfor (outcome in c(\"grand_total_cost_month\", \"IN_CLM_month_total\", \"PS_REV_month_total\", \"IN_CLM_month_groupedHomeHealth\",\n                  \"IN_CLM_month_groupedHospice\",\"IN_CLM_month_groupedNonclaimauxiliary\",\"IN_CLM_month_groupedDialysis\",\n                  \"IN_CLM_month_groupedOutpatient\",\"IN_CLM_month_groupedInpatient\",\"IN_CLM_month_groupedSkilledNursingFacility\")){\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"glmmTMB\"]][[\"tweedie\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" glmmTMB\", \" \", \"tweedie.svg\"),\n         width=14,\n         height=7\n         )\n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"glmmTMB\"]][[\"linear\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" glmmTMB\", \" \", \"linear.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"gee\"]][[\"linear\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" gee\", \" \", \"linear.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"glmmTMB\"]][[\"log\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" glmmTMB\", \" \", \"log.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"gee\"]][[\"log\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" gee\", \" \", \"log.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n}",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Figures"
+    ]
+  },
+  {
+    "objectID": "quarto/figures.html#other-portions-of-the-analysis",
+    "href": "quarto/figures.html#other-portions-of-the-analysis",
+    "title": "Figures",
+    "section": "Other portions of the analysis",
+    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nAbout: methods, assumptions, and disclosures",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Figures"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Cryptococcosis in kidney transplant recipients is uncommon but potentially catastrophic. When transmission occurs through the donor, it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.\nThe costs of cryptococcus after solid organ transplant are unclear. Although studies have quantified the cost of a single hospitalization for cryptococcus, no study to date has estimated the total excess cost of care due to cryptococcus.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#clinical-background",
+    "href": "index.html#clinical-background",
+    "title": "Overview",
+    "section": "",
+    "text": "Cryptococcosis in kidney transplant recipients is uncommon but potentially catastrophic. When transmission occurs through the donor, it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.\nThe costs of cryptococcus after solid organ transplant are unclear. Although studies have quantified the cost of a single hospitalization for cryptococcus, no study to date has estimated the total excess cost of care due to cryptococcus.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#what-this-analysis-does",
+    "href": "index.html#what-this-analysis-does",
+    "title": "Overview",
+    "section": "What this analysis does",
+    "text": "What this analysis does\nThis project uses the United States Renal Data System to analyze the impact of cryptococcus on costs.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#study-timeline",
+    "href": "index.html#study-timeline",
+    "title": "Overview",
+    "section": "Study timeline and cost trajectories",
+    "text": "Study timeline and cost trajectories\nFigure 1 illustrates how the planned study windows relate to case and control costs. The 365-day eligibility lookback is longer than the monthly cost-outcome window. Disease-related care and diagnostic workup can raise costs before the recorded diagnosis, so the prediagnosis trajectory is part of what the study aims to describe.\n\n\n\n\n\n\nFigure 1: Conceptual study timeframes and mean cost trajectories; no patient data or study estimates are shown. The monthly outcome panel spans days −90 to 359. Earlier dashed curves provide context outside that panel. Shaded differences are illustrative and do not establish causal attribution.\n\n\n\nOpen the figure at full size.\nFor cases, time zero is the first qualifying diagnosis claim; controls are aligned at the same time since their most recent transplant, so their calendar dates may differ. The figure explains the intended windows, not the completeness of observation: coverage loss, death, and partial months require the handling specified in the analysis plan. Earlier costs may also inform planned matching covariates; they are outside the monthly outcome panel shown here.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#methods",
+    "href": "index.html#methods",
+    "title": "Overview",
+    "section": "Methods",
+    "text": "Methods\nWe selected cryptococcus cases based on the following inclusion criteria:\n\nAge 18 or greater\nPrior kidney transplant\nICD9 or ICD10 codes for cryptococcus (2 outpatient or 1 inpatient)\nOne year of Medicare primary coverage lead-in\n\nControls were matched 2:1 to cases based on risk-set sampling on the following:\n\nTime since transplant\nDiabetes\nHIV/AIDS\nAge within 10 years\nSampling date for control within 3 years of sampling date for case\n\nInstitutional claims data were abstracted as well as Physician/Supplier line-item data.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#results",
+    "href": "index.html#results",
+    "title": "Overview",
+    "section": "Results",
+    "text": "Results\nPending. The Main results page will hold them once they are cleared for release.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#site-navigation",
+    "href": "index.html#site-navigation",
+    "title": "Overview",
+    "section": "Site navigation",
+    "text": "Site navigation\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nMain results: Pending; will hold the main tables and figures once they are cleared for release.\nAbout: methods, assumptions, and disclosures\n\n\nReproducibility\nAll analyses presented on this website are fully reproducible.\nThe complete source code used to perform the full analysis and generate the tables and figures is publicly available at this GitHub repo. The R script R/main.R will run the R subscripts needed for this analysis in the order they are to be run. Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#abstractsmanuscripts",
+    "href": "index.html#abstractsmanuscripts",
+    "title": "Overview",
+    "section": "Abstracts/manuscripts",
+    "text": "Abstracts/manuscripts\nThis analysis has yet to be published to date.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "quarto/tables.html",
+    "href": "quarto/tables.html",
+    "title": "Tables",
+    "section": "",
+    "text": "The code in this script generates tables for the manuscript.",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Tables"
+    ]
+  },
+  {
+    "objectID": "quarto/tables.html#table-1",
+    "href": "quarto/tables.html#table-1",
+    "title": "Tables",
+    "section": "Table 1",
+    "text": "Table 1\nThe following code uses the gtsummary package to create a Table 1 comparing cases and controls on key variables measured at the index date, to assess balance after risk-set matching. The code then saves the tables as .docx and as .png files.\n\n\nClick to show/hide R Code\n#Create a table of the post-match results to confirm that demographics were appropriately balanced\ntable1&lt;-post_match_results%&gt;%\n  mutate(age=time_length(interval(BORN, index_date_match), \"years\"))%&gt;%\n  dplyr::select(cirrhosis, CMV, HIV, diabetes, cumulative_transplant_total, current_graft_status,\n                liver_transplant, lung_transplant, heart_transplant, heartlung_transplant,\n                pancreas_transplant, intestinal_transplant,\n                age, SEX, RACE, HISPANIC, RACEETH, RURALURBAN, cryptococcus_dx_date, \n         patient_type)%&gt;%\n  gtsummary::tbl_summary(by=patient_type)%&gt;%\n  add_p()\ntable1%&gt;%\n  gtsummary::as_gt() %&gt;%\n  gt::gtsave(\"tables/table1_baseline.png\")\nfile.exists(\"tables/table1_baseline.docx\") && file.remove(\"tables/table1_baseline.docx\")\ntable1%&gt;%\n  gtsummary::as_gt() %&gt;%\n  gt::gtsave(\"tables/table1_baseline.docx\")",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Tables"
+    ]
+  },
+  {
+    "objectID": "quarto/tables.html#table-2",
+    "href": "quarto/tables.html#table-2",
+    "title": "Tables",
+    "section": "Table 2",
+    "text": "Table 2\nTable 2 lists the International Classification of Diseases (ICD-9 and ICD-10) diagnosis codes used to define baseline comorbidities in the study cohort. Comorbidity definitions were specified a priori in the R/setup.R file and implemented uniformly for cases and matched controls.\nCodes were grouped by clinical condition to reflect common diagnostic categories used in transplant and claims-based research. Both ICD-9 and ICD-10 codes were included to ensure continuity across calendar years spanning the ICD-9–to–ICD-10 transition period. For each comorbidity, all qualifying diagnosis codes are shown explicitly to promote transparency and reproducibility.\nThese comorbidity definitions were used for cohort construction, matching, and covariate adjustment, and were applied using diagnosis information available prior to or at the index date to avoid conditioning on post-exposure information.\nTable 2 is provided as a reference table to facilitate replication of the analytic pipeline and to allow readers to evaluate the clinical face validity of the claims-based comorbidity definitions.\n\n\nClick to show/hide R Code\n#Table of comorbidities generated from lists created in setup.R, then exported \n\ntable2_icd &lt;- comorbidity_ICD_list%&gt;%\n  imap_dfr(., \n           ~tibble(\n             comorbidity = .y,\n             icd_codes_raw = paste(.x, collapse = \", \")\n             )\n           )%&gt;%\n  gt() %&gt;%\n  cols_label(\n    comorbidity   = \"Comorbidity\",\n    icd_codes_raw = \"ICD Codes\"\n  ) %&gt;%\n  cols_width(\n    comorbidity   ~ px(220),\n    icd_codes_raw ~ px(500)\n  ) %&gt;%\n  tab_options(\n    table.font.size = px(12)\n  )%&gt;%\n  tab_header(\n  title = \"ICD-9 and ICD-10 Codes Used to Define Comorbidities\",\n  subtitle = \"Codes grouped by clinical condition\"\n)\ntable2_icd%&gt;%\n  gt::gtsave(\"tables/table2_baseline.png\")\nfile.exists(\"tables/table2_baseline.docx\") && file.remove(\"tables/table2_baseline.docx\")\ntable2_icd%&gt;%\n  gt::gtsave(\"tables/table2_baseline.docx\")",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Tables"
+    ]
+  },
+  {
+    "objectID": "quarto/tables.html#cost-tables",
+    "href": "quarto/tables.html#cost-tables",
+    "title": "Tables",
+    "section": "Cost tables",
+    "text": "Cost tables\nThese tables use the total costs, not the modeled longitudinal costs. Cases and controls are compared. These tables are used for exploration and validation and are not intended for the manuscript.\n\n\nClick to show/hide R Code\n#Examine costs broken down by type\ncost_broken_down%&gt;%\n  select(patient_type, contains(c(\"IN_REV_365d_cost\", \"IN_CLM_365d_cost\", \"PS_REV_365d_cost\")))%&gt;%\n  gtsummary::tbl_summary(by=patient_type)%&gt;%\n  add_p()\n\n#Examine costs broken down by type and adjusted for inflation (medians)\ncost_inflated%&gt;%\n  select(patient_type, contains(c(\"IN_REV_365d_cost\", \"IN_CLM_365d_cost\", \"PS_REV_365d_cost\")))%&gt;%\n  gtsummary::tbl_summary(by=patient_type)%&gt;%\n  add_p()\n\ncost_inflated%&gt;%\n  select(patient_type, contains(c(\"IN_REV_365d_cost\", \"IN_CLM_365d_cost\", \"PS_REV_365d_cost\")))%&gt;%\n  gtsummary::tbl_summary(by=patient_type,\n                         statistic = all_continuous() ~ \"{mean} ({sd})\")%&gt;%\n  add_p()",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Tables"
+    ]
+  },
+  {
+    "objectID": "quarto/tables.html#modeled-total-excess-costs",
+    "href": "quarto/tables.html#modeled-total-excess-costs",
+    "title": "Tables",
+    "section": "Modeled total excess costs",
+    "text": "Modeled total excess costs\nThis code uses the calculate_total_excess_costs() function in the R/functions.R file to estimate the total excess cost in cases compared with controls. see the functions site for more details about the internal workings of the function.\nFunctions used: calculate_total_excess_costs().\n\n\nClick to show/hide R Code\n#Total the grand difference between cases and controls over the entire period of follow up:\ncalculate_total_excess_costs(fit[[\"grand_total_cost_month\"]][[\"gee\"]][[\"linear\"]])",
+    "crumbs": [
+      "Code to create tables and figures",
+      "Tables"
+    ]
+  },
+  {
+    "objectID": "quarto/tables.html#other-portions-of-the-analysis",
+    "href": "quarto/tables.html#other-portions-of-the-analysis",
+    "title": "Tables",
     "section": "Other portions of the analysis",
     "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures",
     "crumbs": [
-      "About"
+      "Code to create tables and figures",
+      "Tables"
+    ]
+  },
+  {
+    "objectID": "quarto/repository-blueprint.html",
+    "href": "quarto/repository-blueprint.html",
+    "title": "",
+    "section": "",
+    "text": "Project documentsRepository blueprint Code",
+    "crumbs": [
+      "Project documents",
+      "Repository blueprint"
+    ]
+  },
+  {
+    "objectID": "quarto/repository-blueprint.html#analytical-scripts",
+    "href": "quarto/repository-blueprint.html#analytical-scripts",
+    "title": "",
+    "section": "Analytical scripts",
+    "text": "Analytical scripts\n\nR/main.R sources definitive scripts in dependency order.\nTypical workflow: setup → cohort construction → processing → modeling → outputs.\nStudy-specific scripts may be grouped into subdirectories by analytical stage.\nR/tables.R and R/figures.R may generate outputs directly or orchestrate specialized scripts.",
+    "crumbs": [
+      "Project documents",
+      "Repository blueprint"
+    ]
+  },
+  {
+    "objectID": "quarto/repository-blueprint.html#documentation",
+    "href": "quarto/repository-blueprint.html#documentation",
+    "title": "",
+    "section": "Documentation",
+    "text": "Documentation\n\nDocument definitive analytical scripts with explanatory Quarto pages; exploratory scripts need not have pages.\nUse Cryptococcus-cost-analysis as an example for Quarto supporting files, chunk imports, callouts, and formatting—not scientific methods.\nQuarto source and rendered output locations may vary by project.",
+    "crumbs": [
+      "Project documents",
+      "Repository blueprint"
+    ]
+  },
+  {
+    "objectID": "quarto/repository-blueprint.html#outputs-and-version-control",
+    "href": "quarto/repository-blueprint.html#outputs-and-version-control",
+    "title": "",
+    "section": "Outputs and version control",
+    "text": "Outputs and version control\n\nTrack approved, nonrestricted outputs when useful for publication; otherwise retain them locally and exclude them from Git.\n.gitignore: Exclude restricted data, credentials, caches, temporary files, and generated outputs unless intentionally tracked (e.g., .Rproj.user/, .Rhistory, .RData, .httr-oauth, .quarto/, cache/, figures/, tables/, *.quarto_ipynb); verify exclusions cover actual output paths without hiding necessary source or reference files.",
+    "crumbs": [
+      "Project documents",
+      "Repository blueprint"
     ]
   },
   {
@@ -504,446 +938,23 @@
     ]
   },
   {
-    "objectID": "quarto/repository-blueprint.html",
-    "href": "quarto/repository-blueprint.html",
-    "title": "",
+    "objectID": "quarto/about.html",
+    "href": "quarto/about.html",
+    "title": "About",
     "section": "",
-    "text": "Project documentsRepository blueprint Code",
+    "text": "Pending",
     "crumbs": [
-      "Project documents",
-      "Repository blueprint"
+      "About"
     ]
   },
   {
-    "objectID": "quarto/repository-blueprint.html#analytical-scripts",
-    "href": "quarto/repository-blueprint.html#analytical-scripts",
-    "title": "",
-    "section": "Analytical scripts",
-    "text": "Analytical scripts\n\nR/main.R sources definitive scripts in dependency order.\nTypical workflow: setup → cohort construction → processing → modeling → outputs.\nStudy-specific scripts may be grouped into subdirectories by analytical stage.\nR/tables.R and R/figures.R may generate outputs directly or orchestrate specialized scripts.",
-    "crumbs": [
-      "Project documents",
-      "Repository blueprint"
-    ]
-  },
-  {
-    "objectID": "quarto/repository-blueprint.html#documentation",
-    "href": "quarto/repository-blueprint.html#documentation",
-    "title": "",
-    "section": "Documentation",
-    "text": "Documentation\n\nDocument definitive analytical scripts with explanatory Quarto pages; exploratory scripts need not have pages.\nUse Cryptococcus-cost-analysis as an example for Quarto supporting files, chunk imports, callouts, and formatting—not scientific methods.\nQuarto source and rendered output locations may vary by project.",
-    "crumbs": [
-      "Project documents",
-      "Repository blueprint"
-    ]
-  },
-  {
-    "objectID": "quarto/repository-blueprint.html#outputs-and-version-control",
-    "href": "quarto/repository-blueprint.html#outputs-and-version-control",
-    "title": "",
-    "section": "Outputs and version control",
-    "text": "Outputs and version control\n\nTrack approved, nonrestricted outputs when useful for publication; otherwise retain them locally and exclude them from Git.\n.gitignore: Exclude restricted data, credentials, caches, temporary files, and generated outputs unless intentionally tracked (e.g., .Rproj.user/, .Rhistory, .RData, .httr-oauth, .quarto/, cache/, figures/, tables/, *.quarto_ipynb); verify exclusions cover actual output paths without hiding necessary source or reference files.",
-    "crumbs": [
-      "Project documents",
-      "Repository blueprint"
-    ]
-  },
-  {
-    "objectID": "quarto/tables.html",
-    "href": "quarto/tables.html",
-    "title": "Tables",
-    "section": "",
-    "text": "The code in this script generates tables for the manuscript.",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Tables"
-    ]
-  },
-  {
-    "objectID": "quarto/tables.html#table-1",
-    "href": "quarto/tables.html#table-1",
-    "title": "Tables",
-    "section": "Table 1",
-    "text": "Table 1\nThe following code uses the gtsummary package to create a Table 1 comparing cases and controls on key variables measured at the index date, to assess balance after risk-set matching. The code then saves the tables as .docx and as .png files.\n\n\nClick to show/hide R Code\n#Create a table of the post-match results to confirm that demographics were appropriately balanced\ntable1&lt;-post_match_results%&gt;%\n  mutate(age=time_length(interval(BORN, index_date_match), \"years\"))%&gt;%\n  dplyr::select(cirrhosis, CMV, HIV, diabetes, cumulative_transplant_total, current_graft_status,\n                liver_transplant, lung_transplant, heart_transplant, heartlung_transplant,\n                pancreas_transplant, intestinal_transplant,\n                age, SEX, RACE, HISPANIC, RACEETH, RURALURBAN, cryptococcus_dx_date, \n         patient_type)%&gt;%\n  gtsummary::tbl_summary(by=patient_type)%&gt;%\n  add_p()\ntable1%&gt;%\n  gtsummary::as_gt() %&gt;%\n  gt::gtsave(\"tables/table1_baseline.png\")\nfile.exists(\"tables/table1_baseline.docx\") && file.remove(\"tables/table1_baseline.docx\")\ntable1%&gt;%\n  gtsummary::as_gt() %&gt;%\n  gt::gtsave(\"tables/table1_baseline.docx\")",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Tables"
-    ]
-  },
-  {
-    "objectID": "quarto/tables.html#table-2",
-    "href": "quarto/tables.html#table-2",
-    "title": "Tables",
-    "section": "Table 2",
-    "text": "Table 2\nTable 2 lists the International Classification of Diseases (ICD-9 and ICD-10) diagnosis codes used to define baseline comorbidities in the study cohort. Comorbidity definitions were specified a priori in the R/setup.R file and implemented uniformly for cases and matched controls.\nCodes were grouped by clinical condition to reflect common diagnostic categories used in transplant and claims-based research. Both ICD-9 and ICD-10 codes were included to ensure continuity across calendar years spanning the ICD-9–to–ICD-10 transition period. For each comorbidity, all qualifying diagnosis codes are shown explicitly to promote transparency and reproducibility.\nThese comorbidity definitions were used for cohort construction, matching, and covariate adjustment, and were applied using diagnosis information available prior to or at the index date to avoid conditioning on post-exposure information.\nTable 2 is provided as a reference table to facilitate replication of the analytic pipeline and to allow readers to evaluate the clinical face validity of the claims-based comorbidity definitions.\n\n\nClick to show/hide R Code\n#Table of comorbidities generated from lists created in setup.R, then exported \n\ntable2_icd &lt;- comorbidity_ICD_list%&gt;%\n  imap_dfr(., \n           ~tibble(\n             comorbidity = .y,\n             icd_codes_raw = paste(.x, collapse = \", \")\n             )\n           )%&gt;%\n  gt() %&gt;%\n  cols_label(\n    comorbidity   = \"Comorbidity\",\n    icd_codes_raw = \"ICD Codes\"\n  ) %&gt;%\n  cols_width(\n    comorbidity   ~ px(220),\n    icd_codes_raw ~ px(500)\n  ) %&gt;%\n  tab_options(\n    table.font.size = px(12)\n  )%&gt;%\n  tab_header(\n  title = \"ICD-9 and ICD-10 Codes Used to Define Comorbidities\",\n  subtitle = \"Codes grouped by clinical condition\"\n)\ntable2_icd%&gt;%\n  gt::gtsave(\"tables/table2_baseline.png\")\nfile.exists(\"tables/table2_baseline.docx\") && file.remove(\"tables/table2_baseline.docx\")\ntable2_icd%&gt;%\n  gt::gtsave(\"tables/table2_baseline.docx\")",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Tables"
-    ]
-  },
-  {
-    "objectID": "quarto/tables.html#cost-tables",
-    "href": "quarto/tables.html#cost-tables",
-    "title": "Tables",
-    "section": "Cost tables",
-    "text": "Cost tables\nThese tables use the total costs, not the modeled longitudinal costs. Cases and controls are compared. These tables are used for exploration and validation and are not intended for the manuscript.\n\n\nClick to show/hide R Code\n#Examine costs broken down by type\ncost_broken_down%&gt;%\n  select(patient_type, contains(c(\"IN_REV_365d_cost\", \"IN_CLM_365d_cost\", \"PS_REV_365d_cost\")))%&gt;%\n  gtsummary::tbl_summary(by=patient_type)%&gt;%\n  add_p()\n\n#Examine costs broken down by type and adjusted for inflation (medians)\ncost_inflated%&gt;%\n  select(patient_type, contains(c(\"IN_REV_365d_cost\", \"IN_CLM_365d_cost\", \"PS_REV_365d_cost\")))%&gt;%\n  gtsummary::tbl_summary(by=patient_type)%&gt;%\n  add_p()\n\ncost_inflated%&gt;%\n  select(patient_type, contains(c(\"IN_REV_365d_cost\", \"IN_CLM_365d_cost\", \"PS_REV_365d_cost\")))%&gt;%\n  gtsummary::tbl_summary(by=patient_type,\n                         statistic = all_continuous() ~ \"{mean} ({sd})\")%&gt;%\n  add_p()",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Tables"
-    ]
-  },
-  {
-    "objectID": "quarto/tables.html#modeled-total-excess-costs",
-    "href": "quarto/tables.html#modeled-total-excess-costs",
-    "title": "Tables",
-    "section": "Modeled total excess costs",
-    "text": "Modeled total excess costs\nThis code uses the calculate_total_excess_costs() function in the R/functions.R file to estimate the total excess cost in cases compared with controls. see the functions site for more details about the internal workings of the function.\nFunctions used: calculate_total_excess_costs().\n\n\nClick to show/hide R Code\n#Total the grand difference between cases and controls over the entire period of follow up:\ncalculate_total_excess_costs(fit[[\"grand_total_cost_month\"]][[\"gee\"]][[\"linear\"]])",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Tables"
-    ]
-  },
-  {
-    "objectID": "quarto/tables.html#other-portions-of-the-analysis",
-    "href": "quarto/tables.html#other-portions-of-the-analysis",
-    "title": "Tables",
+    "objectID": "quarto/about.html#other-portions-of-the-analysis",
+    "href": "quarto/about.html#other-portions-of-the-analysis",
+    "title": "About",
     "section": "Other portions of the analysis",
     "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures",
     "crumbs": [
-      "Code to create tables and figures",
-      "Tables"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Overview",
-    "section": "",
-    "text": "Cryptococcosis in kidney transplant recipients is uncommon but potentially catastrophic. When transmission occurs through the donor, it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.\nThe costs of cryptococcus after solid organ transplant are unclear. Although studies have quantified the cost of a single hospitalization for cryptococcus, no study to date has estimated the total excess cost of care due to cryptococcus.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#clinical-background",
-    "href": "index.html#clinical-background",
-    "title": "Overview",
-    "section": "",
-    "text": "Cryptococcosis in kidney transplant recipients is uncommon but potentially catastrophic. When transmission occurs through the donor, it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.\nThe costs of cryptococcus after solid organ transplant are unclear. Although studies have quantified the cost of a single hospitalization for cryptococcus, no study to date has estimated the total excess cost of care due to cryptococcus.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#what-this-analysis-does",
-    "href": "index.html#what-this-analysis-does",
-    "title": "Overview",
-    "section": "What this analysis does",
-    "text": "What this analysis does\nThis project uses the United States Renal Data System to analyze the impact of cryptococcus on costs.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#study-timeline",
-    "href": "index.html#study-timeline",
-    "title": "Overview",
-    "section": "Study timeline and cost trajectories",
-    "text": "Study timeline and cost trajectories\nFigure 1 illustrates how the planned study windows relate to case and control costs. The 365-day eligibility lookback is longer than the monthly cost-outcome window. Disease-related care and diagnostic workup can raise costs before the recorded diagnosis, so the prediagnosis trajectory is part of what the study aims to describe.\n\n\n\n\n\n\nFigure 1: Conceptual study timeframes and mean cost trajectories; no patient data or study estimates are shown. The monthly outcome panel spans days −90 to 359. Earlier dashed curves provide context outside that panel. Shaded differences are illustrative and do not establish causal attribution.\n\n\n\nOpen the figure at full size.\nFor cases, time zero is the first qualifying diagnosis claim; controls are aligned at the same time since their most recent transplant, so their calendar dates may differ. The figure explains the intended windows, not the completeness of observation: coverage loss, death, and partial months require the handling specified in the analysis plan. Earlier costs may also inform planned matching covariates; they are outside the monthly outcome panel shown here.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#methods",
-    "href": "index.html#methods",
-    "title": "Overview",
-    "section": "Methods",
-    "text": "Methods\nWe selected cryptococcus cases based on the following inclusion criteria:\n\nAge 18 or greater\nPrior kidney transplant\nICD9 or ICD10 codes for cryptococcus (2 outpatient or 1 inpatient)\nOne year of Medicare primary coverage lead-in\n\nControls were matched 2:1 to cases based on risk-set sampling on the following:\n\nTime since transplant\nDiabetes\nHIV/AIDS\nAge within 10 years\nSampling date for control within 3 years of sampling date for case\n\nInstitutional claims data were abstracted as well as Physician/Supplier line-item data.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#results",
-    "href": "index.html#results",
-    "title": "Overview",
-    "section": "Results",
-    "text": "Results\nPending",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#site-navigation",
-    "href": "index.html#site-navigation",
-    "title": "Overview",
-    "section": "Site navigation",
-    "text": "Site navigation\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures\n\n\nReproducibility\nAll analyses presented on this website are fully reproducible.\nThe complete source code used to perform the full analysis and generate the tables and figures is publicly available at this GitHub repo. The R script R/main.R will run the R subscripts needed for this analysis in the order they are to be run. Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#abstractsmanuscripts",
-    "href": "index.html#abstractsmanuscripts",
-    "title": "Overview",
-    "section": "Abstracts/manuscripts",
-    "text": "Abstracts/manuscripts\nThis analysis has yet to be published to date.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "quarto/figures.html",
-    "href": "quarto/figures.html",
-    "title": "Figures",
-    "section": "",
-    "text": "The code in this script generates figures for the manuscript.",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Figures"
-    ]
-  },
-  {
-    "objectID": "quarto/figures.html#final-flowchart",
-    "href": "quarto/figures.html#final-flowchart",
-    "title": "Figures",
-    "section": "Final flowchart",
-    "text": "Final flowchart\nThe following code uses the flowchart package to create a STROBE flowchart for the study.\n\n\nClick to show/hide R Code\n#Final STROBE flowchart\npatients_fc_matched%&gt;%\n  fc_draw()%&gt;%\n  fc_export(\"figures/flowchart.svg\",\n            width=20,\n            height=10)",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Figures"
-    ]
-  },
-  {
-    "objectID": "quarto/figures.html#beeswarm-plot-of-total-inflated-costs",
-    "href": "quarto/figures.html#beeswarm-plot-of-total-inflated-costs",
-    "title": "Figures",
-    "section": "Beeswarm plot of total inflated costs",
-    "text": "Beeswarm plot of total inflated costs\nThe following code uses the ggbeeswarm add-on to ggplot2 to compare cases and controls in terms of total inflated costs post-index. No attempt is made to adjust for censoring or death.\n\n\nClick to show/hide R Code\n#GGplot that is beeswarm of adjusted total costs\ncost_inflated%&gt;%\n  mutate(IN_CLM_365d_cost_adjusted_total=ifelse(IN_CLM_365d_cost_adjusted_total==0, 1, IN_CLM_365d_cost_adjusted_total))%&gt;%\n  ggplot()+\n  geom_quasirandom(mapping=aes(x=patient_type, y=IN_CLM_365d_cost_adjusted_total), alpha=0.1)+\n  scale_y_log10()+\n  theme_classic()",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Figures"
-    ]
-  },
-  {
-    "objectID": "quarto/figures.html#month-by-month-plots",
-    "href": "quarto/figures.html#month-by-month-plots",
-    "title": "Figures",
-    "section": "Month-by-month plots",
-    "text": "Month-by-month plots\nIn order to plot monthly costs predicted from the longitudinal models generated in the R/modeling.R script, we use the plot_mean_monthly_costs() function from the R/functions.R script to create the ggplot objects, and then save as .svg files.\nFunctions used: plot_mean_monthly_costs().\n\n\nClick to show/hide R Code\n#Loop that plots the different outcomes longitudinally\n\nfor (outcome in c(\"grand_total_cost_month\", \"IN_CLM_month_total\", \"PS_REV_month_total\", \"IN_CLM_month_groupedHomeHealth\",\n                  \"IN_CLM_month_groupedHospice\",\"IN_CLM_month_groupedNonclaimauxiliary\",\"IN_CLM_month_groupedDialysis\",\n                  \"IN_CLM_month_groupedOutpatient\",\"IN_CLM_month_groupedInpatient\",\"IN_CLM_month_groupedSkilledNursingFacility\")){\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"glmmTMB\"]][[\"tweedie\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" glmmTMB\", \" \", \"tweedie.svg\"),\n         width=14,\n         height=7\n         )\n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"glmmTMB\"]][[\"linear\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" glmmTMB\", \" \", \"linear.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"gee\"]][[\"linear\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" gee\", \" \", \"linear.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"glmmTMB\"]][[\"log\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" glmmTMB\", \" \", \"log.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n  plot_mean_monthly_costs(fit[[outcome]][[\"gee\"]][[\"log\"]])\n  ggsave(filename = paste0(\"figures/Longitudinal \", outcome,\" gee\", \" \", \"log.svg\"),\n         width=14,\n         height=7\n  )\n  \n  \n}",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Figures"
-    ]
-  },
-  {
-    "objectID": "quarto/figures.html#other-portions-of-the-analysis",
-    "href": "quarto/figures.html#other-portions-of-the-analysis",
-    "title": "Figures",
-    "section": "Other portions of the analysis",
-    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nFunctions: Reusable helper functions for cohort construction, matching, costing, and modeling.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nAbout: methods, assumptions, and disclosures",
-    "crumbs": [
-      "Code to create tables and figures",
-      "Figures"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html",
-    "href": "quarto/agents.html",
-    "title": "",
-    "section": "",
-    "text": "Project documentsAGENTS.md Code",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html#the-project",
-    "href": "quarto/agents.html#the-project",
-    "title": "",
-    "section": "The project",
-    "text": "The project\nThis repository estimates the excess Medicare payments attributable to cryptococcosis after kidney transplant. It uses United States Renal Data System (USRDS) data, which link OPTN/UNOS transplant records to Medicare claims, and it publishes its code and methods as a Quarto website.\n\nanalysis-plan.md is the source of truth for design. It covers the cohort, exposure, time zero, matching, cost construction, estimands, models, and sensitivity analyses. Code implements the plan; it does not redefine it.\n\nIf the code needs to depart from the plan, change the plan in the same pull request.\nPlan changes are tracked in git, not in a change log inside the plan. Commit each design change on its own, with a message that gives the reason and says whether any results that depend on it had already been seen.\nThe plan lists open design choices as Decision Dn in its “Open decisions” table. Do not settle one in code. Raise it with the maintainer.\n\nThis is an analysis project, not an R package, even though the scripts live in R/ and there is an .Rbuildignore. Do not add DESCRIPTION, NAMESPACE, roxygen, or pkgdown infrastructure. Do not apply CRAN conventions.\nImplementation status lives in GitHub Issues, not in these files. When you find a gap between the code and the plan, or a defect, open or update an issue. Reference the issue in the pull request that closes it.",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html#r-scripts",
-    "href": "quarto/agents.html#r-scripts",
-    "title": "",
-    "section": "R scripts",
-    "text": "R scripts\n\nRunning the analysis. Open the .Rproj and run R/main.R from the project root. main.R sources the other scripts in dependency order. ARCHITECTURE.md describes what each script does and how data flows between them.\nOne job per script: setup, cohort construction, matching, cost processing, modeling, tables, figures. When you add a script:\n\nsource it from main.R at the right point\nupdate ARCHITECTURE.md in the same commit\n\nHeader comment. Each script begins with a comment saying what it does and which objects it needs from earlier scripts.\nConstants, libraries, and code lists live in R/setup.R. Other scripts do not call library(), re-source setup.R, or hard-code values. Any number a reader might want to change, such as a window length, a year, a caliper, or the matching ratio, is a named constant in setup.R.\nHelper functions go in R/functions.R, sourced after setup.R. A function takes its inputs as arguments and does not read global objects, including through default arguments.\nNo side effects outside the project. Do not use setwd(), absolute paths, or writes outside the project. Locate data only through usRds’s set_USRDS_wd().\nExploration code does not stay in pipeline scripts. Delete it, or move it below a chunk label that no Quarto page uses. The website shows the scripts as they are.\nDeprecated scripts. R/define_cohort.R is deprecated (it uses strobe) and is not sourced. Do not build on it; R/create_cohort.R is the active script.",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html#chunk-labels",
-    "href": "quarto/agents.html#chunk-labels",
-    "title": "",
-    "section": "Chunk labels",
-    "text": "Chunk labels\nScripts are divided into labelled sections, so that Quarto pages can show the code without copying it:\n## ---- merge-costs\n\nEvery logical step has a label. A label covers the code from its line to the next label.\nLabels are kebab-case, describe the step, and are unique across all scripts. Quarto pulls chunks by label, so a duplicate label silently picks up the wrong code.\nRenaming or deleting a label breaks the Quarto page that uses it. Search the .qmd files before you change one.\nScripts must still run end to end through main.R. Labels are comments and must never change what the code does.",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html#variable-labels",
-    "href": "quarto/agents.html#variable-labels",
-    "title": "",
-    "section": "Variable labels",
-    "text": "Variable labels\n\nLabel analysis variables with human-readable descriptions, for example with labelled::set_variable_labels(). Tables then show readable names without renaming code by hand.\nFor USRDS variables, use usRds’s apply_usrds_varlabels() and apply_usrds_factors() rather than writing labels by hand.\nLabel each derived variable where it is created. Include units, the price year for costs, and windows where they apply (for example, “Medicare payments, month 0, January 2021 dollars”).",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html#quarto-website",
-    "href": "quarto/agents.html#quarto-website",
-    "title": "",
-    "section": "Quarto website",
-    "text": "Quarto website\nThe Quarto site documents the code. It does not run the analysis.\n\nSetup files: _quarto.yml and index.qmd sit at the root. There is one page per pipeline script in quarto/, named after the script (for example, quarto/create_cohort.qmd for R/create_cohort.R). The custom-callout extension in _extensions/ provides the Rcode callout.\nShowing code: each page loads its script with knitr::read_chunk(\"../R/&lt;script&gt;.R\") in a hidden chunk. It then shows each labelled section in a chunk with #| eval: false, with prose explaining what the section does and why. Pages link to the script on GitHub and to the scripts it depends on.\nNever evaluate analysis code in the site. Pages must render without USRDS data. The rendered site therefore contains code and explanation only, never results. The one exception is the Setup page, which runs the constants and icd-code-lists sections of R/setup.R and the tables that summarize them; those sections only define values and read nothing. No other section may run, and those two must never read data. The Architecture page also runs one chunk, which reads ARCHITECTURE.md as text so its diagrams are drawn (see “Project documents”).\nFunction cross-references. R/functions.R has one top-level function per labelled chunk, and the functions page one section per chunk. Under each heading is the function’s name; after the explanation, Used in the analysis: links the method-page sections that call it, and Called by: the functions on the page that call it. Each method-page section whose code calls a helper ends its prose with Functions used:. tests/check-crosslinks.R derives all of these from the code and runs on every pull request; when it fails, run Rscript tests/check-crosslinks.R draft and copy what it prints, rather than writing the links by hand.\nProject documents. analysis-plan.md, ARCHITECTURE.md, AGENTS.md and REPOSITORY-BLUEPRINT.md are shown on the site by pages in quarto/ that only include the root file, which stays the one source: edit the root file, not the page. The render: list in _quarto.yml keeps Quarto from also rendering the root files as pages of their own. Two adjustments keep links and diagrams working on both GitHub and the site:\n\nThe plan page uses GitHub-style heading IDs (from: markdown+gfm_auto_identifiers), so links such as #13-open-decisions resolve.\nThe Architecture page reads ARCHITECTURE.md as text and marks its ```mermaid diagrams as Quarto diagrams. It reads only that file. Write diagrams in ARCHITECTURE.md with plain ```mermaid fences.\n\nRendering: the site renders to docs/, which is not committed. .github/workflows/publish.yml renders it on every pull request as a check and, on each push to master, publishes it to the gh-pages branch, which GitHub Pages serves. Render locally to preview a change to a script’s labels or a page’s prose, but do not commit the output.\nNew scripts: when you add a script, add its page and its sidebar entry in _quarto.yml in the same commit.\nProse must match the code. If a change alters what a section does, update that section’s explanation in the same pull request.",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html#outputs",
-    "href": "quarto/agents.html#outputs",
-    "title": "",
-    "section": "Outputs",
-    "text": "Outputs\n\nExported files: tables and figures are exported by R/tables.R and R/figures.R to tables/ and figures/. Both folders are gitignored, because their contents are results under the disclosure rules below.\nFigures need alt text when they are published.\nREADME.Rmd is the source of README.md. Edit the .Rmd and re-knit; do not edit README.md directly.",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html#restricted-data-applies-to-everyone",
-    "href": "quarto/agents.html#restricted-data-applies-to-everyone",
-    "title": "",
-    "section": "Restricted data (applies to everyone)",
-    "text": "Restricted data (applies to everyone)\nUSRDS and Medicare data are covered by a data use agreement (DUA). The rules below apply to people and agents alike.\n\nNever commit data. That includes USRDS files, extracts, and any saved R object or output derived from patient-level data (.rds, .RData, .parquet, .csv, and the like). Keep data outside the repository, and check .gitignore before adding a new output type.\nAI agents must not read restricted data. Anything an agent opens, prints, or summarizes is sent to the model provider. Agents therefore must not:\n\nopen data files or patient-level objects\nprint rows or head() of them\ndisplay USRDS IDs, person-level dates, ZIP codes, or individual cost records\n\nThis applies unless your own DUA explicitly permits that use. Agents may write code, review it, and run it on synthetic data that mimics the column names and types. Results on real data are produced by an authorized person.\nUse synthetic data for development and tests. Build small synthetic data frames in code, label them clearly as synthetic, and never derive them from real records.\nDisclosure. No table, figure, flowchart box, or text may show a count from 1 to 10. That includes counts that can be recovered by subtraction or from complementary cells, and counts in risk tables under plots. Figures that plot individual people (beeswarm, scatter) are not published. Check every output before it leaves the secure environment, and check the exact wording of the governing DUA before dissemination.",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html#look-in-usrds-first",
-    "href": "quarto/agents.html#look-in-usrds-first",
-    "title": "",
-    "section": "Look in usRds first",
-    "text": "Look in usRds first\nThe usRds package is the first place to look for anything that touches USRDS files: loading files, extracting claims, diagnosis dates, Medicare coverage, cohort helpers, costs, proration, and inflation adjustment.\n\nCheck the package’s function reference before writing project-specific code. Use an existing function, or extend it.\nPackage problems belong in the package. If a usRds function is wrong, or does almost but not exactly what the plan needs, open an issue in the usRds repository rather than documenting it here. Then do one of two things:\n\nfix it in usRds, which is preferred when the behavior is generally useful\nwrap it in this project, with a code comment that links the issue\n\nRemove the wrapper when the issue is fixed.\nBefore relying on a function’s behavior, read its documentation and its open issues. This matters most for verify_medicare_primary(), establish_dx_date(), prorate_costs_by_day(), and adjust_costs_for_inflation(), whose behavior directly sets the cohort and the cost outcome.\nRecord the usRds version (or commit) used for any result.",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html#usrds-data-facts",
-    "href": "quarto/agents.html#usrds-data-facts",
-    "title": "",
-    "section": "USRDS data facts",
-    "text": "USRDS data facts\nSources: USRDS 2025 Researcher’s Guide, Appendix B (data file descriptions), and Appendix C (formats). Check these against the release you are using.\nInstitutional (“IN”) claims cover more than inpatient care. They include inpatient, outpatient, skilled nursing facility (SNF), home health, and hospice claims.\n\nHCFASAF gives the claim type: I inpatient, O outpatient, N SNF, H home health, S hospice. In older files, M is a REBUS inpatient stay.\nFrom 2002 on, each type has its own files: ip_*, op_*, sn_*, hh_*, and hs_*, each with a CLM (claim), DXP (diagnosis/procedure), and DET (revenue center) file.\nInstitutional claims are uniquely identified by USRDS_ID, CLM_FROM, and SEQ_KEYC.\n\nPhysician/supplier (PS) claims come as a CLM (claim), LINE (line item), and DX (diagnosis) file.\n\nEach line carries one diagnosis and one procedure code.\nOne visit produces several lines, so lines must be grouped into encounters for counts of visits.\nBe explicit about whether you use line-level or claim-level amounts and diagnoses.\n\nPayment and charge fields. The cost outcome uses Medicare payments, never charges.\n\n\n\n\n\n\n\n\nFile\nMedicare payment\nCharges (do not use as cost)\n\n\n\n\nInstitutional claim (*_CLM)\nCLM_AMT\nCLM_TOT\n\n\nInstitutional revenue center (*_DET)\nREVPMT\nREV_CH\n\n\nPhysician/supplier claim (PS_CLM)\nCLM_PMT_AMT\nNCH_CARR_SBMT_CHRG_AMT (submitted), NCH_CARR_ALOW_CHRG_AMT (allowed)\n\n\nPhysician/supplier line\nPMTAMT\nSBMTCH (submitted), ALOWCH (allowed)\n\n\n\n\nIP_DET and SN_DET have no REVPMT. Revenue-center payments exist only for outpatient, home health, and hospice lines, so revenue-center payment totals do not include inpatient or SNF care.\nSummed REVPMT for an outpatient claim does not always equal that claim’s CLM_AMT (about 3% higher overall). Never add institutional claim payments and revenue-center payments together; they describe the same services.\nRevenue center code 0001 is the sum of a claim’s other revenue-center charges. Exclude it when summing revenue-center lines.\nInpatient CLM_AMT excludes CMS pass-through payments (indirect medical education, capital, kidney acquisition). The pass-through amount is PER_DIEM × CVR_DCNT. Whether to include it is a design choice for the plan.\nFrom the 2015 files on, PRPAYAMT (primary payer paid amount) and TDEDAMT (beneficiary deductible and coinsurance) are also available.\n\nClaims year. Claims are assigned to a SAF year by the service end date, not the start date.\nData currency (2025 release).\n\nClaims are complete through 2023-12-31, except for the Q1 2024 inpatient file.\nThe core files, including deaths, run through 2024-12-31.\nVital status runs ahead of claims by about a year.\n\nPayer history (payhist)\n\nEligible Medicare fee-for-service primary coverage: PAYER is MPAB or MPO. This is the Researcher’s Guide definition (Example 8), and claims are complete only for these periods.\nNot eligible: HMO (Medicare Advantage), MSP-EGHP, MSP-nonEGHP, OTH, WAIT.\nA month without eligible coverage is unobserved, not zero cost. Code must never turn missing claims during uncovered time into zeros.\nMedicare entitlement based only on ESRD ends three years after a successful transplant. Expect coverage loss after that point.\n\nICD transition. ICD-9-CM applies to services before 2015-10-01. ICD-10-CM and ICD-10-PCS apply on or after that date.\n\nCodes are stored without periods.\nDecide, and document, which date sets the code system for a hospital stay that crosses the transition.\n\nUnclear variables. If a variable’s meaning is unclear, check Appendix B and Appendix C. Do not guess from the name.",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html#coding-conventions",
-    "href": "quarto/agents.html#coding-conventions",
-    "title": "",
-    "section": "Coding conventions",
-    "text": "Coding conventions\n\nFlowchart labels and text are built from the constants in setup.R, not hard-coded. For example, a label that says “2007-2020” or “365+ days” goes stale when the constants change.\nCode lists\n\nEach code carries its category, its ICD version or code type (diagnosis or procedure), and its matching rule (exact or prefix).\nEach code belongs to exactly one category.\nCheck every code against the official CMS ICD-9-CM, ICD-10-CM, ICD-10-PCS, and HCPCS code sets.\nNever invent codes, variables, files, or clinical definitions.\n\nCohort flow uses the flowchart package (as_fc(), fc_filter(), fc_split(), fc_draw()). Every inclusion or exclusion goes through fc_filter(). Never drop rows from $data outside the flowchart; the diagram must reproduce the cohort exactly. The cohort used downstream is the data from the final flowchart step.\nMatching\n\nMatching must be reproducible from a recorded seed. Control selection must not depend on row order.\nThe matched-set identifier is kept as an ordinary column through to the modeling data, so models and bootstraps can cluster on it.\nReport the number of cases with each number of matched controls, including zero.\n\nCosts\n\nEach person-month records both its cost and its number of observed days, so partial months are explicit.\nEvery cost carries its price year. Inflation adjustment uses the constants in setup.R.\nFloors, caps, or other changes to cost values (for example, setting negative months to zero) are design choices. They belong in the plan before they go in code.\n\nJoins\n\nUse join_by() with an explicit relationship where you can.\nAfter every interval join (between(), closest(), overlaps()) and every join of claims to people, assert that it did not multiply rows.\nDecide deliberately what happens to people with no match (NA rows): keep them, exclude them through a flowchart step, or stop with an error.\n\nDates and windows\n\nWrite windows as inclusive day offsets from time zero, matching the plan (for example, month 0 is days 0 to 29).\nTest the window edges on synthetic data.\n\nModels. Keep the code that turns model coefficients into reported dollars (contrasts, retransformation, sums over months) in named functions in R/functions.R, and test them on synthetic data with a known answer.\nStyle: the tidyverse style guide. Style changes go in their own commits, separate from changes that alter analytical behavior.",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html#checks-for-any-change",
-    "href": "quarto/agents.html#checks-for-any-change",
-    "title": "",
-    "section": "Checks for any change",
-    "text": "Checks for any change\nBefore opening a pull request, check the items below that apply to your change.\nCohort construction\n\nDo the order, the denominator, and the labels of each flowchart step match the condition it applies?\nCan each count be reproduced from the code?\nIs the downstream cohort the data from the final flowchart step?\n\nExposure and time zero\n\nWhich claim files, claim types (HCFASAF), diagnosis positions, and date fields define cryptococcosis?\nIs matching exact or prefix, and are both ICD-9 and ICD-10 covered for the right dates?\nIs time zero defined as in the plan for cases and for controls?\nIs every covariate measured using only information from before time zero?\n\nMatching\n\nAre controls at risk and undiagnosed at the case’s time since transplant?\nDoes control eligibility use only information available at that time, with no conditioning on future events?\nIs selection reproducible from the seed, and independent of row order?\nAre unmatched and partially matched cases counted and reported?\n\nCoverage and follow-up\n\nDoes Medicare coverage span the whole look-back window, not just its start?\nAre adjacent coverage spans merged without allowing uncovered days?\nDoes follow-up end at every event the plan lists (death, loss of coverage, maximum follow-up, administrative end)?\n\nCosts\n\nAre payment fields used, not charge fields?\nIs any service counted twice (claim plus revenue-center amounts, or revenue code 0001)?\nAre uncovered months excluded rather than recorded as zero?\nAre claims assigned to the right month around time zero, including multi-day claims?\n\nModels and reported numbers\n\nDoes the reported estimate match the estimand in the plan (which months, which scale, which contrast)?\nDo standard errors account for clustering as the plan specifies?\nDo the tables, figures, and website prose say what the model actually estimates?\n\nStructure and documentation\n\nDoes ARCHITECTURE.md still describe the scripts and the data flow?\nAre the chunk labels unique, and does each script’s Quarto page still find every label it uses?\nDoes every script have a Quarto page and a sidebar entry, and does the pull request’s render check pass?\nAre all site chunks eval: false, apart from the Setup page’s constants and icd-code-lists sections and their summary tables, and the Architecture page’s chunk that reads ARCHITECTURE.md?\nDoes Rscript tests/check-crosslinks.R check pass?\nAre new derived variables labelled?\n\nExecution\n\nDoes main.R run from a clean session (Ctrl+Shift+F10 in RStudio, then source main.R), with no objects left over from earlier work?\nAre paths relative, with no hard-coded data directories? Use set_USRDS_wd().\nAre package versions recorded?\nAre any saved intermediates stale?\n\nValidation on real data (run by an authorized person; report only aggregate, suppressed results)\n\nrow counts before and after each join of claims to people\nthe number of cases with 2, 1, and 0 matched controls\nstandardized mean differences at time zero, including cost in months −3 to −1\nperson-months by group and coverage status, and person-months after death\ncase counts by ICD-9 versus ICD-10 era",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/agents.html#working-with-agents",
-    "href": "quarto/agents.html#working-with-agents",
-    "title": "",
-    "section": "Working with agents",
-    "text": "Working with agents\n\nAutonomy. The person directing an agent decides how much it may do. That person may also give the agent stricter rules of their own, and those take precedence over this section. By default, an agent may:\n\nedit code and documentation\nadd scripts and tests\nrun code and render the site on synthetic data\ncommit to a branch and open a pull request\n\nCollaborators: master is protected. Changes reach it only through a pull request that the maintainer reviews.\nEvery agent, under any level of autonomy:\n\nfollows the restricted-data rules above\nasks before any step that would read real data, run the full pipeline, or make expensive calls\ndoes not settle an open decision in the plan\n\nKeep pull requests focused. In each one, state which section of the plan or which issue it addresses, and what was checked. Say whether it was checked on synthetic data or by reading only. Never describe synthetic results as results.\nFor references, use the USRDS Researcher’s Guide and its appendices, the CMS code sets, and PubMed. Cite what you used.",
-    "crumbs": [
-      "Project documents",
-      "AGENTS.md"
-    ]
-  },
-  {
-    "objectID": "quarto/functions.html",
-    "href": "quarto/functions.html",
-    "title": "Functions",
-    "section": "",
-    "text": "The code in this script defines helper functions used throughout the analysis.",
-    "crumbs": [
-      "Setup and helper functions",
-      "Functions"
-    ]
-  },
-  {
-    "objectID": "quarto/functions.html#plotting-mean-monthly-costs",
-    "href": "quarto/functions.html#plotting-mean-monthly-costs",
-    "title": "Functions",
-    "section": "Plotting mean monthly costs",
-    "text": "Plotting mean monthly costs\nplot_mean_monthly_costs()\nThe following function uses ggplot2 to create a plot of monthly costs with a risk table underneath.\nIts inputs are as follows:\n\nfitted_model: the fit object from models created in the R/modeling.R script\ncountdf: a data frame containing the appropriate count data for cases and controls at each time point, used to create a risk table\n\nThe function uses the emmeans function from the package of the same name to estimate monthly costs. The x-axis (months) is shifted to the right so that the vertical line at x=0 cleanly separates pre-index and post-index months, and cases and controls are dodged slightly so that the error bars do not overlap.\nUsed in the analysis: Figures: Month-by-month plots.\n\n\nClick to show/hide R Code\n#Function that returns a ggplot of the mean cost (with confidence interval) for cryptococcus cases and controls by month\nplot_mean_monthly_costs&lt;-function(fitted_model, countdf=final_count_df) {\n\n  #First, use emmeans to calculate the predicted values from the model assuming 30-day months, then convert to data frame\n  emm_df &lt;- emmeans(\n    fitted_model,\n    ~ patient_type | month,\n    at = list(month_offset = 30),\n    type = \"response\"\n  )%&gt;%as.data.frame()%&gt;%\n    \n    #Shifts all points and error_bars 0.5 to the right to avoid the zero-line\n    mutate(month=0.5+as.numeric(month))%&gt;%\n    \n    #Move cases 0.1 to the right and controls 0.1 to the left to improve legibility\n  mutate(month=ifelse(patient_type==\"Case\", month+0.1, month-0.1))%&gt;%\n    mutate(\n      estimate = if (\"response\" %in% names(.)) response else emmean)\n  \n  monthly_plot &lt;- list()\n  \n  # Main plot\n  monthly_plot[[\"main\"]] &lt;- ggplot(data = emm_df) +\n    geom_point(aes(x = month, y = estimate, color = patient_type)) +\n    geom_errorbar(\n      aes(\n        x = month,\n        ymin = asymp.LCL,\n        ymax = asymp.UCL,\n        color = patient_type\n      ),\n      width = 0.1\n    ) +\n    geom_vline(xintercept = 0,\n               linetype = \"dashed\",\n               color = \"gray50\") +\n    theme_classic() +\n    labs(\n      x = \"Month\",\n      y = \"Inflation-adjusted cost per month (dollars)\",\n      color = \"Patient group\"\n    )+\n    theme(legend.position = \"bottom\")\n  \n  # Risk table\n  monthly_plot[[\"risk_table\"]] &lt;- countdf %&gt;%\n    mutate(month = 0.5 + as.numeric(month),\n           y_position = ifelse(patient_type == \"Case\", 0.4, 0.6)) %&gt;%\n    ggplot() +\n    geom_text(\n      aes(x = month, y = y_position, label = n, color=patient_type),\n      size = 3\n    )+\n    coord_cartesian(ylim = c(0.3, 0.7)) +\n    theme_void() +\n    theme(\n      plot.margin = margin(t = -5, b = 5),\n      legend.position = \"none\")\n  \n  # Combine plots\n  monthly_plot[[\"main\"]] /\n    monthly_plot[[\"risk_table\"]] +\n    plot_layout(heights = c(9, 1), guides = \"keep\")+\n    plot_annotation(\n      caption = \"Bottom panel shows N at risk by month\"\n    )\n  \n}",
-    "crumbs": [
-      "Setup and helper functions",
-      "Functions"
-    ]
-  },
-  {
-    "objectID": "quarto/functions.html#calculating-the-number-of-potential-matches",
-    "href": "quarto/functions.html#calculating-the-number-of-potential-matches",
-    "title": "Functions",
-    "section": "Calculating the number of potential matches",
-    "text": "Calculating the number of potential matches\ncalculate_number_potential_matches()\nThe following function is passed a control df and a number of values for a case patient, and returns the number of distinct controls which are potential matches. The matching algorithm is hard-coded.\nUsed in the analysis: 2. Execute matching: Counting the potential number of matched controls for each case.\n\n\nClick to show/hide R Code\n#Function that defines the number of potential control matches for a case\ncalculate_number_potential_matches&lt;-function(control_df,\n                                             USRDS_ID,\n                                             birthdate,\n                                             cirrhosis_status,\n                                             cmv_status,\n                                             hiv_status,\n                                             diabetes_status,\n                                             matching_date,\n                                             matching_days_since_transplant) {\n  \n  print(paste0(\"Calculating number of potential controls for patient: \", USRDS_ID))\n  control_df%&gt;%\n    \n    #Exact match on cirrhosis, CMV, HIV, and diabetes status\n    filter(cirrhosis==cirrhosis_status)%&gt;%\n    #  filter(CMV==cmv_status)%&gt;%\n    filter(HIV==hiv_status)%&gt;%\n    filter(diabetes==diabetes_status)%&gt;%\n    \n    #Risk set matching\n    filter(tstart&lt;=matching_days_since_transplant)%&gt;%\n    filter(tstop&gt;matching_days_since_transplant)%&gt;%\n    \n    #Calculate date for age calculations/etc.\n    mutate(.baseline_control_date=matching_days_since_transplant+most_recent_transplant_date)%&gt;%\n    \n    #Make sure case and control are sampled within 3 years of each other\n    filter(abs(time_length(interval(.baseline_control_date, matching_date), \"years\")) &lt;=3)%&gt;%\n    \n    #Date matching\n    #  filter(cohort_start_date&lt;=matching_date)%&gt;%\n    #  filter(cohort_stop_date&gt;matching_date)%&gt;%\n    \n    #Age&gt;=18 on index date\n    filter(time_length(interval(BORN, .baseline_control_date), \"years\") &gt;= 18)%&gt;%\n    \n    #Age difference under 10 years, calculated at sampling date\n    filter(abs(time_length(interval(BORN,.baseline_control_date), \"years\")-\n                 time_length(interval(birthdate,matching_date), \"years\")) &lt;=10)%&gt;%\n    \n    #Confirming 365 day Medicare lookback available for potential match\n    verify_medicare_primary(index_date = matching_date, medicare_coverage_df = medicare_history, cache=TRUE)%&gt;%\n    filter(medicare_primary_TF==TRUE)%&gt;%\n    \n    #Count rows after ensuring controls with mult transplants are only counted once \n    distinct(USRDS_ID)%&gt;%\n    nrow()%&gt;%\n    return()\n  \n}",
-    "crumbs": [
-      "Setup and helper functions",
-      "Functions"
-    ]
-  },
-  {
-    "objectID": "quarto/functions.html#total-excess-costs",
-    "href": "quarto/functions.html#total-excess-costs",
-    "title": "Functions",
-    "section": "Total excess costs",
-    "text": "Total excess costs\ncalculate_total_excess_costs()\nThis function takes a fit object from a model and calculates the total estimated excess costs and confidence intervals. This object currently only works for models with linear links.\nUsed in the analysis: Tables: Modeled total excess costs.\n\n\nClick to show/hide R Code\n# Calculate total excess costs in a model\ncalculate_total_excess_costs &lt;- function(fitted_model, link = \"linear\") {\n  \n  # Extract coefficients and vcov matrix\n  coef_df &lt;- tidy(fitted_model)\n  vcov_matrix &lt;- vcov(fitted_model)\n  \n  # Get interaction terms\n  interaction_names &lt;- coef_df %&gt;% \n    filter(str_detect(term, \":\")) %&gt;% \n    pull(term)\n  \n  if (link == \"linear\") {\n    # Sum of coefficients\n    sum_estimate &lt;- coef_df %&gt;% \n      filter(term %in% interaction_names) %&gt;% \n      pull(estimate) %&gt;% \n      sum()\n    \n    # Variance of sum\n    sum_variance &lt;- vcov_matrix[interaction_names, interaction_names] %&gt;% \n      sum()\n    \n    # Standard error and CI\n    sum_se &lt;- sqrt(sum_variance)\n    df &lt;- df.residual(fitted_model)\n    \n    tibble(\n      estimate = sum_estimate,\n      std_error = sum_se,\n      conf_low = estimate - qt(0.975, df) * std_error,\n      conf_high = estimate + qt(0.975, df) * std_error,\n      statistic = estimate / std_error,\n      p_value = 2 * pt(-abs(statistic), df)\n    )\n    \n  } else if (link == \"log\") {\n    # Get coefficients for interactions\n    coefs &lt;- coef(fitted_model)[interaction_names]\n    vcov_sub &lt;- vcov_matrix[interaction_names, interaction_names]\n    \n    # Exponentiate each coefficient\n    exp_coefs &lt;- exp(coefs)\n    \n    # Sum of exponentiated coefficients\n    sum_estimate &lt;- sum(exp_coefs)\n    \n    # Delta method for variance\n    # Gradient: derivative of sum(exp(beta)) w.r.t. each beta is exp(beta)\n    gradient &lt;- exp_coefs\n    \n    # Variance using delta method\n    sum_variance &lt;- as.numeric(t(gradient) %*% vcov_sub %*% gradient)\n    sum_se &lt;- sqrt(sum_variance)\n    \n    # CI using normal approximation (GLM)\n    tibble(\n      estimate = sum_estimate,\n      std_error = sum_se,\n      conf_low = estimate - qnorm(0.975) * std_error,\n      conf_high = estimate + qnorm(0.975) * std_error,\n      statistic = estimate / std_error,\n      p_value = 2 * pnorm(-abs(statistic))\n    )\n    \n  } else {\n    stop(\"link must be either 'linear' or 'log'\")\n  }\n}",
-    "crumbs": [
-      "Setup and helper functions",
-      "Functions"
-    ]
-  },
-  {
-    "objectID": "quarto/functions.html#other-portions-of-the-analysis",
-    "href": "quarto/functions.html#other-portions-of-the-analysis",
-    "title": "Functions",
-    "section": "Other portions of the analysis",
-    "text": "Other portions of the analysis\n\nSetup: Defines global paths, data sources, cohort inclusion criteria, and analysis-wide constants.\nCreate cohort: Constructs the initial time-varying cohort of kidney transplant recipients, defining cohort entry, follow-up structure, and case/control eligibility prior to matching.\nExecute matching: Implements risk-set–based greedy matching without replacement to construct the analytic cohort.\nPost-match processing: Derives analytic variables, time-aligned cost windows, and follow-up structure after matching.\nModeling: Fits prespecified cost and outcome models using the matched cohort.\nTables: Summary tables and regression outputs generated from the final models.\nFigures:Visualizations of costs, risks, and model-based estimates.\nAbout: methods, assumptions, and disclosures",
-    "crumbs": [
-      "Setup and helper functions",
-      "Functions"
+      "About"
     ]
   },
   {

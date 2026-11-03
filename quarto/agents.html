@@ -123,9 +123,21 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
   content: '💻';
   background-image: none;
 }
+div.callout-Results.callout {
+  border-left-color: #198754;
+}
+div.callout-Results.callout-style-default > .callout-header {
+  background-color: rgba(25, 135, 84, 0.13);
+}
+div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
+  content: '📊';
+  background-image: none;
+}
 </style>
 
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light">
@@ -164,7 +176,8 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><i class="bi bi-house" role="img">
+</i> 
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -179,19 +192,22 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/background.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/background.html" class="sidebar-item-text sidebar-link"><i class="bi bi-book" role="img">
+</i> 
  <span class="menu-text">Clinical background</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/analysis_methods.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/analysis_methods.html" class="sidebar-item-text sidebar-link"><i class="bi bi-book" role="img">
+</i> 
  <span class="menu-text">Methods background</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/analysis-plan.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/analysis-plan.html" class="sidebar-item-text sidebar-link"><i class="bi bi-book" role="img">
+</i> 
  <span class="menu-text">Analysis plan</span></a>
   </div>
 </li>
@@ -208,13 +224,15 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/setup.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/setup.html" class="sidebar-item-text sidebar-link"><i class="bi bi-laptop" role="img">
+</i> 
  <span class="menu-text">Setup</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/functions.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/functions.html" class="sidebar-item-text sidebar-link"><i class="bi bi-laptop" role="img">
+</i> 
  <span class="menu-text">Functions</span></a>
   </div>
 </li>
@@ -231,25 +249,29 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/create_cohort.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/create_cohort.html" class="sidebar-item-text sidebar-link"><i class="bi bi-laptop" role="img">
+</i> 
  <span class="menu-text">1. Create cohort</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/execute_matching.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/execute_matching.html" class="sidebar-item-text sidebar-link"><i class="bi bi-laptop" role="img">
+</i> 
  <span class="menu-text">2. Execute matching</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/postmatch_processing.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/postmatch_processing.html" class="sidebar-item-text sidebar-link"><i class="bi bi-laptop" role="img">
+</i> 
  <span class="menu-text">3. Post-match processing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/modeling.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/modeling.html" class="sidebar-item-text sidebar-link"><i class="bi bi-laptop" role="img">
+</i> 
  <span class="menu-text">4. Modeling</span></a>
   </div>
 </li>
@@ -266,13 +288,15 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/tables.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/tables.html" class="sidebar-item-text sidebar-link"><i class="bi bi-laptop" role="img">
+</i> 
  <span class="menu-text">Tables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/figures.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/figures.html" class="sidebar-item-text sidebar-link"><i class="bi bi-laptop" role="img">
+</i> 
  <span class="menu-text">Figures</span></a>
   </div>
 </li>
@@ -281,7 +305,7 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Project documents</span></a>
+ <span class="menu-text">Results</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -289,19 +313,40 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/architecture.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/results.html" class="sidebar-item-text sidebar-link"><i class="bi bi-clipboard-data" role="img">
+</i> 
+ <span class="menu-text">Main results</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Project documents</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quarto/architecture.html" class="sidebar-item-text sidebar-link"><i class="bi bi-file-earmark-ruled" role="img">
+</i> 
  <span class="menu-text">Architecture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/agents.html" class="sidebar-item-text sidebar-link active">
+  <a href="../quarto/agents.html" class="sidebar-item-text sidebar-link active"><i class="bi bi-file-earmark-ruled" role="img">
+</i> 
  <span class="menu-text">AGENTS.md</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/repository-blueprint.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/repository-blueprint.html" class="sidebar-item-text sidebar-link"><i class="bi bi-file-earmark-ruled" role="img">
+</i> 
  <span class="menu-text">Repository blueprint</span></a>
   </div>
 </li>
@@ -309,7 +354,8 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../quarto/about.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/about.html" class="sidebar-item-text sidebar-link"><i class="bi bi-info-circle" role="img">
+</i> 
  <span class="menu-text">About</span></a>
   </div>
 </li>
@@ -464,18 +510,56 @@ edit that file, not this page. Its first heading is the page title.
 <h2 class="anchored" data-anchor-id="quarto-website">Quarto website</h2>
 <p>The Quarto site documents the code. It does not run the analysis.</p>
 <ul>
-<li><strong>Setup files:</strong> <code>_quarto.yml</code> and <code>index.qmd</code> sit at the root. There is one page per pipeline script in <code>quarto/</code>, named after the script (for example, <code>quarto/create_cohort.qmd</code> for <code>R/create_cohort.R</code>). The <code>custom-callout</code> extension in <code>_extensions/</code> provides the <code>Rcode</code> callout.</li>
-<li><strong>Showing code:</strong> each page loads its script with <code>knitr::read_chunk("../R/&lt;script&gt;.R")</code> in a hidden chunk. It then shows each labelled section in a chunk with <code>#| eval: false</code>, with prose explaining what the section does and why. Pages link to the script on GitHub and to the scripts it depends on.</li>
-<li><strong>Never evaluate analysis code in the site.</strong> Pages must render without USRDS data. The rendered site therefore contains code and explanation only, never results. The one exception is the Setup page, which runs the <code>constants</code> and <code>icd-code-lists</code> sections of <code>R/setup.R</code> and the tables that summarize them; those sections only define values and read nothing. No other section may run, and those two must never read data. The Architecture page also runs one chunk, which reads <code>ARCHITECTURE.md</code> as text so its diagrams are drawn (see “Project documents”).</li>
-<li><strong>Function cross-references.</strong> <code>R/functions.R</code> has one top-level function per labelled chunk, and the functions page one section per chunk. Under each heading is the function’s name; after the explanation, <strong>Used in the analysis:</strong> links the method-page sections that call it, and <strong>Called by:</strong> the functions on the page that call it. Each method-page section whose code calls a helper ends its prose with <strong>Functions used:</strong>. <code>tests/check-crosslinks.R</code> derives all of these from the code and runs on every pull request; when it fails, run <code>Rscript tests/check-crosslinks.R draft</code> and copy what it prints, rather than writing the links by hand.</li>
-<li><strong>Project documents.</strong> <code>analysis-plan.md</code>, <code>ARCHITECTURE.md</code>, <code>AGENTS.md</code> and <code>REPOSITORY-BLUEPRINT.md</code> are shown on the site by pages in <code>quarto/</code> that only include the root file, which stays the one source: edit the root file, not the page. The <code>render:</code> list in <code>_quarto.yml</code> keeps Quarto from also rendering the root files as pages of their own. Two adjustments keep links and diagrams working on both GitHub and the site:
+<li><p><strong>Setup files:</strong> <code>_quarto.yml</code> and <code>index.qmd</code> sit at the root. There is one page per pipeline script in <code>quarto/</code>, named after the script (for example, <code>quarto/create_cohort.qmd</code> for <code>R/create_cohort.R</code>). <code>quarto/results.qmd</code> is a placeholder for results and says they are pending. The <code>custom-callout</code> extension in <code>_extensions/</code> provides the <code>Rcode</code> and <code>Results</code> callouts.</p></li>
+<li><p><strong>Showing code:</strong> each page loads its script with <code>knitr::read_chunk("../R/&lt;script&gt;.R")</code> in a hidden chunk. It then shows each labelled section in a chunk with <code>#| eval: false</code>, with prose explaining what the section does and why. Pages link to the script on GitHub and to the scripts it depends on.</p></li>
+<li><p><strong>Visual cues.</strong> Each kind of page has one icon and colour, set by its sidebar entry’s <code>icon:</code> in <code>_quarto.yml</code> and coloured by <code>styles.css</code>; pages mark the same kind of content with the callout of that colour:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Kind</th>
+<th>Sidebar icon</th>
+<th>Colour</th>
+<th>Callout</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Background prose</td>
+<td><code>book</code></td>
+<td>blue</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>R code</td>
+<td><code>laptop</code></td>
+<td>pink</td>
+<td><code>Rcode</code> (💻)</td>
+</tr>
+<tr class="odd">
+<td>Results</td>
+<td><code>clipboard-data</code></td>
+<td>green</td>
+<td><code>Results</code> (📊)</td>
+</tr>
+<tr class="even">
+<td>Project documents</td>
+<td><code>file-earmark-ruled</code></td>
+<td>grey</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Give every new page the icon for its kind. <code>styles.css</code> keys colours to icons, not to positions, so adding or moving pages needs no CSS change.</p></li>
+<li><p><strong>Never evaluate analysis code in the site.</strong> Pages must render without USRDS data. The rendered site therefore contains code and explanation only, never results. The one exception is the Setup page, which runs the <code>constants</code> and <code>icd-code-lists</code> sections of <code>R/setup.R</code> and the tables that summarize them; those sections only define values and read nothing. No other section may run, and those two must never read data. The Architecture page also runs one chunk, which reads <code>ARCHITECTURE.md</code> as text so its diagrams are drawn (see “Project documents”).</p></li>
+<li><p><strong>Function cross-references.</strong> <code>R/functions.R</code> has one top-level function per labelled chunk, and the functions page one section per chunk. Under each heading is the function’s name; after the explanation, <strong>Used in the analysis:</strong> links the method-page sections that call it, and <strong>Called by:</strong> the functions on the page that call it. Each method-page section whose code calls a helper ends its prose with <strong>Functions used:</strong>. <code>tests/check-crosslinks.R</code> derives all of these from the code and runs on every pull request; when it fails, run <code>Rscript tests/check-crosslinks.R draft</code> and copy what it prints, rather than writing the links by hand.</p></li>
+<li><p><strong>Project documents.</strong> <code>analysis-plan.md</code>, <code>ARCHITECTURE.md</code>, <code>AGENTS.md</code> and <code>REPOSITORY-BLUEPRINT.md</code> are shown on the site by pages in <code>quarto/</code> that only include the root file, which stays the one source: edit the root file, not the page. The <code>render:</code> list in <code>_quarto.yml</code> keeps Quarto from also rendering the root files as pages of their own. Two adjustments keep links and diagrams working on both GitHub and the site:</p>
 <ul>
 <li>The plan page uses GitHub-style heading IDs (<code>from: markdown+gfm_auto_identifiers</code>), so links such as <code>#13-open-decisions</code> resolve.</li>
 <li>The Architecture page reads <code>ARCHITECTURE.md</code> as text and marks its <code>```mermaid</code> diagrams as Quarto diagrams. It reads only that file. Write diagrams in <code>ARCHITECTURE.md</code> with plain <code>```mermaid</code> fences.</li>
 </ul></li>
-<li><strong>Rendering:</strong> the site renders to <code>docs/</code>, which is not committed. <code>.github/workflows/publish.yml</code> renders it on every pull request as a check and, on each push to <code>master</code>, publishes it to the <code>gh-pages</code> branch, which GitHub Pages serves. Render locally to preview a change to a script’s labels or a page’s prose, but do not commit the output.</li>
-<li><strong>New scripts:</strong> when you add a script, add its page and its sidebar entry in <code>_quarto.yml</code> in the same commit.</li>
-<li><strong>Prose must match the code.</strong> If a change alters what a section does, update that section’s explanation in the same pull request.</li>
+<li><p><strong>Rendering:</strong> the site renders to <code>docs/</code>, which is not committed. <code>.github/workflows/publish.yml</code> renders it on every pull request as a check and, on each push to <code>master</code>, publishes it to the <code>gh-pages</code> branch, which GitHub Pages serves. Render locally to preview a change to a script’s labels or a page’s prose, but do not commit the output.</p></li>
+<li><p><strong>New scripts:</strong> when you add a script, add its page and its sidebar entry in <code>_quarto.yml</code> in the same commit.</p></li>
+<li><p><strong>Prose must match the code.</strong> If a change alters what a section does, update that section’s explanation in the same pull request.</p></li>
 </ul>
 </section>
 <section id="outputs" class="level2">
