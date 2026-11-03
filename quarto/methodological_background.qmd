@@ -86,8 +86,3 @@ A generalized linear model for monthly cost can include:
 - the logarithm of the number of days observed as an **offset**, so that a partly observed month counts in proportion to its length.
 
 Months from the same person, and people in the same matched set, are not independent. Generalized estimating equations give standard errors that allow for this, clustered on the matched set, and also on the patient if one person can appear in more than one matched set. A **cluster bootstrap** gives a confidence interval by resampling whole matched sets with replacement and repeating the whole calculation each time.
-
-## Where to read more
-
-- [Study design and methods](study_overview.qmd): what this study chose, and where its code stands.
-- [Clinical background](background.qmd): the disease, what is known about its cost, and why this question matters.

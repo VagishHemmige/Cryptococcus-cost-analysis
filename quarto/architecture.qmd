@@ -18,7 +18,11 @@ It reads only ARCHITECTURE.md, never data, and runs no analysis code.
 #| echo: false
 #| eval: true
 #| output: asis
-architecture <- readLines("../ARCHITECTURE.md", warn = FALSE, encoding = "UTF-8")
-architecture <- sub("^```mermaid\\s*$", "```{mermaid}", architecture)
-cat(architecture, sep = "\n")
+if (file.exists("../ARCHITECTURE.md")) {
+  architecture <- readLines("../ARCHITECTURE.md", warn = FALSE, encoding = "UTF-8")
+  architecture <- sub("^```mermaid\\s*$", "```{mermaid}", architecture)
+  cat(architecture, sep = "\n")
+} else {
+  cat("# Architecture\n\n`ARCHITECTURE.md` has not been written yet.\n")
+}
 ```
