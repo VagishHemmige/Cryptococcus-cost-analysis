@@ -37,18 +37,16 @@ We update the cohort flow diagram to reflect the results of the risk-set matchin
 
 ## Obtain raw costs from raw claims data
 
-We use the `get_IN_REV_costs()`, `get_IN_CLM_costs()`, and `get_PS_REV_costs()` functions to extract raw Medicare claims with cost information for patients in the matched cohort.
+We use the `usRds` functions `get_IN_REV_costs()`, `get_IN_CLM_costs()` and `get_PS_REV_costs()` to extract Medicare claims with payment amounts for 2006 to 2021, for patients in the matched cohort.
 
-Medicare claims data are organized into **claim-level (CLM)** files and **revenue center (REV)** files, which differ in their level of aggregation. CLM files summarize costs at the claim level, while REV files contain detailed line-item charges associated with individual services within a claim.
+The USRDS claims files hold payments at more than one level [@usrds2025guide]:
 
-For example, a home health agency may submit a single claim covering a multi-day episode of care. This episode appears as **one row in a CLM file** and as **multiple rows in the corresponding REV file**, reflecting individual billed services. As a result, costs from CLM and REV files for the same service year should not be summed, as this would lead to double counting.
+- **Institutional claims** (inpatient, outpatient, skilled nursing, home health and hospice) come as a claim file, with one row per claim and the Medicare payment for the whole claim (`CLM_AMT`), and a revenue-center detail file, with one row per revenue center on the claim. `get_IN_CLM_costs()` reads the claim files and `get_IN_REV_costs()` the detail files.
+- **Revenue-center lines** carry charges (`REV_CH`) and, for outpatient, home health and hospice claims, a payment (`REVPMT`). Inpatient and skilled nursing lines have no payment field (Appendix B), so inpatient payments come from the claim file only.
+- **Claim payments and revenue-center payments describe the same services**, so adding them would count those services twice. For outpatient claims, summed `REVPMT` is about 3% higher than `CLM_AMT` overall [@usrds2025guide].
+- **Physician/supplier claims** are read at the line level: `get_PS_REV_costs()` returns each line's payment (`PMTAMT`), with its submitted and allowed charges. Despite the function's name, these are line files, not revenue-center files. In the files available to this project, physician/supplier claims before 2013 come as combined files rather than separate claim and line files, as listed in `usRds`.
 
-For **inpatient (Part A) services**, Medicare reimbursement is based on diagnosis-related groups (DRGs), and itemized line-item billing is not permitted. Accordingly, inpatient costs are obtained exclusively from CLM files, which capture the full reimbursed amount for each inpatient stay.
-
-For **physician/supplier (Part B) services**, claim-level CLM files are not available prior to 2012 in the USRDS. Therefore, revenue center files are used to capture physician/supplier-related costs for earlier years.
-
-These distinctions follow standard guidance in the [USRDS Researcher’s Guide](https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds/for-researchers/researchers-guide) and [CMS Medicare billing documentation](  https://www.cms.gov/medicare/payment/prospective-payment-systems/ipps).
-
+The cost outcome uses payment fields (`CLM_AMT`, `REVPMT`, `PMTAMT`), never charges.
 
 ```{r}
 #| label: raw-costs

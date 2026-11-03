@@ -29,17 +29,16 @@ knitr::read_chunk("../R/create_cohort.R")
 
 ## Initial data loading and preprocessing of USRDS core and transplant files
 
-This portion of the code imports files from the USRDS data set necessary for the cryptococcus analysis.  This portion makes use of the `load_usrds_file()` 
+This portion of the code imports the USRDS files needed for the cryptococcus analysis. It makes use of the `load_usrds_file()` 
 function from the `usRds` package as well as several tidyverse cleaning functions.
 
 Key files used:
 
-- `patients`: This is a part of the `Core` data set of the USRDS and contains key patient demographics.
-- `tx`: Also a part of the `Core` data set of the USRDS and contains summary information about kidney transplants from UNOS.
-- `txunos_trr_ki` and `txunos_trr_kp`: Part of the `transplant` data set of the USRDS, these files contain more detailed information
-derived from UNOS that is part of the Scientific Registry of Transplant Recipients.
+- `patients`: part of the USRDS Core data set, with one record per patient and basic demographic and kidney-failure data, including transplant and death dates [@usrds2025guide].
+- `tx`: also part of the Core data set, with one record per kidney transplant. USRDS reconciles these records from CMS and OPTN sources, and they include the transplant date and the date of graft failure [@usrds2025guide].
+- `txunos_trr_ki` and `txunos_trr_kp`: part of the USRDS Transplant data set. These are the OPTN (Organ Procurement and Transplantation Network) transplant recipient registration records for kidney and kidney–pancreas transplants, collected by OPTN since 1987 [@usrds2025guide].
 
-The code below loads and merges transplant records across multiple UNOS-derived files, constructs a cumulative transplant count per patient, and reshapes the data into a time-varying format that tracks graft status over time.
+The code below loads and merges transplant records across the core and OPTN files, constructs a cumulative transplant count per patient, and reshapes the data into a time-varying format that tracks graft status over time.
 
 
 ```{r}
