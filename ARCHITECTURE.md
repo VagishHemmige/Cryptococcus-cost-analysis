@@ -54,6 +54,7 @@ Some functions read globals instead of taking them as arguments:
 **Location**: `R/setup.R`
 
 **Key symbols**:
+
 - `censor_date`, `minimum_followup`, `maximum_followup` — follow-up window
 - `number_controls_per_case` — target matching ratio
 - `inflation_month`, `inflation_year` — inflation baseline
@@ -69,6 +70,7 @@ Some functions read globals instead of taking them as arguments:
 **Location**: `R/functions.R`
 
 **Key functions**:
+
 - `calculate_number_potential_matches()` — counts eligible controls for one case, used to order the greedy match
 - `calculate_total_excess_costs()` — sums `patient_type:month` interaction coefficients and their variance (linear branch; log branch exists)
 - `plot_mean_monthly_costs()` — `emmeans` predictions by group and month at `month_offset = 30`, with a risk table underneath
@@ -218,7 +220,8 @@ flowchart LR
 - `.github/workflows/publish.yml` renders the site on every pull request as a check and, on each push to `master`, renders it and publishes it to the `gh-pages` branch, so the live site follows every script or page change. `docs/` is the local render and is not committed.
 - The Setup page runs the `constants` and `icd-code-lists` sections of `R/setup.R` to build its summary tables; every other imported section is shown with `eval: false`.
 - `quarto/functions.qmd` links each helper to the method-page sections that call it, and those sections link back. `tests/check-crosslinks.R` derives the links from the code and runs in the workflow before the render.
-- The Project documents pages (`quarto/analysis-plan.qmd`, `architecture.qmd`, `agents.qmd`, `repository-blueprint.qmd`) show the root files. The plan page uses GitHub-style heading IDs. The Architecture page reads `ARCHITECTURE.md` as text and turns its `mermaid` blocks into Quarto diagrams. `render:` in `_quarto.yml` limits rendering to `index.qmd` and `quarto/`, so the root files are not rendered as pages of their own.
+- The Background pages, `quarto/background.qmd` (clinical background) and `quarto/analysis_methods.qmd` (the methods in plain language, linking each step to its section of the plan), are prose only and run no code.
+- The project-document pages (`quarto/analysis-plan.qmd`, `architecture.qmd`, `agents.qmd`, `repository-blueprint.qmd`) show the root files. The sidebar lists the plan under Background and the other three under Project documents. The plan page uses GitHub-style heading IDs. The Architecture page reads `ARCHITECTURE.md` as text and turns its `mermaid` blocks into Quarto diagrams. `render:` in `_quarto.yml` limits rendering to `index.qmd` and `quarto/`, so the root files are not rendered as pages of their own.
 
 ## Configuration
 

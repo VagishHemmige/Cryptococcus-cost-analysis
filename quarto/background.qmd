@@ -1,0 +1,57 @@
+---
+title: "Clinical background"
+format: html
+---
+
+::: {.callout-warning}
+## Draft outline
+
+This page is a placeholder. Its sections and points are an outline for the final text, and every reference and figure below still has to be checked against the original publication.
+:::
+
+## Cryptococcosis after kidney transplant
+
+*To be written.* Points to cover:
+
+- Cryptococcosis is an uncommon but serious fungal infection in kidney transplant recipients. In one large US cohort, 0.33% of kidney recipients developed it over about 3.5 years, with a median onset of 616 days after transplant [George 2017]. In a national USRDS cohort, median onset was 30.5 months [Fiorica 2025].
+- Most cases occur long after transplant. Donor-derived transmission is rare: US surveillance identified 12 to 23 transmitting donors among 101,006 deceased donors from 2009 to 2019 [Penumarthi 2021]. Donor-derived infection is therefore context for this study, not its focus.
+
+## Presentation, treatment and outcomes
+
+*To be written.* Points to cover:
+
+- Presentation, including central nervous system involvement, and the length of treatment, which drives cost [Baddley 2019].
+- Outcomes: 22% six-month mortality, 44% intensive care and 49% acute kidney injury in the national USRDS cohort [Fiorica 2025]; graft failure in 31% of recipients with meningitis in a French cohort [Tardieu 2022]; earlier multicenter cohorts [Singh 2005; Singh 2007; Sun 2009].
+
+## What is known about its cost
+
+*To be written.* Points to cover:
+
+- Published US estimates are per hospitalization, or modelled, and not specific to transplant recipients: about $52,000 in payments per cryptococcosis hospitalization in 2017 dollars [Benedict 2019]; per-stay costs for cryptococcal meningitis [Pyrgos 2013]; modelled treatment costs [Merry 2016]; charges after fungal meningitis [Charalambous 2018].
+- No published study estimates the excess cost attributable to cryptococcosis over follow-up in transplant recipients.
+
+## Why this question matters
+
+*To be written.* Points to cover:
+
+- Why an attributable, longitudinal estimate is needed: for payers, for transplant programs, and as an input to decisions such as donor screening and prophylaxis.
+- The study question: the excess Medicare payments in the 12 months after diagnosis among adult kidney transplant recipients, compared with similar recipients at the same time since transplant. The [Methods background](analysis_methods.qmd) explains how it is answered.
+
+## References
+
+All to be verified.
+
+- Baddley JW, Forrest GN. Cryptococcosis in solid organ transplantation: guidelines from the American Society of Transplantation Infectious Diseases Community of Practice. *Clin Transplant* 2019. [doi:10.1111/ctr.13543](https://doi.org/10.1111/ctr.13543)
+- Benedict K, Jackson BR, Chiller T, Beer KD. Estimation of direct healthcare costs of fungal diseases in the United States. *Clin Infect Dis* 2019. [doi:10.1093/cid/ciy776](https://doi.org/10.1093/cid/ciy776)
+- Charalambous LT, Premji A, Tybout C, et al. Prevalence, healthcare resource utilization and overall burden of fungal meningitis in the United States. *J Med Microbiol* 2018. [doi:10.1099/jmm.0.000656](https://doi.org/10.1099/jmm.0.000656)
+- Fiorica G, Cervera-Hernandez ME, Pirofski LA, Hemmige VS, Yoon H. High mortality and associated risk factors in kidney transplant recipients with cryptococcosis: a nationwide cohort study over a decade using USRDS data. *Open Forum Infect Dis* 2025. [doi:10.1093/ofid/ofaf263](https://doi.org/10.1093/ofid/ofaf263)
+- George IA, Santos CAQ, Olsen MA, Powderly WG. Epidemiology of cryptococcosis and cryptococcal meningitis in a large retrospective cohort of patients after solid organ transplantation. *Open Forum Infect Dis* 2017. [doi:10.1093/ofid/ofx004](https://doi.org/10.1093/ofid/ofx004)
+- Merry M, Boulware DR. Cryptococcal meningitis treatment strategies affected by the explosive cost of flucytosine in the United States: a cost-effectiveness analysis. *Clin Infect Dis* 2016. [doi:10.1093/cid/ciw151](https://doi.org/10.1093/cid/ciw151)
+- Penumarthi LR, La Hoz RM, Wolfe CR, et al. Cryptococcus transmission through solid organ transplantation in the United States: a report from the Ad Hoc Disease Transmission Advisory Committee. *Am J Transplant* 2021. [doi:10.1111/ajt.16433](https://doi.org/10.1111/ajt.16433)
+- Pyrgos V, Seitz AE, Steiner CA, Prevots DR, Williamson PR. Epidemiology of cryptococcal meningitis in the US: 1997–2009. *PLoS One* 2013. [doi:10.1371/journal.pone.0056269](https://doi.org/10.1371/journal.pone.0056269)
+- Singh N, Lortholary O, Alexander BD, et al. Allograft loss in renal transplant recipients with *Cryptococcus neoformans* associated immune reconstitution syndrome. *Transplantation* 2005. [doi:10.1097/01.tp.0000180530.17683.02](https://doi.org/10.1097/01.tp.0000180530.17683.02)
+- Singh N, Alexander BD, Lortholary O, et al. *Cryptococcus neoformans* in organ transplant recipients: impact of calcineurin-inhibitor agents on mortality. *J Infect Dis* 2007. [doi:10.1086/511438](https://doi.org/10.1086/511438)
+- Sun HY, Alexander BD, Lortholary O, et al. Lipid formulations of amphotericin B significantly improve outcome in solid organ transplant recipients with central nervous system cryptococcosis. *Clin Infect Dis* 2009. [doi:10.1086/647948](https://doi.org/10.1086/647948)
+- Tardieu L, Divard G, Lortholary O, et al. Cryptococcal meningitis in kidney transplant recipients: a two-decade cohort study in France. *Pathogens* 2022. [doi:10.3390/pathogens11060699](https://doi.org/10.3390/pathogens11060699)
+
+Draft references taken from the literature review in the [Cryptococcus donor screening CEA repository](https://github.com/VagishHemmige/Cryptococcus-donor-screening-CEA/blob/master/references/literature-review.md).
