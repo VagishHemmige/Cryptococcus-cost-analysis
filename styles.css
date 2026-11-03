@@ -26,3 +26,10 @@
   margin-top: .35rem;
   padding-top: .35rem;
 }
+
+/* Sections inside another section (the three under Code): lighter and a
+   little smaller, so the hierarchy shows without relying on indentation */
+.sidebar-navigation .sidebar-section .sidebar-item-section > .sidebar-item-container .menu-text {
+  font-weight: 500;
+  font-size: .95em;
+}
