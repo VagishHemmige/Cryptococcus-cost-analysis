@@ -48,4 +48,4 @@ Four documents describe the project. In short: the plan is the scientific intent
 -   [**3. Post-match processing**](postmatch_processing.qmd): claims, follow-up and the monthly cost panel.
 -   [**4. Modeling**](modeling.qmd): the monthly cost models.
 -   [**Tables**](tables.qmd) and [**Figures**](figures.qmd): building and exporting the outputs.
--   [**Main results**](results.qmd): pending.
+-   [**Main results**](results.qmd): not yet available.

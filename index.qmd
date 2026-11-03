@@ -35,7 +35,7 @@ The [Study design and methods](quarto/study_overview.qmd) pages set out who is s
 
 ## Results
 
-Pending. The [Main results](quarto/results.qmd) page will hold them once they are cleared for release.
+Not yet available. The [Main results](quarto/results.qmd) page will hold them once they are cleared for release.
 
 ## Reproducibility
 

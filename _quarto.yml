@@ -65,7 +65,7 @@ website:
                 text: Functions
                 icon: laptop
 
-          - section: Data loading and processing
+          - section: Data processing and analysis
             contents:
               - href: quarto/create_cohort.qmd
                 text: 1. Create cohort
@@ -118,15 +118,17 @@ website:
 
 # Each kind of page has one cue, used both in the sidebar (icon and colour
 # set here and in styles.css) and on the page (a callout of the same colour):
-#   background prose  book icon, blue
-#   R code            laptop icon and the 💻 Rcode callout, pink
-#   results           clipboard-data icon and the 📊 Results callout, green
-#   project rules     ruled-page icon, grey
+#   background                book icon, blue
+#   study design and methods  diagram-3 icon, orange
+#   R code                    laptop icon and the 💻 Rcode callout, pink
+#   results                   clipboard-data icon and the 📊 Results callout, green
+#   project documents         ruled-page icon, grey
+# Yellow, with the ⏳ Pending callout, marks provisional content.
 custom-callout:
   Rcode:
     icon: true
     icon-symbol: "💻"
-    color: pink
+    color: "#d63384"
   Results:
     icon: true
     icon-symbol: "📊"

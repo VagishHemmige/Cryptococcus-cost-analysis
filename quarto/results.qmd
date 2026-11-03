@@ -4,7 +4,7 @@ format: html
 ---
 
 ::: Results
-### Pending
+### Not yet available
 
 No results are shown yet. This page will hold the study's main tables and figures once they have been produced on the USRDS data by an authorized person, checked against the [analysis plan](analysis-plan.qmd), and cleared for release under the USRDS data use agreement.
 :::
