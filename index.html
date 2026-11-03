@@ -62,7 +62,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -432,13 +451,14 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#clinical-background" id="toc-clinical-background" class="nav-link active" data-scroll-target="#clinical-background">Clinical background</a></li>
-  <li><a href="#what-this-analysis-does" id="toc-what-this-analysis-does" class="nav-link" data-scroll-target="#what-this-analysis-does">What this analysis does</a></li>
+  <li><a href="#the-study-question" id="toc-the-study-question" class="nav-link active" data-scroll-target="#the-study-question">The study question</a></li>
+  <li><a href="#why-it-matters" id="toc-why-it-matters" class="nav-link" data-scroll-target="#why-it-matters">Why it matters</a></li>
   <li><a href="#study-timeline" id="toc-study-timeline" class="nav-link" data-scroll-target="#study-timeline">Study timeline and cost trajectories</a></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
   <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility">Reproducibility</a></li>
-  <li><a href="#abstractsmanuscripts" id="toc-abstractsmanuscripts" class="nav-link" data-scroll-target="#abstractsmanuscripts">Abstracts/manuscripts</a></li>
+  <li><a href="#publications" id="toc-publications" class="nav-link" data-scroll-target="#publications">Publications</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/master/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -470,14 +490,36 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </header>
 
 
-<section id="clinical-background" class="level2">
-<h2 class="anchored" data-anchor-id="clinical-background">Clinical background</h2>
-<p><a href="https://academic.oup.com/ofid/article/12/5/ofaf263/8121609">Cryptococcosis in kidney transplant recipients</a> is uncommon but potentially catastrophic. When <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8096655/">transmission occurs through the donor</a>, it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.</p>
-<p>The costs of cryptococcus after solid organ transplant are unclear. Although studies have quantified the cost of a single hospitalization for cryptococcus, no study to date has estimated the total excess cost of care due to cryptococcus.</p>
+<div class="callout callout-style-default callout-Pending callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Pending</span>Provisional
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="pending">Text highlighted like this</span> is provisional: it depends on a decision the analysis plan has not yet made. To comment on any part of this page, highlight the text and use the 💬 Comment button.</p>
+</div>
+</div>
+<section id="the-study-question" class="level2">
+<h2 class="anchored" data-anchor-id="the-study-question">The study question</h2>
+<p>This study estimates the excess Medicare payments in the 12 months after cryptococcosis is diagnosed among adult kidney transplant recipients, compared with similar recipients at the same time since transplant who have not been diagnosed.</p>
+<ul>
+<li><strong>Population:</strong> adult kidney transplant recipients in the United States <span class="pending">with fee-for-service Medicare as their primary payer</span>.</li>
+<li><strong>Comparison:</strong> each case is compared with up to two recipients who have reached the same time since transplant without being diagnosed.</li>
+<li><strong>Outcome:</strong> Medicare payments, month by month, from three months before diagnosis to the end of the twelfth month after it.</li>
+<li><strong>Measure:</strong> the average excess payment per case over the 12 months after diagnosis.</li>
+</ul>
+<div class="pending-note">
+<p><strong>Decision pending:</strong> whether other payer arrangements, such as Medicare as secondary payer, are ever eligible (<a href="./quarto/analysis-plan.html#13-open-decisions">D1</a>).</p>
+</div>
+<p>The data come from the United States Renal Data System (USRDS), which links transplant registry records to Medicare claims<span class="citation" data-cites="usrds2025guide"><sup><a href="#ref-usrds2025guide" role="doc-biblioref">1</a></sup></span>.</p>
 </section>
-<section id="what-this-analysis-does" class="level2">
-<h2 class="anchored" data-anchor-id="what-this-analysis-does">What this analysis does</h2>
-<p>This project uses the <a href="https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds"><strong>United States Renal Data System</strong></a> to analyze the impact of cryptococcus on costs.</p>
+<section id="why-it-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-it-matters">Why it matters</h2>
+<p>Cryptococcosis is uncommon after kidney transplant<span class="citation" data-cites="george2017epidemiology pappas2010transnet"><sup><a href="#ref-george2017epidemiology" role="doc-biblioref">2</a>,<a href="#ref-pappas2010transnet" role="doc-biblioref">3</a></sup></span>, but it is serious: in a national USRDS cohort, 22% of kidney recipients hospitalized for it died within six months<span class="citation" data-cites="fiorica2025mortality"><sup><a href="#ref-fiorica2025mortality" role="doc-biblioref">4</a></sup></span>. Treatment of cryptococcal meningitis lasts at least 10 weeks<span class="citation" data-cites="merry2016flucytosine"><sup><a href="#ref-merry2016flucytosine" role="doc-biblioref">5</a></sup></span>. Published US cost estimates are of single hospital stays, of modelled treatment, or of costs over time without a comparison group. We found no study that estimates the excess Medicare payments attributable to cryptococcosis over the months after diagnosis in kidney transplant recipients. <a href="./quarto/background.html">Clinical background</a> sets out the evidence.</p>
 </section>
 <section id="study-timeline" class="level2">
 <h2 class="anchored" data-anchor-id="study-timeline">Study timeline and cost trajectories</h2>
@@ -506,11 +548,31 @@ Figure&nbsp;1: Conceptual study timeframes and mean cost trajectories; no patien
 </section>
 <section id="reproducibility" class="level2">
 <h2 class="anchored" data-anchor-id="reproducibility">Reproducibility</h2>
-<p>The complete source code used to perform the full analysis and generate the tables and figures is publicly available at this <a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis">GitHub repo</a>. The R script <code>R/main.R</code> will run the R subscripts needed for this analysis in the order they are to be run. Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse. The USRDS data are restricted, so the analysis can be rerun only by an analyst with authorized access to them.</p>
+<p>The complete source code for the analysis, tables and figures is public in the <a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis">GitHub repository</a>. The script <code>R/main.R</code> runs the other scripts in order. Model assumptions, parameter values and the workflow are documented in the repository for transparency and reuse. The USRDS data are restricted, so the analysis can be rerun only by an analyst with authorized access to them.</p>
 </section>
-<section id="abstractsmanuscripts" class="level2">
-<h2 class="anchored" data-anchor-id="abstractsmanuscripts">Abstracts/manuscripts</h2>
-<p>This analysis has yet to be published to date.</p>
+<section id="publications" class="level2">
+<h2 class="anchored" data-anchor-id="publications">Publications</h2>
+<p>This analysis has not yet been published.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-usrds2025guide" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">United States Renal Data System. <em>2025 Researcher’s Guide to the <span>USRDS</span> Database</em>. <span>National Institutes of Health, National Institute of Diabetes and Digestive and Kidney Diseases</span>; 2025. <a href="https://www.niddk.nih.gov/-/media/Files/USRDS/For-Researchers/2025/USRDS_Researcher_Guide_2025.pdf">https://www.niddk.nih.gov/-/media/Files/USRDS/For-Researchers/2025/USRDS_Researcher_Guide_2025.pdf</a></div>
+</div>
+<div id="ref-george2017epidemiology" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">George IA, Santos CAQ, Olsen MA, Powderly WG. Epidemiology of cryptococcosis and cryptococcal meningitis in a large retrospective cohort of patients after solid organ transplantation. <em>Open Forum Infect Dis</em>. 2017;4(1):ofx004. doi:<a href="https://doi.org/10.1093/ofid/ofx004">10.1093/ofid/ofx004</a></div>
+</div>
+<div id="ref-pappas2010transnet" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline"><span class="nocase">Pappas PG, Alexander BD, Andes DR, et al.</span> Invasive fungal infections among organ transplant recipients: Results of the <span>Transplant-Associated Infection Surveillance Network (TRANSNET)</span>. <em>Clin Infect Dis</em>. 2010;50(8):1101-1111. doi:<a href="https://doi.org/10.1086/651262">10.1086/651262</a></div>
+</div>
+<div id="ref-fiorica2025mortality" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Fiorica G, Cervera-Hernandez ME, Pirofski LA, Hemmige VS, Yoon H. High mortality and associated risk factors in kidney transplant recipients with cryptococcosis—a nationwide cohort study over a decade using <span>USRDS</span> data. <em>Open Forum Infect Dis</em>. 2025;12(5):ofaf263. doi:<a href="https://doi.org/10.1093/ofid/ofaf263">10.1093/ofid/ofaf263</a></div>
+</div>
+<div id="ref-merry2016flucytosine" class="csl-entry" role="listitem">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Merry M, Boulware DR. Cryptococcal meningitis treatment strategies affected by the explosive cost of flucytosine in the <span>United States</span>: A cost-effectiveness analysis. <em>Clin Infect Dis</em>. 2016;62(12):1564-1568. doi:<a href="https://doi.org/10.1093/cid/ciw151">10.1093/cid/ciw151</a></div>
+</div>
+</div>
 
 
 <!-- -->
@@ -983,48 +1045,57 @@ Figure&nbsp;1: Conceptual study timeframes and mean cost trajectories; no patien
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Clinical background</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## The study question</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Cryptococcosis in kidney transplant recipients</span><span class="co">](https://academic.oup.com/ofid/article/12/5/ofaf263/8121609)</span> is uncommon but potentially catastrophic. When <span class="co">[</span><span class="ot">transmission occurs through the donor</span><span class="co">](https://pmc.ncbi.nlm.nih.gov/articles/PMC8096655/)</span>, it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>This study estimates the excess Medicare payments in the 12 months after cryptococcosis is diagnosed among adult kidney transplant recipients, compared with similar recipients at the same time since transplant who have not been diagnosed.</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>The costs of cryptococcus after solid organ transplant are unclear.  Although studies have quantified the cost of a single hospitalization for cryptococcus,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>no study to date has estimated the total excess cost of care due to cryptococcus.</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## What this analysis does</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Population:** adult kidney transplant recipients in the United States <span class="co">[</span><span class="ot">with fee-for-service Medicare as their primary payer</span><span class="co">]</span>{.pending}.</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Comparison:** each case is compared with up to two recipients who have reached the same time since transplant without being diagnosed.</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Outcome:** Medicare payments, month by month, from three months before diagnosis to the end of the twelfth month after it.</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Measure:** the average excess payment per case over the 12 months after diagnosis.</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>This project uses the <span class="co">[</span><span class="ot">**United States Renal Data System**</span><span class="co">](https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds)</span> to analyze the impact of cryptococcus on costs.</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>**Decision pending:** whether other payer arrangements, such as Medicare as secondary payer, are ever eligible (<span class="co">[</span><span class="ot">D1</span><span class="co">](quarto/analysis-plan.qmd#13-open-decisions)</span>).</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>The data come from the United States Renal Data System (USRDS), which links transplant registry records to Medicare claims <span class="co">[</span><span class="ot">@usrds2025guide</span><span class="co">]</span>.</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Study timeline and cost trajectories {#study-timeline}</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why it matters</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>@fig-cost-timeline illustrates how the planned study windows relate to case and control costs. The 365-day eligibility lookback is longer than the monthly cost-outcome window. Disease-related care and diagnostic workup can raise costs before the recorded diagnosis, so the prediagnosis trajectory is part of what the study aims to describe.</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>Cryptococcosis is uncommon after kidney transplant <span class="co">[</span><span class="ot">@george2017epidemiology; @pappas2010transnet</span><span class="co">]</span>, but it is serious: in a national USRDS cohort, 22% of kidney recipients hospitalized for it died within six months <span class="co">[</span><span class="ot">@fiorica2025mortality</span><span class="co">]</span>. Treatment of cryptococcal meningitis lasts at least 10 weeks <span class="co">[</span><span class="ot">@merry2016flucytosine</span><span class="co">]</span>. Published US cost estimates are of single hospital stays, of modelled treatment, or of costs over time without a comparison group. We found no study that estimates the excess Medicare payments attributable to cryptococcosis over the months after diagnosis in kidney transplant recipients. <span class="co">[</span><span class="ot">Clinical background</span><span class="co">](quarto/background.qmd)</span> sets out the evidence.</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="al">![Conceptual study timeframes and mean cost trajectories; no patient data or study estimates are shown. The monthly outcome panel spans days −90 to 359. Earlier dashed curves provide context outside that panel. Shaded differences are illustrative and do not establish causal attribution.](quarto/assets/integrated-cost-timeline.svg)</span>{#fig-cost-timeline width=100% fig-alt="Line diagram of mean costs over time for cases and controls. The eligibility bar spans days minus 365 to minus 1. Pale dashed curves precede the cost-outcome window. During intervals minus 3 to minus 1, cases rise above zigzagging controls, peak near the case diagnosis or matched control index date, and decline gradually while remaining higher through interval 11."}</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Study timeline and cost trajectories {#study-timeline}</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Open the figure at full size</span><span class="co">](quarto/assets/integrated-cost-timeline.svg)</span>.</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>@fig-cost-timeline illustrates how the planned study windows relate to case and control costs. The 365-day eligibility lookback is longer than the monthly cost-outcome window. Disease-related care and diagnostic workup can raise costs before the recorded diagnosis, so the prediagnosis trajectory is part of what the study aims to describe.</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>For cases, time zero is the first qualifying diagnosis claim; controls are aligned at the same time since their most recent transplant, so their calendar dates may differ. The figure explains the intended windows, not the completeness of observation: coverage loss, death, and partial months require the handling specified in the <span class="co">[</span><span class="ot">analysis plan</span><span class="co">](quarto/analysis-plan.qmd)</span>. Earlier costs may also inform planned matching covariates; they are outside the monthly outcome panel shown here.</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="al">![Conceptual study timeframes and mean cost trajectories; no patient data or study estimates are shown. The monthly outcome panel spans days −90 to 359. Earlier dashed curves provide context outside that panel. Shaded differences are illustrative and do not establish causal attribution.](quarto/assets/integrated-cost-timeline.svg)</span>{#fig-cost-timeline width=100% fig-alt="Line diagram of mean costs over time for cases and controls. The eligibility bar spans days minus 365 to minus 1. Pale dashed curves precede the cost-outcome window. During intervals minus 3 to minus 1, cases rise above zigzagging controls, peak near the case diagnosis or matched control index date, and decline gradually while remaining higher through interval 11."}</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methods</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Open the figure at full size</span><span class="co">](quarto/assets/integrated-cost-timeline.svg)</span>.</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Each patient diagnosed with cryptococcosis (a *case*) is compared with up to two similar recipients who have reached the same time since transplant without being diagnosed (*controls*). Cases and controls are followed for 12 months from the same starting point, and the difference in their Medicare payments is the excess cost of cryptococcosis.</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>For cases, time zero is the first qualifying diagnosis claim; controls are aligned at the same time since their most recent transplant, so their calendar dates may differ. The figure explains the intended windows, not the completeness of observation: coverage loss, death, and partial months require the handling specified in the <span class="co">[</span><span class="ot">analysis plan</span><span class="co">](quarto/analysis-plan.qmd)</span>. Earlier costs may also inform planned matching covariates; they are outside the monthly outcome panel shown here.</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">Study design and methods</span><span class="co">](quarto/study_overview.qmd)</span> pages set out who is studied, how cases are found, how controls are matched, how costs are built and how they are analysed, with what the plan specifies and where the code stands.</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methods</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>Not yet available. The <span class="co">[</span><span class="ot">Main results</span><span class="co">](quarto/results.qmd)</span> page will hold them once they are cleared for release.</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>Each patient diagnosed with cryptococcosis (a *case*) is compared with up to two similar recipients who have reached the same time since transplant without being diagnosed (*controls*). Cases and controls are followed for 12 months from the same starting point, and the difference in their Medicare payments is the excess cost of cryptococcosis.</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">Study design and methods</span><span class="co">](quarto/study_overview.qmd)</span> pages set out who is studied, how cases are found, how controls are matched, how costs are built and how they are analysed, with what the plan specifies and where the code stands.</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reproducibility</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>The complete source code used to perform the full analysis and generate the tables and figures is publicly available at this <span class="co">[</span><span class="ot">GitHub repo</span><span class="co">](https://github.com/VagishHemmige/Cryptococcus-cost-analysis)</span>.  The R script <span class="in">`R/main.R`</span> will run the R subscripts needed for this analysis in the order they are to be run.  Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse. The USRDS data are restricted, so the analysis can be rerun only by an analyst with authorized access to them.</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>Not yet available. The <span class="co">[</span><span class="ot">Main results</span><span class="co">](quarto/results.qmd)</span> page will hold them once they are cleared for release.</span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## Abstracts/manuscripts</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>This analysis has yet to be published to date.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reproducibility</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>The complete source code for the analysis, tables and figures is public in the <span class="co">[</span><span class="ot">GitHub repository</span><span class="co">](https://github.com/VagishHemmige/Cryptococcus-cost-analysis)</span>. The script <span class="in">`R/main.R`</span> runs the other scripts in order. Model assumptions, parameter values and the workflow are documented in the repository for transparency and reuse. The USRDS data are restricted, so the analysis can be rerun only by an analyst with authorized access to them.</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Publications</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>This analysis has not yet been published.</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

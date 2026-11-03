@@ -663,27 +663,27 @@
     "href": "index.html",
     "title": "Overview",
     "section": "",
-    "text": "Cryptococcosis in kidney transplant recipients is uncommon but potentially catastrophic. When transmission occurs through the donor, it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.\nThe costs of cryptococcus after solid organ transplant are unclear. Although studies have quantified the cost of a single hospitalization for cryptococcus, no study to date has estimated the total excess cost of care due to cryptococcus.",
+    "text": "PendingProvisional\n\n\n\nText highlighted like this is provisional: it depends on a decision the analysis plan has not yet made. To comment on any part of this page, highlight the text and use the 💬 Comment button.",
     "crumbs": [
       "Home"
     ]
   },
   {
-    "objectID": "index.html#clinical-background",
-    "href": "index.html#clinical-background",
+    "objectID": "index.html#the-study-question",
+    "href": "index.html#the-study-question",
     "title": "Overview",
-    "section": "",
-    "text": "Cryptococcosis in kidney transplant recipients is uncommon but potentially catastrophic. When transmission occurs through the donor, it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.\nThe costs of cryptococcus after solid organ transplant are unclear. Although studies have quantified the cost of a single hospitalization for cryptococcus, no study to date has estimated the total excess cost of care due to cryptococcus.",
+    "section": "The study question",
+    "text": "The study question\nThis study estimates the excess Medicare payments in the 12 months after cryptococcosis is diagnosed among adult kidney transplant recipients, compared with similar recipients at the same time since transplant who have not been diagnosed.\n\nPopulation: adult kidney transplant recipients in the United States with fee-for-service Medicare as their primary payer.\nComparison: each case is compared with up to two recipients who have reached the same time since transplant without being diagnosed.\nOutcome: Medicare payments, month by month, from three months before diagnosis to the end of the twelfth month after it.\nMeasure: the average excess payment per case over the 12 months after diagnosis.\n\n\nDecision pending: whether other payer arrangements, such as Medicare as secondary payer, are ever eligible (D1).\n\nThe data come from the United States Renal Data System (USRDS), which links transplant registry records to Medicare claims1.",
     "crumbs": [
       "Home"
     ]
   },
   {
-    "objectID": "index.html#what-this-analysis-does",
-    "href": "index.html#what-this-analysis-does",
+    "objectID": "index.html#why-it-matters",
+    "href": "index.html#why-it-matters",
     "title": "Overview",
-    "section": "What this analysis does",
-    "text": "What this analysis does\nThis project uses the United States Renal Data System to analyze the impact of cryptococcus on costs.",
+    "section": "Why it matters",
+    "text": "Why it matters\nCryptococcosis is uncommon after kidney transplant2,3, but it is serious: in a national USRDS cohort, 22% of kidney recipients hospitalized for it died within six months4. Treatment of cryptococcal meningitis lasts at least 10 weeks5. Published US cost estimates are of single hospital stays, of modelled treatment, or of costs over time without a comparison group. We found no study that estimates the excess Medicare payments attributable to cryptococcosis over the months after diagnosis in kidney transplant recipients. Clinical background sets out the evidence.",
     "crumbs": [
       "Home"
     ]
@@ -723,17 +723,27 @@
     "href": "index.html#reproducibility",
     "title": "Overview",
     "section": "Reproducibility",
-    "text": "Reproducibility\nThe complete source code used to perform the full analysis and generate the tables and figures is publicly available at this GitHub repo. The R script R/main.R will run the R subscripts needed for this analysis in the order they are to be run. Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse. The USRDS data are restricted, so the analysis can be rerun only by an analyst with authorized access to them.",
+    "text": "Reproducibility\nThe complete source code for the analysis, tables and figures is public in the GitHub repository. The script R/main.R runs the other scripts in order. Model assumptions, parameter values and the workflow are documented in the repository for transparency and reuse. The USRDS data are restricted, so the analysis can be rerun only by an analyst with authorized access to them.",
     "crumbs": [
       "Home"
     ]
   },
   {
-    "objectID": "index.html#abstractsmanuscripts",
-    "href": "index.html#abstractsmanuscripts",
+    "objectID": "index.html#publications",
+    "href": "index.html#publications",
     "title": "Overview",
-    "section": "Abstracts/manuscripts",
-    "text": "Abstracts/manuscripts\nThis analysis has yet to be published to date.",
+    "section": "Publications",
+    "text": "Publications\nThis analysis has not yet been published.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#references",
+    "href": "index.html#references",
+    "title": "Overview",
+    "section": "References",
+    "text": "References\n\n\n1. United States Renal Data System. 2025 Researcher’s Guide to the USRDS Database. National Institutes of Health, National Institute of Diabetes and Digestive and Kidney Diseases; 2025. https://www.niddk.nih.gov/-/media/Files/USRDS/For-Researchers/2025/USRDS_Researcher_Guide_2025.pdf\n\n\n2. George IA, Santos CAQ, Olsen MA, Powderly WG. Epidemiology of cryptococcosis and cryptococcal meningitis in a large retrospective cohort of patients after solid organ transplantation. Open Forum Infect Dis. 2017;4(1):ofx004. doi:10.1093/ofid/ofx004\n\n\n3. Pappas PG, Alexander BD, Andes DR, et al. Invasive fungal infections among organ transplant recipients: Results of the Transplant-Associated Infection Surveillance Network (TRANSNET). Clin Infect Dis. 2010;50(8):1101-1111. doi:10.1086/651262\n\n\n4. Fiorica G, Cervera-Hernandez ME, Pirofski LA, Hemmige VS, Yoon H. High mortality and associated risk factors in kidney transplant recipients with cryptococcosis—a nationwide cohort study over a decade using USRDS data. Open Forum Infect Dis. 2025;12(5):ofaf263. doi:10.1093/ofid/ofaf263\n\n\n5. Merry M, Boulware DR. Cryptococcal meningitis treatment strategies affected by the explosive cost of flucytosine in the United States: A cost-effectiveness analysis. Clin Infect Dis. 2016;62(12):1564-1568. doi:10.1093/cid/ciw151",
     "crumbs": [
       "Home"
     ]
