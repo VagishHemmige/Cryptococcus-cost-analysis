@@ -276,4 +276,4 @@ Before opening a pull request, check the items below that apply to your change.
   - asks before any step that would read real data, run the full pipeline, or make expensive calls
   - does not settle an open decision in the plan
 - Keep pull requests focused. In each one, state which section of the plan or which issue it addresses, and what was checked. Say whether it was checked on synthetic data or by reading only. Never describe synthetic results as results.
-- For references, use the USRDS Researcher's Guide and its appendices, the CMS code sets, and PubMed. Cite what you used.
+- For references, use the USRDS Researcher's Guide and its appendices, the CMS code sets, and PubMed. Cite what you used: add a verified entry (with its DOI or PMID, or the official URL and release) to `references.bib` and cite it as `[@key]` in the plan and on site pages, not as a bare link.

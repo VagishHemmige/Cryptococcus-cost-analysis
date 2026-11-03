@@ -4,7 +4,7 @@
 
 This plan states the intended design and analysis. It does not describe the current state of the code; implementation status is tracked separately. Items marked **Decision D*n*** are intended choices not yet made; they are collected in [Open decisions](#13-open-decisions).
 
-Reporting will follow STROBE, its RECORD extension for routinely collected health data, and, for the target-trial sensitivity analysis, the TARGET guideline. The [reporting map](#12-reporting-map) links each checklist item to a section of this plan.
+Reporting will follow STROBE [@vonelm2007strobe], its RECORD extension for routinely collected health data [@benchimol2015record], and, for the target-trial sensitivity analysis, the TARGET guideline [@cashin2025target; @cashin2025targetbmj]. The [reporting map](#12-reporting-map) links each checklist item to a section of this plan.
 
 ---
 
@@ -27,7 +27,7 @@ A **sequential target-trial emulation** with propensity-score weighting is the p
 
 ## 3. Data source
 
-- **United States Renal Data System (USRDS)** standard analysis files, accessed under a data use agreement through the `usRds` R package.
+- **United States Renal Data System (USRDS)** standard analysis files [@usrds2025guide], accessed under a data use agreement through the `usRds` R package.
   - Core files: patients, transplant (TX), payer history (PAYHIST), treatment history (RXHIST), death.
   - Transplant files linked from OPTN/UNOS transplant recipient registration (TRR) records for kidney and kidney–pancreas recipients.
   - Medicare Parts A and B claims: institutional claims and revenue-center lines, and physician/supplier claims. Part D prescription events where a covariate requires them.
@@ -89,7 +89,7 @@ Whichever method is chosen under D10:
 - **Exact matching** on current graft status (functioning, or failed and on dialysis).
 - **Ratio:** up to 2 controls per case.
 - **Order:** cases are matched in a random order fixed by a recorded seed. Ties among controls are broken at random using the same seed.
-- **Pre-period cost:** months −3 to −1 are **not** used for matching. They are kept to check balance on pre-diagnosis cost (Daw and Hatfield, *Health Services Research* 2018).
+- **Pre-period cost:** months −3 to −1 are **not** used for matching. They are kept to check balance on pre-diagnosis cost [@daw2018matching].
 
 ### 6.2 Covariates
 
@@ -120,9 +120,9 @@ Each covariate's code list or registry field will be specified and published bef
 
 ### 6.4 Option B: time-varying propensity score matching
 
-- A time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months (or, equivalently, a Cox model with time-varying covariates). Each person-interval's linear predictor is its score at that time (Lu, *Biometrics* 2005).
+- A time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months (or, equivalently, a Cox model with time-varying covariates). Each person-interval's linear predictor is its score at that time [@lu2005propensity].
 - All covariates in Section 6.2 enter the score.
-- Controls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit (Austin 2011).
+- Controls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit [@austin2011caliper].
 - **Decision D6:** whether to keep the hard calipers on age and calendar time from Option A on top of the score.
 
 **Strength:** balances many covariates at once, and the same score model serves the target-trial sensitivity analysis. **Weakness:** depends on a correctly specified score model and is harder to explain.
@@ -280,10 +280,4 @@ Analyses are run in R. Code is public at https://github.com/VagishHemmige/Crypto
 
 ## References
 
-- von Elm E, et al. The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) statement. *PLoS Med* 2007.
-- Benchimol EI, et al. The REporting of studies Conducted using Observational Routinely-collected health Data (RECORD) statement. *PLoS Med* 2015.
-- Cashin AG, et al. Transparent reporting of observational studies emulating a target trial: the TARGET statement. *JAMA* and *BMJ* 2025.
-- Lu B. Propensity score matching with time-dependent covariates. *Biometrics* 2005.
-- Daw JR, Hatfield LA. Matching and regression to the mean in difference-in-differences analysis. *Health Serv Res* 2018.
-- Austin PC. Optimal caliper widths for propensity-score matching. *Pharm Stat* 2011.
-- United States Renal Data System. *Researcher's Guide to the USRDS Database*, 2025.
+Rendered from `references.bib`.
