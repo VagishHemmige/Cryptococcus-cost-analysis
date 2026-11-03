@@ -114,17 +114,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>
-div.callout-Rcode.callout {
-  border-left-color: pink;
-}
-div.callout-Rcode.callout-style-default > .callout-header {
-  background-color: rgb(from pink r g b / 13%);
-}
-div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
-  content: '💻';
-  background-image: none;
-}
 div.callout-Pending.callout {
   border-left-color: #f0c400;
 }
@@ -145,6 +134,17 @@ div.callout-Results.callout-style-default > .callout-header {
 div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
   content: '📊';
+  background-image: none;
+}
+div.callout-Rcode.callout {
+  border-left-color: #d63384;
+}
+div.callout-Rcode.callout-style-default > .callout-header {
+  background-color: rgba(214, 51, 132, 0.13);
+}
+div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
+  content: '💻';
   background-image: none;
 }
 </style>
@@ -296,7 +296,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Data loading and processing</span></a>
+ <span class="menu-text">Data processing and analysis</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -445,7 +445,6 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
   <li><a href="#death-and-what-is-estimated" id="toc-death-and-what-is-estimated" class="nav-link" data-scroll-target="#death-and-what-is-estimated">Death and what is estimated</a></li>
   <li><a href="#why-cost-data-are-hard-to-model" id="toc-why-cost-data-are-hard-to-model" class="nav-link" data-scroll-target="#why-cost-data-are-hard-to-model">Why cost data are hard to model</a></li>
   <li><a href="#models-for-costs" id="toc-models-for-costs" class="nav-link" data-scroll-target="#models-for-costs">Models for costs</a></li>
-  <li><a href="#where-to-read-more" id="toc-where-to-read-more" class="nav-link" data-scroll-target="#where-to-read-more">Where to read more</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/edit/master/quarto/methodological_background.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -559,13 +558,6 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <li>the logarithm of the number of days observed as an <strong>offset</strong>, so that a partly observed month counts in proportion to its length.</li>
 </ul>
 <p>Months from the same person, and people in the same matched set, are not independent. Generalized estimating equations give standard errors that allow for this, clustered on the matched set, and also on the patient if one person can appear in more than one matched set. A <strong>cluster bootstrap</strong> gives a confidence interval by resampling whole matched sets with replacement and repeating the whole calculation each time.</p>
-</section>
-<section id="where-to-read-more" class="level2">
-<h2 class="anchored" data-anchor-id="where-to-read-more">Where to read more</h2>
-<ul>
-<li><a href="../quarto/study_overview.html">Study design and methods</a>: what this study chose, and where its code stands.</li>
-<li><a href="../quarto/background.html">Clinical background</a>: the disease, what is known about its cost, and why this question matters.</li>
-</ul>
 
 
 <!-- -->
@@ -1123,12 +1115,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a **Tweedie distribution**, which allows exact zeros and a long right tail in the same model;</span>
 <span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>the logarithm of the number of days observed as an **offset**, so that a partly observed month counts in proportion to its length.</span>
 <span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>Months from the same person, and people in the same matched set, are not independent. Generalized estimating equations give standard errors that allow for this, clustered on the matched set, and also on the patient if one person can appear in more than one matched set. A **cluster bootstrap** gives a confidence interval by resampling whole matched sets with replacement and repeating the whole calculation each time.</span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## Where to read more</span></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Study design and methods</span><span class="co">](study_overview.qmd)</span>: what this study chose, and where its code stands.</span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Clinical background</span><span class="co">](background.qmd)</span>: the disease, what is known about its cost, and why this question matters.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>Months from the same person, and people in the same matched set, are not independent. Generalized estimating equations give standard errors that allow for this, clustered on the matched set, and also on the patient if one person can appear in more than one matched set. A **cluster bootstrap** gives a confidence interval by resampling whole matched sets with replacement and repeating the whole calculation each time.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
