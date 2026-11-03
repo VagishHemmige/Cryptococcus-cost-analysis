@@ -4,7 +4,7 @@
 
 This plan states the intended design and analysis. It does not describe the current state of the code; implementation status is tracked separately. Items marked **Decision D*n*** are intended choices not yet made; they are collected in [Open decisions](#13-open-decisions).
 
-Reporting will follow STROBE [@vonelm2007strobe], its RECORD extension for routinely collected health data [@benchimol2015record], and, for the target-trial sensitivity analysis, the TARGET guideline [@cashin2025target; @cashin2025targetbmj]. The [reporting map](#12-reporting-map) links each checklist item to a section of this plan.
+Reporting will follow STROBE [@vonelm2007strobe], its RECORD extension for routinely collected health data [@benchimol2015record], and, for the target-trial sensitivity analysis, the TARGET guideline [@cashin2025target; @cashin2025targetbmj], adapted because the exposure is a disease rather than an intervention and the trials are sequential. The [reporting map](#12-reporting-map) links each checklist item to a section of this plan.
 
 ---
 
@@ -112,7 +112,7 @@ Each covariate's code list or registry field will be specified and published bef
 ### 6.3 Option A: direct covariate matching
 
 - Exact matching on diabetes, cirrhosis and HIV status, in addition to graft status.
-- Calipers on age (±10 years) and calendar time (±3 years).
+- Calipers on age (±10 years) and calendar time (±3 years), widths chosen for this study.
 - Among eligible controls, the closest on smoothed prior cost (months −12 to −4) is chosen first.
 - The remaining covariates in Section 6.2 are checked for balance and, if imbalanced, adjusted for in the outcome model.
 
@@ -120,9 +120,9 @@ Each covariate's code list or registry field will be specified and published bef
 
 ### 6.4 Option B: time-varying propensity score matching
 
-- A time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months (or, equivalently, a Cox model with time-varying covariates). Each person-interval's linear predictor is its score at that time [@lu2005propensity].
+- A time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months, which approximates a Cox model with time-varying covariates when the monthly risk is low. Each person-interval's linear predictor is its score at that time; matching within risk sets on such a score follows Lu, who used a Cox model [@lu2005propensity].
 - All covariates in Section 6.2 enter the score.
-- Controls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit [@austin2011caliper].
+- Controls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit, the width Austin recommended for a score estimated at baseline [@austin2011caliper].
 - **Decision D6:** whether to keep the hard calipers on age and calendar time from Option A on top of the score.
 
 **Strength:** balances many covariates at once, and the same score model serves the target-trial sensitivity analysis. **Weakness:** depends on a correctly specified score model and is harder to explain.
@@ -195,7 +195,7 @@ The **average treatment effect in the treated (ATT)**: the mean difference in to
 ### 8.6 Missing data
 
 - Cost outcomes are observed only during covered months, by design ([Section 7.3](#73-person-month-structure)).
-- For covariates with missing registry values, missingness is described. If it exceeds 5% for any covariate in the score, multiple imputation by chained equations is used, with the score estimated within each imputation.
+- For covariates with missing registry values, missingness is described. If it exceeds 5% for any covariate in the score (a threshold chosen for this study), multiple imputation by chained equations [@white2011mice] is used, with the score estimated within each imputation.
 
 ### 8.7 Software
 

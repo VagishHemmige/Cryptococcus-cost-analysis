@@ -10,10 +10,9 @@ and executes 1:n matching based on a custom-written greedy algorithm
 
 Characteristics of the matching algorithm:
 
-- **[Matching without replacement:](https://pmc.ncbi.nlm.nih.gov/articles/PMC2943670/)** Each patient without cryptococcosis only serves as a control to one case at most.  This makes subsequent statistical analysis simpler.
-- **[Risk set sampling (incidence density sampling):](https://epiville.ccnmtl.columbia.edu/popup/sampling_techniques.html)** If a case patient develops cryptococcosis at 243 days after their most recent kidney transplant, then all potential controls are
-chosen based on their covariate values at exactly 243 days post-transplant.
-- **[Greedy matching:](https://www.ncss.com/wp-content/themes/ncss/pdf/Procedures/NCSS/Data_Matching-Optimal_and_Greedy.pdf)** Cases are ranked by the number of potential controls at the onset, and then matches chosen without replacement without subsequent reordering.
+- **Matching without replacement:** [each patient without cryptococcosis serves as a control to at most one case]{.pending}, which keeps the later analysis simpler [@stuart2010matching].
+- **Risk-set sampling (incidence density sampling):** if a case develops cryptococcosis 243 days after their most recent kidney transplant, potential controls are chosen on their covariate values at exactly 243 days after their own most recent transplant [@richardson2004incidence].
+- **Greedy matching:** each case's controls are chosen in turn, and earlier choices are not revisited [@austin2014algorithms]. Cases are taken in order of how few potential controls they have, a choice made in this code; the order of greedy matching has at most a modest effect on estimates [@austin2014algorithms].
 - **Mix of exact matching and caliper matching**
   - Exact matching on the following:
     - Cirrhosis
@@ -24,6 +23,10 @@ chosen based on their covariate values at exactly 243 days post-transplant.
     - Index date of case and controls (within 3 years of each other)
   - Preferential matching on the following:
     - Number of transplants prior to index date 
+
+**Decision pending:** whether a person may serve as a control in more than one risk set ([D4](analysis-plan.qmd#13-open-decisions)).
+
+**Current code:** potential controls are limited to patients never diagnosed with cryptococcosis, so people diagnosed later cannot serve as controls before their diagnosis ([#7](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/7)). Other differences from the plan, including the order in which cases are matched, are listed under [Cases and controls](study_cases_controls.qmd#what-cases-and-controls-are-matched-on).
     
 
 
@@ -82,3 +85,8 @@ The following code executes the match, creating a matched dataframe suitable for
 ```
 
 The [modeling](modeling.qmd) script uses the above matched dataframe for the actual cost analysis.
+
+## References
+
+::: {#refs}
+:::
