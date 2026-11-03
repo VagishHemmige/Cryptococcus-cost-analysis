@@ -4,7 +4,8 @@
 -- - A paragraph that starts with **Decision pending:** is wrapped in a
 --   `pending-note` block, with no change to the page's source.
 -- - Any span written as [text]{.pending} is marked where it stands.
--- - A page with at least one mark gets a one-line legend at the top.
+-- - A page with at least one mark gets a Pending callout at the top that
+--   explains the mark (styled by custom-callout, which runs after this).
 --
 -- Registered under `filters:` in _quarto.yml. The leading underscore keeps
 -- Quarto from treating this file as a page.
@@ -40,13 +41,13 @@ function Pandoc(doc)
   })
 
   if marked then
-    local legend = pandoc.Div(
-      { pandoc.Para({
+    local legend = pandoc.Div({
+      pandoc.Header(3, { pandoc.Str("Provisional") }),
+      pandoc.Para({
         pandoc.Span({ pandoc.Str(SAMPLE) }, pandoc.Attr("", { "pending" })),
         pandoc.Str(LEGEND),
-      }) },
-      pandoc.Attr("", { "pending-legend" })
-    )
+      }),
+    }, pandoc.Attr("", { "Pending" }))
     blocks:insert(1, legend)
   end
 

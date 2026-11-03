@@ -38,7 +38,8 @@
 
 /* Provisional content: a yellow highlighter, added by quarto/_pending.lua
    to paragraphs that start with **Decision pending:** and to any
-   [text]{.pending}. Yellow is kept for this and used for no kind of page. */
+   [text]{.pending}, and the colour of the Pending callout. Yellow is kept
+   for this and used for no kind of page. */
 .pending {
   background: #fff3bf;
   border-radius: 3px;
@@ -49,7 +50,4 @@
   border-left: 3px solid #f0c400;
   border-radius: 3px;
   padding: .35rem .6rem;
-}
-.pending-legend p {
-  color: #495057;
 }
