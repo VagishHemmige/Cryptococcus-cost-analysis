@@ -216,7 +216,8 @@ flowchart LR
 
 - Each page calls `knitr::read_chunk()` on its script, then shows sections by label. A script edit appears on the site at the next render, with no page edit.
 - `quarto/modeling.qmd` includes the whole script with `#| file:`, so it displays everything in `modeling.R`, including unused blocks.
-- `_quarto.yml` defines the sidebar, the `custom-callout` filter (the `Rcode` callout), and `output-dir: docs`.
+- `_quarto.yml` defines the sidebar, with an icon for each page's kind (background, code, results, project documents), the `custom-callout` filter (the `Rcode` and `Results` callouts), and `output-dir: docs`. `styles.css` colours the sidebar icons to match the callouts.
+- `quarto/results.qmd` is a placeholder under Results that says results are pending. It runs no code.
 - `.github/workflows/publish.yml` renders the site on every pull request as a check and, on each push to `master`, renders it and publishes it to the `gh-pages` branch, so the live site follows every script or page change. `docs/` is the local render and is not committed.
 - The Setup page runs the `constants` and `icd-code-lists` sections of `R/setup.R` to build its summary tables; every other imported section is shown with `eval: false`.
 - `quarto/functions.qmd` links each helper to the method-page sections that call it, and those sections link back. `tests/check-crosslinks.R` derives the links from the code and runs in the workflow before the render.
@@ -235,6 +236,7 @@ flowchart LR
 | `comorbidity_ICD_list` | `R/setup.R` | Condition definitions for cases and covariates |
 | Matching calipers (±3 y calendar, ±10 y age, age ≥18) | `R/execute_matching.R`, `R/functions.R` | Hard-coded in both places |
 | Site navigation, theme, output dir | `_quarto.yml` | Website structure |
+| Sidebar colours | `styles.css` | Colour of each kind of page's icon |
 
 ## Code References
 
@@ -249,7 +251,7 @@ flowchart LR
 | Models | `R/modeling.R` | `temp_formula`, `fit[[outcome]][[engine]][[family]]` |
 | Outputs | `R/tables.R`, `R/figures.R` | `table1`, `table2_icd`, monthly plot loop |
 | Deprecated | `R/define_cohort.R` | older `strobe`-based cohort script |
-| Website | `_quarto.yml`, `index.qmd`, `quarto/*.qmd`, `_extensions/`, `tests/check-crosslinks.R` | `read_chunk`, `custom-callout`, `render:` list |
+| Website | `_quarto.yml`, `styles.css`, `index.qmd`, `quarto/*.qmd`, `_extensions/`, `tests/check-crosslinks.R` | `read_chunk`, `custom-callout`, `render:` list |
 | External (usRds) | — | `load_usrds_file`, `get_IN_ICD`, `get_PS_ICD`, `establish_dx_date`, `verify_medicare_primary`, `create_usrds_cohort`, `add_cohort_covariate`, `finalize_usrds_cohort`, `get_IN_REV_costs`, `get_IN_CLM_costs`, `get_PS_REV_costs`, `prorate_costs_by_day`, `adjust_costs_for_inflation` |
 
 ## Known Architectural Gaps

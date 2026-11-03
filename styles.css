@@ -1,0 +1,28 @@
+/* Sidebar cues for the kind of page. Each colour follows an icon set in
+   _quarto.yml, not a position in the sidebar, so pages can be added or
+   reordered without editing this file. The colours match the callouts that
+   mark the same kind of content on the pages themselves (custom-callout in
+   _quarto.yml). */
+.sidebar-navigation {
+  --cue-prose: #2780e3;   /* background prose: cosmo's primary blue */
+  --cue-code: #d63384;    /* R code: pink, as the 💻 Rcode callout */
+  --cue-results: #198754; /* results: green, as the 📊 Results callout */
+  --cue-rules: #6c757d;   /* project rules: grey */
+}
+.sidebar-navigation .bi-book { color: var(--cue-prose); }
+.sidebar-navigation .bi-laptop { color: var(--cue-code); }
+.sidebar-navigation .bi-clipboard-data { color: var(--cue-results); }
+.sidebar-navigation .bi-file-earmark-ruled { color: var(--cue-rules); }
+
+/* Section headings read as group labels rather than pages */
+.sidebar-navigation .sidebar-item-section > .sidebar-item-container .menu-text {
+  font-weight: 600;
+}
+
+/* A thin rule between sections, and before the last links */
+.sidebar-navigation .sidebar-item-section + .sidebar-item-section,
+.sidebar-navigation .sidebar-item-section + .sidebar-item {
+  border-top: 1px solid rgba(0, 0, 0, .08);
+  margin-top: .35rem;
+  padding-top: .35rem;
+}
