@@ -14,8 +14,25 @@ local LABEL = "Decision pending:"
 
 local SAMPLE = "Text highlighted like this"
 local LEGEND = " is provisional: it depends on a decision the analysis plan " ..
-  "has not yet made. To comment on any part of this page, highlight the " ..
-  "text and use the Comment button."
+  "has not yet made."
+
+-- The comment button's label belongs to the issue-comments extension: its
+-- `text: button:` setting, or the extension's default. Without the
+-- extension (no `issue-comments:` block), the callout says nothing about
+-- commenting.
+local DEFAULT_BUTTON = "💬 Comment"
+
+local function comment_sentence(meta)
+  local ic = meta["issue-comments"]
+  if ic == nil or ic["endpoint"] == nil then return nil end
+  local label = DEFAULT_BUTTON
+  if ic["text"] ~= nil and ic["text"]["button"] ~= nil then
+    local s = pandoc.utils.stringify(ic["text"]["button"])
+    if s ~= "" then label = s end
+  end
+  return " To comment on any part of this page, highlight the text and " ..
+    "use the " .. label .. " button."
+end
 
 local function starts_with_label(para)
   local first = para.content[1]
@@ -45,7 +62,7 @@ function Pandoc(doc)
       pandoc.Header(3, { pandoc.Str("Provisional") }),
       pandoc.Para({
         pandoc.Span({ pandoc.Str(SAMPLE) }, pandoc.Attr("", { "pending" })),
-        pandoc.Str(LEGEND),
+        pandoc.Str(LEGEND .. (comment_sentence(doc.meta) or "")),
       }),
     }, pandoc.Attr("", { "Pending" }))
     blocks:insert(1, legend)
