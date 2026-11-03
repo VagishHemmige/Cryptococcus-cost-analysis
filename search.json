@@ -48,7 +48,7 @@
     "href": "quarto/architecture.html#website-build",
     "title": "",
     "section": "Website Build",
-    "text": "Website Build\n\n\n\n\n\nflowchart LR\n    RS[\"R/*.R&lt;br/&gt;sections marked ## ---- label\"] --&gt;|knitr::read_chunk| Q[\"quarto/*.qmd&lt;br/&gt;chunks with #| label + eval: false\"]\n    RM[R/modeling.R] --&gt;|\"#| file: whole script\"| QM[quarto/modeling.qmd]\n    Y[_quarto.yml&lt;br/&gt;sidebar, custom-callout filter] --&gt; REN[quarto render]\n    Q --&gt; REN\n    QM --&gt; REN\n    IX[index.qmd] --&gt; REN\n    PD[\"analysis-plan.md, ARCHITECTURE.md,&lt;br/&gt;AGENTS.md, REPOSITORY-BLUEPRINT.md\"] --&gt;|include, or read as text&lt;br/&gt;for ARCHITECTURE.md| QD[quarto/ project-document pages]\n    QD --&gt; REN\n    CK[tests/check-crosslinks.R] -.-&gt;|checks links between&lt;br/&gt;functions page and method pages| Q\n    REN --&gt; DOCS[(gh-pages branch, rendered by&lt;br/&gt;GitHub Actions, served by GitHub Pages)]\n\n\n\n\n\n\n\nEach page calls knitr::read_chunk() on its script, then shows sections by label. A script edit appears on the site at the next render, with no page edit.\nquarto/modeling.qmd includes the whole script with #| file:, so it displays everything in modeling.R, including unused blocks.\n_quarto.yml defines the sidebar, with an icon for each page’s kind (background, code, results, project documents), the custom-callout filter (the Rcode and Results callouts), and output-dir: docs. styles.css colours the sidebar icons to match the callouts.\nquarto/results.qmd is a placeholder under Results that says results are pending. It runs no code.\n.github/workflows/publish.yml renders the site on every pull request as a check and, on each push to master, renders it and publishes it to the gh-pages branch, so the live site follows every script or page change. docs/ is the local render and is not committed.\nThe Setup page runs the constants and icd-code-lists sections of R/setup.R to build its summary tables; every other imported section is shown with eval: false.\nquarto/functions.qmd links each helper to the method-page sections that call it, and those sections link back. tests/check-crosslinks.R derives the links from the code and runs in the workflow before the render.\nThe Background pages, quarto/background.qmd (clinical background) and quarto/analysis_methods.qmd (the methods in plain language, linking each step to its section of the plan), are prose only and run no code.\nThe project-document pages (quarto/analysis-plan.qmd, architecture.qmd, agents.qmd, repository-blueprint.qmd) show the root files. The sidebar lists the plan under Background and the other three under Project documents. The plan page uses GitHub-style heading IDs. The Architecture page reads ARCHITECTURE.md as text and turns its mermaid blocks into Quarto diagrams. render: in _quarto.yml limits rendering to index.qmd and quarto/, so the root files are not rendered as pages of their own.",
+    "text": "Website Build\n\n\n\n\n\nflowchart LR\n    RS[\"R/*.R&lt;br/&gt;sections marked ## ---- label\"] --&gt;|knitr::read_chunk| Q[\"quarto/*.qmd&lt;br/&gt;chunks with #| label + eval: false\"]\n    RM[R/modeling.R] --&gt;|\"#| file: whole script\"| QM[quarto/modeling.qmd]\n    Y[_quarto.yml&lt;br/&gt;sidebar, custom-callout filter] --&gt; REN[quarto render]\n    Q --&gt; REN\n    QM --&gt; REN\n    IX[index.qmd] --&gt; REN\n    PD[\"analysis-plan.md, ARCHITECTURE.md,&lt;br/&gt;AGENTS.md, REPOSITORY-BLUEPRINT.md\"] --&gt;|include, or read as text&lt;br/&gt;for ARCHITECTURE.md| QD[quarto/ project-document pages]\n    QD --&gt; REN\n    CK[tests/check-crosslinks.R] -.-&gt;|checks links between&lt;br/&gt;functions page and method pages| Q\n    REN --&gt; DOCS[(gh-pages branch, rendered by&lt;br/&gt;GitHub Actions, served by GitHub Pages)]\n\n\n\n\n\n\n\nEach page calls knitr::read_chunk() on its script, then shows sections by label. A script edit appears on the site at the next render, with no page edit.\nquarto/modeling.qmd includes the whole script with #| file:, so it displays everything in modeling.R, including unused blocks.\n_quarto.yml defines the sidebar, with an icon for each page’s kind (background, code, results, project documents), the custom-callout filter (the Rcode and Results callouts), and output-dir: docs. styles.css colours the sidebar icons to match the callouts.\nquarto/results.qmd is a placeholder under Results that says results are pending. It runs no code.\n.github/workflows/publish.yml renders the site on every pull request as a check and, on each push to master, renders it and publishes it to the gh-pages branch, so the live site follows every script or page change. docs/ is the local render and is not committed.\nThe Setup page runs the constants and icd-code-lists sections of R/setup.R to build its summary tables; every other imported section is shown with eval: false.\nquarto/functions.qmd links each helper to the method-page sections that call it, and those sections link back. tests/check-crosslinks.R derives the links from the code and runs in the workflow before the render.\nThe Background pages, quarto/background.qmd (clinical background) and quarto/analysis_methods.qmd (the methods in plain language, linking each step to its section of the plan), are prose only and run no code.\nThe project-document pages (quarto/analysis-plan.qmd, architecture.qmd, agents.qmd, repository-blueprint.qmd) show the root files. The sidebar lists all four under Project documents, because they are written for the people and agents working on the code; the Background pages explain the plan in plain language and link to its sections. The plan page uses GitHub-style heading IDs. The Architecture page reads ARCHITECTURE.md as text and turns its mermaid blocks into Quarto diagrams. render: in _quarto.yml limits rendering to index.qmd and quarto/, so the root files are not rendered as pages of their own.",
     "crumbs": [
       "Project documents",
       "Architecture"
@@ -103,9 +103,9 @@
     "href": "quarto/analysis-plan.html",
     "title": "",
     "section": "",
-    "text": "BackgroundAnalysis plan Code",
+    "text": "Project documentsAnalysis plan Code",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -116,7 +116,7 @@
     "section": "1. Objective",
     "text": "1. Objective\nTo estimate the excess Medicare payments attributable to cryptococcosis in the 12 months after diagnosis among adult kidney transplant recipients, compared with similar recipients at the same time since transplant who have not been diagnosed.\nSecondary objectives\n\nDescribe the month-by-month profile of excess cost from 3 months before to 12 months after diagnosis.\nPartition excess cost by care setting (inpatient, outpatient, skilled nursing, home health, hospice, dialysis, physician/supplier).",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -127,7 +127,7 @@
     "section": "2. Design",
     "text": "2. Design\nRetrospective cohort study in linked registry and claims data, using risk-set (incidence density) matching. Each case is matched, at the time since transplant when they are diagnosed, to controls who are still at risk and undiagnosed at that same time.\nDecision D10: the matching method — direct covariate matching, or matching on a time-varying propensity score (Section 6).\nA sequential target-trial emulation with propensity-score weighting is the planned main sensitivity analysis (Section 9; protocol in Appendix A). It requires a propensity score model whichever matching method is chosen.",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -138,7 +138,7 @@
     "section": "3. Data source",
     "text": "3. Data source\n\nUnited States Renal Data System (USRDS) standard analysis files, accessed under a data use agreement through the usRds R package.\n\nCore files: patients, transplant (TX), payer history (PAYHIST), treatment history (RXHIST), death.\nTransplant files linked from OPTN/UNOS transplant recipient registration (TRR) records for kidney and kidney–pancreas recipients.\nMedicare Parts A and B claims: institutional claims and revenue-center lines, and physician/supplier claims. Part D prescription events where a covariate requires them.\n\nLinkage: USRDS links CMS and OPTN records to a single USRDS patient identifier. The study uses this linkage as supplied; no further linkage is performed.\nPeriod: claims 2006–2021; incident cryptococcosis 2007–2020; administrative end of follow-up 2022-01-01.\nGeography: United States.",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -149,7 +149,7 @@
     "section": "4. Study population",
     "text": "4. Study population\n\n4.1 Source population\nKidney transplant recipients in USRDS with a transplant before 2021.\n\n\n4.2 Eligibility at time zero (cases and controls alike)\nAt the risk-set time (Section 5.3), a person is eligible if they:\n\nHave had at least one kidney transplant before that date.\nAre aged 18 or older.\nHave no prior cryptococcosis diagnosis.\nHave Medicare fee-for-service as primary payer for both Part A and Part B for the 365 days before time zero, without gaps, so that baseline covariates and baseline cost are fully observed. Decision D1: whether Medicare as secondary payer or other payer categories are ever eligible.\nAre alive and under observation on that date.\n\n\n\n4.3 Index transplant\nThe time scale is time since the most recent kidney transplant before time zero. Retransplant recipients are eligible; prior transplants enter as covariates. Decision D2: inclusion of kidney–pancreas and other multi-organ recipients (exclude, or include with an indicator).",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -160,7 +160,7 @@
     "section": "5. Exposure and time zero",
     "text": "5. Exposure and time zero\n\n5.1 Exposure definition\nIncident cryptococcosis, identified from ICD-9-CM and ICD-10-CM diagnosis codes on Medicare institutional or physician/supplier claims. The full code list is published as a supplementary table.\nDecision D3: the claim algorithm, meaning the claim types and diagnosis positions accepted and the number of claims required (for example, one inpatient claim, or two outpatient claims within a set window). The choice will cite any available validation literature for fungal infection codes in claims.\n\n\n5.2 Diagnosis date\nThe service date of the first qualifying claim.\n\n\n5.3 Time zero\n\nCases: the diagnosis date.\nControls: the date on which the control reaches the same number of days since their most recent transplant as the case had at diagnosis.\n\nEligibility, covariates and baseline cost are measured as of time zero, using only information available before it.\n\n\n5.4 Control eligibility\nAny person meeting Section 4.2 at the case’s risk-set time is eligible, including people who are diagnosed with cryptococcosis later. Their time before diagnosis is unexposed time. Excluding them would condition on the future.\nDecision D4: whether a person may serve as a control in more than one risk set (sampling with replacement across risk sets, as in standard incidence density sampling) or at most once.",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -171,7 +171,7 @@
     "section": "6. Matching",
     "text": "6. Matching\n\n6.1 Common elements\nWhichever method is chosen under D10:\n\nExact matching on current graft status (functioning, or failed and on dialysis).\nRatio: up to 2 controls per case.\nOrder: cases are matched in a random order fixed by a recorded seed. Ties among controls are broken at random using the same seed.\nPre-period cost: months −3 to −1 are not used for matching. They are kept to check balance on pre-diagnosis cost (Daw and Hatfield, Health Services Research 2018).\n\n\n\n6.2 Covariates\nThese are the confounders the design must address. Under Option A (Section 6.3), a subset is matched on directly and the rest are checked for balance. Under Option B (Section 6.4), all enter the score. All are measured before time zero.\n\n\n\n\n\n\n\nDomain\nCovariates\n\n\n\n\nDemographics\nAge, sex, race and ethnicity, calendar year\n\n\nTransplant\nTime since transplant (the time scale), donor type (living or deceased), retransplant and number of prior transplants, cause of kidney failure, time on dialysis before transplant, induction regimen\n\n\nGraft function\nCurrent graft status (functioning, or failed and on dialysis)\n\n\nImmunosuppression intensity\nRejection treatment in the prior 3–6 months; maintenance regimen where observable\n\n\nComorbidity\nDiabetes, cirrhosis, HIV, other solid organ transplant, a claims-based comorbidity index\n\n\nOther infections\nCMV, BK virus, Pneumocystis pneumonia, other invasive fungal infection, sepsis\n\n\nPrior use of care\nHospital admissions, emergency visits, skilled nursing days in the prior year\n\n\nPrior cost\nMedicare payments in months −12 to −4, as a smoothed measure (mean or log of monthly cost)\n\n\nPayer and place\nMedicaid dual eligibility, region\n\n\n\nEach covariate’s code list or registry field will be specified and published before analysis. Decision D5: the lookback window for rejection treatment, and the comorbidity index (Charlson or Elixhauser).\n\n\n6.3 Option A: direct covariate matching\n\nExact matching on diabetes, cirrhosis and HIV status, in addition to graft status.\nCalipers on age (±10 years) and calendar time (±3 years).\nAmong eligible controls, the closest on smoothed prior cost (months −12 to −4) is chosen first.\nThe remaining covariates in Section 6.2 are checked for balance and, if imbalanced, adjusted for in the outcome model.\n\nStrength: simple to explain and to reproduce. Weakness: exact matching becomes sparse as matching factors are added, so few of the covariates in Section 6.2 can be matched on directly.\n\n\n6.4 Option B: time-varying propensity score matching\n\nA time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months (or, equivalently, a Cox model with time-varying covariates). Each person-interval’s linear predictor is its score at that time (Lu, Biometrics 2005).\nAll covariates in Section 6.2 enter the score.\nControls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit (Austin 2011).\nDecision D6: whether to keep the hard calipers on age and calendar time from Option A on top of the score.\n\nStrength: balances many covariates at once, and the same score model serves the target-trial sensitivity analysis. Weakness: depends on a correctly specified score model and is harder to explain.\n\n\n6.5 Matching outcomes reported\n\nThe number of cases with 2, 1 and 0 matched controls.\nThe characteristics of unmatched cases compared with matched cases.",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -182,7 +182,7 @@
     "section": "7. Outcome",
     "text": "7. Outcome\n\n7.1 Cost measure\nMedicare paid amounts (not charges) from institutional claims and physician/supplier claims. Institutional claims spanning several days are prorated evenly across days of service.\n\n\n7.2 Inflation adjustment\nAll costs are expressed in January 2021 US dollars. Decision D7: the price index (for example, the medical care component of the CPI-U, or the PCE health price index).\n\n\n7.3 Person-month structure\n\nEach person’s follow-up is divided into 30-day months relative to time zero, from month −3 (days −90 to −61) through month 11 (days 330 to 359).\nEach person-month’s cost is the sum of prorated, inflation-adjusted payments for services in that month.\nPartial months are kept, with the number of observed days recorded as exposure.\nA month with Medicare coverage and no claims has a cost of zero. A month without qualifying coverage is not observed; it is never recorded as zero cost.\n\n\n\n7.4 End of follow-up\nFollow-up ends at the earliest of:\n\nday 365 after time zero;\ndeath;\nloss of Medicare fee-for-service primary coverage for Parts A and B;\nthe administrative end date, 2022-01-01.\n\nGraft failure after time zero does not end follow-up; it is an outcome pathway, not a censoring event.\nDecision D8: the treatment of death, which defines the estimand. In option (a), cost accrues only while alive, and death ends follow-up. In option (b), months after death count as zero cost, so the estimand includes the cost consequences of mortality. Whichever is primary, the other is a sensitivity analysis.",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -193,7 +193,7 @@
     "section": "8. Statistical analysis",
     "text": "8. Statistical analysis\n\n8.1 Descriptive analysis\n\nA cohort flow diagram from the source population through eligibility, case identification, and matching.\nBaseline characteristics at time zero, by group, before and after matching.\n\n\n\n8.2 Balance\n\nStandardized mean differences at time zero for every covariate in Section 6.2, and for cost in months −3, −2 and −1.\nAn absolute standardized mean difference below 0.1 is considered adequate balance.\nBalance on months −3 to −1, which were not matched on, is reported as a check on residual confounding.\n\n\n\n8.3 Estimand\nThe average treatment effect in the treated (ATT): the mean difference in total Medicare payments over months 0–11 between cases and their matched controls, per case.\n\n\n8.4 Primary model\n\nPerson-month cost is modelled with a generalized linear model with log link and Tweedie variance, including group, month (as a categorical variable), and their interaction, with log observed days as an offset.\nStandard errors are estimated with generalized estimating equations clustered on matched set; robust standard errors also cluster on patient if D4 allows a person in more than one set.\nRetransformation to dollars: predicted monthly cost for each group is computed at a full 30-day month by recycled predictions. The ATT is the sum of case-minus-control differences over months 0–11.\nConfidence intervals come from a cluster bootstrap that resamples matched sets (1,000 replicates, or more if needed for stability).\nDecision D9: whether the primary estimate subtracts the pre-period difference (months −3 to −1), giving a difference-in-differences, or relies on matching alone with the pre-period reported as a balance check.\n\n\n\n8.5 Secondary analyses\n\nThe month-by-month excess cost profile for months −3 to 11, from the primary model.\nExcess cost by care setting, using the same model on each setting’s cost.\n\n\n\n8.6 Missing data\n\nCost outcomes are observed only during covered months, by design (Section 7.3).\nFor covariates with missing registry values, missingness is described. If it exceeds 5% for any covariate in the score, multiple imputation by chained equations is used, with the score estimated within each imputation.\n\n\n\n8.7 Software\nAnalyses are run in R. Code is public at https://github.com/VagishHemmige/Cryptococcus-cost-analysis, and a website at https://vagishhemmige.github.io/Cryptococcus-cost-analysis documents each step. Data are not shared, as the data use agreement requires.",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -204,7 +204,7 @@
     "section": "9. Sensitivity analyses",
     "text": "9. Sensitivity analyses\n\nSequential target-trial emulation (Appendix A). Monthly trials of everyone eligible, with the newly diagnosed as the exposed group. The comparison group is weighted by propensity odds (ATT weights), trials are pooled, and robust standard errors are clustered on patient. Weights are truncated at the 1st and 99th percentiles, with untruncated results also reported.\nAlternative death handling: the option in D8 not chosen as primary.\nAlternative outcome models: Gaussian identity-link and log-cost models, to show sensitivity to distributional assumptions.\nAlternative exposure algorithm: a stricter claims definition than D3 (for example, requiring an inpatient claim), to address misclassification.\nMatching variations: a 1:1 ratio; exact matching on CMV status; under Option B, a caliper of 0.1 standard deviations. The matching method not chosen under D10 may also be run as a sensitivity analysis.\nRestriction to first transplant recipients.\nPre-2015 and 2015-or-later diagnoses, to check stability across the ICD-9-CM to ICD-10-CM transition (October 2015).",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -215,7 +215,7 @@
     "section": "10. Disclosure control",
     "text": "10. Disclosure control\n\nNo cell with a count under 11 is reported in any table, figure, or text, including flow diagrams and website pages. Complementary cells are suppressed where they would allow a small count to be derived.\nFigures that show individual-level data (for example, beeswarm or scatter plots) are not published.\nAll outputs are reviewed against the USRDS data use agreement before release.",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -226,7 +226,7 @@
     "section": "11. Limitations to address in reporting",
     "text": "11. Limitations to address in reporting\n\nClaims-based diagnoses carry misclassification of both exposure and covariates.\nCosts are Medicare payments only; patient cost-sharing, other payers, and Part D are excluded unless Part D is added.\nRestricting to Medicare fee-for-service primary coverage limits generalizability to recipients with other primary payers or Medicare Advantage.\nConfounding by unmeasured immunosuppression intensity may remain despite the covariates in Section 6.2.\nCoverage requirements depend on eligibility rules that change over time, such as the end of Medicare entitlement 36 months after a successful transplant for patients without another qualifying reason.",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -237,7 +237,7 @@
     "section": "12. Reporting map",
     "text": "12. Reporting map\n\n\n\n\n\n\n\n\nChecklist item\nTopic\nPlan section\n\n\n\n\nSTROBE 1 / RECORD 1.1–1.3\nTitle, abstract, data type, region and period, linkage\n3\n\n\nSTROBE 2–3\nBackground, objectives\n1\n\n\nSTROBE 4\nStudy design\n2\n\n\nSTROBE 5\nSetting, dates\n3\n\n\nSTROBE 6 / RECORD 6.1–6.3\nEligibility, selection codes and algorithms, validation, linkage\n4, 5\n\n\nSTROBE 6b\nMatching criteria and number of controls\n6\n\n\nSTROBE 7 / RECORD 7.1\nVariables, with complete code lists\n5, 6.2, 7\n\n\nSTROBE 8\nData sources and measurement\n3, 7\n\n\nSTROBE 9\nBias\n5.4, 6, 9, 11\n\n\nSTROBE 10\nStudy size\n6.5, 8.1\n\n\nSTROBE 11\nQuantitative variables\n6.2, 7\n\n\nSTROBE 12 / RECORD 12.1–12.3\nStatistical methods, data access, cleaning, linkage\n3, 8\n\n\nSTROBE 12d\nMatching taken into account in analysis\n8.4\n\n\nSTROBE 12e\nSensitivity analyses\n9\n\n\nSTROBE 13 / RECORD 13.1\nParticipants, flow diagram\n8.1\n\n\nSTROBE 14–17\nDescriptive data, outcomes, main and other results\n8\n\n\nSTROBE 18–21\nDiscussion, limitations, interpretation, generalizability\n11\n\n\nRECORD 19.1\nLimitations of routinely collected data\n11\n\n\nSTROBE 22 / RECORD 22.1\nFunding; access to protocol, code and supplementary material\n8.7\n\n\nTARGET\nTarget-trial emulation\n9, Appendix A",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -248,7 +248,7 @@
     "section": "13. Open decisions",
     "text": "13. Open decisions\n\n\n\n\n\n\n\n\nID\nDecision\nSection\n\n\n\n\nD1\nEligible payer categories beyond Medicare fee-for-service primary for Parts A and B\n4.2\n\n\nD2\nInclusion of kidney–pancreas and other multi-organ recipients\n4.3\n\n\nD3\nClaim algorithm for cryptococcosis: claim types, diagnosis positions, number of claims\n5.1\n\n\nD4\nControls in more than one risk set, or at most once\n5.4\n\n\nD5\nRejection-treatment lookback window; comorbidity index\n6.2\n\n\nD6\nUnder Option B, hard calipers on age and calendar time in addition to the score\n6.4\n\n\nD7\nPrice index for inflation adjustment\n7.2\n\n\nD8\nDeath: end of cost accrual, or zero cost after death\n7.4\n\n\nD9\nPrimary estimate as matched difference, or difference-in-differences\n8.4\n\n\nD10\nMatching method: direct covariate matching (Option A) or time-varying propensity score (Option B)\n2, 6",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -259,7 +259,7 @@
     "section": "Appendix A: Target-trial protocol",
     "text": "Appendix A: Target-trial protocol\n\n\n\n\n\n\n\n\nComponent\nTarget trial\nEmulation\n\n\n\n\nEligibility\nAdult kidney transplant recipients, no prior cryptococcosis, 12 months of Medicare fee-for-service primary Parts A and B coverage\nSame criteria, applied at the start of each monthly trial\n\n\nTreatment strategies\nDevelop cryptococcosis in month t, or not\nDiagnosis in month t (exposed) versus no diagnosis in month t (comparison)\n\n\nAssignment\nNot randomizable; the trial is hypothetical\nExchangeability approximated by ATT weights from a propensity score with the covariates in Section 6.2\n\n\nTime zero\nStart of month t\nStart of each monthly trial; aligned with eligibility and exposure\n\n\nFollow-up\n12 months, ending as in Section 7.4\nSame\n\n\nOutcome\nMedicare payments over months 0–11\nSame as Section 7\n\n\nCausal contrast\nEffect in those who develop cryptococcosis (ATT)\nWeighted difference pooled across trials\n\n\nAnalysis\n—\nWeighted model as in Section 8.4; robust standard errors clustered on patient, because people appear in several trials",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
@@ -270,7 +270,7 @@
     "section": "References",
     "text": "References\n\nvon Elm E, et al. The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) statement. PLoS Med 2007.\nBenchimol EI, et al. The REporting of studies Conducted using Observational Routinely-collected health Data (RECORD) statement. PLoS Med 2015.\nCashin AG, et al. Transparent reporting of observational studies emulating a target trial: the TARGET statement. JAMA and BMJ 2025.\nLu B. Propensity score matching with time-dependent covariates. Biometrics 2005.\nDaw JR, Hatfield LA. Matching and regression to the mean in difference-in-differences analysis. Health Serv Res 2018.\nAustin PC. Optimal caliper widths for propensity-score matching. Pharm Stat 2011.\nUnited States Renal Data System. Researcher’s Guide to the USRDS Database, 2025.",
     "crumbs": [
-      "Background",
+      "Project documents",
       "Analysis plan"
     ]
   },
