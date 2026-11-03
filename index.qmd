@@ -3,18 +3,22 @@ title: "Overview"
 format: html
 ---
 
-## Clinical background
+## The study question
 
-[Cryptococcosis in kidney transplant recipients](https://academic.oup.com/ofid/article/12/5/ofaf263/8121609) is uncommon but potentially catastrophic. When [transmission occurs through the donor](https://pmc.ncbi.nlm.nih.gov/articles/PMC8096655/), it often presents early after transplant, may involve the central nervous system, and is associated with substantial morbidity and mortality despite treatment.
+This study estimates the excess Medicare payments in the 12 months after cryptococcosis is diagnosed among adult kidney transplant recipients, compared with similar recipients at the same time since transplant who have not been diagnosed.
 
-The costs of cryptococcus after solid organ transplant are unclear.  Although studies have quantified the cost of a single hospitalization for cryptococcus,
-no study to date has estimated the total excess cost of care due to cryptococcus.
+- **Population:** adult kidney transplant recipients in the United States [with fee-for-service Medicare as their primary payer]{.pending}.
+- **Comparison:** each case is compared with up to two recipients who have reached the same time since transplant without being diagnosed.
+- **Outcome:** Medicare payments, month by month, from three months before diagnosis to the end of the twelfth month after it.
+- **Measure:** the average excess payment per case over the 12 months after diagnosis.
 
-## What this analysis does
+**Decision pending:** whether other payer arrangements, such as Medicare as secondary payer, are ever eligible ([D1](quarto/analysis-plan.qmd#13-open-decisions)).
 
-This project uses the [**United States Renal Data System**](https://www.niddk.nih.gov/about-niddk/strategic-plans-reports/usrds) to analyze the impact of cryptococcus on costs.
+The data come from the United States Renal Data System (USRDS), which links transplant registry records to Medicare claims [@usrds2025guide].
 
+## Why it matters
 
+Cryptococcosis is uncommon after kidney transplant [@george2017epidemiology; @pappas2010transnet], but it is serious: in a national USRDS cohort, 22% of kidney recipients hospitalized for it died within six months [@fiorica2025mortality]. Treatment of cryptococcal meningitis lasts at least 10 weeks [@merry2016flucytosine]. Published US cost estimates are of single hospital stays, of modelled treatment, or of costs over time without a comparison group. We found no study that estimates the excess Medicare payments attributable to cryptococcosis over the months after diagnosis in kidney transplant recipients. [Clinical background](quarto/background.qmd) sets out the evidence.
 
 ## Study timeline and cost trajectories {#study-timeline}
 
@@ -39,10 +43,14 @@ Not yet available. The [Main results](quarto/results.qmd) page will hold them on
 
 ## Reproducibility
 
-The complete source code used to perform the full analysis and generate the tables and figures is publicly available at this [GitHub repo](https://github.com/VagishHemmige/Cryptococcus-cost-analysis).  The R script `R/main.R` will run the R subscripts needed for this analysis in the order they are to be run.  Model assumptions, parameter values, and analytic workflows are documented in the repository to facilitate transparency and reuse. The USRDS data are restricted, so the analysis can be rerun only by an analyst with authorized access to them.
+The complete source code for the analysis, tables and figures is public in the [GitHub repository](https://github.com/VagishHemmige/Cryptococcus-cost-analysis). The script `R/main.R` runs the other scripts in order. Model assumptions, parameter values and the workflow are documented in the repository for transparency and reuse. The USRDS data are restricted, so the analysis can be rerun only by an analyst with authorized access to them.
 
 
-## Abstracts/manuscripts
+## Publications
 
-This analysis has yet to be published to date.
+This analysis has not yet been published.
 
+## References
+
+::: {#refs}
+:::
