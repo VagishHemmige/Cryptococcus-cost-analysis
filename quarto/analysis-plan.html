@@ -144,17 +144,6 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
   content: '📊';
   background-image: none;
 }
-div.callout-Pending.callout {
-  border-left-color: #f0c400;
-}
-div.callout-Pending.callout-style-default > .callout-header {
-  background-color: rgba(240, 196, 0, 0.13);
-}
-div.callout-Pending .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Pending.callout-style-default .callout-icon::before, div.callout-Pending.callout-titled .callout-icon::before {
-  content: '⏳';
-  background-image: none;
-}
 div.callout-Rcode.callout {
   border-left-color: #d63384;
 }
@@ -164,6 +153,17 @@ div.callout-Rcode.callout-style-default > .callout-header {
 div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
   content: '💻';
+  background-image: none;
+}
+div.callout-Pending.callout {
+  border-left-color: #f0c400;
+}
+div.callout-Pending.callout-style-default > .callout-header {
+  background-color: rgba(240, 196, 0, 0.13);
+}
+div.callout-Pending .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Pending.callout-style-default .callout-icon::before, div.callout-Pending.callout-titled .callout-icon::before {
+  content: '⏳';
   background-image: none;
 }
 </style>
@@ -632,7 +632,7 @@ gives this page GitHub-style IDs and those links work on both.
 <li><strong>Exact matching</strong> on current graft status (functioning, or failed and on dialysis).</li>
 <li><strong>Ratio:</strong> up to 2 controls per case.</li>
 <li><strong>Order:</strong> cases are matched in a random order fixed by a recorded seed. Ties among controls are broken at random using the same seed.</li>
-<li><strong>Pre-period cost:</strong> months −3 to −1 are <strong>not</strong> used for matching. They are kept to check balance on pre-diagnosis cost<span class="citation" data-cites="daw2018matching"><sup><a href="#ref-daw2018matching" role="doc-biblioref">6</a></sup></span>.</li>
+<li><strong>Pre-period cost:</strong> months −3 to −1 are <strong>not</strong> used for matching. They are kept to check balance on pre-diagnosis cost<span class="citation" data-cites="daw2018matching daw2018rock"><sup><a href="#ref-daw2018matching" role="doc-biblioref">6</a>,<a href="#ref-daw2018rock" role="doc-biblioref">7</a></sup></span>.</li>
 </ul>
 </section>
 <section id="62-covariates" class="level3">
@@ -703,9 +703,9 @@ gives this page GitHub-style IDs and those links work on both.
 <section id="64-option-b-time-varying-propensity-score-matching" class="level3">
 <h3 class="anchored" data-anchor-id="64-option-b-time-varying-propensity-score-matching">6.4 Option B: time-varying propensity score matching</h3>
 <ul>
-<li>A time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months, which approximates a Cox model with time-varying covariates when the monthly risk is low. Each person-interval’s linear predictor is its score at that time; matching within risk sets on such a score follows Lu, who used a Cox model<span class="citation" data-cites="lu2005propensity"><sup><a href="#ref-lu2005propensity" role="doc-biblioref">7</a></sup></span>.</li>
+<li>A time-varying propensity score for cryptococcosis diagnosis is estimated on the person-time of the eligible cohort, with a discrete-time logistic model on person-months, which approximates a Cox model with time-varying covariates when the monthly risk is low. Each person-interval’s linear predictor is its score at that time; matching within risk sets on such a score follows Lu, who used a Cox model<span class="citation" data-cites="lu2005propensity"><sup><a href="#ref-lu2005propensity" role="doc-biblioref">8</a></sup></span>.</li>
 <li>All covariates in Section 6.2 enter the score.</li>
-<li>Controls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit, the width Austin recommended for a score estimated at baseline<span class="citation" data-cites="austin2011caliper"><sup><a href="#ref-austin2011caliper" role="doc-biblioref">8</a></sup></span>.</li>
+<li>Controls are chosen by nearest neighbour on the logit of the score, within a caliper of 0.2 standard deviations of the logit, the width Austin recommended for a score estimated at baseline<span class="citation" data-cites="austin2011caliper"><sup><a href="#ref-austin2011caliper" role="doc-biblioref">9</a></sup></span>.</li>
 <li><strong>Decision D6:</strong> whether to keep the hard calipers on age and calendar time from Option A on top of the score.</li>
 </ul>
 <p><strong>Strength:</strong> balances many covariates at once, and the same score model serves the target-trial sensitivity analysis. <strong>Weakness:</strong> depends on a correctly specified score model and is harder to explain.</p>
@@ -792,7 +792,7 @@ gives this page GitHub-style IDs and those links work on both.
 <h3 class="anchored" data-anchor-id="86-missing-data">8.6 Missing data</h3>
 <ul>
 <li>Cost outcomes are observed only during covered months, by design (<a href="#73-person-month-structure">Section 7.3</a>).</li>
-<li>For covariates with missing registry values, missingness is described. If it exceeds 5% for any covariate in the score (a threshold chosen for this study), multiple imputation by chained equations<span class="citation" data-cites="white2011mice"><sup><a href="#ref-white2011mice" role="doc-biblioref">9</a></sup></span> is used, with the score estimated within each imputation.</li>
+<li>For covariates with missing registry values, missingness is described. If it exceeds 5% for any covariate in the score (a threshold chosen for this study), multiple imputation by chained equations<span class="citation" data-cites="white2011mice"><sup><a href="#ref-white2011mice" role="doc-biblioref">10</a></sup></span> is used, with the score estimated within each imputation.</li>
 </ul>
 </section>
 <section id="87-software" class="level3">
@@ -908,8 +908,8 @@ gives this page GitHub-style IDs and those links work on both.
 </tr>
 <tr class="odd">
 <td>STROBE 12d</td>
-<td>Matching taken into account in analysis</td>
-<td>8.4</td>
+<td>Loss to follow-up (cohort wording); matching of cases and controls (case–control wording, which applies to the matched design)</td>
+<td>7.4, 8.4, 8.6</td>
 </tr>
 <tr class="even">
 <td>STROBE 12e</td>
@@ -1107,14 +1107,17 @@ gives this page GitHub-style IDs and those links work on both.
 <div id="ref-daw2018matching" class="csl-entry" role="listitem">
 <div class="csl-left-margin">6. </div><div class="csl-right-inline">Daw JR, Hatfield LA. Matching and regression to the mean in difference-in-differences analysis. <em>Health Serv Res</em>. 2018;53(6):4138-4156. doi:<a href="https://doi.org/10.1111/1475-6773.12993">10.1111/1475-6773.12993</a></div>
 </div>
+<div id="ref-daw2018rock" class="csl-entry" role="listitem">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Daw JR, Hatfield LA. Matching in difference-in-differences: Between a rock and a hard place. <em>Health Serv Res</em>. 2018;53(6):4111-4117. doi:<a href="https://doi.org/10.1111/1475-6773.13017">10.1111/1475-6773.13017</a></div>
+</div>
 <div id="ref-lu2005propensity" class="csl-entry" role="listitem">
-<div class="csl-left-margin">7. </div><div class="csl-right-inline">Lu B. Propensity score matching with time-dependent covariates. <em>Biometrics</em>. 2005;61(3):721-728. doi:<a href="https://doi.org/10.1111/j.1541-0420.2005.00356.x">10.1111/j.1541-0420.2005.00356.x</a></div>
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Lu B. Propensity score matching with time-dependent covariates. <em>Biometrics</em>. 2005;61(3):721-728. doi:<a href="https://doi.org/10.1111/j.1541-0420.2005.00356.x">10.1111/j.1541-0420.2005.00356.x</a></div>
 </div>
 <div id="ref-austin2011caliper" class="csl-entry" role="listitem">
-<div class="csl-left-margin">8. </div><div class="csl-right-inline">Austin PC. Optimal caliper widths for propensity-score matching when estimating differences in means and differences in proportions in observational studies. <em>Pharm Stat</em>. 2011;10(2):150-161. doi:<a href="https://doi.org/10.1002/pst.433">10.1002/pst.433</a></div>
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Austin PC. Optimal caliper widths for propensity-score matching when estimating differences in means and differences in proportions in observational studies. <em>Pharm Stat</em>. 2011;10(2):150-161. doi:<a href="https://doi.org/10.1002/pst.433">10.1002/pst.433</a></div>
 </div>
 <div id="ref-white2011mice" class="csl-entry" role="listitem">
-<div class="csl-left-margin">9. </div><div class="csl-right-inline">White IR, Royston P, Wood AM. Multiple imputation using chained equations: Issues and guidance for practice. <em>Stat Med</em>. 2011;30(4):377-399. doi:<a href="https://doi.org/10.1002/sim.4067">10.1002/sim.4067</a></div>
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">White IR, Royston P, Wood AM. Multiple imputation using chained equations: Issues and guidance for practice. <em>Stat Med</em>. 2011;30(4):377-399. doi:<a href="https://doi.org/10.1002/sim.4067">10.1002/sim.4067</a></div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
