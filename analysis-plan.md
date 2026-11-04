@@ -89,7 +89,7 @@ Whichever method is chosen under D10:
 - **Exact matching** on current graft status (functioning, or failed and on dialysis).
 - **Ratio:** up to 2 controls per case.
 - **Order:** cases are matched in a random order fixed by a recorded seed. Ties among controls are broken at random using the same seed.
-- **Pre-period cost:** months −3 to −1 are **not** used for matching. They are kept to check balance on pre-diagnosis cost [@daw2018matching].
+- **Pre-period cost:** months −3 to −1 are **not** used for matching. They are kept to check balance on pre-diagnosis cost [@daw2018matching; @daw2018rock].
 
 ### 6.2 Covariates
 
@@ -241,7 +241,7 @@ Analyses are run in R. Code is public at https://github.com/VagishHemmige/Crypto
 | STROBE 10 | Study size | 6.5, 8.1 |
 | STROBE 11 | Quantitative variables | 6.2, 7 |
 | STROBE 12 / RECORD 12.1–12.3 | Statistical methods, data access, cleaning, linkage | 3, 8 |
-| STROBE 12d | Matching taken into account in analysis | 8.4 |
+| STROBE 12d | Loss to follow-up (cohort wording); matching of cases and controls (case–control wording, which applies to the matched design) | 7.4, 8.4, 8.6 |
 | STROBE 12e | Sensitivity analyses | 9 |
 | STROBE 13 / RECORD 13.1 | Participants, flow diagram | 8.1 |
 | STROBE 14–17 | Descriptive data, outcomes, main and other results | 8 |
