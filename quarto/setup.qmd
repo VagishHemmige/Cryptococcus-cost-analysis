@@ -99,7 +99,7 @@ libraries_table <- tibble::tibble(
     "[CRAN – emmeans](https://cran.r-project.org/package=emmeans)",
     "[CRAN – geepack](https://cran.r-project.org/package=geepack)",
     "[broom documentation](https://broom.tidymodels.org/)",
-    "[broom.mixed documentation](https://broom.tidymodels.org/)",
+    "[GitHub – broom.mixed](https://github.com/bbolker/broom.mixed)",
     "[CRAN – multcomp](https://cran.r-project.org/package=multcomp)"
   )
 )

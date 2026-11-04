@@ -106,6 +106,8 @@ each claim.  Proration is applied before date filtering so that only the portion
 
 We repeat the analysis above, except that we use the `adjust_costs_for_inflation()` function from the `usRds` package to adjust costs for medical inflation, using the month and year listed in the `R/setup.R` file to establish the time point at which all costs are anchored based on the [medical Consumer Price Index](https://www.bls.gov/cpi/factsheets/medical-care.htm).
 
+**Decision pending:** which price index is used for inflation adjustment ([D7](analysis-plan.qmd#13-open-decisions)). The code currently uses the medical care component of the Consumer Price Index.
+
 ```{r}
 #| label: inflation-adjustment
 #| eval: false
