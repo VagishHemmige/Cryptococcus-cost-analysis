@@ -13,4 +13,6 @@ default heading IDs drop leading numbers (#open-decisions), so `from:` above
 gives this page GitHub-style IDs and those links work on both.
 -->
 
+To comment on any part of this page, highlight the text and use the 💬 Comment button.
+
 {{< include ../analysis-plan.md >}}
