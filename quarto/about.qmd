@@ -15,7 +15,7 @@ Scientific decisions are made by Vagish Hemmige, and open ones are listed in the
 
 ## This repository
 
-The analysis is written as scripts run in order by `R/main.R`, using [`usRds`](https://github.com/VagishHemmige/usRds) to load the USRDS files and `flowchart` to build the cohort. The USRDS data are restricted and are not in the repository; the code finds them through `usRds` on the computer of an authorized analyst.
+The analysis is written as scripts run in order by `R/main.R`, using [{usRds}](https://github.com/VagishHemmige/usRds) to load the USRDS files and [{flowchart}](https://bruigtp.github.io/flowchart/) to build the cohort. The USRDS data are restricted and are not in the repository; the code finds them through {usRds} on the computer of an authorized analyst.
 
 Contributions follow the rules in [`AGENTS.md`](agents.qmd); known issues and gaps between the code and the plan are tracked in [Issues](https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues). To comment on any page, highlight the text and use the Comment button; comments are filed as GitHub issues.
 

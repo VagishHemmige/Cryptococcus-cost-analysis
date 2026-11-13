@@ -21,7 +21,7 @@ This repository estimates the excess Medicare payments attributable to cryptococ
   - If the code needs to depart from the plan, change the plan in the same pull request.
   - Plan changes are tracked in git, not in a change log inside the plan. Commit each design change on its own, with a message that gives the reason and says whether any results that depend on it had already been seen.
   - The plan lists open design choices as **Decision D*n*** in its "Open decisions" table. Do not settle one in code. Raise it with the maintainer.
-- **This is an analysis project, not an R package**, even though the scripts live in `R/` and there is an `.Rbuildignore`. Do not add DESCRIPTION, NAMESPACE, roxygen, or pkgdown infrastructure. Do not apply CRAN conventions.
+- **This is an analysis project, not an R package**, even though the scripts live in `R/` and there is an `.Rbuildignore`. Do not add DESCRIPTION, NAMESPACE, roxygen, or [{pkgdown}](https://pkgdown.r-lib.org/) infrastructure. Do not apply CRAN conventions.
 - **Implementation status lives in GitHub Issues**, not in these files. When you find a gap between the code and the plan, or a defect, open or update an issue. Reference the issue in the pull request that closes it.
 
 ## R scripts
@@ -33,9 +33,9 @@ This repository estimates the excess Medicare payments attributable to cryptococ
 - **Header comment.** Each script begins with a comment saying what it does and which objects it needs from earlier scripts.
 - **Constants, libraries, and code lists** live in `R/setup.R`. Other scripts do not call `library()`, re-source `setup.R`, or hard-code values. Any number a reader might want to change, such as a window length, a year, a caliper, or the matching ratio, is a named constant in `setup.R`.
 - **Helper functions** go in `R/functions.R`, sourced after `setup.R`. A function takes its inputs as arguments and does not read global objects, including through default arguments.
-- **No side effects outside the project.** Do not use `setwd()`, absolute paths, or writes outside the project. Locate data only through usRds's `set_USRDS_wd()`.
+- **No side effects outside the project.** Do not use `setwd()`, absolute paths, or writes outside the project. Locate data only through {usRds}'s `set_USRDS_wd()`.
 - **Exploration code** does not stay in pipeline scripts. Delete it, or move it below a chunk label that no Quarto page uses. The website shows the scripts as they are.
-- **Deprecated scripts.** `R/define_cohort.R` is deprecated (it uses `strobe`) and is not sourced. Do not build on it; `R/create_cohort.R` is the active script.
+- **Deprecated scripts.** `R/define_cohort.R` is deprecated (it uses [{strobe}](https://vagishhemmige.github.io/strobe/)) and is not sourced. Do not build on it; `R/create_cohort.R` is the active script.
 
 ## Chunk labels
 
@@ -53,7 +53,7 @@ Scripts are divided into labelled sections, so that Quarto pages can show the co
 ## Variable labels
 
 - Label analysis variables with human-readable descriptions, for example with `labelled::set_variable_labels()`. Tables then show readable names without renaming code by hand.
-- For USRDS variables, use usRds's `apply_usrds_varlabels()` and `apply_usrds_factors()` rather than writing labels by hand.
+- For USRDS variables, use {usRds}'s `apply_usrds_varlabels()` and `apply_usrds_factors()` rather than writing labels by hand.
 - Label each derived variable where it is created. Include units, the price year for costs, and windows where they apply (for example, "Medicare payments, month 0, January 2021 dollars").
 
 ## Quarto website
@@ -105,16 +105,16 @@ USRDS and Medicare data are covered by a data use agreement (DUA). The rules bel
 
 ## Look in usRds first
 
-The [usRds](https://github.com/VagishHemmige/usRds) package is the **first place to look** for anything that touches USRDS files: loading files, extracting claims, diagnosis dates, Medicare coverage, cohort helpers, costs, proration, and inflation adjustment.
+The [{usRds}](https://github.com/VagishHemmige/usRds) package is the **first place to look** for anything that touches USRDS files: loading files, extracting claims, diagnosis dates, Medicare coverage, cohort helpers, costs, proration, and inflation adjustment.
 
 - Check the package's function reference before writing project-specific code. Use an existing function, or extend it.
-- **Package problems belong in the package.** If a usRds function is wrong, or does almost but not exactly what the plan needs, open an issue in the [usRds repository](https://github.com/VagishHemmige/usRds/issues) rather than documenting it here. Then do one of two things:
-  - fix it in usRds, which is preferred when the behavior is generally useful
+- **Package problems belong in the package.** If a {usRds} function is wrong, or does almost but not exactly what the plan needs, open an issue in the [{usRds} repository](https://github.com/VagishHemmige/usRds/issues) rather than documenting it here. Then do one of two things:
+  - fix it in {usRds}, which is preferred when the behavior is generally useful
   - wrap it in this project, with a code comment that links the issue
 
   Remove the wrapper when the issue is fixed.
 - Before relying on a function's behavior, read its documentation and its open issues. This matters most for `verify_medicare_primary()`, `establish_dx_date()`, `prorate_costs_by_day()`, and `adjust_costs_for_inflation()`, whose behavior directly sets the cohort and the cost outcome.
-- Record the usRds version (or commit) used for any result.
+- Record the {usRds} version (or commit) used for any result.
 
 ## USRDS data facts
 
@@ -177,7 +177,7 @@ Sources: USRDS 2025 Researcher's Guide, Appendix B (data file descriptions), and
   - Each code belongs to exactly one category.
   - Check every code against the official CMS ICD-9-CM, ICD-10-CM, ICD-10-PCS, and HCPCS code sets.
   - Never invent codes, variables, files, or clinical definitions.
-- **Cohort flow** uses the `flowchart` package (`as_fc()`, `fc_filter()`, `fc_split()`, `fc_draw()`). Every inclusion or exclusion goes through `fc_filter()`. Never drop rows from `$data` outside the flowchart; the diagram must reproduce the cohort exactly. The cohort used downstream is the data from the final flowchart step.
+- **Cohort flow** uses the [{flowchart}](https://bruigtp.github.io/flowchart/) package (`as_fc()`, `fc_filter()`, `fc_split()`, `fc_draw()`). Every inclusion or exclusion goes through `fc_filter()`. Never drop rows from `$data` outside the flowchart; the diagram must reproduce the cohort exactly. The cohort used downstream is the data from the final flowchart step.
 - **Matching**
   - Matching must be reproducible from a recorded seed. Control selection must not depend on row order.
   - The matched-set identifier is kept as an ordinary column through to the modeling data, so models and bootstraps can cluster on it.

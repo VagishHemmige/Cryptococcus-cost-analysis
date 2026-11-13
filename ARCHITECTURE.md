@@ -4,7 +4,7 @@
 
 ## Overview
 
-The project estimates excess Medicare cost after cryptococcosis in kidney transplant recipients, using USRDS data (linked UNOS and Medicare) accessed through the separate `usRds` package. It works in four stages:
+The project estimates excess Medicare cost after cryptococcosis in kidney transplant recipients, using USRDS data (linked UNOS and Medicare) accessed through the separate [{usRds}](https://vagishhemmige.github.io/usRds/) package. It works in four stages:
 
 1. Build a time-varying cohort of transplant recipients.
 2. Match each case at diagnosis to up to `number_controls_per_case` (2) never-diagnosed controls, using risk-set matching on time since transplant.
@@ -43,7 +43,7 @@ Some functions read globals instead of taking them as arguments:
 - `calculate_number_potential_matches()` reads `medicare_history`, created in `create_cohort.R`.
 - `plot_mean_monthly_costs()` defaults `countdf = final_count_df`, created in `postmatch_processing.R`. R evaluates the default only when the function is called, so this works from `figures.R` but not earlier.
 - `create_cohort.R` sources `setup.R` a second time. Harmless, but it reloads every library.
-- `define_cohort.R` is marked deprecated, uses the older `strobe` API, and is sourced by nothing. `setup.R` still loads `strobe` for it.
+- `define_cohort.R` is marked deprecated, uses the older [{strobe}](https://vagishhemmige.github.io/strobe/) API, and is sourced by nothing. `setup.R` still loads {strobe} for it.
 
 ## Components
 
@@ -73,7 +73,7 @@ Some functions read globals instead of taking them as arguments:
 
 - `calculate_number_potential_matches()` — counts eligible controls for one case, used to order the greedy match
 - `calculate_total_excess_costs()` — sums `patient_type:month` interaction coefficients and their variance (linear branch; log branch exists)
-- `plot_mean_monthly_costs()` — `emmeans` predictions by group and month at `month_offset = 30`, with a risk table underneath
+- `plot_mean_monthly_costs()` — [{emmeans}](https://CRAN.R-project.org/package=emmeans) predictions by group and month at `month_offset = 30`, with a risk table underneath
 
 ### Cohort construction
 
@@ -112,7 +112,7 @@ flowchart LR
 
 Cases enter at diagnosis, so a case's first row has `tstart` equal to the days from their most recent transplant to diagnosis. That value is their matching time. Controls run from `TX1DATE` to `terminal_date`.
 
-The `flowchart` package objects (`patients_clean`, `patients_merged`, `patients_merged2`) carry the exclusion counts for the STROBE diagram.
+The [{flowchart}](https://bruigtp.github.io/flowchart/) package objects (`patients_clean`, `patients_merged`, `patients_merged2`) carry the exclusion counts for the STROBE diagram.
 
 ### Matching
 
@@ -178,10 +178,10 @@ For each of 10 outcomes (grand total, `IN_CLM` total, `PS_REV` total, and seven 
 
 | Key in `fit[[outcome]]` | Engine | Outcome scale | Family |
 |---|---|---|---|
-| `glmmTMB$tweedie` | glmmTMB, random intercept | dollars | Tweedie, log link |
-| `glmmTMB$linear` | glmmTMB, random intercept | dollars | Gaussian, identity |
+| `glmmTMB$tweedie` | [{glmmTMB}](https://glmmtmb.github.io/glmmTMB/), random intercept | dollars | Tweedie, log link |
+| `glmmTMB$linear` | {glmmTMB}, random intercept | dollars | Gaussian, identity |
 | `gee$linear` | geeglm, exchangeable | dollars | Gaussian, identity |
-| `glmmTMB$log` | glmmTMB, random intercept | `log1p` dollars | Gaussian, identity |
+| `glmmTMB$log` | {glmmTMB}, random intercept | `log1p` dollars | Gaussian, identity |
 | `gee$log` | geeglm, exchangeable | `log1p` dollars | Gaussian, identity |
 
 The reference level of `factor(month)` is −3, the lowest month, so each interaction term is a case–control difference relative to month −3.
@@ -250,9 +250,9 @@ flowchart LR
 | Costs and panel | `R/postmatch_processing.R` | `end_date_analysis`, `cost_inflated`, `cost_longitudinal`, `final_data_set`, `final_count_df` |
 | Models | `R/modeling.R` | `temp_formula`, `fit[[outcome]][[engine]][[family]]` |
 | Outputs | `R/tables.R`, `R/figures.R` | `table1`, `table2_icd`, monthly plot loop |
-| Deprecated | `R/define_cohort.R` | older `strobe`-based cohort script |
+| Deprecated | `R/define_cohort.R` | older {strobe}-based cohort script |
 | Website | `_quarto.yml`, `styles.css`, `index.qmd`, `quarto/*.qmd`, `_extensions/`, `tests/check-crosslinks.R` | `read_chunk`, `custom-callout`, `render:` list |
-| External (usRds) | — | `load_usrds_file`, `get_IN_ICD`, `get_PS_ICD`, `establish_dx_date`, `verify_medicare_primary`, `create_usrds_cohort`, `add_cohort_covariate`, `finalize_usrds_cohort`, `get_IN_REV_costs`, `get_IN_CLM_costs`, `get_PS_REV_costs`, `prorate_costs_by_day`, `adjust_costs_for_inflation` |
+| External ({usRds}) | — | `load_usrds_file`, `get_IN_ICD`, `get_PS_ICD`, `establish_dx_date`, `verify_medicare_primary`, `create_usrds_cohort`, `add_cohort_covariate`, `finalize_usrds_cohort`, `get_IN_REV_costs`, `get_IN_CLM_costs`, `get_PS_REV_costs`, `prorate_costs_by_day`, `adjust_costs_for_inflation` |
 
 ## Known Architectural Gaps
 
@@ -276,4 +276,4 @@ Status as of commit `8a52330`. These come from reading the code and need checkin
 | `month_offset` | Days observed in a panel month, capped at 30; used as the model offset |
 | IN_CLM / IN_REV / PS_REV | Institutional claims, institutional revenue-center lines, and physician/supplier lines from USRDS Medicare files |
 | HCFASAF | Claim setting (inpatient, outpatient, SNF, home health, hospice, dialysis, auxiliary) used to split costs |
-| usRds | Separate package that loads USRDS files and provides cohort, coverage and cost helpers |
+| {usRds} | Separate package that loads USRDS files and provides cohort, coverage and cost helpers |

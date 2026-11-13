@@ -28,7 +28,7 @@ knitr::read_chunk("../R/tables.R")
 
 ## Table 1
 
-The following code uses the `gtsummary` package to create a Table 1 comparing cases and controls on key variables measured at the index date, to assess balance after risk-set matching.  The code then saves the tables as `.docx` and as `.png` files.
+The following code uses the [{gtsummary}](https://www.danieldsjoberg.com/gtsummary/) package to create a Table 1 comparing cases and controls on key variables measured at the index date, to assess balance after risk-set matching.  The code then saves the tables as `.docx` and as `.png` files.
 
 
 ```{r}

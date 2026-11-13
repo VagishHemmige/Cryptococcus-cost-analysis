@@ -27,7 +27,7 @@ A **sequential target-trial emulation** with propensity-score weighting is the p
 
 ## 3. Data source
 
-- **United States Renal Data System (USRDS)** standard analysis files [@usrds2025guide], accessed under a data use agreement through the `usRds` R package.
+- **United States Renal Data System (USRDS)** standard analysis files [@usrds2025guide], accessed under a data use agreement through the [{usRds}](https://vagishhemmige.github.io/usRds/) R package.
   - Core files: patients, transplant (TX), payer history (PAYHIST), treatment history (RXHIST), death.
   - Transplant files linked from OPTN/UNOS transplant recipient registration (TRR) records for kidney and kidney–pancreas recipients.
   - Medicare Parts A and B claims: institutional claims and revenue-center lines, and physician/supplier claims. Part D prescription events where a covariate requires them.
