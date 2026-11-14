@@ -37,14 +37,14 @@ We update the cohort flow diagram to reflect the results of the risk-set matchin
 
 ## Obtain raw costs from raw claims data
 
-We use the `usRds` functions `get_IN_REV_costs()`, `get_IN_CLM_costs()` and `get_PS_REV_costs()` to extract Medicare claims with payment amounts for 2006 to 2021, for patients in the matched cohort.
+We use the [{usRds}](https://vagishhemmige.github.io/usRds/) functions `get_IN_REV_costs()`, `get_IN_CLM_costs()` and `get_PS_REV_costs()` to extract Medicare claims with payment amounts for 2006 to 2021, for patients in the matched cohort.
 
 The USRDS claims files hold payments at more than one level [@usrds2025guide]:
 
 - **Institutional claims** (inpatient, outpatient, skilled nursing, home health and hospice) come as a claim file, with one row per claim and the Medicare payment for the whole claim (`CLM_AMT`), and a revenue-center detail file, with one row per revenue center on the claim. `get_IN_CLM_costs()` reads the claim files and `get_IN_REV_costs()` the detail files.
 - **Revenue-center lines** carry charges (`REV_CH`) and, for outpatient, home health and hospice claims, a payment (`REVPMT`). Inpatient and skilled nursing lines have no payment field (Appendix B), so inpatient payments come from the claim file only.
 - **Claim payments and revenue-center payments describe the same services**, so adding them would count those services twice. For outpatient claims, summed `REVPMT` is about 3% higher than `CLM_AMT` overall [@usrds2025guide].
-- **Physician/supplier claims** are read at the line level: `get_PS_REV_costs()` returns each line's payment (`PMTAMT`), with its submitted and allowed charges. Despite the function's name, these are line files, not revenue-center files. In the files available to this project, physician/supplier claims before 2013 come as combined files rather than separate claim and line files, as listed in `usRds`.
+- **Physician/supplier claims** are read at the line level: `get_PS_REV_costs()` returns each line's payment (`PMTAMT`), with its submitted and allowed charges. Despite the function's name, these are line files, not revenue-center files. In the files available to this project, physician/supplier claims before 2013 come as combined files rather than separate claim and line files, as listed in {usRds}.
 
 The cost outcome uses payment fields (`CLM_AMT`, `REVPMT`, `PMTAMT`), never charges.
 
@@ -63,7 +63,7 @@ Patients with no observed claims in a given cost category are assigned empty [ti
 
 This structure allows costs to be prorated, inflated, and aggregated relative to patient-specific index dates without repeatedly reshaping the data.
 
-While nested data is convenient from many perspectives, it does require the use of the `map()` family of functions from the [`purrr`](https://purrr.tidyverse.org/) package.
+While nested data is convenient from many perspectives, it does require the use of the `map()` family of functions from the [{purrr}](https://purrr.tidyverse.org/) package.
 
 ```{r}
 #| label: merge-costs
@@ -94,7 +94,7 @@ We now write code that totals costs for each patient, accounting for the start a
 
 In addition to total costs, we also calculated total costs grouped by type (Inpatient, Outpatient, Home Health, etc.).
 
-Since claims can span many days, we use the `prorate_costs_by_day()` function from the `usRds` package to divide the costs evenly among the days spanned by
+Since claims can span many days, we use the `prorate_costs_by_day()` function from the {usRds} package to divide the costs evenly among the days spanned by
 each claim.  Proration is applied before date filtering so that only the portion of each claim overlapping the analytic window contributes to total cost.
 
 ```{r}
@@ -104,7 +104,7 @@ each claim.  Proration is applied before date filtering so that only the portion
 
 ## Accounting for inflation
 
-We repeat the analysis above, except that we use the `adjust_costs_for_inflation()` function from the `usRds` package to adjust costs for medical inflation, using the month and year listed in the `R/setup.R` file to establish the time point at which all costs are anchored based on the [medical Consumer Price Index](https://www.bls.gov/cpi/factsheets/medical-care.htm).
+We repeat the analysis above, except that we use the `adjust_costs_for_inflation()` function from the {usRds} package to adjust costs for medical inflation, using the month and year listed in the `R/setup.R` file to establish the time point at which all costs are anchored based on the [medical Consumer Price Index](https://www.bls.gov/cpi/factsheets/medical-care.htm).
 
 **Decision pending:** which price index is used for inflation adjustment ([D7](analysis-plan.qmd#13-open-decisions)). The code currently uses the medical care component of the Consumer Price Index.
 

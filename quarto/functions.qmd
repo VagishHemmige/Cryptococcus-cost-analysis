@@ -29,7 +29,7 @@ knitr::read_chunk("../R/functions.R")
 
 `plot_mean_monthly_costs()`
 
-The following function uses `ggplot2` to create a plot of monthly costs with a risk table underneath.
+The following function uses [{ggplot2}](https://ggplot2.tidyverse.org/) to create a plot of monthly costs with a risk table underneath.
 
 Its inputs are as follows:
 
@@ -37,7 +37,7 @@ Its inputs are as follows:
 - `countdf`: a data frame containing the appropriate count data for cases and controls at each time point, used
 to create a risk table
 
-The function uses the `emmeans` function from the package of the same name to estimate monthly costs.  The x-axis (months) is shifted to the right so that the vertical line at x=0 cleanly separates pre-index and post-index months, and cases and controls are dodged slightly so that the error bars do not overlap.
+The function uses the [{emmeans}](https://CRAN.R-project.org/package=emmeans) function from the package of the same name to estimate monthly costs.  The x-axis (months) is shifted to the right so that the vertical line at x=0 cleanly separates pre-index and post-index months, and cases and controls are dodged slightly so that the error bars do not overlap.
 
 **Used in the analysis:** Figures: [Month-by-month plots](figures.qmd#month-by-month-plots).
 

@@ -45,6 +45,8 @@ Not yet available. The [Main results](quarto/results.qmd) page will hold them on
 
 The complete source code for the analysis, tables and figures is public in the [GitHub repository](https://github.com/VagishHemmige/Cryptococcus-cost-analysis). The script `R/main.R` runs the other scripts in order. Model assumptions, parameter values and the workflow are documented in the repository for transparency and reuse. The USRDS data are restricted, so the analysis can be rerun only by an analyst with authorized access to them.
 
+[Braces](https://forum.posit.co/t/curly-braces-around-package-name-convention/122547) identify R packages throughout this site.
+
 
 ## Publications
 

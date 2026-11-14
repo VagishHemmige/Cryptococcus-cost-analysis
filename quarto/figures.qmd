@@ -28,7 +28,7 @@ knitr::read_chunk("../R/figures.R")
 
 ## Final flowchart
 
-The following code uses the `flowchart` package to create a STROBE flowchart for the study.
+The following code uses the [{flowchart}](https://bruigtp.github.io/flowchart/) package to create a STROBE flowchart for the study.
 
 ```{r}
 #| label: final-flowchart
@@ -37,7 +37,7 @@ The following code uses the `flowchart` package to create a STROBE flowchart for
 
 ## Beeswarm plot of total inflated costs
 
-The following code uses the `ggbeeswarm` add-on to `ggplot2` to compare cases and controls in terms of total inflated costs post-index.  No attempt is made to adjust for censoring or death.
+The following code uses the [{ggbeeswarm}](https://CRAN.R-project.org/package=ggbeeswarm) add-on to [{ggplot2}](https://ggplot2.tidyverse.org/) to compare cases and controls in terms of total inflated costs post-index.  No attempt is made to adjust for censoring or death.
 
 ```{r}
 #| label: beeswarm-total-costs
