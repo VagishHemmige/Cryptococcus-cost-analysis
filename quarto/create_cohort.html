@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-66ae90e4418e9d0ac3caa4b8c3bef75c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9c6fd4a99ff4209dd1149a1765198857.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/issue-comments-0.3.0/issue-comments.js"></script>
 <link href="../site_libs/quarto-contrib/issue-comments-0.3.0/issue-comments.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -144,17 +144,6 @@ div.callout-Pending.callout-style-default .callout-icon::before, div.callout-Pen
   content: '⏳';
   background-image: none;
 }
-div.callout-Rcode.callout {
-  border-left-color: #d63384;
-}
-div.callout-Rcode.callout-style-default > .callout-header {
-  background-color: rgba(214, 51, 132, 0.13);
-}
-div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
-  content: '💻';
-  background-image: none;
-}
 div.callout-Results.callout {
   border-left-color: #198754;
 }
@@ -164,6 +153,17 @@ div.callout-Results.callout-style-default > .callout-header {
 div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
   content: '📊';
+  background-image: none;
+}
+div.callout-Rcode.callout {
+  border-left-color: #d63384;
+}
+div.callout-Rcode.callout-style-default > .callout-header {
+  background-color: rgba(214, 51, 132, 0.13);
+}
+div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
+  content: '💻';
   background-image: none;
 }
 </style>
@@ -513,7 +513,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </div>
 <section id="initial-data-loading-and-preprocessing-of-usrds-core-and-transplant-files" class="level2">
 <h2 class="anchored" data-anchor-id="initial-data-loading-and-preprocessing-of-usrds-core-and-transplant-files">Initial data loading and preprocessing of USRDS core and transplant files</h2>
-<p>This portion of the code imports the USRDS files needed for the cryptococcus analysis. It makes use of the <code>load_usrds_file()</code> function from the <code>usRds</code> package as well as several tidyverse cleaning functions.</p>
+<p>This portion of the code imports the USRDS files needed for the cryptococcus analysis. It makes use of the <code>load_usrds_file()</code> function from the <a href="https://vagishhemmige.github.io/usRds/">{usRds}</a> package as well as several <a href="https://www.tidyverse.org/">{tidyverse}</a> cleaning functions.</p>
 <p>Key files used:</p>
 <ul>
 <li><code>patients</code>: part of the USRDS Core data set, with one record per patient and basic demographic and kidney-failure data, including transplant and death dates<span class="citation" data-cites="usrds2025guide"><sup><a href="#ref-usrds2025guide" role="doc-biblioref">1</a></sup></span>.</li>
@@ -570,7 +570,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </section>
 <section id="initialize-flowchart" class="level2">
 <h2 class="anchored" data-anchor-id="initialize-flowchart">Initialize flowchart</h2>
-<p>The next component makes use of the <code>flowchart</code> package. This package combines two key processes in an epidemiologic analysis:</p>
+<p>The next component makes use of the <a href="https://bruigtp.github.io/flowchart/">{flowchart}</a> package. This package combines two key processes in an epidemiologic analysis:</p>
 <ul>
 <li><strong>Dataset preparation:</strong> Sequential application of eligibility criteria to define the analytic cohort, with explicit tracking of excluded records at each step.</li>
 <li><strong><a href="https://www.strobe-statement.org/">STROBE</a> diagram preparation:</strong> <a href="https://www.strobe-statement.org/">STrengthening the Reporting of OBservational studies in Epidemiology</a> diagrams visually depict the process of including/excluding patients in an observational study and grouping them into cohorts. Many journals require these as a standard Figure 1.</li>
@@ -599,8 +599,8 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <section id="identification-of-comorbidities-and-confirmation-of-medicare-coverage-continuity" class="level2">
 <h2 class="anchored" data-anchor-id="identification-of-comorbidities-and-confirmation-of-medicare-coverage-continuity">Identification of comorbidities and confirmation of Medicare coverage continuity</h2>
 <p>This component identifies baseline comorbidities among transplant recipients using diagnosis codes derived from Medicare Institutional (Part A) and physician/supplier (Part B) claims. Diagnosis code lists defined in <code>R/setup.R</code> are applied uniformly across claims files to establish the presence and timing of comorbid conditions.</p>
-<p>This portion makes use of the <code>get_IN_ICD()</code> and <code>get_PS_ICD()</code> functions from the <code>usRds</code> package to obtain dates that specific ICD codes are used for patients with a history of at least one kidney transplant in the study period.</p>
-<p>The <code>establish_dx_date()</code> function from the <code>usRds</code> package uses the results of this analysis to ascertain the date when each condition meets the criteria for a diagnosis. It counts a diagnosis as established on the first of:</p>
+<p>This portion makes use of the <code>get_IN_ICD()</code> and <code>get_PS_ICD()</code> functions from the {usRds} package to obtain dates that specific ICD codes are used for patients with a history of at least one kidney transplant in the study period.</p>
+<p>The <code>establish_dx_date()</code> function from the {usRds} package uses the results of this analysis to ascertain the date when each condition meets the criteria for a diagnosis. It counts a diagnosis as established on the first of:</p>
 <ul>
 <li><strong>one inpatient claim</strong> carrying a code from the condition’s list; or</li>
 <li><strong>a second record of any other kind</strong> carrying one: hospital outpatient, physician/supplier, skilled nursing, home health or other institutional claims.</li>
@@ -665,7 +665,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <h2 class="anchored" data-anchor-id="further-development-of-the-strobe-flowchart">Further development of the STROBE flowchart</h2>
 <p>Subsequently, key diagnosis dates, including the date of cryptococcosis diagnosis, are merged into the analytic patient dataset.</p>
 <p>This code block then extends the STROBE flowchart by integrating diagnosis timing, eligibility criteria, and coverage requirements to finalize the analytic cohorts. Patients are classified as cryptococcosis cases or potential controls based on the presence and timing of diagnosis, and sequential exclusion criteria are applied to ensure incident disease, adult status at diagnosis, and appropriate calendar-time eligibility.</p>
-<p>The <code>verify_medicare_primary()</code> function from the <code>usRds</code> package is used to confirm that patients with a cryptococcus diagnosis have Medicare primary coverage for at least 365 days prior to the cryptococcus diagnosis date, so that a diagnosis established earlier in that year would have been seen. This makes it more likely that the diagnosis is new, but does not prove it (<a href="../quarto/study_cases_controls.html#what-a-claims-based-definition-can-and-cannot-show">What a claims-based definition can and cannot show</a>).</p>
+<p>The <code>verify_medicare_primary()</code> function from the {usRds} package is used to confirm that patients with a cryptococcus diagnosis have Medicare primary coverage for at least 365 days prior to the cryptococcus diagnosis date, so that a diagnosis established earlier in that year would have been seen. This makes it more likely that the diagnosis is new, but does not prove it (<a href="../quarto/study_cases_controls.html#what-a-claims-based-definition-can-and-cannot-show">What a claims-based definition can and cannot show</a>).</p>
 <p>These steps culminate in the final case and control cohorts, with all inclusion and exclusion decisions explicitly tracked and visualized in the updated STROBE flow diagram.</p>
 <div class="cell">
 <details class="code-fold">
@@ -733,7 +733,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </section>
 <section id="creation-of-a-time-varying-cohort" class="level2">
 <h2 class="anchored" data-anchor-id="creation-of-a-time-varying-cohort">Creation of a time-varying cohort</h2>
-<p>We use several functions from the <code>usRds</code> package:</p>
+<p>We use several functions from the {usRds} package:</p>
 <ul>
 <li><code>create_usrds_cohort()</code></li>
 <li><code>add_cohort_covariate()</code></li>
@@ -1357,7 +1357,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Initial data loading and preprocessing of USRDS core and transplant files</span></span>
 <span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>This portion of the code imports the USRDS files needed for the cryptococcus analysis. It makes use of the <span class="in">`load_usrds_file()`</span> </span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>function from the <span class="in">`usRds`</span> package as well as several tidyverse cleaning functions.</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>function from the <span class="co">[</span><span class="ot">{usRds}</span><span class="co">](https://vagishhemmige.github.io/usRds/)</span> package as well as several <span class="co">[</span><span class="ot">{tidyverse}</span><span class="co">](https://www.tidyverse.org/)</span> cleaning functions.</span>
 <span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>Key files used:</span>
 <span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
@@ -1375,7 +1375,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## Initialize flowchart</span></span>
 <span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>The next component makes use of the <span class="in">`flowchart`</span> package.  This package combines two key processes in an epidemiologic analysis:</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>The next component makes use of the <span class="co">[</span><span class="ot">{flowchart}</span><span class="co">](https://bruigtp.github.io/flowchart/)</span> package.  This package combines two key processes in an epidemiologic analysis:</span>
 <span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Dataset preparation:** Sequential application of eligibility criteria to define the analytic cohort, with explicit tracking of excluded records at each step.</span>
 <span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**[STROBE](https://www.strobe-statement.org/) diagram preparation:**  <span class="co">[</span><span class="ot">STrengthening the Reporting of OBservational studies in Epidemiology </span><span class="co">](https://www.strobe-statement.org/)</span> diagrams visually depict the process of including/excluding patients in an observational study and grouping them into cohorts.  Many journals require these as a standard Figure 1.</span>
@@ -1391,9 +1391,9 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>This component identifies baseline comorbidities among transplant recipients using diagnosis codes derived from Medicare Institutional (Part A) and physician/supplier (Part B) claims. Diagnosis code lists defined in <span class="in">`R/setup.R`</span> are applied uniformly across claims files to establish the presence and timing of comorbid conditions.  </span>
 <span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>This portion makes use of the <span class="in">`get_IN_ICD()`</span> and <span class="in">`get_PS_ICD()`</span> functions from the <span class="in">`usRds`</span> package to obtain dates that specific ICD codes are used for patients with a history of at least one kidney transplant in the study period.</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>This portion makes use of the <span class="in">`get_IN_ICD()`</span> and <span class="in">`get_PS_ICD()`</span> functions from the {usRds} package to obtain dates that specific ICD codes are used for patients with a history of at least one kidney transplant in the study period.</span>
 <span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>The <span class="in">`establish_dx_date()`</span> function from the <span class="in">`usRds`</span> package uses the results of this analysis to ascertain the date when each condition meets the criteria for a diagnosis. It counts a diagnosis as established on the first of:</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>The <span class="in">`establish_dx_date()`</span> function from the {usRds} package uses the results of this analysis to ascertain the date when each condition meets the criteria for a diagnosis. It counts a diagnosis as established on the first of:</span>
 <span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**one inpatient claim** carrying a code from the condition's list; or</span>
 <span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**a second record of any other kind** carrying one: hospital outpatient, physician/supplier, skilled nursing, home health or other institutional claims.</span>
@@ -1415,7 +1415,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>This code block then extends the STROBE flowchart by integrating diagnosis timing, eligibility criteria, and coverage requirements to finalize the analytic cohorts. Patients are classified as cryptococcosis cases or potential controls based on the presence and timing of diagnosis, and sequential exclusion criteria are applied to ensure incident disease, adult status at diagnosis, and appropriate calendar-time eligibility. </span>
 <span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>The <span class="in">`verify_medicare_primary()`</span> function from the <span class="in">`usRds`</span> package is used to confirm that patients with a cryptococcus diagnosis have Medicare primary coverage for at least 365 days prior to the cryptococcus diagnosis date, so that a diagnosis established earlier in that year would have been seen. This makes it more likely that the diagnosis is new, but does not prove it (<span class="co">[</span><span class="ot">What a claims-based definition can and cannot show</span><span class="co">](study_cases_controls.qmd#what-a-claims-based-definition-can-and-cannot-show)</span>).</span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>The <span class="in">`verify_medicare_primary()`</span> function from the {usRds} package is used to confirm that patients with a cryptococcus diagnosis have Medicare primary coverage for at least 365 days prior to the cryptococcus diagnosis date, so that a diagnosis established earlier in that year would have been seen. This makes it more likely that the diagnosis is new, but does not prove it (<span class="co">[</span><span class="ot">What a claims-based definition can and cannot show</span><span class="co">](study_cases_controls.qmd#what-a-claims-based-definition-can-and-cannot-show)</span>).</span>
 <span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>These steps culminate in the final case and control cohorts, with all inclusion and exclusion decisions explicitly tracked and visualized in the updated STROBE flow diagram.</span>
 <span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a></span>
@@ -1426,7 +1426,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a><span class="fu">## Creation of a time-varying cohort</span></span>
 <span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>We use several functions from the <span class="in">`usRds`</span> package:</span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>We use several functions from the {usRds} package:</span>
 <span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`create_usrds_cohort()`</span></span>
 <span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`add_cohort_covariate()`</span></span>

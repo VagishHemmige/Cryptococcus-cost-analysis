@@ -83,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-66ae90e4418e9d0ac3caa4b8c3bef75c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9c6fd4a99ff4209dd1149a1765198857.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/issue-comments-0.3.0/issue-comments.js"></script>
 <link href="../site_libs/quarto-contrib/issue-comments-0.3.0/issue-comments.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -128,17 +128,6 @@ div.callout-Pending.callout-style-default .callout-icon::before, div.callout-Pen
   content: '⏳';
   background-image: none;
 }
-div.callout-Rcode.callout {
-  border-left-color: #d63384;
-}
-div.callout-Rcode.callout-style-default > .callout-header {
-  background-color: rgba(214, 51, 132, 0.13);
-}
-div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
-  content: '💻';
-  background-image: none;
-}
 div.callout-Results.callout {
   border-left-color: #198754;
 }
@@ -148,6 +137,17 @@ div.callout-Results.callout-style-default > .callout-header {
 div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
   content: '📊';
+  background-image: none;
+}
+div.callout-Rcode.callout {
+  border-left-color: #d63384;
+}
+div.callout-Rcode.callout-style-default > .callout-header {
+  background-color: rgba(214, 51, 132, 0.13);
+}
+div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
+  content: '💻';
   background-image: none;
 }
 </style>
@@ -506,7 +506,7 @@ It reads only ARCHITECTURE.md, never data, and runs no analysis code.
 </blockquote>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The project estimates excess Medicare cost after cryptococcosis in kidney transplant recipients, using USRDS data (linked UNOS and Medicare) accessed through the separate <code>usRds</code> package. It works in four stages:</p>
+<p>The project estimates excess Medicare cost after cryptococcosis in kidney transplant recipients, using USRDS data (linked UNOS and Medicare) accessed through the separate <a href="https://vagishhemmige.github.io/usRds/">{usRds}</a> package. It works in four stages:</p>
 <ol type="1">
 <li>Build a time-varying cohort of transplant recipients.</li>
 <li>Match each case at diagnosis to up to <code>number_controls_per_case</code> (2) never-diagnosed controls, using risk-set matching on time since transplant.</li>
@@ -552,7 +552,7 @@ It reads only ARCHITECTURE.md, never data, and runs no analysis code.
 <li><code>calculate_number_potential_matches()</code> reads <code>medicare_history</code>, created in <code>create_cohort.R</code>.</li>
 <li><code>plot_mean_monthly_costs()</code> defaults <code>countdf = final_count_df</code>, created in <code>postmatch_processing.R</code>. R evaluates the default only when the function is called, so this works from <code>figures.R</code> but not earlier.</li>
 <li><code>create_cohort.R</code> sources <code>setup.R</code> a second time. Harmless, but it reloads every library.</li>
-<li><code>define_cohort.R</code> is marked deprecated, uses the older <code>strobe</code> API, and is sourced by nothing. <code>setup.R</code> still loads <code>strobe</code> for it.</li>
+<li><code>define_cohort.R</code> is marked deprecated, uses the older <a href="https://vagishhemmige.github.io/strobe/">{strobe}</a> API, and is sourced by nothing. <code>setup.R</code> still loads {strobe} for it.</li>
 </ul>
 </section>
 </section>
@@ -580,7 +580,7 @@ It reads only ARCHITECTURE.md, never data, and runs no analysis code.
 <ul>
 <li><code>calculate_number_potential_matches()</code> — counts eligible controls for one case, used to order the greedy match</li>
 <li><code>calculate_total_excess_costs()</code> — sums <code>patient_type:month</code> interaction coefficients and their variance (linear branch; log branch exists)</li>
-<li><code>plot_mean_monthly_costs()</code> — <code>emmeans</code> predictions by group and month at <code>month_offset = 30</code>, with a risk table underneath</li>
+<li><code>plot_mean_monthly_costs()</code> — <a href="https://CRAN.R-project.org/package=emmeans">{emmeans}</a> predictions by group and month at <code>month_offset = 30</code>, with a risk table underneath</li>
 </ul>
 </section>
 <section id="cohort-construction" class="level3">
@@ -624,7 +624,7 @@ It reads only ARCHITECTURE.md, never data, and runs no analysis code.
 </div>
 <p><strong>Output</strong>: <code>prematching_cohort</code>, a counting-process data set with one row per person per interval (<code>tstart</code>, <code>tstop</code>). After <code>finalize_usrds_cohort()</code>, time is days since <code>most_recent_transplant_date</code>. Comorbidities, graft status and payer vary over time within a person.</p>
 <p>Cases enter at diagnosis, so a case’s first row has <code>tstart</code> equal to the days from their most recent transplant to diagnosis. That value is their matching time. Controls run from <code>TX1DATE</code> to <code>terminal_date</code>.</p>
-<p>The <code>flowchart</code> package objects (<code>patients_clean</code>, <code>patients_merged</code>, <code>patients_merged2</code>) carry the exclusion counts for the STROBE diagram.</p>
+<p>The <a href="https://bruigtp.github.io/flowchart/">{flowchart}</a> package objects (<code>patients_clean</code>, <code>patients_merged</code>, <code>patients_merged2</code>) carry the exclusion counts for the STROBE diagram.</p>
 </section>
 <section id="matching" class="level3">
 <h3 class="anchored" data-anchor-id="matching">Matching</h3>
@@ -695,12 +695,6 @@ month_offset = days observed in each month, capped at 30; follow-up ends at end_
 <p><strong>Location</strong>: <code>R/modeling.R</code> (no section labels; the page includes the whole file)</p>
 <p>For each of 10 outcomes (grand total, <code>IN_CLM</code> total, <code>PS_REV</code> total, and seven <code>IN_CLM</code> service categories), five models are fitted, all with <code>patient_type * factor(month) + offset(log(month_offset))</code>, clustered on <code>USRDS_ID</code>:</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Key in <code>fit[[outcome]]</code></th>
@@ -712,13 +706,13 @@ month_offset = days observed in each month, capped at 30; follow-up ends at end_
 <tbody>
 <tr class="odd">
 <td><code>glmmTMB$tweedie</code></td>
-<td>glmmTMB, random intercept</td>
+<td><a href="https://glmmtmb.github.io/glmmTMB/">{glmmTMB}</a>, random intercept</td>
 <td>dollars</td>
 <td>Tweedie, log link</td>
 </tr>
 <tr class="even">
 <td><code>glmmTMB$linear</code></td>
-<td>glmmTMB, random intercept</td>
+<td>{glmmTMB}, random intercept</td>
 <td>dollars</td>
 <td>Gaussian, identity</td>
 </tr>
@@ -730,7 +724,7 @@ month_offset = days observed in each month, capped at 30; follow-up ends at end_
 </tr>
 <tr class="even">
 <td><code>glmmTMB$log</code></td>
-<td>glmmTMB, random intercept</td>
+<td>{glmmTMB}, random intercept</td>
 <td><code>log1p</code> dollars</td>
 <td>Gaussian, identity</td>
 </tr>
@@ -916,7 +910,7 @@ month_offset = days observed in each month, capped at 30; follow-up ends at end_
 <tr class="odd">
 <td>Deprecated</td>
 <td><code>R/define_cohort.R</code></td>
-<td>older <code>strobe</code>-based cohort script</td>
+<td>older {strobe}-based cohort script</td>
 </tr>
 <tr class="even">
 <td>Website</td>
@@ -924,7 +918,7 @@ month_offset = days observed in each month, capped at 30; follow-up ends at end_
 <td><code>read_chunk</code>, <code>custom-callout</code>, <code>render:</code> list</td>
 </tr>
 <tr class="odd">
-<td>External (usRds)</td>
+<td>External ({usRds})</td>
 <td>—</td>
 <td><code>load_usrds_file</code>, <code>get_IN_ICD</code>, <code>get_PS_ICD</code>, <code>establish_dx_date</code>, <code>verify_medicare_primary</code>, <code>create_usrds_cohort</code>, <code>add_cohort_covariate</code>, <code>finalize_usrds_cohort</code>, <code>get_IN_REV_costs</code>, <code>get_IN_CLM_costs</code>, <code>get_PS_REV_costs</code>, <code>prorate_costs_by_day</code>, <code>adjust_costs_for_inflation</code></td>
 </tr>
@@ -992,7 +986,7 @@ month_offset = days observed in each month, capped at 30; follow-up ends at end_
 <td>Claim setting (inpatient, outpatient, SNF, home health, hospice, dialysis, auxiliary) used to split costs</td>
 </tr>
 <tr class="even">
-<td>usRds</td>
+<td>{usRds}</td>
 <td>Separate package that loads USRDS files and provides cohort, coverage and cost helpers</td>
 </tr>
 </tbody>

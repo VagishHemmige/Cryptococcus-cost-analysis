@@ -83,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-66ae90e4418e9d0ac3caa4b8c3bef75c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9c6fd4a99ff4209dd1149a1765198857.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/issue-comments-0.3.0/issue-comments.js"></script>
 <link href="../site_libs/quarto-contrib/issue-comments-0.3.0/issue-comments.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -114,15 +114,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>
-div.callout-Results.callout {
-  border-left-color: #198754;
+div.callout-Pending.callout {
+  border-left-color: #f0c400;
 }
-div.callout-Results.callout-style-default > .callout-header {
-  background-color: rgba(25, 135, 84, 0.13);
+div.callout-Pending.callout-style-default > .callout-header {
+  background-color: rgba(240, 196, 0, 0.13);
 }
-div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
-  content: '📊';
+div.callout-Pending .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Pending.callout-style-default .callout-icon::before, div.callout-Pending.callout-titled .callout-icon::before {
+  content: '⏳';
   background-image: none;
 }
 div.callout-Rcode.callout {
@@ -136,15 +136,15 @@ div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode
   content: '💻';
   background-image: none;
 }
-div.callout-Pending.callout {
-  border-left-color: #f0c400;
+div.callout-Results.callout {
+  border-left-color: #198754;
 }
-div.callout-Pending.callout-style-default > .callout-header {
-  background-color: rgba(240, 196, 0, 0.13);
+div.callout-Results.callout-style-default > .callout-header {
+  background-color: rgba(25, 135, 84, 0.13);
 }
-div.callout-Pending .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Pending.callout-style-default .callout-icon::before, div.callout-Pending.callout-titled .callout-icon::before {
-  content: '⏳';
+div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
+  content: '📊';
   background-image: none;
 }
 </style>
@@ -523,7 +523,7 @@ edit that file, not this page. Its first heading is the page title.
 <li>Plan changes are tracked in git, not in a change log inside the plan. Commit each design change on its own, with a message that gives the reason and says whether any results that depend on it had already been seen.</li>
 <li>The plan lists open design choices as <strong>Decision D<em>n</em></strong> in its “Open decisions” table. Do not settle one in code. Raise it with the maintainer.</li>
 </ul></li>
-<li><strong>This is an analysis project, not an R package</strong>, even though the scripts live in <code>R/</code> and there is an <code>.Rbuildignore</code>. Do not add DESCRIPTION, NAMESPACE, roxygen, or pkgdown infrastructure. Do not apply CRAN conventions.</li>
+<li><strong>This is an analysis project, not an R package</strong>, even though the scripts live in <code>R/</code> and there is an <code>.Rbuildignore</code>. Do not add DESCRIPTION, NAMESPACE, roxygen, or <a href="https://pkgdown.r-lib.org/">{pkgdown}</a> infrastructure. Do not apply CRAN conventions.</li>
 <li><strong>Implementation status lives in GitHub Issues</strong>, not in these files. When you find a gap between the code and the plan, or a defect, open or update an issue. Reference the issue in the pull request that closes it.</li>
 </ul>
 </section>
@@ -539,9 +539,9 @@ edit that file, not this page. Its first heading is the page title.
 <li><strong>Header comment.</strong> Each script begins with a comment saying what it does and which objects it needs from earlier scripts.</li>
 <li><strong>Constants, libraries, and code lists</strong> live in <code>R/setup.R</code>. Other scripts do not call <code>library()</code>, re-source <code>setup.R</code>, or hard-code values. Any number a reader might want to change, such as a window length, a year, a caliper, or the matching ratio, is a named constant in <code>setup.R</code>.</li>
 <li><strong>Helper functions</strong> go in <code>R/functions.R</code>, sourced after <code>setup.R</code>. A function takes its inputs as arguments and does not read global objects, including through default arguments.</li>
-<li><strong>No side effects outside the project.</strong> Do not use <code>setwd()</code>, absolute paths, or writes outside the project. Locate data only through usRds’s <code>set_USRDS_wd()</code>.</li>
+<li><strong>No side effects outside the project.</strong> Do not use <code>setwd()</code>, absolute paths, or writes outside the project. Locate data only through {usRds}’s <code>set_USRDS_wd()</code>.</li>
 <li><strong>Exploration code</strong> does not stay in pipeline scripts. Delete it, or move it below a chunk label that no Quarto page uses. The website shows the scripts as they are.</li>
-<li><strong>Deprecated scripts.</strong> <code>R/define_cohort.R</code> is deprecated (it uses <code>strobe</code>) and is not sourced. Do not build on it; <code>R/create_cohort.R</code> is the active script.</li>
+<li><strong>Deprecated scripts.</strong> <code>R/define_cohort.R</code> is deprecated (it uses <a href="https://vagishhemmige.github.io/strobe/">{strobe}</a>) and is not sourced. Do not build on it; <code>R/create_cohort.R</code> is the active script.</li>
 </ul>
 </section>
 <section id="chunk-labels" class="level2">
@@ -559,7 +559,7 @@ edit that file, not this page. Its first heading is the page title.
 <h2 class="anchored" data-anchor-id="variable-labels">Variable labels</h2>
 <ul>
 <li>Label analysis variables with human-readable descriptions, for example with <code>labelled::set_variable_labels()</code>. Tables then show readable names without renaming code by hand.</li>
-<li>For USRDS variables, use usRds’s <code>apply_usrds_varlabels()</code> and <code>apply_usrds_factors()</code> rather than writing labels by hand.</li>
+<li>For USRDS variables, use {usRds}’s <code>apply_usrds_varlabels()</code> and <code>apply_usrds_factors()</code> rather than writing labels by hand.</li>
 <li>Label each derived variable where it is created. Include units, the price year for costs, and windows where they apply (for example, “Medicare payments, month 0, January 2021 dollars”).</li>
 </ul>
 </section>
@@ -652,17 +652,17 @@ This applies unless your own DUA explicitly permits that use. Agents may write c
 </section>
 <section id="look-in-usrds-first" class="level2">
 <h2 class="anchored" data-anchor-id="look-in-usrds-first">Look in usRds first</h2>
-<p>The <a href="https://github.com/VagishHemmige/usRds">usRds</a> package is the <strong>first place to look</strong> for anything that touches USRDS files: loading files, extracting claims, diagnosis dates, Medicare coverage, cohort helpers, costs, proration, and inflation adjustment.</p>
+<p>The <a href="https://github.com/VagishHemmige/usRds">{usRds}</a> package is the <strong>first place to look</strong> for anything that touches USRDS files: loading files, extracting claims, diagnosis dates, Medicare coverage, cohort helpers, costs, proration, and inflation adjustment.</p>
 <ul>
 <li>Check the package’s function reference before writing project-specific code. Use an existing function, or extend it.</li>
-<li><strong>Package problems belong in the package.</strong> If a usRds function is wrong, or does almost but not exactly what the plan needs, open an issue in the <a href="https://github.com/VagishHemmige/usRds/issues">usRds repository</a> rather than documenting it here. Then do one of two things:
+<li><strong>Package problems belong in the package.</strong> If a {usRds} function is wrong, or does almost but not exactly what the plan needs, open an issue in the <a href="https://github.com/VagishHemmige/usRds/issues">{usRds} repository</a> rather than documenting it here. Then do one of two things:
 <ul>
-<li>fix it in usRds, which is preferred when the behavior is generally useful</li>
+<li>fix it in {usRds}, which is preferred when the behavior is generally useful</li>
 <li>wrap it in this project, with a code comment that links the issue</li>
 </ul>
 Remove the wrapper when the issue is fixed.</li>
 <li>Before relying on a function’s behavior, read its documentation and its open issues. This matters most for <code>verify_medicare_primary()</code>, <code>establish_dx_date()</code>, <code>prorate_costs_by_day()</code>, and <code>adjust_costs_for_inflation()</code>, whose behavior directly sets the cohort and the cost outcome.</li>
-<li>Record the usRds version (or commit) used for any result.</li>
+<li>Record the {usRds} version (or commit) used for any result.</li>
 </ul>
 </section>
 <section id="usrds-data-facts" class="level2">
@@ -756,7 +756,7 @@ Remove the wrapper when the issue is fixed.</li>
 <li>Check every code against the official CMS ICD-9-CM, ICD-10-CM, ICD-10-PCS, and HCPCS code sets.</li>
 <li>Never invent codes, variables, files, or clinical definitions.</li>
 </ul></li>
-<li><strong>Cohort flow</strong> uses the <code>flowchart</code> package (<code>as_fc()</code>, <code>fc_filter()</code>, <code>fc_split()</code>, <code>fc_draw()</code>). Every inclusion or exclusion goes through <code>fc_filter()</code>. Never drop rows from <code>$data</code> outside the flowchart; the diagram must reproduce the cohort exactly. The cohort used downstream is the data from the final flowchart step.</li>
+<li><strong>Cohort flow</strong> uses the <a href="https://bruigtp.github.io/flowchart/">{flowchart}</a> package (<code>as_fc()</code>, <code>fc_filter()</code>, <code>fc_split()</code>, <code>fc_draw()</code>). Every inclusion or exclusion goes through <code>fc_filter()</code>. Never drop rows from <code>$data</code> outside the flowchart; the diagram must reproduce the cohort exactly. The cohort used downstream is the data from the final flowchart step.</li>
 <li><strong>Matching</strong>
 <ul>
 <li>Matching must be reproducible from a recorded seed. Control selection must not depend on row order.</li>

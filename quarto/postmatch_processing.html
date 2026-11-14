@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-66ae90e4418e9d0ac3caa4b8c3bef75c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9c6fd4a99ff4209dd1149a1765198857.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/issue-comments-0.3.0/issue-comments.js"></script>
 <link href="../site_libs/quarto-contrib/issue-comments-0.3.0/issue-comments.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -144,17 +144,6 @@ div.callout-Pending.callout-style-default .callout-icon::before, div.callout-Pen
   content: '⏳';
   background-image: none;
 }
-div.callout-Rcode.callout {
-  border-left-color: #d63384;
-}
-div.callout-Rcode.callout-style-default > .callout-header {
-  background-color: rgba(214, 51, 132, 0.13);
-}
-div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
-div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
-  content: '💻';
-  background-image: none;
-}
 div.callout-Results.callout {
   border-left-color: #198754;
 }
@@ -164,6 +153,17 @@ div.callout-Results.callout-style-default > .callout-header {
 div.callout-Results .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
 div.callout-Results.callout-style-default .callout-icon::before, div.callout-Results.callout-titled .callout-icon::before {
   content: '📊';
+  background-image: none;
+}
+div.callout-Rcode.callout {
+  border-left-color: #d63384;
+}
+div.callout-Rcode.callout-style-default > .callout-header {
+  background-color: rgba(214, 51, 132, 0.13);
+}
+div.callout-Rcode .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');}
+div.callout-Rcode.callout-style-default .callout-icon::before, div.callout-Rcode.callout-titled .callout-icon::before {
+  content: '💻';
   background-image: none;
 }
 </style>
@@ -547,13 +547,13 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </section>
 <section id="obtain-raw-costs-from-raw-claims-data" class="level2">
 <h2 class="anchored" data-anchor-id="obtain-raw-costs-from-raw-claims-data">Obtain raw costs from raw claims data</h2>
-<p>We use the <code>usRds</code> functions <code>get_IN_REV_costs()</code>, <code>get_IN_CLM_costs()</code> and <code>get_PS_REV_costs()</code> to extract Medicare claims with payment amounts for 2006 to 2021, for patients in the matched cohort.</p>
+<p>We use the <a href="https://vagishhemmige.github.io/usRds/">{usRds}</a> functions <code>get_IN_REV_costs()</code>, <code>get_IN_CLM_costs()</code> and <code>get_PS_REV_costs()</code> to extract Medicare claims with payment amounts for 2006 to 2021, for patients in the matched cohort.</p>
 <p>The USRDS claims files hold payments at more than one level<span class="citation" data-cites="usrds2025guide"><sup><a href="#ref-usrds2025guide" role="doc-biblioref">1</a></sup></span>:</p>
 <ul>
 <li><strong>Institutional claims</strong> (inpatient, outpatient, skilled nursing, home health and hospice) come as a claim file, with one row per claim and the Medicare payment for the whole claim (<code>CLM_AMT</code>), and a revenue-center detail file, with one row per revenue center on the claim. <code>get_IN_CLM_costs()</code> reads the claim files and <code>get_IN_REV_costs()</code> the detail files.</li>
 <li><strong>Revenue-center lines</strong> carry charges (<code>REV_CH</code>) and, for outpatient, home health and hospice claims, a payment (<code>REVPMT</code>). Inpatient and skilled nursing lines have no payment field (Appendix B), so inpatient payments come from the claim file only.</li>
 <li><strong>Claim payments and revenue-center payments describe the same services</strong>, so adding them would count those services twice. For outpatient claims, summed <code>REVPMT</code> is about 3% higher than <code>CLM_AMT</code> overall<span class="citation" data-cites="usrds2025guide"><sup><a href="#ref-usrds2025guide" role="doc-biblioref">1</a></sup></span>.</li>
-<li><strong>Physician/supplier claims</strong> are read at the line level: <code>get_PS_REV_costs()</code> returns each line’s payment (<code>PMTAMT</code>), with its submitted and allowed charges. Despite the function’s name, these are line files, not revenue-center files. In the files available to this project, physician/supplier claims before 2013 come as combined files rather than separate claim and line files, as listed in <code>usRds</code>.</li>
+<li><strong>Physician/supplier claims</strong> are read at the line level: <code>get_PS_REV_costs()</code> returns each line’s payment (<code>PMTAMT</code>), with its submitted and allowed charges. Despite the function’s name, these are line files, not revenue-center files. In the files available to this project, physician/supplier claims before 2013 come as combined files rather than separate claim and line files, as listed in {usRds}.</li>
 </ul>
 <p>The cost outcome uses payment fields (<code>CLM_AMT</code>, <code>REVPMT</code>, <code>PMTAMT</code>), never charges.</p>
 <div class="cell">
@@ -573,7 +573,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <p>This is done as a <a href="https://bookdown.org/Maxine/r4ds/nesting.html">nested data frame</a> for convenience in subsequent analysis. A single column is a list, with each element of the list being all cost-related entries for a specific patient. See <a href="https://bookdown.org/Maxine/r4ds/nesting.html">https://bookdown.org/Maxine/r4ds/nesting.html</a> for more information on nested data in R.</p>
 <p>Patients with no observed claims in a given cost category are assigned empty <a href="https://tibble.tidyverse.org/">tibbles</a> to ensure consistent downstream processing.</p>
 <p>This structure allows costs to be prorated, inflated, and aggregated relative to patient-specific index dates without repeatedly reshaping the data.</p>
-<p>While nested data is convenient from many perspectives, it does require the use of the <code>map()</code> family of functions from the <a href="https://purrr.tidyverse.org/"><code>purrr</code></a> package.</p>
+<p>While nested data is convenient from many perspectives, it does require the use of the <code>map()</code> family of functions from the <a href="https://purrr.tidyverse.org/">{purrr}</a> package.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Click to show/hide R Code</summary>
@@ -674,7 +674,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </ul>
 <p><strong>Current code:</strong> death is not yet an end point of follow-up; it is recorded as the reason follow-up ended only when it falls on one of the dates above (<a href="https://github.com/VagishHemmige/Cryptococcus-cost-analysis/issues/10">#10</a>). See <a href="../quarto/study_costs.html#end-of-follow-up">End of follow-up</a>.</p>
 <p>In addition to total costs, we also calculated total costs grouped by type (Inpatient, Outpatient, Home Health, etc.).</p>
-<p>Since claims can span many days, we use the <code>prorate_costs_by_day()</code> function from the <code>usRds</code> package to divide the costs evenly among the days spanned by each claim. Proration is applied before date filtering so that only the portion of each claim overlapping the analytic window contributes to total cost.</p>
+<p>Since claims can span many days, we use the <code>prorate_costs_by_day()</code> function from the {usRds} package to divide the costs evenly among the days spanned by each claim. Proration is applied before date filtering so that only the portion of each claim overlapping the analytic window contributes to total cost.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Click to show/hide R Code</summary>
@@ -787,7 +787,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 </section>
 <section id="accounting-for-inflation" class="level2">
 <h2 class="anchored" data-anchor-id="accounting-for-inflation">Accounting for inflation</h2>
-<p>We repeat the analysis above, except that we use the <code>adjust_costs_for_inflation()</code> function from the <code>usRds</code> package to adjust costs for medical inflation, using the month and year listed in the <code>R/setup.R</code> file to establish the time point at which all costs are anchored based on the <a href="https://www.bls.gov/cpi/factsheets/medical-care.htm">medical Consumer Price Index</a>.</p>
+<p>We repeat the analysis above, except that we use the <code>adjust_costs_for_inflation()</code> function from the {usRds} package to adjust costs for medical inflation, using the month and year listed in the <code>R/setup.R</code> file to establish the time point at which all costs are anchored based on the <a href="https://www.bls.gov/cpi/factsheets/medical-care.htm">medical Consumer Price Index</a>.</p>
 <div class="pending-note">
 <p><strong>Decision pending:</strong> which price index is used for inflation adjustment (<a href="../quarto/analysis-plan.html#13-open-decisions">D7</a>). The code currently uses the medical care component of the Consumer Price Index.</p>
 </div>
@@ -1508,14 +1508,14 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Obtain raw costs from raw claims data</span></span>
 <span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>We use the <span class="in">`usRds`</span> functions <span class="in">`get_IN_REV_costs()`</span>, <span class="in">`get_IN_CLM_costs()`</span> and <span class="in">`get_PS_REV_costs()`</span> to extract Medicare claims with payment amounts for 2006 to 2021, for patients in the matched cohort.</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>We use the <span class="co">[</span><span class="ot">{usRds}</span><span class="co">](https://vagishhemmige.github.io/usRds/)</span> functions <span class="in">`get_IN_REV_costs()`</span>, <span class="in">`get_IN_CLM_costs()`</span> and <span class="in">`get_PS_REV_costs()`</span> to extract Medicare claims with payment amounts for 2006 to 2021, for patients in the matched cohort.</span>
 <span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>The USRDS claims files hold payments at more than one level <span class="co">[</span><span class="ot">@usrds2025guide</span><span class="co">]</span>:</span>
 <span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Institutional claims** (inpatient, outpatient, skilled nursing, home health and hospice) come as a claim file, with one row per claim and the Medicare payment for the whole claim (<span class="in">`CLM_AMT`</span>), and a revenue-center detail file, with one row per revenue center on the claim. <span class="in">`get_IN_CLM_costs()`</span> reads the claim files and <span class="in">`get_IN_REV_costs()`</span> the detail files.</span>
 <span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Revenue-center lines** carry charges (<span class="in">`REV_CH`</span>) and, for outpatient, home health and hospice claims, a payment (<span class="in">`REVPMT`</span>). Inpatient and skilled nursing lines have no payment field (Appendix B), so inpatient payments come from the claim file only.</span>
 <span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Claim payments and revenue-center payments describe the same services**, so adding them would count those services twice. For outpatient claims, summed <span class="in">`REVPMT`</span> is about 3% higher than <span class="in">`CLM_AMT`</span> overall <span class="co">[</span><span class="ot">@usrds2025guide</span><span class="co">]</span>.</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Physician/supplier claims** are read at the line level: <span class="in">`get_PS_REV_costs()`</span> returns each line's payment (<span class="in">`PMTAMT`</span>), with its submitted and allowed charges. Despite the function's name, these are line files, not revenue-center files. In the files available to this project, physician/supplier claims before 2013 come as combined files rather than separate claim and line files, as listed in <span class="in">`usRds`</span>.</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Physician/supplier claims** are read at the line level: <span class="in">`get_PS_REV_costs()`</span> returns each line's payment (<span class="in">`PMTAMT`</span>), with its submitted and allowed charges. Despite the function's name, these are line files, not revenue-center files. In the files available to this project, physician/supplier claims before 2013 come as combined files rather than separate claim and line files, as listed in {usRds}.</span>
 <span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>The cost outcome uses payment fields (<span class="in">`CLM_AMT`</span>, <span class="in">`REVPMT`</span>, <span class="in">`PMTAMT`</span>), never charges.</span>
 <span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a></span>
@@ -1534,7 +1534,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>This structure allows costs to be prorated, inflated, and aggregated relative to patient-specific index dates without repeatedly reshaping the data.</span>
 <span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>While nested data is convenient from many perspectives, it does require the use of the <span class="in">`map()`</span> family of functions from the <span class="co">[</span><span class="ot">`purrr`</span><span class="co">](https://purrr.tidyverse.org/)</span> package.</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>While nested data is convenient from many perspectives, it does require the use of the <span class="in">`map()`</span> family of functions from the <span class="co">[</span><span class="ot">{purrr}</span><span class="co">](https://purrr.tidyverse.org/)</span> package.</span>
 <span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: merge-costs</span></span>
@@ -1565,7 +1565,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a>In addition to total costs, we also calculated total costs grouped by type (Inpatient, Outpatient, Home Health, etc.).</span>
 <span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>Since claims can span many days, we use the <span class="in">`prorate_costs_by_day()`</span> function from the <span class="in">`usRds`</span> package to divide the costs evenly among the days spanned by</span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>Since claims can span many days, we use the <span class="in">`prorate_costs_by_day()`</span> function from the {usRds} package to divide the costs evenly among the days spanned by</span>
 <span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a>each claim.  Proration is applied before date filtering so that only the portion of each claim overlapping the analytic window contributes to total cost.</span>
 <span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -1575,7 +1575,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Accounting for inflation</span></span>
 <span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>We repeat the analysis above, except that we use the <span class="in">`adjust_costs_for_inflation()`</span> function from the <span class="in">`usRds`</span> package to adjust costs for medical inflation, using the month and year listed in the <span class="in">`R/setup.R`</span> file to establish the time point at which all costs are anchored based on the <span class="co">[</span><span class="ot">medical Consumer Price Index</span><span class="co">](https://www.bls.gov/cpi/factsheets/medical-care.htm)</span>.</span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>We repeat the analysis above, except that we use the <span class="in">`adjust_costs_for_inflation()`</span> function from the {usRds} package to adjust costs for medical inflation, using the month and year listed in the <span class="in">`R/setup.R`</span> file to establish the time point at which all costs are anchored based on the <span class="co">[</span><span class="ot">medical Consumer Price Index</span><span class="co">](https://www.bls.gov/cpi/factsheets/medical-care.htm)</span>.</span>
 <span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a>**Decision pending:** which price index is used for inflation adjustment (<span class="co">[</span><span class="ot">D7</span><span class="co">](analysis-plan.qmd#13-open-decisions)</span>). The code currently uses the medical care component of the Consumer Price Index.</span>
 <span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a></span>

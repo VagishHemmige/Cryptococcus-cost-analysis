@@ -83,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-66ae90e4418e9d0ac3caa4b8c3bef75c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9c6fd4a99ff4209dd1149a1765198857.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/issue-comments-0.3.0/issue-comments.js"></script>
 <link href="../site_libs/quarto-contrib/issue-comments-0.3.0/issue-comments.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -492,13 +492,13 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <section id="plotting-mean-monthly-costs" class="level2">
 <h2 class="anchored" data-anchor-id="plotting-mean-monthly-costs">Plotting mean monthly costs</h2>
 <p><code>plot_mean_monthly_costs()</code></p>
-<p>The following function uses <code>ggplot2</code> to create a plot of monthly costs with a risk table underneath.</p>
+<p>The following function uses <a href="https://ggplot2.tidyverse.org/">{ggplot2}</a> to create a plot of monthly costs with a risk table underneath.</p>
 <p>Its inputs are as follows:</p>
 <ul>
 <li><code>fitted_model</code>: the <code>fit</code> object from models created in the <code>R/modeling.R</code> script</li>
 <li><code>countdf</code>: a data frame containing the appropriate count data for cases and controls at each time point, used to create a risk table</li>
 </ul>
-<p>The function uses the <code>emmeans</code> function from the package of the same name to estimate monthly costs. The x-axis (months) is shifted to the right so that the vertical line at x=0 cleanly separates pre-index and post-index months, and cases and controls are dodged slightly so that the error bars do not overlap.</p>
+<p>The function uses the <a href="https://CRAN.R-project.org/package=emmeans">{emmeans}</a> function from the package of the same name to estimate monthly costs. The x-axis (months) is shifted to the right so that the vertical line at x=0 cleanly separates pre-index and post-index months, and cases and controls are dodged slightly so that the error bars do not overlap.</p>
 <p><strong>Used in the analysis:</strong> Figures: <a href="../quarto/figures.html#month-by-month-plots">Month-by-month plots</a>.</p>
 <div class="cell">
 <details class="code-fold">
@@ -1216,7 +1216,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="in">`plot_mean_monthly_costs()`</span></span>
 <span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>The following function uses <span class="in">`ggplot2`</span> to create a plot of monthly costs with a risk table underneath.</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>The following function uses <span class="co">[</span><span class="ot">{ggplot2}</span><span class="co">](https://ggplot2.tidyverse.org/)</span> to create a plot of monthly costs with a risk table underneath.</span>
 <span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>Its inputs are as follows:</span>
 <span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
@@ -1224,7 +1224,7 @@ div.callout-Results.callout-style-default .callout-icon::before, div.callout-Res
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`countdf`</span>: a data frame containing the appropriate count data for cases and controls at each time point, used</span>
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>to create a risk table</span>
 <span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>The function uses the <span class="in">`emmeans`</span> function from the package of the same name to estimate monthly costs.  The x-axis (months) is shifted to the right so that the vertical line at x=0 cleanly separates pre-index and post-index months, and cases and controls are dodged slightly so that the error bars do not overlap.</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>The function uses the <span class="co">[</span><span class="ot">{emmeans}</span><span class="co">](https://CRAN.R-project.org/package=emmeans)</span> function from the package of the same name to estimate monthly costs.  The x-axis (months) is shifted to the right so that the vertical line at x=0 cleanly separates pre-index and post-index months, and cases and controls are dodged slightly so that the error bars do not overlap.</span>
 <span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>**Used in the analysis:** Figures: <span class="co">[</span><span class="ot">Month-by-month plots</span><span class="co">](figures.qmd#month-by-month-plots)</span>.</span>
 <span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
