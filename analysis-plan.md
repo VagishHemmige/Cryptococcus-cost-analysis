@@ -61,11 +61,16 @@ The time scale is time since the **most recent** kidney transplant before time z
 
 Incident cryptococcosis, identified from ICD-9-CM and ICD-10-CM diagnosis codes on Medicare institutional or physician/supplier claims. The full code list is published as a supplementary table.
 
-**Decision D3:** the claim algorithm, meaning the claim types and diagnosis positions accepted and the number of claims required (for example, one inpatient claim, or two outpatient claims within a set window). The choice will cite any available validation literature for fungal infection codes in claims.
+**Claim algorithm (Decision D3, settled 27 November 2026).** A diagnosis is established by either:
+
+- one inpatient claim carrying a code; or
+- two claims of any other type carrying a code, on different service dates no more than 365 days apart.
+
+Records on the same service date count once, so a single visit that lists the code in several line items or diagnosis positions does not meet the rule. A code in any diagnosis position counts. The rule follows studies of infections after kidney transplant in USRDS claims [@naik2016infections]. Administrative codes for invasive fungal infection misclassify some cases [@chang2008aspergillosis], so an inpatient-only definition is a sensitivity analysis ([Section 9](#9-sensitivity-analyses)).
 
 ### 5.2 Diagnosis date
 
-The service date of the first qualifying claim.
+The service date of the first qualifying claim: the earliest claim carrying a code in the 365 days up to and including the claim that establishes the diagnosis under [Section 5.1](#51-exposure-definition).
 
 ### 5.3 Time zero
 
@@ -206,7 +211,7 @@ Analyses are run in R. Code is public at https://github.com/VagishHemmige/Crypto
 1. **Sequential target-trial emulation** ([Appendix A](#appendix-a-target-trial-protocol)). Monthly trials of everyone eligible, with the newly diagnosed as the exposed group. The comparison group is weighted by propensity odds (ATT weights), trials are pooled, and robust standard errors are clustered on patient. Weights are truncated at the 1st and 99th percentiles, with untruncated results also reported.
 2. **Alternative death handling:** the option in D8 not chosen as primary.
 3. **Alternative outcome models:** Gaussian identity-link and log-cost models, to show sensitivity to distributional assumptions.
-4. **Alternative exposure algorithm:** a stricter claims definition than D3 (for example, requiring an inpatient claim), to address misclassification.
+4. **Inpatient-only exposure definition:** a diagnosis requires an inpatient claim carrying a code, as in the USRDS cohort study of cryptococcosis in kidney transplant recipients [@fiorica2025mortality], and is dated to the first day of service on that claim. The share of primary-definition cases with no inpatient claim, and their costs, are reported to show how much the choice matters.
 5. **Matching variations:** a 1:1 ratio; exact matching on CMV status; under Option B, a caliper of 0.1 standard deviations. The matching method not chosen under D10 may also be run as a sensitivity analysis.
 6. **Restriction to first transplant** recipients.
 7. **Pre-2015 and 2015-or-later** diagnoses, to check stability across the ICD-9-CM to ICD-10-CM transition (October 2015).
@@ -256,7 +261,6 @@ Analyses are run in R. Code is public at https://github.com/VagishHemmige/Crypto
 |---|---|---|
 | D1 | Eligible payer categories beyond Medicare fee-for-service primary for Parts A and B | 4.2 |
 | D2 | Inclusion of kidney–pancreas and other multi-organ recipients | 4.3 |
-| D3 | Claim algorithm for cryptococcosis: claim types, diagnosis positions, number of claims | 5.1 |
 | D4 | Controls in more than one risk set, or at most once | 5.4 |
 | D5 | Rejection-treatment lookback window; comorbidity index | 6.2 |
 | D6 | Under Option B, hard calipers on age and calendar time in addition to the score | 6.4 |
@@ -264,6 +268,8 @@ Analyses are run in R. Code is public at https://github.com/VagishHemmige/Crypto
 | D8 | Death: end of cost accrual, or zero cost after death | 7.4 |
 | D9 | Primary estimate as matched difference, or difference-in-differences | 8.4 |
 | D10 | Matching method: direct covariate matching (Option A) or time-varying propensity score (Option B) | 2, 6 |
+
+Settled: D3, the claim algorithm (27 November 2026; [Section 5.1](#51-exposure-definition)).
 
 ## Appendix A: Target-trial protocol
 

@@ -18,9 +18,9 @@ The current rule counts a diagnosis as established on the first of:
 
 A code in any diagnosis position counts. There is no time limit between the two records, and two on the same day count as two. Records are counted one at a time rather than grouped into visits, so a single outpatient visit that lists the code more than once may be enough. The diagnosis date is the first day of service on the record that establishes the diagnosis.
 
-**Specified in:** [§5.1 Exposure definition](analysis-plan.qmd#51-exposure-definition) (the code list), [§5.2 Diagnosis date](analysis-plan.qmd#52-diagnosis-date). The plan gives the diagnosis date as the service date of the "first qualifying claim". Under a two-claim rule that could mean the first coded claim or the one that completes the rule; the code uses the second.
+**Specified in:** [§5.1 Exposure definition](analysis-plan.qmd#51-exposure-definition), [§5.2 Diagnosis date](analysis-plan.qmd#52-diagnosis-date). The plan counts a diagnosis as established by one inpatient claim, or by two other claims on different service dates no more than 365 days apart, with records on the same date counted once. The diagnosis date is the earliest coded claim in the 365 days up to the claim that establishes it.
 
-**Decision pending:** the claim algorithm, meaning which claim types and diagnosis positions count, how many claims are needed and within what window ([D3](analysis-plan.qmd#13-open-decisions)). The rule above is what the code does now.
+**Current code:** the rule described above, which counts same-day records separately, sets no time limit and dates the diagnosis to the claim that establishes it. The code will follow the plan once {usRds} can count claims by service date ([usRds #4](https://github.com/VagishHemmige/usRds/issues/4)).
 
 ### What a claims-based definition can and cannot show
 
@@ -28,7 +28,7 @@ A claim shows that a clinician recorded the diagnosis for billing. It does not s
 
 The 365-day window of complete coverage before diagnosis means that, had the rule been met earlier in that year, it would have been seen. An earlier single record carrying the code can still fall inside the window: when the diagnosis is established by a second record, the first always comes before it. Complete coverage makes it more likely the diagnosis is new, but it does not prove the infection began then. A person with a diagnosis before their first transplant is excluded.
 
-Two planned sensitivity analyses address this: a stricter claims definition, and separate analyses of diagnoses before and after the October 2015 change from ICD-9-CM to ICD-10-CM ([§9](analysis-plan.qmd#9-sensitivity-analyses)).
+Two planned sensitivity analyses address this: an inpatient-only definition, and separate analyses of diagnoses before and after the October 2015 change from ICD-9-CM to ICD-10-CM ([§9](analysis-plan.qmd#9-sensitivity-analyses)).
 
 ### Time zero
 
